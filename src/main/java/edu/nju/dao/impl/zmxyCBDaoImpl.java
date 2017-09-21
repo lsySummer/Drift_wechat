@@ -6,16 +6,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.nju.dao.BaseDao;
-import edu.nju.dao.TestDao;
+import edu.nju.dao.zmxyCBDao;
 import edu.nju.entities.Test;
 
 @Transactional
-@Repository("testDao")
-public class TestDaoImpl implements TestDao{
+@Repository("zmxyCBDao")
+public class zmxyCBDaoImpl implements zmxyCBDao{
 	
 	 @Autowired
 	 private BaseDao baseDao;
-
 
 	public void test() {
 		Test t = new Test();

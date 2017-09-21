@@ -9,6 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="../js/weui.min.js"></script>
 <html>
   <head>
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <base href="<%=basePath%>">
     <title>Write your details here</title>
   </head>
@@ -47,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="weui-cell weui-cell_warn">
                 <div class="weui-cell__hd"><label for="" class="weui-label">微信号</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" pattern="[0-9]*" value="weui input error" placeholder="请输入卡号">
+                    <input class="weui-input" type="number" pattern="[0-9]*" value="weui input error" placeholder="请输入微信号">
                 </div>
                 <div class="weui-cell__ft">
                     <i class="weui-icon-warn"></i>

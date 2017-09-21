@@ -9,9 +9,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="../js/weui.min.js"></script>
 <html>
   <head>
-    <base href="<%=basePath%>">   
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
     <title>Drift_wechat</title>
-<!-- 	   <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script> -->
   </head> 
  <body>
   <script type="text/javascript">
@@ -36,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </article>
    </div>
    <div class="page__bd page__bd_spacing">
-     <a href="jsp/Detail_Write.jsp" class="weui-btn weui-btn_primary">我要报名</a>
+     <a href="Detail_Write.jsp" class="weui-btn weui-btn_primary">我要报名</a>
    </div>
   </div>
   <div class="page_bd page_bd_spacing">

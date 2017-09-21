@@ -6,21 +6,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.nju.service.TestService;
-
+import edu.nju.service.zmxyService;
 
 @Controller
-@RequestMapping("/test")
-public class TestController {
+@RequestMapping("/zmxy")
+public class zmxyController {
 
 	@Autowired
-	private TestService testService;
+	private zmxyService zmxyService;
 	
 	@ResponseBody
-	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	@RequestMapping(value = "/cb", method = RequestMethod.GET)
 	public String insert()
 	{
-		testService.test();
+		zmxyService.cb();
 		return "{\"success\"}";
 	}
+	
+	
 }
