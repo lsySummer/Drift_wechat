@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
-    <title>Drift_wechat</title>
+    <title>Drift</title>
   </head> 
  <body>
   <script type="text/javascript">
@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-cells">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" id="phone" name="phone" type="text" placeholder="请输入手机号">
+                    <input class="weui-input" id="phone" name="phone" type="tel" required pattern="[0-9]{11}" placeholder="输入你现在的手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	 </div>
    </form>
   </div>
-  <div class="page_bd page_bd_spacing">
+  <div class="page_bd page__bd_spacing">
   	<div class="weui-footer">
   		<p class="weui-footer_text">Copyright © 2017-2020 GuoMai</p>
   	</div>

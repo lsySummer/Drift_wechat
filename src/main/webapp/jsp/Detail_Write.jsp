@@ -20,16 +20,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <h1 class="page__title">请输入预定信息</h1>
     </div>
     <div class="page__bd">
-     
-        <div class="weui-cells__title">复选列表项</div>
+     <form method="get" id="detail" name="detail" action="/Drift_wechat/api/zmxy/reserve">
+        <div class="weui-cells__title">性别</div>
         <div class="weui-cells weui-cells_checkbox">
             <label class="weui-cell weui-check__label" for="s11">
                 <div class="weui-cell__hd">
-                    <input type="checkbox" class="weui-check" name="checkbox1" id="s11" checked="checked">
+                    <input id="sex" name="sex" type="checkbox" class="weui-check" name="checkbox1" id="s11" checked="checked">
                     <i class="weui-icon-checked"></i>
                 </div>
                 <div class="weui-cell__bd">
-                    <p>Selection 1.</p>
+                    <p>男.</p>
                 </div>
             </label>
             <label class="weui-cell weui-check__label" for="s12">
@@ -38,54 +38,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <i class="weui-icon-checked"></i>
                 </div>
                 <div class="weui-cell__bd">
-                    <p>Selection 2.</p>
+                    <p>女.</p>
                 </div>
             </label>
         </div>
 
-        <div class="weui-cells__title">具体信息</div>
+        <div class="weui-cells__title">预定信息</div>
         <div class="weui-cells weui-cells_form">
-            <div class="weui-cell weui-cell_warn">
-                <div class="weui-cell__hd"><label for="" class="weui-label">微信号</label></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">起始日期</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" pattern="[0-9]*" value="weui input error" placeholder="请输入微信号">
-                </div>
-                <div class="weui-cell__ft">
-                    <i class="weui-icon-warn"></i>
+                    <input id="startDate" name="startDate" class="weui-input" type="date" value="">
                 </div>
             </div>
+        
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label for="" class="weui-label">日期</label></div>
+                <div class="weui-cell__hd"><label for="" class="weui-label">结束日期</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="date" value="">
+                    <input id="endDate" name="endDate" class="weui-input" type="date" value="">
+                </div>
+        </div> 
+        </div>
+
+        <div class="weui-cells__title">详细地址</div>   
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input id="address" name="address" class="weui-input" type="text" placeholder="请输入具体地址">
                 </div>
             </div>
         </div>
-
-        <div class="weui-cells__title">开关</div>
+        
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell weui-cell_switch">
                 <div class="weui-cell__bd">是否接受产品推荐</div>
                 <div class="weui-cell__ft">
-                    <input class="weui-switch" type="checkbox">
-                </div>
-            </div>
-        </div>
-
-        <div class="weui-cells__title">文本框</div>
-        <div class="weui-cells">
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="请输入文本">
-                </div>
-            </div>
-        </div>
-
-        <div class="weui-cells__title">输入手机号</div>
-        <div class="weui-cells">
-            <div class="weui-cell weui-cell_select weui-cell_select-before">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入号码">
+                    <input id="recommand" name="recommand" class="weui-switch" type="checkbox">
                 </div>
             </div>
         </div>
@@ -98,14 +86,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </label>
 
         <div class="weui-btn-area">
-            <a class="weui-btn weui-btn_primary" href="jsp/Result.jsp" id="showTooltips">确定并绑定芝麻信用</a>
+            <a class="weui-btn weui-btn_primary" href="jsp/Result.jsp" id="showTooltips">确定并提交</a>
         </div>
+      </form>
     </div>
+    
     <div class="page__ft">
         <a href="javascript:home()"><img src="./images/icon_footer_link.png"></a>
     </div>
 </div>
-  <div class="page_bd page_bd_spacing">
+  <div class="page_bd page__bd_spacing">
   	<div class="weui-footer">
   		<p class="weui-footer_text">Copyright © 2017-2020 GuoMai</p>
   	</div>
