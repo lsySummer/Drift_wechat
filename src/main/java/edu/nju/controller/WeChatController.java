@@ -54,7 +54,7 @@ public class WeChatController {
 				String openid = resultJson.getString("openid");
 				String nickname = resultJson.getString("nickname");
 				String headimgurl = resultJson.getString("headimgurl");
-//				service.register(openid,nickname);
+				service.register(openid,nickname);
 				if(nickname==null || nickname.isEmpty()){
 					return "redirect:../../"+htmlPage+".html";
 				}else{

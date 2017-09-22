@@ -21,6 +21,7 @@ public class UserInfo {
 	private Date startDate;
 	private Date endDate;
 	private String openid;
+	private String nickName;
 	private String transactionid;//芝麻信用的业务流水号id
 	private int score;//芝麻信用分
 	
@@ -69,6 +70,12 @@ public class UserInfo {
 	}
 	public void setOpenid(String openid) {
 		this.openid = openid;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	public String getTransactionid() {
 		return transactionid;

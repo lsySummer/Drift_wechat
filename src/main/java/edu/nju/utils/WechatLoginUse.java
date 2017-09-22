@@ -9,6 +9,7 @@ public class WechatLoginUse {
 		
 		//access token
 		JSONObject resultJson = WechatConfig.getAccessToken(code);
+		System.out.println(resultJson.toString());
 		String openid = resultJson.getString("openid");
 		String accessToken = resultJson.getString("access_token");
 		

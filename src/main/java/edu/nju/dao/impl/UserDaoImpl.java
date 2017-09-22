@@ -1,12 +1,15 @@
 package edu.nju.dao.impl;
 
+import java.util.Date;
+import java.util.List;
+
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.nju.dao.BaseDao;
 import edu.nju.dao.UserDao;
+import edu.nju.entities.UserInfo;
 
 
 @Repository
@@ -14,24 +17,66 @@ public class UserDaoImpl implements UserDao{
 	
 	private static final Logger log = Logger.getLogger(UserDaoImpl.class);
 
-	@Autowired
-	private SessionFactory sessionFactory;
 
-	private Session getSession() {
-		return sessionFactory.getCurrentSession();
-	}
+	 @Autowired
+	 private BaseDao baseDao;
 	
 	@Override
 	public boolean register(String openId, String nickName) {
 		try{
-			String sql= "insert ignore into user(openId, nickName) values('" + openId + "','"+nickName+"')";
-			getSession().createSQLQuery(sql).executeUpdate();//注意,插入要加上executeUpdate,否则插入不成功  
+			UserInfo user = new UserInfo();
+			user.setOpenid(openId);
+			user.setNickName(nickName);
+			baseDao.save(user);
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();
 			log.error(e.getMessage());
 			return false;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean setZMInfo(String openId,String transactionid, int score) {
+		String hql = "from UserInfo where openid =:openid";
+		List<UserInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openId).getResultList();
+		if(list.size()>0){
+			UserInfo user = list.get(0);
+			user.setScore(score);
+			user.setTransactionid(transactionid);
+			baseDao.save(user);
+			return true;
+		}
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean setAddress(String openid,String address, String phone, Date startDate, Date endDate) {
+		String hql = "from UserInfo where openid =:openid";
+		List<UserInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openid).getResultList();
+		if(list.size()>0){
+			UserInfo user = list.get(0);
+			user.setAddress(address);
+			user.setPhone(phone);
+			user.setStartDate(startDate);
+			user.setEndDate(endDate);
+			baseDao.save(user);
+			return true;
+		}
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public UserInfo getUser(String openid) {
+		String hql = "from UserInfo where openid =:openid";
+		List<UserInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openid).getResultList();
+		if(list.size()>0){
+			return list.get(0);
+		}
+		return null;
 	}
 
 }

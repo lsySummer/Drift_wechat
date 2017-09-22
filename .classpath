@@ -33,9 +33,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/hannatao/Downloads/zmxy-sdk-java15-20170919191404/commons-logging-1.1.1-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/hannatao/Downloads/zmxy-sdk-java15-20170919191404/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/Users/hannatao/Downloads/zmxy-sdk-java15-20170919191404/zmxy-sdk-java-20170919191404-source.jar"/>
-	<classpathentry kind="lib" path="/Users/hannatao/Downloads/zmxy-sdk-java15-20170919191404/zmxy-sdk-java-20170919191404.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-logging-1.1.1-sources.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/zmxy-sdk-java-20170919191404-source.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/zmxy-sdk-java-20170919191404.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
