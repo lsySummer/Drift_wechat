@@ -58,7 +58,15 @@ public class ZmxyCBDaoImpl implements ZmxyCBDao{
 	    try {
 		    DefaultZhimaClient client = new DefaultZhimaClient(gatewayUrl, appId, privateKey, zhimaPublicKey);
 	        String result = client.decryptAndVerifySign(params, sign);
-	        return result;
+	        String temp[] = result.split("&");
+	        String temp1[] = temp[temp.length - 1].split("=");
+	        String success = temp1[1];
+	        if(success == "true"){
+	        	String temp2[] = temp[0].split("=");
+	        	return temp2[1];
+	        }else{
+	        	return "failed";
+	        }
 	    } catch (ZhimaApiException e) {
 	        e.printStackTrace();
 	        return "failed";

@@ -44,7 +44,7 @@ public class ZmxyAskDaoImpl implements ZmxyAskDao{
         req.setPlatform("zmop");
         req.setIdentityType("1");
         req.setIdentityParam("{\"name\":\"" + name + "\",\"mobileNo\":\"" + phone +"\"}");
-        req.setBizParams("{\"auth_code\":\"M_APPSDK\",\"channelType\":\"appsdk\",\"state\":\"商户自定义\"}"); 
+        req.setBizParams("{\"auth_code\":\"M_APPSDK\",\"channelType\":\"appsdk\",\"state\":\"Test\"}"); 
         DefaultZhimaClient client = new DefaultZhimaClient(gatewayUrl, appId, privateKey, zhimaPublicKey);
         try {
             String url = client.generatePageRedirectInvokeUrl(req);
