@@ -171,4 +171,5 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<spring.version>4.3.3.RELEASE</spring.version>
 	</properties>
+
 </project>

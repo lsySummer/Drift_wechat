@@ -5,13 +5,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<link rel="stylesheet" href="../css/weui.min.css">
-<script type="text/javascript" src="../js/weui.min.js"></script>
+<link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <html>
   <head>
-    <base href="<%=basePath%>">   
-    <title>Drift_wechat</title>
-<!-- 	   <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script> -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
+    <title>Drift</title>
   </head> 
  <body>
   <script type="text/javascript">
@@ -35,11 +34,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </section>
    </article>
    </div>
-   <div class="page__bd page__bd_spacing">
-     <a href="jsp/Detail_Write.jsp" class="weui-btn weui-btn_primary">我要报名</a>
-   </div>
+   <form method="get" id="basic" name="basic" action="/Drift_wechat/api/zmxy/register">
+     <div class="weui-cells__title">手机号</div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="phone" name="phone" type="tel" required pattern="[0-9]{11}" placeholder="输入你现在的手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
+                </div>
+            </div>
+        </div>
+       <div class="weui-cells__title">姓名</div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="name" name="name" type="text" placeholder="请输入姓名">
+                </div>
+            </div>
+        </div>
+     <div class="page__bd page__bd_spacing">
+      <button type="submit" class="weui-btn weui-btn_primary">授权芝麻信用</button>
+   	 </div>
+   </form>
   </div>
-  <div class="page_bd page_bd_spacing">
+  <div class="page_bd page__bd_spacing">
   	<div class="weui-footer">
   		<p class="weui-footer_text">Copyright © 2017-2020 GuoMai</p>
   	</div>

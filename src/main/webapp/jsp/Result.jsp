@@ -5,10 +5,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<link rel="stylesheet" href="../css/weui.min.css">
-<script type="text/javascript" src="../js/weui.min.js"></script>
+
+<link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <html>
   <head>
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <base href="<%=basePath%>">  
     <title>申请结果</title>
   </head>
