@@ -38,10 +38,6 @@ public class UserController {
 	@RequestMapping(value = "/setAddress")
 	public String setAddress(String address,String startDate,String endDate,String address_detail,HttpSession session) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		session.setAttribute("openid", "test");
-		session.setAttribute("name", "test");
-		session.setAttribute("phone", "test");
-		session.setAttribute("zmxyid", "test");
 		String openid = (String) session.getAttribute("openid");
 		String name = (String) session.getAttribute("name");
 		String phone = (String) session.getAttribute("phone");
