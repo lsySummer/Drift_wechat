@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.nju.entities.UserInfo;
 import edu.nju.service.UserService;
 import edu.nju.utils.WechatLoginUse;
 
@@ -33,19 +34,6 @@ public class WeChatController {
 		return redir;
 	}
 	
-//	@RequestMapping(value = "/service")
-//	public String toService(String code, String state) throws IOException {
-//		String htmlPage="service";    
-//		String redir = getWechatInfo(htmlPage, code, state);
-//		return redir;
-//	}
-//	@RequestMapping(value = "/tlogin")
-//	public String tlogin(String code, String state) throws IOException {
-//		String htmlPage="login";
-//		String redir = getWechatInfo(htmlPage, code, state);
-//		return redir;
-//	}
-	
 	public String getWechatInfo(String htmlPage, String code, HttpSession session) throws UnsupportedEncodingException{
 		String wechatInfo = WechatLoginUse.wechatInfo(code);
 		JSONObject resultJson;
@@ -55,15 +43,18 @@ public class WeChatController {
 			if(resultJson.get("message").equals("success")){
 				String openid = resultJson.getString("openid");
 				session.setAttribute("openid", openid);
-				String nickname = "user";
-				if(nickname==null || nickname.isEmpty()){
-					return "redirect:../../"+htmlPage+".html";
+				UserInfo u = service.getUser(openid);
+				if(u==null){
+					return "jsp/result";
 				}else{
-					nickname = URLEncoder.encode(nickname,"utf-8");
-					return "jsp/index";
+					String nickname = "user";
+					if(nickname==null || nickname.isEmpty()){
+						return "redirect:../../"+htmlPage+".html";
+					}else{
+						nickname = URLEncoder.encode(nickname,"utf-8");
+						return "jsp/index";
+					}
 				}
-				
-				
 			}else{
 				return null;	
 			}
