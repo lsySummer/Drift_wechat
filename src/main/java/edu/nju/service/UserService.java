@@ -63,19 +63,9 @@ public class UserService {
 		return resultObj.toString();
 	}
 
-	public String getUser(String openid) {
-		JSONObject resultObj=new JSONObject();
+	public UserInfo getUser(String openid) {
 		UserInfo b = dao.getUser(openid);
-		if (b==null) {
-			resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.CREATE_ERROR);
-			resultObj.put(Constants.RESPONSE_MSG_KEY,
-					RESCODE.NOT_FOUND.getMsg());
-			return resultObj.toString();
-		}
-		resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.SUCCESS);
-		resultObj.put(Constants.RESPONSE_MSG_KEY, RESCODE.SUCCESS.getMsg());
-		resultObj.put(Constants.RESPONSE_DATA_KEY, b);
-		return resultObj.toString();
+		return b;
 	}
 
 
