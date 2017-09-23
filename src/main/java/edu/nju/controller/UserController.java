@@ -46,7 +46,7 @@ public class UserController {
 		Date startTemp = sdf.parse(startDate);
 		Date endTemp = sdf.parse(endDate);
 		service.setAddress(openid,zmxyid,addressTemp,phone,startTemp,endTemp,name);
-		return "jsp/result";
+		return "jsp/Result";
 	}
 	
 	@RequestMapping(value = "/getUser")
