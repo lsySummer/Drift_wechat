@@ -5,7 +5,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
 <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
 <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <html>
@@ -17,28 +16,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div class="container" id="container">
-    <div class="page msg_success js_show">
+    <div class="page msg_warn js_show">
     <div class="weui-msg">
-    
-        <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+        <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
         <div class="weui-msg__text-area">
-            <h2 class="weui-msg__title">操作成功</h2>
-            <p class="weui-msg__desc">请加微信XXXXX，会有客服与您联系<a href="javascript:void(0);">文字链接</a></p>
+            <h2 class="weui-msg__title">操作失败</h2>
+            <p class="weui-msg__desc">Whoops，好像哪里出错了，再回首页重试一下吧！<a href="javascript:void(0);">文字链接</a></p>
         </div>
         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
-                <a href="javascript:history.back();" class="weui-btn weui-btn_primary">添加微信</a>
-                <a href="javascript:history.back();" class="weui-btn weui-btn_default">返回首页</a>
+                <a href="/Drift_wechat/jsp/index.jsp" class="weui-btn weui-btn_primary">回到首页</a>
             </p>
         </div>
-    </div>
+        <div class="weui-msg__extra-area">
+            <div class="weui-footer">
+                <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
+            </div>
+        </div>
     </div>
 </div>
-    <div class="weui-msg__extra-area">
-        <div class="weui-footer">
-                <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
-        </div>
-  </div>
-
+</div>
   </body>
 </html>
+

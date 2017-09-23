@@ -29,16 +29,15 @@ public class ZmxyController {
 		String state = zmxyService.cb(params,sign);
 		ModelAndView modelAndView = new ModelAndView();
 		log.info("state:" + state);
-		if(state != "failed"){
+		if(state.equals("failed")){
 			modelAndView.addObject("state", state);
-			modelAndView.setViewName("redirect:/jsp/Detail_Write.jsp");
+			modelAndView.setViewName("redirect:/jsp/Warn.jsp");
 			return modelAndView;
 		}else{
 			modelAndView.addObject("state", state);
-			modelAndView.setViewName("redirect:/jsp/index.jsp");
+			modelAndView.setViewName("redirect:/jsp/Detail_Write.jsp");
 			return modelAndView;
 		}
-		
 	}
 	
 	@ResponseBody

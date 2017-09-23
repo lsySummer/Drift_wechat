@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-cells">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" id="phone" name="phone" type="tel" required pattern="[0-9]{11}" placeholder="输入你现在的手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
+                    <input class="weui-input" id="phone" name="phone" type="tel" required pattern="[0-9]{11}" placeholder="输入您与芝麻信息绑定的手机号" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
                 </div>
             </div>
         </div>
@@ -56,10 +56,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	 </div>
    </form>
   </div>
-  <div class="page_bd page__bd_spacing">
-  	<div class="weui-footer">
-  		<p class="weui-footer_text">Copyright © 2017-2020 GuoMai</p>
-  	</div>
+  <div class="weui-msg__extra-area">
+        <div class="weui-footer">
+                <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
+        </div>
   </div>
  </body>
 </html>
