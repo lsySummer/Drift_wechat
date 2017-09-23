@@ -45,7 +45,7 @@ public class WeChatController {
 				session.setAttribute("openid", openid);
 				UserInfo u = service.getUser(openid);
 				if(u==null){
-					return "jsp/result";
+					return "jsp/Repetition";
 				}else{
 					String nickname = "user";
 					if(nickname==null || nickname.isEmpty()){
