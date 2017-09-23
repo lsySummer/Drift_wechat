@@ -22,6 +22,7 @@ public class UserInfo {
 	private Date endDate;
 	private String openid;
 	private String nickName;
+	private String zmxyid; //芝麻信用id
 	private String transactionid;//芝麻信用的业务流水号id
 	private int score;//芝麻信用分
 	
@@ -89,7 +90,11 @@ public class UserInfo {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
-	
+	public String getZmxyid() {
+		return zmxyid;
+	}
+	public void setZmxyid(String zmxyid) {
+		this.zmxyid = zmxyid;
+	}
 	
 }

@@ -48,9 +48,10 @@ public class UserService {
 		return resultObj.toString();
 	}
 
-	public String setAddress(String openid,String address, String phone, Date startDate, Date endDate) {
+	public String setAddress(String openid,String zmxyid, String address, String phone, Date startDate, Date endDate,String name) {
+		System.out.println("openid");
 		JSONObject resultObj=new JSONObject();
-		boolean b = dao.setAddress(openid,address,phone,startDate,endDate);
+		boolean b = dao.setAddress(openid,zmxyid,address,phone,startDate,endDate,name);
 		if (!b) {
 			resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.CREATE_ERROR);
 			resultObj.put(Constants.RESPONSE_MSG_KEY,

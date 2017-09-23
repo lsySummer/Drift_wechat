@@ -27,8 +27,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="page__hd">
         <h1 class="page__title">请输入预定信息</h1>
     </div>
+    <form method="get" id="detail" name="detail" action="/Drift_wechat/api/user/setAddress">
     <div class="page__bd">
-     <form method="get" id="detail" name="detail" action="/Drift_wechat/api/zmxy/reserve">
         <div class="weui-cells__title">产品预约时间</div>
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
@@ -84,13 +84,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-btn-area">
             <button class="weui-btn weui-btn_primary" type="submit" id="submit">确定并提交</button>
         </div>
-      </form>
+      
     </div>
+    </form>
     
     <div class="page__ft">
         <a href="javascript:home()"><img src="./images/icon_footer_link.png"></a>
     </div>
 </div>
+
   <div class="weui-msg__extra-area">
         <div class="weui-footer">
                 <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>

@@ -10,7 +10,7 @@ public interface UserDao {
 
 	boolean setZMInfo(String openId,String transactionid, int score);
 
-	boolean setAddress(String openid,String address, String phone, Date startDate, Date endDate);
+	boolean setAddress(String openid, String zmxyid, String address, String phone, Date startDate, Date endDate,String name);
 
 	UserInfo getUser(String openid);
 

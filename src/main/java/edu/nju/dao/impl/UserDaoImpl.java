@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -53,19 +54,17 @@ public class UserDaoImpl implements UserDao{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean setAddress(String openid,String address, String phone, Date startDate, Date endDate) {
-		String hql = "from UserInfo where openid =:openid";
-		List<UserInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openid).getResultList();
-		if(list.size()>0){
-			UserInfo user = list.get(0);
-			user.setAddress(address);
-			user.setPhone(phone);
-			user.setStartDate(startDate);
-			user.setEndDate(endDate);
-			baseDao.save(user);
-			return true;
-		}
-		return false;
+	public boolean setAddress(String openid, String zmxyid, String address, String phone, Date startDate, Date endDate,String name) {
+		UserInfo user = new UserInfo();
+		user.setAddress(address);
+		user.setOpenid(openid);
+		user.setZmxyid(zmxyid);
+		user.setPhone(phone);
+		user.setStartDate(startDate);
+		user.setEndDate(endDate);
+		user.setName(name);
+		baseDao.save(user);
+		return true;
 	}
 
 	@SuppressWarnings("unchecked")

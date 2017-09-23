@@ -1,5 +1,7 @@
 package edu.nju.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,7 @@ public class ZmxyController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/cb", method = RequestMethod.GET)
-	public ModelAndView callback(@RequestParam("params") String params,@RequestParam("sign") String sign)
+	public ModelAndView callback(@RequestParam("params") String params,@RequestParam("sign") String sign, HttpSession session)
 	{
 		log.info("params:" + params);
 		log.info("sign:" + params);
@@ -34,6 +36,7 @@ public class ZmxyController {
 			modelAndView.setViewName("redirect:/jsp/Warn.jsp");
 			return modelAndView;
 		}else{
+			session.setAttribute("zmxyid", state);
 			modelAndView.addObject("state", state);
 			modelAndView.setViewName("redirect:/jsp/Detail_Write.jsp");
 			return modelAndView;
@@ -42,8 +45,10 @@ public class ZmxyController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public ModelAndView ask(@RequestParam("name") String name,@RequestParam("phone") String phone)
+	public ModelAndView ask(@RequestParam("name") String name,@RequestParam("phone") String phone, HttpSession session)
 	{
+		session.setAttribute("name", name);
+		session.setAttribute("phone", phone);
 		return new ModelAndView(new RedirectView(zmxyService.askRequest(name,phone)));
 	}
 }
