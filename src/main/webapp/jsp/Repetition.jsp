@@ -25,11 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <p class="weui-msg__desc">您已经申请成功了，请留意微信群内的消息</p>
         </div>
         <img src="/Drift_wechat/images/QR_code.jpg" height="200px" width="200px"/>
-        <div class="weui-msg__opr-area">
-            <p class="weui-btn-area">
-                <a href="/Drift_wechat/api/wechat/center" class="weui-btn weui-btn_default">退出</a>
-            </p>
-        </div>
     </div>
     </div>
 </div>

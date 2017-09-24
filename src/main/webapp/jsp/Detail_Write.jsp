@@ -36,14 +36,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="" class="weui-label">起始日期</label></div>
                 <div class="weui-cell__bd">
-                    <input id="startDate" name="startDate" class="weui-input" type="date" value="">
+                    <input id="startDate" name="startDate" class="weui-input" type="date" value="" required="required">
                 </div>
             </div>
         
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="" class="weui-label">结束日期</label></div>
                 <div class="weui-cell__bd">
-                    <input id="endDate" name="endDate" class="weui-input" type="date" value="">
+                    <input id="endDate" name="endDate" class="weui-input" type="date" value="" required="required">
                 </div>
             </div> 
         </div>
@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-cells">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input id='city-picker' name="address" class="weui-input" placeholder="选择省市区">
+                    <input id='city-picker' name="address" class="weui-input" placeholder="选择省市区" required="required">
                     <script>
   						$("#city-picker").cityPicker({
     					title: "请选择收货地址"
@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" name="address_detail" placeholder="请填写可以邮寄给您的详细地址哦">
+                    <input class="weui-input" type="text" name="address_detail" placeholder="请填写可以邮寄给您的详细地址哦" required="required">
                 </div>
             </div>
         </div>
