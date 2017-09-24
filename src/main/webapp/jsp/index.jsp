@@ -45,6 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <p>仪器在您与下家之间传递</p>
             <p>需使用顺丰快递并保价</p>
             <p>13-25元快递费+50元保价费</p>
+            <p>免押金和使用费，但需绑定芝麻信用</p>
         </section>
     </section>
    </article>
