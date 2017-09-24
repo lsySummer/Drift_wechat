@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </script>
   
  <div class="container" id="container">
-	<img src="/Drift_wechat/images/icon.jpg"  width="80px" height="80px" align="right"/>
+	<img src="/Drift_wechat/images/icon.jpg"  width="70px" height="70px" align="right"/>
     <div class="page__hd">
         <h1 class="page__title" align="left">&nbsp;&nbsp;请输入预约信息</h1>
     </div>
@@ -36,14 +36,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="" class="weui-label">起始日期</label></div>
                 <div class="weui-cell__bd">
-                    <input id="startDate" name="startDate" class="weui-input" type="date" value="" required="required">
+                    <input id="startDate" name="startDate" class="weui-input" type="date" value="" required/>
                 </div>
             </div>
         
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="" class="weui-label">结束日期</label></div>
                 <div class="weui-cell__bd">
-                    <input id="endDate" name="endDate" class="weui-input" type="date" value="" required="required">
+                    <input id="endDate" name="endDate" class="weui-input" type="date" value="" required/>
                 </div>
             </div> 
         </div>
@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-cells">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input id='city-picker' name="address" class="weui-input" placeholder="选择省市区" required="required">
+                    <input id='city-picker' name="address" class="weui-input" placeholder="选择省市区" required/>
                     <script>
   						$("#city-picker").cityPicker({
     					title: "请选择收货地址"
@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" name="address_detail" placeholder="请填写可以邮寄给您的详细地址哦" required="required">
+                    <input class="weui-input" type="text" name="address_detail" placeholder="请填写可以邮寄给您的详细地址哦" required/>
                 </div>
             </div>
         </div>

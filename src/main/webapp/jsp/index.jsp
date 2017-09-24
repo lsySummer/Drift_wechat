@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-cells">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" id="name" name="name" type="text" placeholder="请输入姓名">
+                    <input class="weui-input" id="name" name="name" type="text" placeholder="请输入姓名" required/>
                 </div>
             </div>
         </div>
