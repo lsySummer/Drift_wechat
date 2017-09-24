@@ -18,18 +18,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </script>
   <div class="container" id="container">
    <div class="page_hd">
-    <h1 class="page_title">公益甲醛检测仪漂流预报名系统</h1>
+    <h1 class="page_title" align="center">公益共享甲醛检测仪</h1>
+    <h1 class="page_title" align="center">预报名系统</h1>
    </div>
    <div class="page_bd">
    <article class="weui-article">
     <section>
-    	<h2>1.1 活动目的</h2>
         <section>
-            <p>Test</p>
+            <img src="/Drift_wechat/images/product.png" height="150px" width="350px"/>
         </section>
-        <h2>1.2 活动须知</h2>
+        <h2>&bull;&nbsp;产品特点</h2>
         <section>
-            <p>Test</p>
+            <p>以ppm和mg/m3为单位显示甲醛浓度</p>
+            <p>单键操作，能够快速采样。快速恢复时间</p>
+            <p>可存储数据并与电脑连接，输出数据</p>
+            <p>不受高湿度和温度影响，具备补偿功能</p>
+        </section>
+        <h2>&bull;&nbsp;活动原因</h2>
+        <section>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;淘宝售价1万多，当然您搜索甲醛检测仪时会出现更多销量过千售价几百这样的检测仪器
+				看到这里您应该能想明白为何专业的价格会这么高了，所以我们只选最专业的仪器，来保证大家的检测结果精准
+			</p>
+        </section>
+        <h2>&bull;&nbsp;活动方式</h2>
+        <section>
+            <p>仪器在您与下家之间传递</p>
+            <p>需使用顺丰快递并保价</p>
+            <p>13-25元快递费+50元保价费</p>
         </section>
     </section>
    </article>
@@ -56,10 +71,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	 </div>
    </form>
   </div>
-  <div class="weui-msg__extra-area">
         <div class="weui-footer">
                 <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
         </div>
-  </div>
  </body>
 </html>

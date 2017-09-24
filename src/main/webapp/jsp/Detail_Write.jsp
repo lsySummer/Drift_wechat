@@ -23,13 +23,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     weui.alert('芝麻信用绑定成功，开始填写预定信息吧！');
   </script>
   
-    <div class="container" id="container">
+ <div class="container" id="container">
+	<img src="/Drift_wechat/images/icon.jpg"  width="80px" height="80px" align="right"/>
     <div class="page__hd">
-        <h1 class="page__title">请输入预定信息</h1>
+        <h1 class="page__title" align="left">&nbsp;&nbsp;请输入预约信息</h1>
     </div>
+    </br>
     <form method="get" id="detail" name="detail" action="/Drift_wechat/api/user/setAddress">
     <div class="page__bd">
-        <div class="weui-cells__title">产品预约时间</div>
+        <div class="weui-cells__title">预约时间</div>
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="" class="weui-label">起始日期</label></div>
@@ -45,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div> 
         </div>
-
+		</br>
         <div class="weui-cells__title">地址选择</div>   
         <div class="weui-cells">
             <div class="weui-cell">
@@ -73,13 +75,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
         </div>
-        
-        <label for="weuiAgree" class="weui-agree">
-            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
-            <span class="weui-agree__text">
-                阅读并同意<a href="javascript:void(0);">《相关条款》</a>
-            </span>
-        </label>
 
         <div class="weui-btn-area">
             <button class="weui-btn weui-btn_primary" type="submit" id="submit">确定并提交</button>
@@ -87,16 +82,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       
     </div>
     </form>
-    
-    <div class="page__ft">
-        <a href="javascript:home()"><img src="./images/icon_footer_link.png"></a>
-    </div>
 </div>
 
-  <div class="weui-msg__extra-area">
         <div class="weui-footer">
                 <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
         </div>
-  </div>
   </body>
 </html>

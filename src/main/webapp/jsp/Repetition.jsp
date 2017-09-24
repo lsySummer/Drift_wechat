@@ -22,12 +22,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
         <div class="weui-msg__text-area">
             <h2 class="weui-msg__title">申请成功</h2>
-            <p class="weui-msg__desc">您已经申请成功了，请留意微信群内的消息<a href="javascript:void(0);">文字链接</a></p>
+            <p class="weui-msg__desc">您已经申请成功了，请留意微信群内的消息</p>
         </div>
+        <img src="/Drift_wechat/images/QR_code.jpg" height="200px" width="200px"/>
         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
-                <a href="javascript:history.back();" class="weui-btn weui-btn_primary">添加微信</a>
-                <a href="javascript:history.back();" class="weui-btn weui-btn_default">返回首页</a>
+                <a href="/Drift_wechat/api/wechat/center" class="weui-btn weui-btn_default">退出</a>
             </p>
         </div>
     </div>
