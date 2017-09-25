@@ -6,7 +6,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
 <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
+<script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
 <html>
   <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
@@ -63,17 +66,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-cells">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" id="name" name="name" type="text" placeholder="请输入姓名" required/>
+                    <input class="weui-input" id="name" name="name" type="text" placeholder="请输入姓名"/>
                 </div>
             </div>
         </div>
-     <div class="page__bd page__bd_spacing">
-      <button type="submit" class="weui-btn weui-btn_primary">授权芝麻信用</button>
+     <div class="weui-btn-area">
+      <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick=verity>授权芝麻信用</button>
    	 </div>
    </form>
   </div>
         <div class="weui-footer">
                 <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
         </div>
+   <script type="text/javascript">
+		$('#auth').click(function(){
+			if($("#name").val().trim().length && $("#phone").val().trim().length){
+				$.toptip('操作成功', 'success');
+				$('#basic').submit();
+			}else{
+				$.toptip('操作失败，请确保所有内容均已填写', 'error');
+				return false;
+			}
+		})
+	</script>
  </body>
 </html>

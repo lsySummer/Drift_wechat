@@ -48,7 +48,6 @@ public class ZmxyAskDaoImpl implements ZmxyAskDao{
         DefaultZhimaClient client = new DefaultZhimaClient(gatewayUrl, appId, privateKey, zhimaPublicKey);
         try {
             String url = client.generatePageRedirectInvokeUrl(req);
-            System.out.println(url);
             return url;
         } catch (ZhimaApiException e) {
             e.printStackTrace();

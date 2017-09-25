@@ -22,7 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript">
     weui.alert('芝麻信用绑定成功，开始填写预定信息吧！');
   </script>
-  
  <div class="container" id="container">
 	<img src="/Drift_wechat/images/icon.jpg"  width="70px" height="70px" align="right"/>
     <div class="page__hd">
@@ -36,14 +35,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="" class="weui-label">起始日期</label></div>
                 <div class="weui-cell__bd">
-                    <input id="startDate" name="startDate" class="weui-input" type="date" value="" required/>
+                    <input id="startDate" name="startDate" class="weui-input" type="date" value="" required=""/>
                 </div>
             </div>
         
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="" class="weui-label">结束日期</label></div>
                 <div class="weui-cell__bd">
-                    <input id="endDate" name="endDate" class="weui-input" type="date" value="" required/>
+                    <input id="endDate" name="endDate" class="weui-input" type="date" value="" required=""/>
                 </div>
             </div> 
         </div>
@@ -52,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-cells">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input id='city-picker' name="address" class="weui-input" placeholder="选择省市区" required/>
+                    <input id='city-picker' name="address" class="weui-input" placeholder="选择省市区" required=""/>
                     <script>
   						$("#city-picker").cityPicker({
     					title: "请选择收货地址"
@@ -62,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" name="address_detail" placeholder="请填写可以邮寄给您的详细地址哦" required/>
+                    <input id="address_detail" class="weui-input" type="text" name="address_detail" placeholder="请填写可以邮寄给您的详细地址哦" required=""/>
                 </div>
             </div>
         </div>
@@ -88,4 +87,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
         </div>
   </body>
+    <script type="text/javascript">
+		$("#submit").click(function(){
+			if($("#startDate").val().trim().length && $("#endDate").val().trim().length && $("#city-picker").val().trim().length && $("#address_detail").val().trim().length){
+				if($("#startDate").val() < $("#endDate").val()){
+					$.toptip('操作成功', 'success');
+					$('#detail').submit();
+				}else{
+					$.toptip('操作失败，起止日期填反了哦', 'error');
+					return false;
+				}
+			}else{
+				$.toptip('操作失败，请确保所有内容均已填写', 'error');
+				return false;
+			}
+		})
+	</script>
 </html>
