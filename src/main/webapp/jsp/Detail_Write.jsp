@@ -23,11 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     weui.alert('芝麻信用绑定成功，开始填写预定信息吧！');
   </script>
  <div class="container" id="container">
-	<img src="/Drift_wechat/images/icon.jpg"  width="70px" height="70px" align="right"/>
+	
     <div class="page__hd">
-        <h1 class="page__title" align="left">&nbsp;&nbsp;请输入预约信息</h1>
+        <h1 class="page__title" align="center">&nbsp;&nbsp;请输入预约信息</h1>
     </div>
-    </br>
+    <img src="/Drift_wechat/images/icon2.jpg"  width="320px" height="140px" align="middle"/>
     <form method="get" id="detail" name="detail" action="/Drift_wechat/api/user/setAddress">
     <div class="page__bd">
         <div class="weui-cells__title">预约时间</div>
