@@ -24,10 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </script>
  <div class="container" id="container">
 	
-    <div class="page__hd">
-        <h1 class="page__title" align="center">&nbsp;&nbsp;请输入预约信息</h1>
-    </div>
-    <img src="/Drift_wechat/images/icon2.jpg"  width="320px" height="140px" align="middle"/>
+    <img src="/Drift_wechat/images/icon2.jpg"  width="340px" height="140px" align="middle"/>
     <form method="get" id="detail" name="detail" action="/Drift_wechat/api/user/setAddress">
     <div class="page__bd">
         <div class="weui-cells__title">预约时间</div>
