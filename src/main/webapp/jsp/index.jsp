@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <img src="/Drift_wechat/images/product.png" width="340px" height="160px"/>
     </header>
    <div class="weui-grids">
-      <a href="javascript:part1()" class="weui-grid js_grid">
+      <a href="javascript:part2()" class="weui-grid js_grid">
         <div class="weui-grid__icon">
           <img src="/Drift_wechat/images/icon_nav_article.png" alt="">
         </div>
@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           产品特点
         </p>
       </a>
-      <a href="javascript:part2()" class="weui-grid js_grid">
+      <a href="javascript:part1()" class="weui-grid js_grid">
         <div class="weui-grid__icon">
           <img src="/Drift_wechat/images/icon_nav_button.png" alt="">
         </div>
