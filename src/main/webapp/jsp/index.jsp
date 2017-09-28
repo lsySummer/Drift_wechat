@@ -24,10 +24,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <h2 class="demos-title">共享甲醛检测仪</h2>
       <p class='demos-sub-title'>预报名系统</p>
       </br>
-      <img src="/Drift_wechat/images/product.png" width="340px" height="160px"/>
+      <img src="/Drift_wechat/images/product.png" width="100%" height="160px"/>
     </header>
    <div class="weui-grids">
-      <a href="javascript:part2()" class="weui-grid js_grid">
+      <a href="javascript:part1()" class="weui-grid js_grid">
         <div class="weui-grid__icon">
           <img src="/Drift_wechat/images/icon_nav_article.png" alt="">
         </div>
@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           产品特点
         </p>
       </a>
-      <a href="javascript:part1()" class="weui-grid js_grid">
+      <a href="javascript:part2()" class="weui-grid js_grid">
         <div class="weui-grid__icon">
           <img src="/Drift_wechat/images/icon_nav_button.png" alt="">
         </div>
@@ -86,13 +86,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				return false;
 			}
 		})
-		function part1(){
+		function part2(){
 			$.notification({
 				  title: "活动原因",
 				  text: "单键操作，能够快速采样。快速恢复时间;可存储数据并与电脑连接，输出数据;不受高湿度和温度影响，具备补偿功能。",
 			});
 		}
-		function part2(){
+		function part1(){
 			$.notification({
 				  title: "产品特点",
 				  text: "淘宝售价1万多，当然您搜索甲醛检测仪时会出现更多销量过千售价几百这样的检测仪器。看到这里您应该能想明白为何专业的价格会这么高了。",
