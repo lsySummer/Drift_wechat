@@ -1,6 +1,5 @@
 package edu.nju.dao.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -8,9 +7,7 @@ import com.antgroup.zmxy.openplatform.api.DefaultZhimaClient;
 import com.antgroup.zmxy.openplatform.api.ZhimaApiException;
 import com.antgroup.zmxy.openplatform.api.request.ZhimaAuthInfoAuthorizeRequest;
 
-import edu.nju.dao.BaseDao;
 import edu.nju.dao.ZmxyAskDao;
-import edu.nju.entities.Test;
 
 @Transactional
 @Repository("zmxyAskDao")
