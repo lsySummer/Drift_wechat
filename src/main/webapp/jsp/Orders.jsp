@@ -7,6 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+<link rel="stylesheet" href="/Drift_wechat/css/demos.css">
 <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
 <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
@@ -15,19 +16,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <base href="<%=basePath%>">  
-    <title>我的订单</title>
+    <title>我的预约</title>
   </head>
   
   <body>
+  	<header class='demos-header'>
+      <h2 class="demos-title">我的预约</h2>
+    </header>
     <div class="container" id="container">
-    	<div class="weui-cells">
-  			<div class="weui-cell">
-    			<div class="weui-cell__bd">
-      				<p>标题文字</p>
-    			</div>
-    			<div class="weui-cell__ft">说明文字</div>
- 			</div>
+    	<div class="weui-form-preview" id="item1">
+		  <div class="weui-form-preview__hd">
+		    <label class="weui-form-preview__label">订单编号</label>
+		    <em class="weui-form-preview__value" id="orderId">test</em>
+		  </div>
+		  <div class="weui-form-preview__bd">
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">下单日期</label>
+		      <span class="weui-form-preview__value" id="startDate">test</span>
+		    </div>
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">预约结束</label>
+		      <span class="weui-form-preview__value" id="endDate">test</span>
+		    </div>
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">送货地址</label>
+		      <span class="weui-form-preview__value" id="address">test</span>
+		    </div>
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">设备状态</label>
+		      <span class="weui-form-preview__value" id="state">test</span>
+		    </div>
+		  </div>
 		</div>
 	</div>
   </body>
+  <script type="text/javascript" src="/Drift_wechat/js/myJS/Orders.js"></script>
 </html>
