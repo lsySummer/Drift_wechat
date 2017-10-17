@@ -43,7 +43,7 @@ public class OrderController {
 		}
 	}
 	
-	@RequestMapping(value = "/Delivery")
+	@RequestMapping(value = "/delivery")
 	public void getDelivery(HttpSession session){
 //		String openid = (String) session.getAttribute("openid");
 		
