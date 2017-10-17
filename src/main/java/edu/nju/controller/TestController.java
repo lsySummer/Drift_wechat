@@ -1,21 +1,87 @@
 package edu.nju.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.nju.entities.Point;
 import edu.nju.service.TestService;
 
 
 @Controller
-@RequestMapping("/test")
+@RequestMapping(value="/test")
 public class TestController {
-
-	private Logger log = Logger.getLogger(UserController.class);
+	@Autowired
+	private TestService testService;
+	
+	@RequestMapping(value = "/map1")
+	public String getMap1(String openid) {
+		return "jsp/BaiduMap";
+	}
+	
+	@RequestMapping(value = "/map2")
+	public String getMap2(String openid) {
+		return "jsp/BaiduMap2";
+	}
+	
+	@RequestMapping(value = "/getdata")
+	@ResponseBody  
+	public Map<String, Object> getMapdata() {
+		Map<String, Object> map = new HashMap<String, Object>();  
+		double myPx = 116.345555;
+		double myPy = 40.018661;
+		int x = 3;
+		int y = 8;
+		ArrayList<Point> poiArr1 = new ArrayList<Point>();
+		ArrayList<Point> poiArr2 = new ArrayList<Point>();
+		
+		int d1 = x + (int)(Math.random() * (y - x));
+		int d2 = x + (int)(Math.random() * (y - x));
+		for(int i=0;i<d1;i++){
+			String title = "检测仪"+(i+1);
+			poiArr1.add(TestController.randomPoint(title));
+		}
+		
+		for(int i=0;i<d2;i++){
+			String title = "空气净化器"+(i+1);
+			poiArr2.add(TestController.randomPoint(title));
+		}
+		
+		map.put("myLocation", new Point("我的位置",myPx,myPy));
+		map.put("markerArr1", poiArr1);
+		map.put("markerArr2", poiArr2);
+		return map;
+	}
+	
+	public static Point randomPoint(String title){
+		double myPx = 116.345555;
+		double myPy = 40.018661;
+		double px;
+		double py;
+		if(Math.random()>0.5){
+			px = myPx - Math.random()/1000;
+		}
+		else{
+			px = myPx + Math.random()/1000;
+		}
+		
+		if(Math.random()>0.5){
+			py = myPy - Math.random()/1000;
+		}
+		else{
+			py = myPy +Math.random()/1000;
+		}
+		return new Point(title,px,py);
+	} 
+	/*private Logger log = Logger.getLogger(UserController.class);
 	@Autowired
 	private TestService testService;
 	
@@ -23,8 +89,8 @@ public class TestController {
 	public String insert(String name)
 	{
 		System.out.println("name");
-//		testService.test();
+		testService.test();
 		log.info("this is a log!!!!!!!!!");
 		return "jsp/index";
-	}
+	}*/
 }
