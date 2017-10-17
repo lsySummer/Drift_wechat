@@ -68,5 +68,15 @@ public class UserService {
 		return b;
 	}
 
+	public double getLongtitute(){
+		return 0;
+	};
+	public double getLatitute(){
+		return 0;
+	};
+	public String saveLoc(double longtitute,double latitute){
+		return "";
+	};
+
 
 }

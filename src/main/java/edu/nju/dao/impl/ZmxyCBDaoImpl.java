@@ -3,16 +3,13 @@ package edu.nju.dao.impl;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.antgroup.zmxy.openplatform.api.DefaultZhimaClient;
 import com.antgroup.zmxy.openplatform.api.ZhimaApiException;
 
-import edu.nju.dao.BaseDao;
 import edu.nju.dao.ZmxyCBDao;
-import edu.nju.entities.Test;
 
 @Transactional
 @Repository("zmxyCBDao")

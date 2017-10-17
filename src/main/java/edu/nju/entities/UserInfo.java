@@ -1,8 +1,6 @@
 package edu.nju.entities;
 
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,13 +16,14 @@ public class UserInfo {
 	private String name;
 	private String address;
 	private String phone;
-	private Date startDate;
-	private Date endDate;
 	private String openid;
 	private String nickName;
 	private String zmxyid; //芝麻信用id
 	private String transactionid;//芝麻信用的业务流水号id
 	private int score;//芝麻信用分
+	private double longtitute;
+	private double latitute;
+	
 	
 	@Id
 	@Column(length = 32)
@@ -53,18 +52,6 @@ public class UserInfo {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-	public Date getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-	public Date getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
 	}
 	public String getOpenid() {
 		return openid;
@@ -95,6 +82,18 @@ public class UserInfo {
 	}
 	public void setZmxyid(String zmxyid) {
 		this.zmxyid = zmxyid;
+	}
+	public double getLongtitute() {
+		return longtitute;
+	}
+	public void setLongtitute(double longtitute) {
+		this.longtitute = longtitute;
+	}
+	public double getLatitute() {
+		return latitute;
+	}
+	public void setLatitute(double latitute) {
+		this.latitute = latitute;
 	}
 	
 }

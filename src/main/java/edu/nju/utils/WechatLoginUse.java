@@ -16,7 +16,7 @@ public class WechatLoginUse {
 		JSONObject resultJson = WechatConfig.getAccessToken(code);
 		log.info("resultJson"+resultJson.toString());
 		String openid = resultJson.getString("openid");
-		String accessToken = resultJson.getString("access_token");
+//		String accessToken = resultJson.getString("access_token");
 		
 		//user info
 //		JSONObject userInfoJson = WechatConfig.getWXUserInfo(accessToken, openid);
