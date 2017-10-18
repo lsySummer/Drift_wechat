@@ -17,10 +17,25 @@ public class Order {
 	private String openId;//用戶openid
 	private Date startDate;
 	private Date endDate;
-	private String deviceId;//甲醛仪id
+	private String deviceNumber;//甲醛仪id
+	private String deviceId;
 	private int state;//0代表尚未寄给用户，1代表在用户手中，2代表用户已寄出
 	private int num;//购买耗材数量
 	private int ifPay;//是否是付费用户,0代表免费用户，1代表付费用户
+	
+	public Order(){
+	}
+	
+	public Order(String openId,Date startDate,Date endDate,String deviceId,String deviceNumber,int state,int num,int ifPay){
+		this.openId = openId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.deviceId = deviceId;
+		this.deviceNumber = deviceNumber;
+		this.state=state;
+		this.num = num;
+		this.ifPay = ifPay;
+	}
 	
 	@Id
 	@Column(length = 32)
@@ -50,12 +65,22 @@ public class Order {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	public String getDeviceNumber() {
+		return deviceNumber;
+	}
+
 	public String getDeviceId() {
 		return deviceId;
 	}
+
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
 	}
+
+	public void setDeviceNumber(String deviceNumber) {
+		this.deviceNumber = deviceNumber;
+	}
+
 	public int getState() {
 		return state;
 	}

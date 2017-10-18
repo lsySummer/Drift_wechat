@@ -1,6 +1,7 @@
 package edu.nju.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.nju.dao.UserDao;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.RESCODE;
+import edu.nju.model.UserVO;
 import edu.nju.utils.Constants;
 
 
@@ -48,10 +50,10 @@ public class UserService {
 		return resultObj.toString();
 	}
 
-	public String setAddress(String openid,String zmxyid, String address, String phone, Date startDate, Date endDate,String name) {
+	public String setAddress(String openid,String zmxyid, String address, String phone, Date startDate, Date endDate,String name,String nickname) {
 		System.out.println("openid");
 		JSONObject resultObj=new JSONObject();
-		boolean b = dao.setAddress(openid,zmxyid,address,phone,startDate,endDate,name);
+		boolean b = dao.setAddress(openid,zmxyid,address,phone,startDate,endDate,name,nickname);
 		if (!b) {
 			resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.CREATE_ERROR);
 			resultObj.put(Constants.RESPONSE_MSG_KEY,
@@ -67,16 +69,15 @@ public class UserService {
 		UserInfo b = dao.getUser(openid);
 		return b;
 	}
-
-	public double getLongtitute(){
-		return 0;
-	};
-	public double getLatitute(){
-		return 0;
-	};
-	public String saveLoc(double longtitute,double latitute){
-		return "";
-	};
-
-
+	
+	public UserInfo getByNickName(String nickname){
+		UserInfo b = dao.getByNickName(nickname);
+		return b;
+	}
+	
+	public List<UserVO> getUserVO(){
+		List<UserVO> vo = dao.getUserVO();
+		return vo;
+	}
+	
 }
