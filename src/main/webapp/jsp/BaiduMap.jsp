@@ -71,8 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var markerArr2 = data.markerArr2;
 				var myIp = "218.94.159.98";
 				//$.session.get('id');
-				var url = "https://api.map.baidu.com/location/ip?ip="+myIp+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";
-				
+				var url = "https://api.map.baidu.com/location/ip?ip="+myIp+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";				
 			},"json");
 		});
 		  
@@ -190,6 +189,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   map.addOverlay(marker);  
                   return marker;  
               }  
-                   
        	</script>      
 </html>  

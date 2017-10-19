@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import edu.nju.dao.BaseDao;
 import edu.nju.dao.ReserveDao;
@@ -13,6 +14,7 @@ import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.utils.Utility;
 
+@Repository
 public class ReserveDaoImpl implements ReserveDao{
 	
 	 @Autowired

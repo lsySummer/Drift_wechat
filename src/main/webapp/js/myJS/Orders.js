@@ -1,7 +1,7 @@
 /**
  * 
  */
-$.getJSON('/Drift_wechat/api/order/detail',function(json){
+$.getJSON('/Drift_wechat/api/order/get',function(json){
 	var item = json.length;
 	if(item == 0){
 		document.getElementById("item1").style.display="none";
