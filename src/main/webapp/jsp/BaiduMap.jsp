@@ -52,142 +52,141 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 	</div>
 </body>
-	<script type="text/javascript">
-	function getUserLocation(ip){
+
+<script type="text/javascript">
+	
+	//session中获取ip并得到位置信息
+	$("document").ready(function(){
+		//$.session.get('ip');
+		var ip = "218.94.159.98";
+		var url = "https://api.map.baidu.com/location/ip?ip="+ip+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";
 		$.get(url,function(data){
-					result = data.content.address;
-					result = data.content.point;
-					console.log(result);
-					alert(result);
-					map_init(myLocation,markerArr1,markerArr2);
+			myLocation = data.content.point;
+			getMap(myLocation);
 		},"JSONP");
+	});
+	
+	//得到用户userVO列表
+	function getMap(myLocation){
+		$.get("/Drift_wechat/api/map/getMap",function(data){
+			var userArr1 = data.userArr1;
+			var userArr2 = data.userArr2;
+			//$.session.get('id');
+			map_init(myLocation,userArr1,userArr2);				
+		},"json");
 	}
-		//发送GET请求
-		$("document").ready(function(){
-			$.get("/Drift_wechat/api/map/getMapData",function(data){
-				//var map;
-				var myLocation = data.myLocation;
-				var markerArr1 = data.markerArr1;
-				var markerArr2 = data.markerArr2;
-				var myIp = "218.94.159.98";
-				//$.session.get('id');
-				var url = "https://api.map.baidu.com/location/ip?ip="+myIp+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";				
-			},"json");
-		});
-		  
-              function map_init(myLocation,markerArr1,markerArr2) {  
-                      map = new BMap.Map("map");  
-                      //第1步：设置地图中心点，当前城市  
-                      var point = new BMap.Point(myLocation.px,myLocation.py);  
-                      //第2步：初始化地图,设置中心点坐标和地图级别。  
-                      map.centerAndZoom(point, 18);  
-                      //第3步：启用滚轮放大缩小  
-                      map.enableScrollWheelZoom(true);  
-                      //第4步：向地图中添加缩放控件  
-                      /*var ctrlNav = new window.BMap.NavigationControl({  
-                          anchor: BMAP_ANCHOR_TOP_LEFT,  
-                          type: BMAP_NAVIGATION_CONTROL_LARGE  
-                      });  
-                      map.addControl(ctrlNav);*/  
-                      //第5步：向地图中添加缩略图控件  
-                      var ctrlOve = new window.BMap.OverviewMapControl({  
-                          anchor: BMAP_ANCHOR_BOTTOM_RIGHT,  
-                          isOpen: 1  
-                      });  
-                      map.addControl(ctrlOve);  
-    
-                      //第6步：向地图中添加比例尺控件  
-                      var ctrlSca = new window.BMap.ScaleControl({  
-                          anchor: BMAP_ANCHOR_BOTTOM_LEFT  
-                      });  
-                      map.addControl(ctrlSca);  
-                        
-                        
-                      //第7步：绘制点    
-                      for (var i = 0; i < markerArr1.length; i++) {
-                          var myPoint = new BMap.Point(markerArr1[i].px,
-                              markerArr1[i].py);
+	
+	//初始化地图
+    function map_init(myLocation,userArr1,userArr2) {  
+            map = new BMap.Map("map");  
+            //第1步：设置地图中心点，当前城市  
+            var point = new BMap.Point(myLocation.x,myLocation.y);  
+            //第2步：初始化地图,设置中心点坐标和地图级别。  
+            map.centerAndZoom(point, 18);  
+            //第3步：启用滚轮放大缩小  
+            map.enableScrollWheelZoom(true);  
+            //第4步：向地图中添加缩放控件  
+            var ctrlNav = new window.BMap.NavigationControl({  
+                anchor: BMAP_ANCHOR_TOP_LEFT,  
+                type: BMAP_NAVIGATION_CONTROL_LARGE  
+            });  
+            map.addControl(ctrlNav);
+            //第5步：向地图中添加缩略图控件  
+            var ctrlOve = new window.BMap.OverviewMapControl({  
+                anchor: BMAP_ANCHOR_BOTTOM_RIGHT,  
+                isOpen: 1  
+            });  
+            map.addControl(ctrlOve);  
 
-                          var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
-                          new BMap.Size(23, 25), {  
-                              offset: new BMap.Size(10, 25),  
-                              imageOffset: new BMap.Size(0, -275)  
-                                
-                          }); 
-                          var maker =  new BMap.Marker(myPoint,{icon:myIcon});
-                          map.addOverlay(maker); 
-                          addInfoWindow(maker, markerArr1[i]);   
-                      }
+            //第6步：向地图中添加比例尺控件  
+            var ctrlSca = new window.BMap.ScaleControl({  
+                anchor: BMAP_ANCHOR_BOTTOM_LEFT  
+            });  
+            map.addControl(ctrlSca);  
+             
+			var myPoint = new BMap.Point(myLocation.x,myLocation.y);
+            var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
+            new BMap.Size(23, 25), {  
+                offset: new BMap.Size(10, 25),  
+                imageOffset: new BMap.Size(0, -250)      
+            });
 
-                      for (var i = 0; i < markerArr2.length; i++) {
-                          var myPoint = new BMap.Point(markerArr2[i].px,
-                              markerArr2[i].py);
-
-                          var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
-                          new BMap.Size(23, 25), {  
-                              offset: new BMap.Size(10, 25),  
-                              imageOffset: new BMap.Size(0, -300)  
-                                
-                          }); 
-                          var maker =  new BMap.Marker(myPoint,{icon:myIcon});
-                          map.addOverlay(maker);
-                          addInfoWindow(maker, markerArr2[i]);  
-                      }
-
-
-                      var myPoint = new BMap.Point(myLocation.px,myLocation.py);
-                      var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
-                      new BMap.Size(23, 25), {  
-                          offset: new BMap.Size(10, 25),  
-                          imageOffset: new BMap.Size(0, -250)      
-                      });
-
-                      var maker =  new BMap.Marker(myPoint,{icon:myIcon});
-                      map.addOverlay(maker);
-                      addInfoWindow(maker, myLocation);
-              }  
-				
-            	// 添加信息窗口  
-              function addInfoWindow(marker, poi) {  
-                      //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画  
-                      /*var label = new window.BMap.Label(poi.title, { offset: new window.BMap.Size(20, -10) }); 
-                      marker.setLabel(label);  
-                      var clo="";  
-                      if("hello"==poi.title){  
-                          clo="#FFFFFF";  
-                      }else{  
-                          clo="#FF5782";  
-                      }  
-                      var info = new window.BMap.InfoWindow("<p style=’font-size:12px;lineheight:1.8em;color:"+clo+";’>" +poi.title+ "</p>"); // 创建信息窗口对象  
-                      marker.addEventListener("mouseover", openInfoWinFun);  
-                      var openInfoWinFun = function () {  
-                          this.openInfoWindow(info);  
-                      };*/
+            var myMaker =  new BMap.Marker(myPoint,{icon:myIcon});
+            map.addOverlay(myMaker);
+            var myWindow = {};
+            myWindow["point"] = myPoint;
+            myWindow["info"] = "欢迎使用甲醛仪，预计排队时间一天";
+            
+            addMyInfoWindow(myMaker, myWindow);
+			  
+			
+			 var icon1 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
+                new BMap.Size(23, 25), {  
+                    offset: new BMap.Size(10, 25),  
+                    imageOffset: new BMap.Size(0, -275)                        
+                });
+             var icon2 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
+                new BMap.Size(23, 25), {  
+                    offset: new BMap.Size(10, 25),  
+                    imageOffset: new BMap.Size(0, -300)  
                       
-			    var opts = {
-				  width : 200,     // 信息窗口宽度
-				  height: 100,     // 信息窗口高度
-				  title : poi.title , // 信息窗口标题
-				  enableMessage:true,//设置允许信息窗发送短息
-				  message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
+                });
+                
+             addPoint(userArr1,icon1);
+             addPoint(userArr2,icon2);
+                 
+    }  
+   	// 将地址解析结果显示在地图上,并调整地图视野
+	function addPoint(userArr,icon){
+	    // 创建地址解析器实例
+		var myGeo = new BMap.Geocoder();
+		
+		for (var i = 0; i < userArr.length; i++) {
+			var temp = {};
+			temp["deviceNumber"] = userArr[i].deviceNumber;
+			temp["address"] = userArr[i].address;	
+			myGeo.getPoint(userArr[i].address, function(point){
+				if (point) {		
+					var maker =  new BMap.Marker(point,{icon:icon});
+               		map.addOverlay(maker);
+               		temp["point"] = point;
+               		console.log(temp);
+               		addInfoWindow(maker, temp); 
+				}else{
+					alert("您选择地址没有解析到结果!");
 				}
-				var infoWindow = new BMap.InfoWindow("地址：*******", opts);  // 创建信息窗口对象 
-				marker.addEventListener("click", function(){          
-					this.openInfoWindow(infoWindow,poi);
-				}); 
-              }  
-              
-              // 添加标注  
-              function addMarker(point, index) {  
-                  var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarker.png",  
-                      new BMap.Size(23, 25), {  
-                          offset: new BMap.Size(10, 25),  
-                          imageOffset: new BMap.Size(0, -250 -  index * 25)  
-                            
-                      });  
-                  var marker = new BMap.Marker(point, { icon: myIcon });  
-                  map.addOverlay(marker);  
-                  return marker;  
-              }  
+			}, "");
+			
+           }
+	}	
+   // 添加检测仪信息窗口  
+   function addInfoWindow(marker, poi) {  
+	    var opts = {
+		  width : 200,     // 信息窗口宽度
+		  height: 100,     // 信息窗口高度
+		  title : poi.deviceNumber , // 信息窗口标题
+		  enableMessage:true,//设置允许信息窗发送短息
+		  message:""
+		}
+		var infoWindow = new BMap.InfoWindow(poi.address, opts);  // 创建信息窗口对象 
+		marker.addEventListener("click", function(){          
+			this.openInfoWindow(infoWindow,poi.point);
+		});
+	}
+	
+	// 添加我的位置信息窗口  
+   function addMyInfoWindow(marker, poi) {  
+	    var opts = {
+		  width : 200,     // 信息窗口宽度
+		  height: 100,     // 信息窗口高度
+		  title : "", // 信息窗口标题
+		  enableMessage:true,//设置允许信息窗发送短息
+		  message:""
+		}
+		var infoWindow = new BMap.InfoWindow(poi.info, opts);  // 创建信息窗口对象 
+		marker.addEventListener("click", function(){          
+			this.openInfoWindow(infoWindow,poi.point);
+		});
+	}
        	</script>      
 </html>  
