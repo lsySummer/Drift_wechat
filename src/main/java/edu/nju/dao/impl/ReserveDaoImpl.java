@@ -63,7 +63,7 @@ public class ReserveDaoImpl implements ReserveDao{
 			String deviceId = o.getDeviceId();
 			Date startDate = o.getStartDate();
 			Date beforeDate = Utility.getSpecifiedDayAfter(startDate,-1);
-			String hql = "from Order where endDate = :beforeDate and deviceId = : deviceId";
+			String hql = "from Order where endDate = :beforeDate and deviceId = :deviceId";
 			List<Order> orderList = baseDao.getNewSession().createQuery(hql).setParameter("beforeDate", beforeDate).
 					setParameter("deviceId", deviceId).getResultList();
 			if(orderList.size()>0){
@@ -85,7 +85,7 @@ public class ReserveDaoImpl implements ReserveDao{
 			String deviceId = o.getDeviceId();
 			Date startDate = o.getEndDate();
 			Date afterDate = Utility.getSpecifiedDayAfter(startDate,1);
-			String hql = "from Order where startDate = :afterDate and deviceId + : deviceId";
+			String hql = "from Order where startDate = :afterDate and deviceId = :deviceId";
 			List<Order> orderList = baseDao.getNewSession().createQuery(hql).setParameter("afterDate", afterDate).
 					setParameter("deviceId", deviceId).getResultList();
 			if(orderList.size()>0){
@@ -204,7 +204,7 @@ public class ReserveDaoImpl implements ReserveDao{
 	@Override
 	public String getSendDid(String openid) {
 		String hql = "from DeliveryInfo where sendId = :openId";
-		List<DeliveryInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("sendId", openid).getResultList();
+		List<DeliveryInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("openId", openid).getResultList();
 		if(list.size()>0){
 			return list.get(0).getDeliveryNumber();
 		}
@@ -215,7 +215,7 @@ public class ReserveDaoImpl implements ReserveDao{
 	@Override
 	public String getRecDid(String openid) {
 		String hql = "from DeliveryInfo where receiveId = :openId";
-		List<DeliveryInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("receiveId", openid).getResultList();
+		List<DeliveryInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("openId", openid).getResultList();
 		if(list.size()>0){
 			return list.get(0).getDeliveryNumber();
 		}

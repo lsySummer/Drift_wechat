@@ -9,12 +9,12 @@ $.getJSON('/Drift_wechat/api/delivery/get',function(json){
 		document.getElementById("container").innerHTML="暂无订单";
 	}else{
 		document.getElementById('previous').innerHTML=before.name;
-		document.getElementById('deliveryNum1').innerHTML=before.deliveryNum1;
-		document.getElementById('deviceId1').innerHTML=before.deviceId1;
+		document.getElementById('deliveryNum1').innerHTML=json.receive;
+		document.getElementById('deviceId1').innerHTML=json.deviceId;
 		if(after != null){
-			document.getElementById('next').innerHTML=after.next;
-			document.getElementById('deliveryNum2').innerHTML=after.deliveryNum2;
-			document.getElementById('deviceId2').innerHTML=after.deviceId2;
+			document.getElementById('next').innerHTML=after.name;
+			document.getElementById('deliveryNum2').innerHTML=json.deliveryNum2;
+			document.getElementById('deviceId2').innerHTML=json.deviceId;
 		}else{document.getElementById("item2").style.display="none";}
 	}
 });

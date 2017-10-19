@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import edu.nju.entities.Device;
 import edu.nju.service.ReserveService;
 
 @Controller
@@ -28,12 +29,18 @@ public class DeliveryController {
 	
 	@RequestMapping(value = "/get")
 	public void getDelivery(HttpSession session, HttpServletResponse response){
-//		String openid = (String) session.getAttribute("openid");
 		JSONObject result=new JSONObject();
-//		service.getBefore((String)session.getAttribute("openid"));
-//		service.getAfter((String)session.getAttribute("openid"));
+//		Device device = service.getDeviceByOpenId((String)session.getAttribute("openid"));
+//		result.put("before", service.getBefore((String)session.getAttribute("openid")));
+//		result.put("after", service.getAfter((String)session.getAttribute("openid")));
+//		result.put("receive", service.getRecDid((String)session.getAttribute("openid")));
+//		result.put("send", service.getSendDid((String)session.getAttribute("openid")));
+		Device device = service.getDeviceByOpenId("oRTgpwXFnHUxJVa1ttSC8Tu_edXw");
 		result.put("before", service.getBefore("oRTgpwXFnHUxJVa1ttSC8Tu_edXw"));
 		result.put("after", service.getAfter("oRTgpwXFnHUxJVa1ttSC8Tu_edXw"));
+		result.put("receive", service.getRecDid("oRTgpwXFnHUxJVa1ttSC8Tu_edXw"));
+		result.put("send", service.getSendDid("oRTgpwXFnHUxJVa1ttSC8Tu_edXw"));
+		result.put("deviceId", device.getId());
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(result);
