@@ -47,10 +47,14 @@ public class OrderController {
 	public String ZMXY(HttpSession session) {
 		UserInfo user = userService.getUser((String)session.getAttribute("openid"));
 //		UserInfo user = userService.getUser("hahaha");
-		if(user == null || user.getZmxyid() == null){
-
+		if(user == null){
+			return "jsp/MyIndex.jsp";
+		}else if(user.getZmxyid() == null){
 			return "jsp/index";
-		}else{
+		}else if(service.checkReserve((String)session.getAttribute("openid"))){
+			return "jsp/Warn";
+		}
+		else{
 			service.makeOrder((String)session.getAttribute("openid"), 0, 0);
 //			service.makeOrder("hahaha", 0, 0);
 			return "jsp/Result";
