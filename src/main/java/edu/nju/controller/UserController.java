@@ -68,7 +68,7 @@ public class UserController {
 		result.put("nickName", session.getAttribute("nickname"));
 		result.put("image", session.getAttribute("headimgurl"));
 //		UserInfo user = service.getUser((String)session.getAttribute("openid"));
-		UserInfo user = service.getUser("oRTgpwXFnHUxJVa1ttSC8Tu_edXw");
+		UserInfo user = service.getUser("hahaha");
 		if(user != null){
 			flag = true;
 			result.put("address", user.getAddress());
@@ -88,13 +88,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/save")
-	public String saveUser(HttpSession session, String name, String address, String phone, String address_detail) {
+	public String saveUser(HttpSession session, String deliveryPerson, String address, String phone, String address_detail) {
 		UserInfo user = new UserInfo();
 //		user.setOpenid((String)session.getAttribute("openid"));
-		user.setOpenid("oRTgpwXFnHUxJVa1ttSC8Tu_edXw");
+		user.setOpenid("hahaha");
 		user.setAddress(address + " " + address_detail);
 		user.setPhone(phone);
-		user.setName(name);
+		user.setName(deliveryPerson);
 		service.saveOrUpdate(user);
 		return "jsp/MyIndex";
 	}
