@@ -17,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 
 @Entity
-@Table(name = "device")
+@Table(name = "device_info")
 public class DeliveryInfo {
 	private String id;
 	private String sendId;//发出方openid
