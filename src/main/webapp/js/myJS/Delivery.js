@@ -2,6 +2,7 @@
  * 
  */
 $.getJSON('/Drift_wechat/api/delivery/get',function(json){
+	console.log(json);
 	var before = json.before;
 	var after = json.after;
 	if(before == null){

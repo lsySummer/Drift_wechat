@@ -41,6 +41,7 @@ public class DeliveryController {
 		result.put("receive", service.getRecDid("oRTgpwXFnHUxJVa1ttSC8Tu_edXw"));
 		result.put("send", service.getSendDid("oRTgpwXFnHUxJVa1ttSC8Tu_edXw"));
 		result.put("deviceId", device.getId());
+		System.out.println(result);
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(result);
