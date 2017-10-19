@@ -116,10 +116,15 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public boolean saveOrUpdate(UserInfo user) {
 		List<UserInfo> list = getUserById(user.getOpenid());
-		System.out.println("listsize"+list.size());
 		if(list.size()==0){
 			baseDao.save(user);
 		}else{
+			UserInfo u = list.get(0);
+			user.setId(u.getId());
+			user.setNickName(u.getNickName());
+			user.setScore(u.getScore());
+			user.setTransactionid(u.getTransactionid());
+			user.setZmxyid(u.getZmxyid());
 			baseDao.update(user);
 		}
 		return true;

@@ -19,8 +19,10 @@ public class TestController {
 	@RequestMapping(value = "/insert")
 	public String register() {
 		UserInfo u = new UserInfo();
-		u.setOpenid("thisiscomponyinfomation");
-		u.setNickName("Compony");
+		u.setOpenid("hahaha");
+		u.setAddress("北京");
+		u.setPhone("15850512345");
+		u.setName("公司");
 		userService.saveOrUpdate(u);
 //		System.out.println(userService.getUser("thisiscomponyinfomation").toString());
 		return "success";
