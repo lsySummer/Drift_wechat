@@ -168,5 +168,18 @@ public class ReserveService {
 			}
 		}
 	}
+	/**
+	 * @param openId
+	 * @return
+	 * 根据openid获得其订单状态
+	 */
+	public String getOrderState(String openId){
+		List<Order> olist = dao.getOrderById(openId);
+		if(olist.size()>0){
+			Order o = olist.get(olist.size()-1);
+			return o.getState();
+		}
+		return "暂无";
+	}
 
 }

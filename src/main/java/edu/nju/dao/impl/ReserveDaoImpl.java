@@ -248,7 +248,7 @@ public class ReserveDaoImpl implements ReserveDao{
 		String hql = "from Order where openId = :openId";
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openId", openId).getResultList();
 		if(list.size()>0){
-			Order o = list.get(0);
+			Order o = list.get(list.size()-1);
 			String deviceId = o.getDeviceId();
 			List<Device> deviceList =getDeviceById(deviceId);
 			if(deviceList.size()>0){
@@ -265,7 +265,7 @@ public class ReserveDaoImpl implements ReserveDao{
 		String hql = "from DeliveryInfo where sendId = :openId";
 		List<DeliveryInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("openId", openid).getResultList();
 		if(list.size()>0){
-			return list.get(0).getDeliveryNumber();
+			return list.get(list.size()-1).getDeliveryNumber();
 		}
 		return "暂无物流信息";
 	}
@@ -276,7 +276,7 @@ public class ReserveDaoImpl implements ReserveDao{
 		String hql = "from DeliveryInfo where receiveId = :openId";
 		List<DeliveryInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("openId", openid).getResultList();
 		if(list.size()>0){
-			return list.get(0).getDeliveryNumber();
+			return list.get(list.size()-1).getDeliveryNumber();
 		}
 		return "暂无物流信息";
 	}
@@ -287,7 +287,7 @@ public class ReserveDaoImpl implements ReserveDao{
 		String hql = "from Order where openId =:openid";
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openid).getResultList();
 		if(list.size()>0){
-			Order o = list.get(0);
+			Order o = list.get(list.size()-1);
 			o.setState("已确认收货");
 			baseDao.update(o);
 			return true;

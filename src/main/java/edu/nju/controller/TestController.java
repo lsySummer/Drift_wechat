@@ -22,10 +22,11 @@ public class TestController {
 //		System.out.println(userService.getUser("thisiscomponyinfomation").toString());
 //		userService.setZMXY("ZMXYopenID", "UPDATEzmxyid");
 //		service.saveDelInfo("hahaha","7654");
-		service.makeOrder("qwertyu", 0, 2);
+//		service.makeOrder("qwertyu", 0, 2);
 //		System.out.println(service.checkReserve("12345"));
 //		System.out.println(service.checkReserve("hahaha"));
 //		System.out.println(service.getBefore("hahaha").toString());
+		System.out.println(service.getOrderState("oRTgpweSZbOxfrg9H57JwuPwMJLo"));
 		return "success";
 	}
 }
