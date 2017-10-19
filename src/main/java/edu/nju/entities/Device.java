@@ -1,5 +1,7 @@
 package edu.nju.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +14,12 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "device")
 public class Device {
 	private String id;
-	private String number;//编号
-	private int type;//普通or预留
+	private String number;//设备编号
+	private int type;//普通or预留 0代表普通，1代表预留
 	private String loc;//目前所在位置
 	private String deliveryId;//目前快递单号
+	private int queueNum;//当前排队人数
+	private Date queueDate;//当前排到哪一天了
 	
 	@Id
 	@Column(length = 32)
@@ -32,6 +36,12 @@ public class Device {
 	}
 	public void setNumber(String number) {
 		this.number = number;
+	}
+	public int getQueueNum() {
+		return queueNum;
+	}
+	public void setQueueNum(int queueNum) {
+		this.queueNum = queueNum;
 	}
 	public int getType() {
 		return type;
@@ -50,6 +60,12 @@ public class Device {
 	}
 	public void setDeliveryId(String deliveryId) {
 		this.deliveryId = deliveryId;
+	}
+	public Date getQueueDate() {
+		return queueDate;
+	}
+	public void setQueueDate(Date queueDate) {
+		this.queueDate = queueDate;
 	}
 	
 	

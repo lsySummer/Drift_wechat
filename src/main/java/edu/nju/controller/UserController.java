@@ -42,10 +42,11 @@ public class UserController {
 		String name = (String) session.getAttribute("name");
 		String phone = (String) session.getAttribute("phone");
 		String zmxyid = (String) session.getAttribute("zmxyid");
+		String nickname = (String) session.getAttribute("nickname");
 		String addressTemp = address + address_detail;
 		Date startTemp = sdf.parse(startDate);
 		Date endTemp = sdf.parse(endDate);
-		service.setAddress(openid,zmxyid,addressTemp,phone,startTemp,endTemp,name);
+		service.setAddress(openid,zmxyid,addressTemp,phone,startTemp,endTemp,name,nickname);
 		return "jsp/Result";
 	}
 	

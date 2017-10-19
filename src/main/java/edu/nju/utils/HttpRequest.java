@@ -18,6 +18,7 @@ import java.util.Map;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -260,5 +261,25 @@ public class HttpRequest {
 		}
 		return entity;
 	}
+	
+	  public static String getIpAddress(HttpServletRequest request) { 
+		    String ip = request.getHeader("x-forwarded-for"); 
+		    if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+		      ip = request.getHeader("Proxy-Client-IP"); 
+		    } 
+		    if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+		      ip = request.getHeader("WL-Proxy-Client-IP"); 
+		    } 
+		    if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+		      ip = request.getHeader("HTTP_CLIENT_IP"); 
+		    } 
+		    if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+		      ip = request.getHeader("HTTP_X_FORWARDED_FOR"); 
+		    } 
+		    if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
+		      ip = request.getRemoteAddr(); 
+		    } 
+		    return ip; 
+		  } 
 	
 }
