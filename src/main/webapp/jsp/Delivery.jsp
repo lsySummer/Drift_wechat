@@ -13,6 +13,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
 <html>
+	<script>
+	function confirm(){
+		$.toptip('确认收货成功', 'success');
+		$.get('/Drift_wechat/api/delivery/confirm');
+	}
+	</script>
   <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <base href="<%=basePath%>">  
@@ -63,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 		  <div class="weui-form-preview__ft">
 		  	<a class="weui-form-preview__btn weui-form-preview__btn_default" href="/Drift_wechat/jsp/DeliveryWrite.jsp">快递查询</a>
-    		<button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascript:confirm()">确认收货</button>
+    		<button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascript:confirm();">确认收货</button>
   		  </div>
 		</div>
 		</br>

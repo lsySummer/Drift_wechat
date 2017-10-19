@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import edu.nju.service.ReserveService;
+import edu.nju.service.UserService;
 import edu.nju.service.ZmxyService;
 
 @Controller
@@ -24,6 +25,10 @@ public class ZmxyController {
 	
 	@Autowired
 	private ReserveService reserveService;
+	
+	@Autowired
+	private UserService userService;
+	
 	private Logger log = Logger.getLogger(ZmxyController.class);
 	
 	@ResponseBody
@@ -41,7 +46,8 @@ public class ZmxyController {
 			return modelAndView;
 		}else{
 			session.setAttribute("zmxyid", state);
-			modelAndView.addObject("state", state);
+//			modelAndView.addObject("state", state);
+			userService.setZMXY((String)session.getAttribute("openid"), state);
 			reserveService.makeOrder((String)session.getAttribute("openid"), 0, 0);
 //			reserveService.makeOrder("hahaha", 0, 0);
 			modelAndView.setViewName("redirect:/jsp/Result.jsp");
