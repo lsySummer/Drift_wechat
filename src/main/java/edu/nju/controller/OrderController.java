@@ -17,24 +17,15 @@ import com.google.gson.GsonBuilder;
 @Controller
 @RequestMapping(value="/order")
 public class OrderController {
-	public class Orders{
-		private int number;
-		private String name;
-		public Orders(int string, String string2) {
-			// TODO Auto-generated constructor stub
-			this.number = string;
-			this.name = string2;
-		}	
-	}
+	
 	
 	@RequestMapping(value = "/get")
 	public void getDetail(HttpSession session, HttpServletResponse response){
-		Orders orders = new Orders(1234,"test");
 		Gson result = new GsonBuilder().create();
 //		String openid = (String) session.getAttribute("openid");
 		try {
 			PrintWriter out = response.getWriter();
-			out.print(result.toJson(orders));
+			out.print(result.toJson(null));
 			out.flush();
 			out.close();
 		} catch (IOException e) {
