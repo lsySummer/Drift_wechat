@@ -44,6 +44,7 @@ public class WeChatController {
 		try {
 			log.info("用户信息:"+wechatInfo);
 			resultJson = new JSONObject(wechatInfo);
+			log.info("messageInfo"+resultJson.get("message"));
 			if(resultJson.get("message").equals("success")){
 				String openid = resultJson.getString("openid");
 				String nickname = resultJson.getString("nickname");

@@ -148,7 +148,7 @@ public class ReserveDaoImpl implements ReserveDao{
 			info.setDeliveryNumber(did);
 			info.setSendId(openId);
 			UserInfo afterUser = getAfter(openId);
-			info.setReceiveId(afterUser.getId());
+			info.setReceiveId(afterUser.getOpenid());
 			List<Order> afterList = getOrderById(afterUser.getOpenid());
 //			System.out.println(afterUser.getOpenid()+" "+afterList.size());
 			if(afterList.size()>0){
