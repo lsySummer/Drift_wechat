@@ -26,9 +26,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
         <div class="weui-msg__text-area">
             <h2 class="weui-msg__title">操作成功</h2>
-            <p class="weui-msg__desc">请加入微信群，会有客服与您联系</p>
+            <p class="weui-msg__desc">请加入微信群，方便客服与您联系</p>
         </div>
     		<img src="/Drift_wechat/images/QR_code.jpg" height="200px" width="200px"/>
+    		</br>
+    		<a href="/Drift_wechat/jsp/BaiduMap.jsp" class="weui-btn weui-btn_default">返回首页</a>
 <!--         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
             	
