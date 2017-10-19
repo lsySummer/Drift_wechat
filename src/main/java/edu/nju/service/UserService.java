@@ -51,7 +51,6 @@ public class UserService {
 	}
 
 	public String setAddress(String openid,String zmxyid, String address, String phone, Date startDate, Date endDate,String name,String nickname) {
-		System.out.println("openid");
 		JSONObject resultObj=new JSONObject();
 		boolean b = dao.setAddress(openid,zmxyid,address,phone,startDate,endDate,name,nickname);
 		if (!b) {
@@ -64,20 +63,78 @@ public class UserService {
 		resultObj.put(Constants.RESPONSE_MSG_KEY, RESCODE.SUCCESS.getMsg());
 		return resultObj.toString();
 	}
+	
+	public String setZMXY(String openid,String zmxyid){
+		JSONObject resultObj = new JSONObject();
+		boolean b = dao.setZMXY(openid,zmxyid);
+		if (!b) {
+			resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.CREATE_ERROR);
+			resultObj.put(Constants.RESPONSE_MSG_KEY,
+					RESCODE.CREATE_ERROR.getMsg());
+			return resultObj.toString();
+		}
+		resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.SUCCESS);
+		resultObj.put(Constants.RESPONSE_MSG_KEY, RESCODE.SUCCESS.getMsg());
+		return resultObj.toString();
+	}
 
-	public UserInfo getUser(String openid) {
-		UserInfo b = dao.getUser(openid);
-		return b;
+	public String getUser(String openid) {
+		JSONObject resultObj=new JSONObject();
+		UserInfo s = dao.getUser(openid);
+		if (s!=null) {
+			resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.SUCCESS);
+			resultObj.put(Constants.RESPONSE_MSG_KEY, RESCODE.SUCCESS.getMsg());
+			resultObj.put(Constants.RESPONSE_DATA_KEY, new JSONObject(s));
+			return resultObj.toString();
+		}
+		resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.NOT_FOUND);
+		resultObj.put(Constants.RESPONSE_MSG_KEY,
+				RESCODE.NOT_FOUND.getMsg());
+		return resultObj.toString();
 	}
 	
-	public UserInfo getByNickName(String nickname){
-		UserInfo b = dao.getByNickName(nickname);
-		return b;
+	public String getByNickName(String nickname){
+		JSONObject resultObj=new JSONObject();
+		UserInfo s = dao.getByNickName(nickname);
+		if (s!=null) {
+			resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.SUCCESS);
+			resultObj.put(Constants.RESPONSE_MSG_KEY, RESCODE.SUCCESS.getMsg());
+			resultObj.put(Constants.RESPONSE_DATA_KEY, new JSONObject(s));
+			return resultObj.toString();
+		}
+		resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.NOT_FOUND);
+		resultObj.put(Constants.RESPONSE_MSG_KEY,
+				RESCODE.NOT_FOUND.getMsg());
+		return resultObj.toString();
 	}
 	
-	public List<UserVO> getUserVO(){
-		List<UserVO> vo = dao.getUserVO();
-		return vo;
+	public String getUserVO(){
+		JSONObject resultObj=new JSONObject();
+		List<UserVO> list = dao.getUserVO();
+		if (list!=null&&list.size()!=0) {
+			resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.SUCCESS);
+			resultObj.put(Constants.RESPONSE_MSG_KEY, RESCODE.SUCCESS.getMsg());
+			resultObj.put(Constants.RESPONSE_DATA_KEY, list);
+			return resultObj.toString();
+		}
+		resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.NOT_FOUND);
+		resultObj.put(Constants.RESPONSE_MSG_KEY,
+				RESCODE.NOT_FOUND.getMsg());
+		return resultObj.toString();
+	}
+	
+	public String saveOrUpdate(UserInfo user){
+		JSONObject resultObj=new JSONObject();
+		boolean b = dao.saveOrUpdate(user);
+		if (!b) {
+			resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.CREATE_ERROR);
+			resultObj.put(Constants.RESPONSE_MSG_KEY,
+					RESCODE.CREATE_ERROR.getMsg());
+			return resultObj.toString();
+		}
+		resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.SUCCESS);
+		resultObj.put(Constants.RESPONSE_MSG_KEY, RESCODE.SUCCESS.getMsg());
+		return resultObj.toString();
 	}
 	
 }

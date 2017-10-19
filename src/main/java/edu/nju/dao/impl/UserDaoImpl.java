@@ -106,10 +106,32 @@ public class UserDaoImpl implements UserDao{
 			if(ulist.size()>0){
 			UserInfo u = ulist.get(0);
 			UserVO vo = new UserVO(u.getOpenid(),u.getNickName(),u.getAddress(), u.getLongtitute(),u.getLatitute(),o.getStartDate(),
-			o.getDeviceNumber());
+			o.getDeviceNumber(),0);
 			volist.add(vo);
 			}
 		}
 		return volist;
+	}
+
+	@Override
+	public boolean saveOrUpdate(UserInfo user) {
+		List<UserInfo> list = getUserById(user.getOpenid());
+		if(list.size()==0){
+			baseDao.save(user);
+		}else{
+			baseDao.update(user);
+		}
+		return true;
+	}
+
+	@Override
+	public boolean setZMXY(String openid, String zmxyid) {
+		List<UserInfo> list = getUserById(openid);
+		if(list.size()>0){
+			UserInfo u = list.get(0);
+			u.setZmxyid(zmxyid);
+			return true;
+		}
+		return false;
 	}
 }

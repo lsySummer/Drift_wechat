@@ -2,6 +2,7 @@ package edu.nju.service;
 
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.nju.dao.ReserveDao;
 import edu.nju.entities.DeliveryInfo;
 import edu.nju.entities.Device;
-import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
+import edu.nju.model.OrderVO;
+import edu.nju.model.RESCODE;
+import edu.nju.utils.Constants;
 
 @Transactional
 @Service
@@ -19,9 +22,19 @@ public class ReserveService {
 	ReserveDao dao;
 	
 	//获得某个用户的预约信息
-	public List<Order> getOrder(String openId){
-		List<Order> orders = dao.getOrder(openId);
-		return orders;
+	public String getOrder(String openId){
+		JSONObject resultObj=new JSONObject();
+		List<OrderVO> list = dao.getOrder(openId);
+		if (list!=null&&list.size()!=0) {
+			resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.SUCCESS);
+			resultObj.put(Constants.RESPONSE_MSG_KEY, RESCODE.SUCCESS.getMsg());
+			resultObj.put(Constants.RESPONSE_DATA_KEY, list);
+			return resultObj.toString();
+		}
+		resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.NOT_FOUND);
+		resultObj.put(Constants.RESPONSE_MSG_KEY,
+				RESCODE.NOT_FOUND.getMsg());
+		return resultObj.toString();
 	};
 	//获得上家信息
 	public UserInfo getBefore(String openId){
@@ -33,6 +46,16 @@ public class ReserveService {
 		UserInfo u = dao.getAfter(openId);
 		return u;
 	};
+	
+	/**
+	 * 根据用户id获得其设备信息
+	 * @return
+	 */
+	public Device getDeviceByOpenId(String openId){
+		Device d = dao.getDeviceByOpenId(openId);
+		return d;
+	}
+	
 	//根据快递单号获得快递物流信息  目前看前端写起来更方便
 	public DeliveryInfo getDeliveryInfo(String did){
 		return null;
@@ -44,8 +67,8 @@ public class ReserveService {
 	 * @return
 	 * 保存快递信息
 	 */
-	public boolean saveDelInfo(String deviceId,String did){
-		boolean b = dao.saveDelInfo(deviceId,did);
+	public boolean saveDelInfo(String openId,String did){
+		boolean b = dao.saveDelInfo(openId,did);
 		return b;
 	}
 	
@@ -54,10 +77,10 @@ public class ReserveService {
 	 * @return
 	 * 根据甲醛仪id获得其快递单号
 	 */
-	public String getDelNum(String deviceId){
-		String num = dao.getDelNum(deviceId);
-		return num;
-	}
+//	public String getDelNum(String deviceId){
+//		String num = dao.getDelNum(deviceId);
+//		return num;
+//	}
 	
 	//用户购买耗材
 	public boolean paySupply(String openId,int num,int ifPay){

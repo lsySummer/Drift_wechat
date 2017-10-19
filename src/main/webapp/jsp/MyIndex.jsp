@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div class="container" id="container">
-
+		<img src="/Drift_wechat/images/product.png" width="100px" height="100px"/>
   	</div>
 
   </body>

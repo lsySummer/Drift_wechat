@@ -9,11 +9,11 @@ $.getJSON('/Drift_wechat/api/order/delivery',function(json){
 	}else if(item == 1){
 		document.getElementById('previous').innerHTML=json.previous;
 		document.getElementById('deliveryNum1').innerHTML=json.deliveryNum1;
-		document.getElementById('deliveryDate1').innerHTML=json.deliveryDate1;
+		document.getElementById('deviceId1').innerHTML=json.deliveryDate1;
 	}else{
 		document.getElementById('next').innerHTML=json.next;
 		document.getElementById('deliveryNum2').innerHTML=json.deliveryNum2;
-		document.getElementById('deliveryDate2').innerHTML=json.deliveryDate2;
+		document.getElementById('deviceId2').innerHTML=json.deliveryDate2;
 	}
 });
 

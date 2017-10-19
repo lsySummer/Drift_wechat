@@ -22,4 +22,8 @@ public interface UserDao {
 
 	List<UserVO> getUserVO();
 
+	boolean saveOrUpdate(UserInfo user);
+
+	boolean setZMXY(String openid, String zmxyid);
+
 }

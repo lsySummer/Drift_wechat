@@ -17,7 +17,7 @@ public class Device {
 	private String number;//设备编号
 	private int type;//普通or预留 0代表普通，1代表预留
 	private String loc;//目前所在位置
-	private String deliveryId;//目前快递单号
+//	private String deliveryId;//目前快递单号
 	private int queueNum;//当前排队人数
 	private Date queueDate;//当前排到哪一天了
 	
@@ -55,12 +55,12 @@ public class Device {
 	public void setLoc(String loc) {
 		this.loc = loc;
 	}
-	public String getDeliveryId() {
-		return deliveryId;
-	}
-	public void setDeliveryId(String deliveryId) {
-		this.deliveryId = deliveryId;
-	}
+//	public String getDeliveryId() {
+//		return deliveryId;
+//	}
+//	public void setDeliveryId(String deliveryId) {
+//		this.deliveryId = deliveryId;
+//	}
 	public Date getQueueDate() {
 		return queueDate;
 	}
