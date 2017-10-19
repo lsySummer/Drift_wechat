@@ -10,8 +10,10 @@ public class OrderVO {
 	private String name;
 	private String phone;
 	private String address;
+	private String state;
+	
 	public OrderVO(String id, Date startDate, Date endDate, String deviceNumber, String name, String phone,
-			String address) {
+			String address,String state) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -20,6 +22,13 @@ public class OrderVO {
 		this.name = name;
 		this.phone = phone;
 		this.address = address;
+		this.state = state;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	public String getId() {
 		return id;

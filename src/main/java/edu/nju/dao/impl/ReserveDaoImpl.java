@@ -39,7 +39,7 @@ public class ReserveDaoImpl implements ReserveDao{
 			UserInfo u = userDao.getUser(openid);
 			if(u!=null){
 				OrderVO vo = new OrderVO(o.getId(), o.getStartDate(),o.getEndDate(), o.getDeviceNumber(), u.getName(), u.getPhone(),
-						u.getAddress());
+						u.getAddress(),o.getState());
 				volist.add(vo);
 			}
 			
@@ -108,22 +108,32 @@ public class ReserveDaoImpl implements ReserveDao{
 	@Override
 	public boolean saveDelInfo(String openId,String did) {
 		Device d = getDeviceByOpenId(openId);
-		List<Device> list =getDeviceById(d.getId());
-		if(list.size()>0){
-			List<Order> orderList = getById(d.getId());
-			if(orderList.size()>0){
-				Order o = orderList.get(0);
-				o.setState("已寄出");
-				DeliveryInfo info = new DeliveryInfo();
-				info.setDeliveryNumber(did);
-				info.setSendId(openId);
-				UserInfo afterUser = getAfter(openId);
-				info.setReceiveId(afterUser.getId());
-				baseDao.update(o);
-				return true;
+//		List<Device> list =getDeviceById(d.getId());
+		d.setQueueNum(d.getQueueNum()-1);
+//		if(list.size()>0){
+		List<Order> orderList = getById(d.getId());
+		if(orderList.size()>0){
+			Order o = orderList.get(0);
+			o.setState("已寄出");
+			DeliveryInfo info = new DeliveryInfo();
+			info.setDeliveryNumber(did);
+			info.setSendId(openId);
+			UserInfo afterUser = getAfter(openId);
+			info.setReceiveId(afterUser.getId());
+			List<Order> afterList = getOrderById(afterUser.getOpenid());
+			if(afterList.size()>0){
+				Order afterOrder = afterList.get(0);
+				afterOrder.setState("上家已发货");
+				baseDao.update(afterOrder);
+			}else{
+				d.setLoc("Company");
 			}
+			baseDao.update(o);
+			baseDao.save(info);
 		}
-		return false;
+//		}
+		baseDao.update(d);
+		return true;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -231,7 +241,6 @@ public class ReserveDaoImpl implements ReserveDao{
 	public boolean confirm(String openid) {
 		String hql = "from Order where openId =:openid";
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openid).getResultList();
-		System.out.println(list.size());
 		if(list.size()>0){
 			Order o = list.get(0);
 			o.setState("已确认收货");

@@ -20,7 +20,9 @@ public class TestController {
 //		service.confirm("hahaha");
 //		System.out.println(service.getBefore("hahaha").toString());
 //		System.out.println(userService.getUser("thisiscomponyinfomation").toString());
-		userService.setZMXY("ZMXYopenID", "UPDATEzmxyid");
+//		userService.setZMXY("ZMXYopenID", "UPDATEzmxyid");
+//		service.saveDelInfo("hahaha","1234567");
+		service.makeOrder("ZMXYopenID", 0, 2);
 		return "success";
 	}
 }
