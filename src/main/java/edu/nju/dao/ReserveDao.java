@@ -3,6 +3,7 @@ package edu.nju.dao;
 import java.util.List;
 
 import edu.nju.entities.Device;
+import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.OrderVO;
 
@@ -32,4 +33,5 @@ public interface ReserveDao {
 
 	boolean confirm(String openid);
 
+	List<Order> getOrderById(String openId);
 }

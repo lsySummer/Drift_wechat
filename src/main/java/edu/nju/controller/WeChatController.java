@@ -51,6 +51,7 @@ public class WeChatController {
 				session.setAttribute("openid", openid);
 				session.setAttribute("nickname", nickname);
 				session.setAttribute("headimgurl", headimgurl);
+				log.info("nickname"+nickname+" "+headimgurl);
 				return "jsp/BaiduMap";
 //				UserInfo u = service.getUser(openid);
 //				if(u!=null){

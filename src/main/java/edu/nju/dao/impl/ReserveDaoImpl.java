@@ -209,16 +209,27 @@ public class ReserveDaoImpl implements ReserveDao{
 	@Override
 	public boolean makeOrder(String openid, int ifPay, int num) {
 		Device device = new Device();
+		Date startDate = new Date();
+		Date endDate = new Date();
+		UserInfo user = userDao.getUser(openid);
 		if(ifPay==0){
 			device = reserve(openid);
 		}else{
 			device = priorReserve(openid);
 		}
+		if(device.getQueueNum()==1){
+			Date nowday = new Date();//明日发出,后天收到
+			startDate = Utility.getSpecifiedDayAfter(nowday,2);//
+			endDate = Utility.getSpecifiedDayAfter(nowday,3);//
+		}else{
+			Date queueDate = device.getQueueDate();
+			startDate= Utility.getSpecifiedDayAfter(queueDate,1);
+			endDate = Utility.getSpecifiedDayAfter(startDate,1);
+		}
+		device.setQueueDate(endDate);
+		device.setLoc(user.getAddress());
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date queueDate = device.getQueueDate();
-		Date startDate;
-		startDate = Utility.getSpecifiedDayAfter(queueDate,1);
-		Date endDate = Utility.getSpecifiedDayAfter(startDate,1);
+		baseDao.update(device);
 		Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),"等待发货",num,ifPay);
 		baseDao.save(o);
 		return true;

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.nju.dao.ReserveDao;
 import edu.nju.entities.Device;
+import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.OrderVO;
 import edu.nju.model.RESCODE;
@@ -136,6 +137,36 @@ public class ReserveService {
 	public boolean confirm(String openid){
 		boolean b = dao.confirm(openid);
 		return b;
+	}
+	
+	/**
+	 * @param openid
+	 * @return
+	 * 检验是否能够预约。判断方法是下家order的状态
+	 */
+	public boolean checkReserve(String openid){
+		Device d = dao.getDeviceByOpenId(openid);
+		if(d==null){//没有预约过
+			return true;
+		}else{
+			UserInfo after = dao.getAfter(openid);
+			List<OrderVO> volist = dao.getOrder(after.getOpenid());
+			if(volist.size()>0){//有下家
+				OrderVO vo = volist.get(0);
+				String state = vo.getState();
+				if(state.equals("已收货")||state.equals("已寄出")){
+					return true;
+				}else{
+					return false;
+				}
+			}else{//退回给公司
+				if(d.getLoc().equals("Company")){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		}
 	}
 
 }
