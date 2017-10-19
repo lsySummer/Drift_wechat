@@ -51,17 +51,18 @@ public class WeChatController {
 				String nickname = resultJson.getString("nickname");
 				session.setAttribute("openid", openid);
 				session.setAttribute("nickname", nickname);
-				UserInfo u = service.getUser(openid);
-				if(u!=null){
-					return "jsp/Repetition";
-				}else{
-					if(nickname==null || nickname.isEmpty()){
-						return "redirect:../../"+htmlPage+".html";
-					}else{
-						nickname = URLEncoder.encode(nickname,"utf-8");
-						return "jsp/index";
-					}
-				}
+				return "jsp/BaiduMap";
+//				UserInfo u = service.getUser(openid);
+//				if(u!=null){
+//					return "jsp/Repetition";
+//				}else{
+//					if(nickname==null || nickname.isEmpty()){
+//						return "redirect:../../"+htmlPage+".html";
+//					}else{
+//						nickname = URLEncoder.encode(nickname,"utf-8");
+//						return "jsp/index";
+//					}
+//				}
 			}else{
 				return null;	
 			}
