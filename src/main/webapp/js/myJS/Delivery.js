@@ -16,3 +16,7 @@ $.getJSON('/Drift_wechat/api/order/delivery',function(json){
 		document.getElementById('deliveryDate2').innerHTML=json.deliveryDate2;
 	}
 });
+
+function confirm(){
+	$.get('/Drift_wechat/api/delivery/confirm');
+}

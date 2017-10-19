@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <base href="<%=basePath%>">  
-    <title>购买耗材</title>
+    <title>个人信息</title>
   </head>
   
   <body>

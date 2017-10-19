@@ -27,35 +27,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div class="weui-form-preview" id="item1">
 		  <div class="weui-form-preview__hd">
 		    <label class="weui-form-preview__label">上家名称</label>
-		    <em class="weui-form-preview__value" id="previous">test</em>
+		    <em class="weui-form-preview__value" id="previous">暂无</em>
 		  </div>
 		  <div class="weui-form-preview__bd">
 		    <div class="weui-form-preview__item">
 		      <label class="weui-form-preview__label">快递单号</label>
-		      <span class="weui-form-preview__value" id="deliveryNum1">test</span>
+		      <span class="weui-form-preview__value" id="deliveryNum1">暂无</span>
 		    </div>
 		    <div class="weui-form-preview__item">
 		      <label class="weui-form-preview__label">发货日期</label>
-		      <span class="weui-form-preview__value" id="deliveryDate1">test</span>
+		      <span class="weui-form-preview__value" id="deliveryDate1">暂无</span>
 		    </div>
 		  </div>
+		  <div class="weui-form-preview__ft">
+		  	<a class="weui-form-preview__btn weui-form-preview__btn_default" href="/Drift_wechat/jsp/DeliveryWrite.jsp">快递查询</a>
+    		<button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascript:confirm()">确认收货</button>
+  		  </div>
 		</div>
+		</br>
 		<div class="weui-form-preview" id="item2">
 		  <div class="weui-form-preview__hd">
 		    <label class="weui-form-preview__label">下家名称</label>
-		    <em class="weui-form-preview__value" id="next">test</em>
+		    <em class="weui-form-preview__value" id="next">暂无</em>
 		  </div>
 		  <div class="weui-form-preview__bd">
 		    <div class="weui-form-preview__item">
 		      <label class="weui-form-preview__label">快递单号</label>
-		      <span class="weui-form-preview__value" id="deliveryNum2">test</span>
+		      <span class="weui-form-preview__value" id="deliveryNum2">暂无</span>
 		    </div>
 		    <div class="weui-form-preview__item">
 		      <label class="weui-form-preview__label">发货日期</label>
-		      <span class="weui-form-preview__value" id="deliveryDate2">test</span>
+		      <span class="weui-form-preview__value" id="deliveryDate2">暂无</span>
 		    </div>
 		  </div>
+		  <div class="weui-form-preview__ft">
+		  	<a class="weui-form-preview__btn weui-form-preview__btn_default" href="/Drift_wechat/jsp/DeliveryWrite.jsp">快递查询</a>
+    		<button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp'">填写快递信息</button>
+  		  </div>
 		</div>
+		</br>
 		<a href="javascript:;" class="weui-btn weui-btn_plain-default">回到首页</a>
 	</div>
   </body>

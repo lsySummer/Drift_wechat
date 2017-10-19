@@ -27,7 +27,7 @@ public class OrderController {
 		}	
 	}
 	
-	@RequestMapping(value = "/detail")
+	@RequestMapping(value = "/get")
 	public void getDetail(HttpSession session, HttpServletResponse response){
 		Orders orders = new Orders(1234,"test");
 		Gson result = new GsonBuilder().create();
@@ -43,9 +43,4 @@ public class OrderController {
 		}
 	}
 	
-	@RequestMapping(value = "/delivery")
-	public void getDelivery(HttpSession session){
-//		String openid = (String) session.getAttribute("openid");
-		
-	}
 }
