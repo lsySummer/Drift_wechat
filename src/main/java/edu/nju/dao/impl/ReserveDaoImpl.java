@@ -67,7 +67,7 @@ public class ReserveDaoImpl implements ReserveDao{
 			Date beforeDate;
 			beforeDate = Utility.getSpecifiedDayAfter(startDate,-1);
 			// endDate = :beforeDate 
-			String hql = "from Order where and deviceId = :deviceId";
+			String hql = "from Order where deviceId = :deviceId";
 			List<Order> orderList = baseDao.getNewSession().createQuery(hql).
 					setParameter("deviceId", deviceId).getResultList();
 			if(orderList.size()>0){
