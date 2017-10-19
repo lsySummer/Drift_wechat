@@ -42,8 +42,8 @@ public class ZmxyController {
 		}else{
 			session.setAttribute("zmxyid", state);
 			modelAndView.addObject("state", state);
-//			reserveService.makeOrder((String)session.getAttribute("openid"), 0, 0);
-			reserveService.makeOrder("hahaha", 0, 0);
+			reserveService.makeOrder((String)session.getAttribute("openid"), 0, 0);
+//			reserveService.makeOrder("hahaha", 0, 0);
 			modelAndView.setViewName("redirect:/jsp/Result.jsp");
 			return modelAndView;
 		}

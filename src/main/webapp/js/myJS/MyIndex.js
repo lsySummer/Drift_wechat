@@ -13,7 +13,8 @@ $.getJSON('/Drift_wechat/api/user/getDetail',function(json){
 		$('#deliveryPerson').val(name);
 		document.getElementById("phone").value = phone;
 //		document.getElementById("nickName").value = nickName;
-		document.getElementById("city-picker").value = address[0] + " " + address[1] + " " + address[2];
+//		document.getElementById("image").src = json.image;
+		document.getElementById("city-picker").value = address[0] + " " + address[1] + " " + address[2];		
 		document.getElementById("address_detail").value = address[3];
 	}
 	if(!json.zmxy){
