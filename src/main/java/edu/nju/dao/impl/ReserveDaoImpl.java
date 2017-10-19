@@ -1,5 +1,7 @@
 package edu.nju.dao.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -62,15 +64,29 @@ public class ReserveDaoImpl implements ReserveDao{
 			Order o = list.get(0);
 			String deviceId = o.getDeviceId();
 			Date startDate = o.getStartDate();
-			Date beforeDate = Utility.getSpecifiedDayAfter(startDate,-1);
-			String hql = "from Order where endDate = :beforeDate and deviceId = :deviceId";
-			List<Order> orderList = baseDao.getNewSession().createQuery(hql).setParameter("beforeDate", beforeDate).
+			Date beforeDate;
+			beforeDate = Utility.getSpecifiedDayAfter(startDate,-1);
+			// endDate = :beforeDate 
+			String hql = "from Order where and deviceId = :deviceId";
+			List<Order> orderList = baseDao.getNewSession().createQuery(hql).
 					setParameter("deviceId", deviceId).getResultList();
 			if(orderList.size()>0){
-				Order resultOrder = orderList.get(0);
-				String userId = resultOrder.getOpenId();
-				UserInfo u = userDao.getUser(userId);
-				return u;
+				for(int i=0;i<orderList.size();i++){
+					Order order = orderList.get(i);
+					Date oendDate = order.getEndDate();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			        String s = sdf.format(oendDate);
+			        String s1 = sdf.format(beforeDate);
+			        if(s.equals(s1)){
+			        	String userId = order.getOpenId();
+			        	UserInfo u = userDao.getUser(userId);
+			        	return u;
+			        }
+				}
+//				Order resultOrder = orderList.get(0);
+//				String userId = resultOrder.getOpenId();
+//				UserInfo u = userDao.getUser(userId);
+//				return u;
 			}
 			else{
 				UserInfo u = userDao.getUser("thisiscomponyinfomation");
@@ -89,14 +105,25 @@ public class ReserveDaoImpl implements ReserveDao{
 			String deviceId = o.getDeviceId();
 			Date startDate = o.getEndDate();
 			Date afterDate = Utility.getSpecifiedDayAfter(startDate,1);
-			String hql = "from Order where startDate = :afterDate and deviceId = :deviceId";
-			List<Order> orderList = baseDao.getNewSession().createQuery(hql).setParameter("afterDate", afterDate).
+
+//	        System.out.println(s);
+			//startDate = :afterDate 
+			String hql = "from Order where deviceId =:deviceId";
+			List<Order> orderList = baseDao.getNewSession().createQuery(hql).
 					setParameter("deviceId", deviceId).getResultList();
 			if(orderList.size()>0){
-				Order resultOrder = orderList.get(0);
-				String userId = resultOrder.getOpenId();
-				UserInfo u = userDao.getUser(userId);
-				return u;
+				for(int i=0;i<orderList.size();i++){
+					Order order = orderList.get(i);
+					Date ostartDate = order.getStartDate();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			        String s = sdf.format(ostartDate);
+			        String s1 = sdf.format(afterDate);
+			        if(s.equals(s1)){
+			        	String userId = order.getOpenId();
+			        	UserInfo u = userDao.getUser(userId);
+			        	return u;
+			        }
+				}
 			}else{
 				UserInfo u = userDao.getUser("thisiscomponyinfomation");
 				return u;
@@ -121,6 +148,7 @@ public class ReserveDaoImpl implements ReserveDao{
 			UserInfo afterUser = getAfter(openId);
 			info.setReceiveId(afterUser.getId());
 			List<Order> afterList = getOrderById(afterUser.getOpenid());
+//			System.out.println(afterUser.getOpenid()+" "+afterList.size());
 			if(afterList.size()>0){
 				Order afterOrder = afterList.get(0);
 				afterOrder.setState("上家已发货");
@@ -160,6 +188,7 @@ public class ReserveDaoImpl implements ReserveDao{
 		Utility.sortInt(list);//按照排队人数对设备进行排序
 		Device device = list.get(0);//排队人数最少的设备被预定
 		device.setQueueNum(device.getQueueNum()+1);//排队人数+1
+		baseDao.update(device);
 		return device;
 	}
 
@@ -171,6 +200,7 @@ public class ReserveDaoImpl implements ReserveDao{
 		Utility.sortInt(list);//按照排队人数对设备进行排序
 		Device device = list.get(0);//排队人数最少的设备被预定
 		device.setQueueNum(device.getQueueNum()+1);//排队人数+1
+		baseDao.update(device);
 		return device;
 	}
 
@@ -182,8 +212,10 @@ public class ReserveDaoImpl implements ReserveDao{
 		}else{
 			device = priorReserve(openid);
 		}
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date queueDate = device.getQueueDate();
-		Date startDate = Utility.getSpecifiedDayAfter(queueDate,1);
+		Date startDate;
+		startDate = Utility.getSpecifiedDayAfter(queueDate,1);
 		Date endDate = Utility.getSpecifiedDayAfter(startDate,1);
 		Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),"等待发货",num,ifPay);
 		baseDao.save(o);
