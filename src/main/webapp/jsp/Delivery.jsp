@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 		  <div class="weui-form-preview__ft">
 		  	<a class="weui-form-preview__btn weui-form-preview__btn_default" href="/Drift_wechat/jsp/DeliveryWrite.jsp">快递查询</a>
-    		<button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascript:confirm();">确认收货</button>
+    		<button id="confirm" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascript:confirm();">确认收货</button>
   		  </div>
 		</div>
 		</br>
@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 		  <div class="weui-form-preview__ft">
 		  	<a class="weui-form-preview__btn weui-form-preview__btn_default" href="/Drift_wechat/jsp/DeliveryWrite.jsp">快递查询</a>
-    		<button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp'">填写快递信息</button>
+    		<button id="detail" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp'">填写快递信息</button>
   		  </div>
 		</div>
 		</br>

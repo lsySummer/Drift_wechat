@@ -36,6 +36,7 @@ public class DeliveryController {
 		result.put("after", service.getAfter((String)session.getAttribute("openid")).getName());
 		result.put("receive", service.getRecDid((String)session.getAttribute("openid")));
 		result.put("send", service.getSendDid((String)session.getAttribute("openid")));
+		result.put("enable", service.getOrderState((String)session.getAttribute("openid")));
 //		Device device = service.getDeviceByOpenId("hahaha");
 //		result.put("before", service.getBefore("hahaha").getName());
 //		result.put("after", service.getAfter("hahaha").getName());
