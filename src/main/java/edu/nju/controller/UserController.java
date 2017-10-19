@@ -101,5 +101,15 @@ public class UserController {
 		service.saveOrUpdate(user);
 		return "jsp/MyIndex";
 	}
+	
+	@RequestMapping(value = "/zmxy")
+	public String ZMXY(HttpSession session) {
+		UserInfo user = service.getUser((String)session.getAttribute("openid"));
+		if(user == null || user.getZmxyid() == null){
+			return "jsp/index";
+		}else{
+			return "jsp/result";
+		}
+	}
 }
 
