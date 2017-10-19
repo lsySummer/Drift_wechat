@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +17,8 @@ import edu.nju.entities.Point;
 public class MapController {
 	
 	@RequestMapping(value = "/map")
-	public String getMap1(String openid) {
+	public String getMap1(String openid,HttpSession session) {
+		session.setAttribute("ip", "218.94.159.98");
 		return "jsp/BaiduMap";
 	}
 	

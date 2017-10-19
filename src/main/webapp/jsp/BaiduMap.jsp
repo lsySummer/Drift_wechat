@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%
@@ -54,7 +53,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 </body>
 	<script type="text/javascript">
-
+	function getUserLocation(ip){
+		$.get(url,function(data){
+					result = data.content.address;
+					result = data.content.point;
+					console.log(result);
+					alert(result);
+					map_init(myLocation,markerArr1,markerArr2);
+		},"JSONP");
+	}
 		//发送GET请求
 		$("document").ready(function(){
 			$.get("/Drift_wechat/api/map/getMapData",function(data){
@@ -63,15 +70,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var markerArr1 = data.markerArr1;
 				var markerArr2 = data.markerArr2;
 				var myIp = "218.94.159.98";
+				//$.session.get('id');
 				var url = "https://api.map.baidu.com/location/ip?ip="+myIp+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";
-				
-				$.get(url,function(data){
-					result = data.content.address;
-					result = data.content.point;
-					console.log(result);
-					alert(result);
-					map_init(myLocation,markerArr1,markerArr2);
-					},"JSONP");
 				
 			},"json");
 		});
