@@ -15,7 +15,7 @@ $.getJSON('/Drift_wechat/api/user/getDetail',function(json){
 			document.getElementById('next').innerHTML=after.next;
 			document.getElementById('deliveryNum2').innerHTML=after.deliveryNum2;
 			document.getElementById('deviceId2').innerHTML=after.deviceId2;
-		}
+		}else{document.getElementById("item2").style.display="none";}
 	}
 });
 
