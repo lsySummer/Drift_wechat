@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		  </div>
 		</div>
 		</br>
-		<div class="weui-form-preview" id="item2">
+		<div class="weui-form-preview">
 		  <div class="weui-form-preview__hd">
 		    <label class="weui-form-preview__label">下家名称</label>
 		    <em class="weui-form-preview__value" id="next">暂无</em>
