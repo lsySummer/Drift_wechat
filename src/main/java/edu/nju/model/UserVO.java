@@ -10,8 +10,9 @@ public class UserVO {
 	private double latitute;
 	private Date startDate;
 	private String deviceNumber;
+	private int deviceState;
 	public UserVO(String openId, String nickname, String address, double longtitute, double latitute, Date startDate,
-			String deviceNumber) {
+			String deviceNumber,int deviceState) {
 		super();
 		this.openId = openId;
 		this.nickname = nickname;
@@ -20,6 +21,7 @@ public class UserVO {
 		this.latitute = latitute;
 		this.startDate = startDate;
 		this.deviceNumber = deviceNumber;
+		this.deviceState = deviceState;
 	}
 	public String getOpenId() {
 		return openId;
@@ -62,6 +64,12 @@ public class UserVO {
 	}
 	public void setDeviceNumber(String deviceNumber) {
 		this.deviceNumber = deviceNumber;
+	}
+	public int getDeviceState() {
+		return deviceState;
+	}
+	public void setDeviceState(int deviceState) {
+		this.deviceState = deviceState;
 	}
 	
 }

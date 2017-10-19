@@ -97,35 +97,40 @@ public class ReserveDaoImpl implements ReserveDao{
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public boolean saveDelInfo(String deviceId,String did) {
-		String hql = "from Device where id =:deviceId";
-		List<Device> list = baseDao.getNewSession().createQuery(hql).setParameter("deviceId", deviceId).getResultList();
+	public boolean saveDelInfo(String openId,String did) {
+		Device d = getDeviceByOpenId(openId);
+		List<Device> list =getDeviceById(d.getId());
 		if(list.size()>0){
 			Device u = list.get(0);
-			u.setDeliveryId(did);
-			List<Order> orderList = getById(deviceId);
+//			u.setDeliveryId(did);
+			List<Order> orderList = getById(d.getId());
 			if(orderList.size()>0){
 				Order o = orderList.get(0);
 				o.setState(2);
+				o.setDeliveryId(did);
 				baseDao.save(o);
 				return true;
 			}
 		}
 		return false;
 	}
-
+	
 	@SuppressWarnings("unchecked")
-	@Override
-	public String getDelNum(String deviceId) {
-		String hql = "from Dedvice where id =:deviceId";
+	public List<Device> getDeviceById(String deviceId){
+		String hql = "from Device where id =:deviceId";
 		List<Device> list = baseDao.getNewSession().createQuery(hql).setParameter("deviceId", deviceId).getResultList();
-		if(list.size()>0){
-			return list.get(0).getDeliveryId();
-		}
-		return "";
+		return list;
 	}
+//
+//	@Override
+//	public String getDelNum(String deviceId) {
+//		List<Device> list =getDeviceById(deviceId);
+//		if(list.size()>0){
+//			return list.get(0).getDeliveryId();
+//		}
+//		return "";
+//	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -160,7 +165,7 @@ public class ReserveDaoImpl implements ReserveDao{
 		Date queueDate = device.getQueueDate();
 		Date startDate = Utility.getSpecifiedDayAfter(queueDate,1);
 		Date endDate = Utility.getSpecifiedDayAfter(startDate,1);
-		Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),0,num,ifPay);
+		Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),0,num,ifPay,"");
 		baseDao.save(o);
 		return true;
 	}
@@ -170,6 +175,22 @@ public class ReserveDaoImpl implements ReserveDao{
 		String hql = "from Order where deviceId =:deviceId";
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("deviceId", deviceId).getResultList();
 		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Device getDeviceByOpenId(String openId) {
+		String hql = "from Order where openId = :openId";
+		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openId", openId).getResultList();
+		if(list.size()>0){
+			Order o = list.get(0);
+			String deviceId = o.getDeviceId();
+			List<Device> deviceList =getDeviceById(deviceId);
+			if(deviceList.size()>0){
+				return deviceList.get(0);
+			}
+		}
+		return null;
 	}
 	
 }

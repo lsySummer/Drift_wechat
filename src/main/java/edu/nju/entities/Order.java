@@ -22,11 +22,13 @@ public class Order {
 	private int state;//0代表尚未寄给用户，1代表在用户手中，2代表用户已寄出
 	private int num;//购买耗材数量
 	private int ifPay;//是否是付费用户,0代表免费用户，1代表付费用户
+	private String deliveryId;//快递信息
 	
 	public Order(){
 	}
 	
-	public Order(String openId,Date startDate,Date endDate,String deviceId,String deviceNumber,int state,int num,int ifPay){
+	public Order(String openId,Date startDate,Date endDate,String deviceId,String deviceNumber,int state,int num,int ifPay,
+			String deliveryId){
 		this.openId = openId;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -35,6 +37,7 @@ public class Order {
 		this.state=state;
 		this.num = num;
 		this.ifPay = ifPay;
+		this.deliveryId = deliveryId;
 	}
 	
 	@Id
@@ -98,6 +101,14 @@ public class Order {
 	}
 	public void setIfPay(int ifPay) {
 		this.ifPay = ifPay;
+	}
+
+	public String getDeliveryId() {
+		return deliveryId;
+	}
+
+	public void setDeliveryId(String deliveryId) {
+		this.deliveryId = deliveryId;
 	}
 	
 }

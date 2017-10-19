@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import edu.nju.dao.ReserveDao;
 import edu.nju.entities.DeliveryInfo;
 import edu.nju.entities.Device;
-import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.OrderVO;
 import edu.nju.model.RESCODE;
@@ -48,6 +46,16 @@ public class ReserveService {
 		UserInfo u = dao.getAfter(openId);
 		return u;
 	};
+	
+	/**
+	 * 根据用户id获得其设备信息
+	 * @return
+	 */
+	public Device getDeviceByOpenId(String openId){
+		Device d = dao.getDeviceByOpenId(openId);
+		return d;
+	}
+	
 	//根据快递单号获得快递物流信息  目前看前端写起来更方便
 	public DeliveryInfo getDeliveryInfo(String did){
 		return null;
@@ -59,8 +67,8 @@ public class ReserveService {
 	 * @return
 	 * 保存快递信息
 	 */
-	public boolean saveDelInfo(String deviceId,String did){
-		boolean b = dao.saveDelInfo(deviceId,did);
+	public boolean saveDelInfo(String openId,String did){
+		boolean b = dao.saveDelInfo(openId,did);
 		return b;
 	}
 	
@@ -69,10 +77,10 @@ public class ReserveService {
 	 * @return
 	 * 根据甲醛仪id获得其快递单号
 	 */
-	public String getDelNum(String deviceId){
-		String num = dao.getDelNum(deviceId);
-		return num;
-	}
+//	public String getDelNum(String deviceId){
+//		String num = dao.getDelNum(deviceId);
+//		return num;
+//	}
 	
 	//用户购买耗材
 	public boolean paySupply(String openId,int num,int ifPay){
