@@ -2,15 +2,20 @@ package edu.nju.service;
 
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import edu.nju.dao.ReserveDao;
 import edu.nju.entities.DeliveryInfo;
 import edu.nju.entities.Device;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
+import edu.nju.model.OrderVO;
+import edu.nju.model.RESCODE;
+import edu.nju.utils.Constants;
 
 @Transactional
 @Service
@@ -19,9 +24,19 @@ public class ReserveService {
 	ReserveDao dao;
 	
 	//获得某个用户的预约信息
-	public List<Order> getOrder(String openId){
-		List<Order> orders = dao.getOrder(openId);
-		return orders;
+	public String getOrder(String openId){
+		JSONObject resultObj=new JSONObject();
+		List<OrderVO> list = dao.getOrder(openId);
+		if (list!=null&&list.size()!=0) {
+			resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.SUCCESS);
+			resultObj.put(Constants.RESPONSE_MSG_KEY, RESCODE.SUCCESS.getMsg());
+			resultObj.put(Constants.RESPONSE_DATA_KEY, list);
+			return resultObj.toString();
+		}
+		resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.NOT_FOUND);
+		resultObj.put(Constants.RESPONSE_MSG_KEY,
+				RESCODE.NOT_FOUND.getMsg());
+		return resultObj.toString();
 	};
 	//获得上家信息
 	public UserInfo getBefore(String openId){

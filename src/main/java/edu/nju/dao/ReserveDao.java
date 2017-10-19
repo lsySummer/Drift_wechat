@@ -5,10 +5,11 @@ import java.util.List;
 import edu.nju.entities.Device;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
+import edu.nju.model.OrderVO;
 
 public interface ReserveDao {
 
-	List<Order> getOrder(String openId);
+	List<OrderVO> getOrder(String openId);
 
 	UserInfo getBefore(String openId);
 

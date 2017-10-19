@@ -1,5 +1,6 @@
 package edu.nju.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import edu.nju.dao.UserDao;
 import edu.nju.entities.Device;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
+import edu.nju.model.OrderVO;
 import edu.nju.utils.Utility;
 
 @Repository
@@ -26,7 +28,26 @@ public class ReserveDaoImpl implements ReserveDao{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Order> getOrder(String openId) {
+	public List<OrderVO> getOrder(String openId) {
+		String hql = "from Order where openid =:openid";
+		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openId).getResultList();
+		List<OrderVO> volist = new ArrayList<OrderVO>();
+		for(int i=0;i<list.size();i++){
+			Order o = list.get(i);
+			String openid = o.getOpenId();
+			UserInfo u = userDao.getUser(openid);
+			if(u!=null){
+				OrderVO vo = new OrderVO(o.getId(), o.getStartDate(),o.getEndDate(), o.getDeviceNumber(), u.getName(), u.getPhone(),
+						u.getAddress());
+				volist.add(vo);
+			}
+			
+		}
+		return volist;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Order> getOrderById(String openId){
 		String hql = "from Order where openid =:openid";
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openId).getResultList();
 		return list;
@@ -35,7 +56,7 @@ public class ReserveDaoImpl implements ReserveDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public UserInfo getBefore(String openId) {
-		List<Order> list = getOrder(openId);
+		List<Order> list = getOrderById(openId);
 		if(list.size()>0){
 			Order o = list.get(0);
 			String deviceId = o.getDeviceId();
@@ -57,7 +78,7 @@ public class ReserveDaoImpl implements ReserveDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public UserInfo getAfter(String openId) {
-		List<Order> list = getOrder(openId);
+		List<Order> list = getOrderById(openId);
 		if(list.size()>0){
 			Order o = list.get(0);
 			String deviceId = o.getDeviceId();

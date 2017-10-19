@@ -17,7 +17,7 @@ public class Order {
 	private String openId;//用戶openid
 	private Date startDate;
 	private Date endDate;
-	private String deviceNumber;//甲醛仪id
+	private String deviceNumber;//甲醛仪设备编号
 	private String deviceId;
 	private int state;//0代表尚未寄给用户，1代表在用户手中，2代表用户已寄出
 	private int num;//购买耗材数量
