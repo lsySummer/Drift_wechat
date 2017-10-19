@@ -45,9 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<div class="weui-tab__bd">
     <div class="weui-tab__bd-item weui-tab__bd-item--active" id="container">
-    
-      <h2 class="demos-title">仪器传递</h2>
-      
+      </br>
     	<div class="weui-form-preview" id="item1">
 		  <div class="weui-form-preview__hd">
 		    <label class="weui-form-preview__label">上家名称</label>

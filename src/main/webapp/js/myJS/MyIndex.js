@@ -16,4 +16,7 @@ $.getJSON('/Drift_wechat/api/user/getDetail',function(json){
 		document.getElementById("city-picker").value = address[0] + " " + address[1] + " " + address[2];
 		document.getElementById("address_detail").value = address[3];
 	}
+	if(!json.zmxy){
+		document.getElementById("zmxy").style.display="none";
+	}
 });

@@ -69,6 +69,9 @@ public class UserController {
 		result.put("image", session.getAttribute("headimgurl"));
 //		UserInfo user = service.getUser((String)session.getAttribute("openid"));
 		UserInfo user = service.getUser("hahaha");
+		if(user.getZmxyid() != null){
+			result.put("zmxy",false);
+		}
 		if(user != null){
 			flag = true;
 			result.put("address", user.getAddress());

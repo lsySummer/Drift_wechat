@@ -47,13 +47,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="weui-tab__bd" id="container">
     <div id="tab" class="weui-tab__bd-item weui-tab__bd-item--active">
     </br>
-    </br>
     	<div style="text-align: center">
 			<img alt="" class="img-circle" src="/Drift_wechat/images/icon.jpg" style="margin: 0 auto;width: 100px; heigth: 100px;" />
 		</div>
 		</br>
 		<div style="text-align: center">
-			<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="text-align:center">绑定芝麻信用</a>
+			<a id="zmxy" href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="text-align:center">绑定芝麻信用并预约</a>
 		</div>
 		<div class="weui-cells">
 		  <div class="weui-cell">
