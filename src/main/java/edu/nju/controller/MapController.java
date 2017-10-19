@@ -28,10 +28,10 @@ public class MapController {
 	@ResponseBody  
 	public Map<String, Object> getMap() {		
 		Map<String, Object> map = new HashMap<String, Object>(); 
-		UserVO user1 = new UserVO("1", "aaa", "江苏省南京市鼓楼区北京西路二号新村小区12栋101", 0, 0, new Date(11110), "甲醛仪1号",1);
-		UserVO user2 = new UserVO("2", "bbb", "江苏省南京市鼓楼区汉口路22号", 0, 0, new Date(10110), "甲醛仪2号",1);
-		UserVO user3 = new UserVO("1", "aaa", "江苏省南京市鼓楼区上海路大锏银巷17号1栋601", 0, 0, new Date(1110), "甲醛仪3号",0);
-		UserVO user4 = new UserVO("1", "aaa", "江苏省南京市鼓楼区南京大学", 0, 0, new Date(111100), "甲醛仪4号",0); 
+		UserVO user1 = new UserVO("1", "aaa", "江苏省南京市鼓楼区北京西路二号新村小区12栋101", new Date(11110), "甲醛仪1号",1);
+		UserVO user2 = new UserVO("2", "bbb", "江苏省南京市鼓楼区汉口路22号",  new Date(10110), "甲醛仪2号",1);
+		UserVO user3 = new UserVO("1", "aaa", "江苏省南京市鼓楼区上海路大锏银巷17号1栋601",  new Date(1110), "甲醛仪3号",0);
+		UserVO user4 = new UserVO("1", "aaa", "江苏省南京市鼓楼区南京大学", new Date(111100), "甲醛仪4号",0); 
 		
 		ArrayList<UserVO> userArr1 = new ArrayList<UserVO>();
 		ArrayList<UserVO> userArr2 = new ArrayList<UserVO>();

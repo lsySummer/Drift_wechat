@@ -6,19 +6,19 @@ public class UserVO {
 	private String openId;
 	private String nickname;
 	private String address;
-	private double longtitute;
-	private double latitute;
+//	private double longtitute;
+//	private double latitute;
 	private Date startDate;
 	private String deviceNumber;
 	private int deviceState;
-	public UserVO(String openId, String nickname, String address, double longtitute, double latitute, Date startDate,
+	public UserVO(String openId, String nickname, String address,  Date startDate,
 			String deviceNumber,int deviceState) {
 		super();
 		this.openId = openId;
 		this.nickname = nickname;
 		this.address = address;
-		this.longtitute = longtitute;
-		this.latitute = latitute;
+//		this.longtitute = longtitute;
+//		this.latitute = latitute;
 		this.startDate = startDate;
 		this.deviceNumber = deviceNumber;
 		this.deviceState = deviceState;
@@ -41,18 +41,18 @@ public class UserVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public double getLongtitute() {
-		return longtitute;
-	}
-	public void setLongtitute(double longtitute) {
-		this.longtitute = longtitute;
-	}
-	public double getLatitute() {
-		return latitute;
-	}
-	public void setLatitute(double latitute) {
-		this.latitute = latitute;
-	}
+//	public double getLongtitute() {
+//		return longtitute;
+//	}
+//	public void setLongtitute(double longtitute) {
+//		this.longtitute = longtitute;
+//	}
+//	public double getLatitute() {
+//		return latitute;
+//	}
+//	public void setLatitute(double latitute) {
+//		this.latitute = latitute;
+//	}
 	public Date getStartDate() {
 		return startDate;
 	}

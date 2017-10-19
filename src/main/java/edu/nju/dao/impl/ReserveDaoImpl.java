@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import edu.nju.dao.BaseDao;
 import edu.nju.dao.ReserveDao;
 import edu.nju.dao.UserDao;
+import edu.nju.entities.DeliveryInfo;
 import edu.nju.entities.Device;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
@@ -92,6 +93,9 @@ public class ReserveDaoImpl implements ReserveDao{
 				String userId = resultOrder.getOpenId();
 				UserInfo u = userDao.getUser(userId);
 				return u;
+			}else{
+				UserInfo u = userDao.getUser("thisiscomponyinfomation");
+				return u;
 			}
 		}
 		return null;
@@ -102,14 +106,15 @@ public class ReserveDaoImpl implements ReserveDao{
 		Device d = getDeviceByOpenId(openId);
 		List<Device> list =getDeviceById(d.getId());
 		if(list.size()>0){
-			Device u = list.get(0);
-//			u.setDeliveryId(did);
 			List<Order> orderList = getById(d.getId());
 			if(orderList.size()>0){
 				Order o = orderList.get(0);
-				o.setState(2);
-				//TODO
-//				o.setDeliveryId(did);
+				o.setState("已寄出");
+				DeliveryInfo info = new DeliveryInfo();
+				info.setDeliveryNumber(did);
+				info.setSendId(openId);
+				UserInfo afterUser = getAfter(openId);
+				info.setReceiveId(afterUser.getId());
 				baseDao.save(o);
 				return true;
 			}
@@ -166,9 +171,8 @@ public class ReserveDaoImpl implements ReserveDao{
 		Date queueDate = device.getQueueDate();
 		Date startDate = Utility.getSpecifiedDayAfter(queueDate,1);
 		Date endDate = Utility.getSpecifiedDayAfter(startDate,1);
-//		Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),0,num,ifPay,"");
-		//TODO
-//		baseDao.save(o);
+		Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),"等待发货",num,ifPay);
+		baseDao.save(o);
 		return true;
 	}
 	
@@ -193,6 +197,43 @@ public class ReserveDaoImpl implements ReserveDao{
 			}
 		}
 		return null;
+	}
+
+	// 根据用户id获得其寄出的快递单号信息
+	@SuppressWarnings("unchecked")
+	@Override
+	public String getSendDid(String openid) {
+		String hql = "from DeliveryInfo where sendId = :openId";
+		List<DeliveryInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("sendId", openid).getResultList();
+		if(list.size()>0){
+			return list.get(0).getDeliveryNumber();
+		}
+		return "暂无物流信息";
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public String getRecDid(String openid) {
+		String hql = "from DeliveryInfo where receiveId = :openId";
+		List<DeliveryInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("receiveId", openid).getResultList();
+		if(list.size()>0){
+			return list.get(0).getDeliveryNumber();
+		}
+		return "暂无物流信息";
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean confirm(String openid) {
+		String hql = "from Order where openId =:openid";
+		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openid).getResultList();
+		if(list.size()>0){
+			Order o = list.get(0);
+			o.setState("已确认收货");
+			baseDao.save(o);
+			return true;
+		}
+		return false;
 	}
 	
 }

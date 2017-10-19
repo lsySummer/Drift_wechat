@@ -105,7 +105,7 @@ public class UserDaoImpl implements UserDao{
 			List<UserInfo> ulist = getUserById(o.getOpenId());
 			if(ulist.size()>0){
 			UserInfo u = ulist.get(0);
-			UserVO vo = new UserVO(u.getOpenid(),u.getNickName(),u.getAddress(), u.getLongtitute(),u.getLatitute(),o.getStartDate(),
+			UserVO vo = new UserVO(u.getOpenid(),u.getNickName(),u.getAddress(),o.getStartDate(),
 			o.getDeviceNumber(),0);
 			volist.add(vo);
 			}
@@ -116,6 +116,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public boolean saveOrUpdate(UserInfo user) {
 		List<UserInfo> list = getUserById(user.getOpenid());
+		System.out.println("listsize"+list.size());
 		if(list.size()==0){
 			baseDao.save(user);
 		}else{

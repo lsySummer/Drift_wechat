@@ -26,4 +26,10 @@ public interface ReserveDao {
 
 	Device getDeviceByOpenId(String openId);
 
+	String getSendDid(String openid);
+
+	String getRecDid(String openid);
+
+	boolean confirm(String openid);
+
 }
