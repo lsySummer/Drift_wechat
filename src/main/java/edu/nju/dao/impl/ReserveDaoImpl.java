@@ -231,10 +231,11 @@ public class ReserveDaoImpl implements ReserveDao{
 	public boolean confirm(String openid) {
 		String hql = "from Order where openId =:openid";
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openid).getResultList();
+		System.out.println(list.size());
 		if(list.size()>0){
 			Order o = list.get(0);
 			o.setState("已确认收货");
-			baseDao.save(o);
+			baseDao.update(o);
 			return true;
 		}
 		return false;

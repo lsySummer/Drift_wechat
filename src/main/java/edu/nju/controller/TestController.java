@@ -17,7 +17,8 @@ public class TestController {
 	
 	@RequestMapping(value = "/insert")
 	public String register() {
-		System.out.println(service.getBefore("hahaha").toString());
+		service.confirm("hahaha");
+//		System.out.println(service.getBefore("hahaha").toString());
 //		System.out.println(userService.getUser("thisiscomponyinfomation").toString());
 		return "success";
 	}
