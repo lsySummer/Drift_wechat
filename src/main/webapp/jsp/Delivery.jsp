@@ -35,8 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <span class="weui-form-preview__value" id="deliveryNum1">暂无</span>
 		    </div>
 		    <div class="weui-form-preview__item">
-		      <label class="weui-form-preview__label">发货日期</label>
-		      <span class="weui-form-preview__value" id="deliveryDate1">暂无</span>
+		      <label class="weui-form-preview__label">设备id</label>
+		      <span class="weui-form-preview__value" id="deviceId1">暂无</span>
 		    </div>
 		  </div>
 		  <div class="weui-form-preview__ft">
@@ -56,8 +56,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <span class="weui-form-preview__value" id="deliveryNum2">暂无</span>
 		    </div>
 		    <div class="weui-form-preview__item">
-		      <label class="weui-form-preview__label">发货日期</label>
-		      <span class="weui-form-preview__value" id="deliveryDate2">暂无</span>
+		      <label class="weui-form-preview__label">设备id</label>
+		      <span class="weui-form-preview__value" id="deviceId2">暂无</span>
 		    </div>
 		  </div>
 		  <div class="weui-form-preview__ft">

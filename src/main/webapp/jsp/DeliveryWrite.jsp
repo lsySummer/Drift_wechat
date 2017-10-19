@@ -28,12 +28,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<div class="page__bd">
 		        <div class="weui-cells__title">快递详情</div>
 		        <div class="weui-cells weui-cells_form">
-		            <div class="weui-cell">
+		            <!-- <div class="weui-cell">
 		                <div class="weui-cell__hd"><label for="" class="weui-label">发货日期</label></div>
 		                <div class="weui-cell__bd">
 		                    <input id="startDate" name="deliveryDate" id="deliveryDate" class="weui-input" type="date" value="" required=""/>
 		                </div>
-		            </div>
+		            </div> -->
 		            <div class="weui-cell">
 		            	<div class="weui-cell__hd">
 					      <label class="weui-label">快递单号</label>
@@ -42,14 +42,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					      <input class="weui-input" name="deliveryNum" id="deliveryNum" type="number" placeholder="请输入快递单号">
 					    </div>
 		            </div>
-		            <div class="weui-cell">
+		            <!-- <div class="weui-cell">
 		            	<div class="weui-cell__hd">
 					      <label class="weui-label">收货人</label>
 					    </div>
 					    <div class="weui-cell__bd">
 					      <input class="weui-input" name="deliveryPerson" id="deliveryPerson" placeholder="请输入收货人姓名">
 					    </div>
-		            </div>
+		            </div> -->
 		        </div>
 		    </div>
 		    <div class="weui-btn-area">
