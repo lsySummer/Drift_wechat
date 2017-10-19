@@ -49,8 +49,10 @@ public class WeChatController {
 			if(resultJson.get("message").equals("success")){
 				String openid = resultJson.getString("openid");
 				String nickname = resultJson.getString("nickname");
+				String headimgurl = resultJson.getString("headimgurl");
 				session.setAttribute("openid", openid);
 				session.setAttribute("nickname", nickname);
+				session.setAttribute("headimgurl", headimgurl);
 				return "jsp/BaiduMap";
 //				UserInfo u = service.getUser(openid);
 //				if(u!=null){
