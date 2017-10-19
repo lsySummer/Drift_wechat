@@ -21,6 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class DeliveryInfo {
 	private String id;
 	private String sendId;//发出方openid
+	private String deliveryNumber;//快递单号
 	private String receiveId;//接收方openid
 	
 	@Id
@@ -44,6 +45,12 @@ public class DeliveryInfo {
 	}
 	public void setReceiveId(String receiveId) {
 		this.receiveId = receiveId;
+	}
+	public String getDeliveryNumber() {
+		return deliveryNumber;
+	}
+	public void setDeliveryNumber(String deliveryNumber) {
+		this.deliveryNumber = deliveryNumber;
 	}
 	
 	

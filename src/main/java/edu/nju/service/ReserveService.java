@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.nju.dao.ReserveDao;
-import edu.nju.entities.DeliveryInfo;
 import edu.nju.entities.Device;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.OrderVO;
@@ -55,11 +54,26 @@ public class ReserveService {
 		Device d = dao.getDeviceByOpenId(openId);
 		return d;
 	}
+	/**
+	 * @param openid
+	 * @return
+	 * 根据用户id获得其接收的快递单号信息
+	 */
+	public String getRecDid(String openid){
+		String did = dao.getRecDid(openid);
+		return did;
+	}
 	
-	//根据快递单号获得快递物流信息  目前看前端写起来更方便
-	public DeliveryInfo getDeliveryInfo(String did){
-		return null;
-	};
+	
+	/**
+	 * @param openid
+	 * @return
+	 * 根据用户id获得其寄出的快递单号信息
+	 */
+	public String getSendDid(String openid){
+		String did = dao.getSendDid(openid);
+		return did;
+	}
 	
 	/**
 	 * @param did 快递单号
@@ -120,8 +134,8 @@ public class ReserveService {
 	 * @return
 	 */
 	public boolean confirm(String openid){
-		//TODO
-		return true;
+		boolean b = dao.confirm(openid);
+		return b;
 	}
 
 }

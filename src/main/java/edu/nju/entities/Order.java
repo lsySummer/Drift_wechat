@@ -19,7 +19,7 @@ public class Order {
 	private Date endDate;
 	private String deviceNumber;//甲醛仪设备编号
 	private String deviceId;
-	private int state;//0代表尚未寄给用户，1代表在快递途中，2代表在用户手中，3代表在寄出快递中，4代表到达下家手中
+	private String state;//0代表尚未寄给用户，1代表在快递途中，2代表在用户手中，3代表在寄出快递中，4代表到达下家手中
 	private int num;//购买耗材数量
 	private int ifPay;//是否是付费用户,0代表免费用户，1代表付费用户
 //	private String deliveryId;//快递信息
@@ -27,7 +27,7 @@ public class Order {
 	public Order(){
 	}
 	
-	public Order(String openId,Date startDate,Date endDate,String deviceId,String deviceNumber,int state,int num,int ifPay){
+	public Order(String openId,Date startDate,Date endDate,String deviceId,String deviceNumber,String state,int num,int ifPay){
 		this.openId = openId;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -83,12 +83,14 @@ public class Order {
 		this.deviceNumber = deviceNumber;
 	}
 
-	public int getState() {
+	public String getState() {
 		return state;
 	}
-	public void setState(int state) {
+
+	public void setState(String state) {
 		this.state = state;
 	}
+
 	public int getNum() {
 		return num;
 	}
