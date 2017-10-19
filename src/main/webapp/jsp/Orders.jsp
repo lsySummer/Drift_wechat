@@ -27,24 +27,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div class="weui-form-preview" id="item1">
 		  <div class="weui-form-preview__hd">
 		    <label class="weui-form-preview__label">订单编号</label>
-		    <em class="weui-form-preview__value" id="orderId">test</em>
+		    <em class="weui-form-preview__value" id="orderId">暂无</em>
 		  </div>
 		  <div class="weui-form-preview__bd">
 		    <div class="weui-form-preview__item">
 		      <label class="weui-form-preview__label">下单日期</label>
-		      <span class="weui-form-preview__value" id="startDate">test</span>
+		      <span class="weui-form-preview__value" id="startDate">暂无</span>
 		    </div>
 		    <div class="weui-form-preview__item">
 		      <label class="weui-form-preview__label">预约结束</label>
-		      <span class="weui-form-preview__value" id="endDate">test</span>
+		      <span class="weui-form-preview__value" id="endDate">暂无</span>
 		    </div>
 		    <div class="weui-form-preview__item">
 		      <label class="weui-form-preview__label">送货地址</label>
-		      <span class="weui-form-preview__value" id="address">test</span>
+		      <span class="weui-form-preview__value" id="address">暂无</span>
+		    </div>
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">收件人</label>
+		      <span class="weui-form-preview__value" id="userName">暂无</span>
+		    </div>
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">联系电话</label>
+		      <span class="weui-form-preview__value" id="userPhone">暂无</span>
 		    </div>
 		    <div class="weui-form-preview__item">
 		      <label class="weui-form-preview__label">设备状态</label>
-		      <span class="weui-form-preview__value" id="state">test</span>
+		      <span class="weui-form-preview__value" id="state">暂无</span>
 		    </div>
 		  </div>
 		</div>
