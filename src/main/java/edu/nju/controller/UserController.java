@@ -63,10 +63,19 @@ public class UserController {
 	
 	@RequestMapping(value = "/getDetail")
 	public void getDetail(HttpSession session, HttpServletResponse response) {
+		boolean flag = false;
 		JSONObject result=new JSONObject();
 		result.put("nickName", session.getAttribute("nickname"));
 		result.put("image", session.getAttribute("headimgurl"));
-//		result.put("user",service.getUser(session.getAttribute("openid")));
+//		UserInfo user = service.getUser((String)session.getAttribute("openid"));
+		UserInfo user = service.getUser("oRTgpwXFnHUxJVa1ttSC8Tu_edXw");
+		if(user != null){
+			flag = true;
+			result.put("address", user.getAddress());
+			result.put("name", user.getName());
+			result.put("phone",user.getPhone());
+		}
+		result.put("flag", flag);
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(result);
@@ -79,9 +88,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/save")
-	public String saveUser(HttpSession session, String name, String address, String phone) {
-		
-		return "jsp/index";
+	public String saveUser(HttpSession session, String name, String address, String phone, String address_detail) {
+		UserInfo user = new UserInfo();
+//		user.setOpenid((String)session.getAttribute("openid"));
+		user.setOpenid("oRTgpwXFnHUxJVa1ttSC8Tu_edXw");
+		user.setAddress(address + " " + address_detail);
+		user.setPhone(phone);
+		user.setName(name);
+		service.saveOrUpdate(user);
+		return "jsp/MyIndex";
 	}
 }
 

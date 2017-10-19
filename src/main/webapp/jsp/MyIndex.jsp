@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
-<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
+<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.min.css">
 <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
 <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    <div id="nickName" class="weui-cell__ft">暂无</div>
 		  </div>
 		</div>
-		<form method="get" id="personDetail" name="personDetail" action="/Drift_wechat/api/delivery/set">		
+		<form method="get" id="personDetail" name="personDetail" action="/Drift_wechat/api/user/save">		
     		<div class="page__bd">
 		        <div class="weui-cells weui-cells_form">		            
 		            <div class="weui-cell">
@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        </div>
 	        </br>
 	        <div style="text-align: center">		    	
-	          <a href="/Drift_wechat/api/user/save" class="weui-btn weui-btn_mini weui-btn_primary" id="submit" style="text-align:center">修改个人信息</a>
+	          <button type="submit"class="weui-btn weui-btn_mini weui-btn_primary" id="submit" style="text-align:center">修改个人信息</button>
 	        </div>
     	</form>
   	</div>
@@ -91,5 +91,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		})
   	</script>
+  	<script type="text/javascript" src="/Drift_wechat/js/myJS/MyIndex.js"></script>
   </body>
 </html>

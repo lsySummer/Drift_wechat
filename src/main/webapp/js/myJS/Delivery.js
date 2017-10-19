@@ -1,7 +1,7 @@
 /**
  * 
  */
-$.getJSON('/Drift_wechat/api/user/getDetail',function(json){
+$.getJSON('/Drift_wechat/api/delivery/get',function(json){
 	var before = json.before;
 	var after = json.after;
 	if(before == null){

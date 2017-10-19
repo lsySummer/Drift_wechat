@@ -32,8 +32,6 @@ public class DeliveryController {
 		JSONObject result=new JSONObject();
 //		service.getBefore((String)session.getAttribute("openid"));
 //		service.getAfter((String)session.getAttribute("openid"));
-//		service.getDeliveryInfo((String)session.getAttribute("openid"));
-//		service.getDeliveryInfo("oRTgpwXFnHUxJVa1ttSC8Tu_edXw");
 		result.put("before", service.getBefore("oRTgpwXFnHUxJVa1ttSC8Tu_edXw"));
 		result.put("after", service.getAfter("oRTgpwXFnHUxJVa1ttSC8Tu_edXw"));
 		try {
@@ -56,6 +54,7 @@ public class DeliveryController {
 	
 	@RequestMapping(value = "/confirm")
 	public String deliveryConfirm(HttpSession session, HttpServletResponse response){
+		service.confirm((String)session.getAttribute("openid"));
 		return "jsp/Delivery";
 	}
 }
