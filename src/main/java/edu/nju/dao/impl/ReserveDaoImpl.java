@@ -142,7 +142,7 @@ public class ReserveDaoImpl implements ReserveDao{
 //		if(list.size()>0){
 		List<Order> orderList = getById(d.getId());
 		if(orderList.size()>0){
-			Order o = orderList.get(0);
+			Order o = orderList.get(orderList.size()-1);
 			o.setState("已寄出");
 			DeliveryInfo info = new DeliveryInfo();
 			info.setDeliveryNumber(did);
@@ -152,7 +152,7 @@ public class ReserveDaoImpl implements ReserveDao{
 			List<Order> afterList = getOrderById(afterUser.getOpenid());
 //			System.out.println(afterUser.getOpenid()+" "+afterList.size());
 			if(afterList.size()>0){
-				Order afterOrder = afterList.get(0);
+				Order afterOrder = afterList.get(afterList.size()-1);
 				afterOrder.setState("上家已发货");
 				baseDao.update(afterOrder);
 			}else{
@@ -284,12 +284,30 @@ public class ReserveDaoImpl implements ReserveDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean confirm(String openid) {
+		Device d = getDeviceByOpenId(openid);
 		String hql = "from Order where openId =:openid";
+		UserInfo currentUser = userDao.getUser(openid);
+		d.setLoc(currentUser.getAddress());
+		baseDao.update(d);
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openid).getResultList();
 		if(list.size()>0){
 			Order o = list.get(list.size()-1);
 			o.setState("已确认收货");
 			baseDao.update(o);
+			
+			UserInfo beforeUser = getBefore(openid);
+			List<Order> beforeList = getOrderById(beforeUser.getOpenid());
+//			System.out.println(afterUser.getOpenid()+" "+afterList.size());
+			if(beforeList.size()>0){
+				Order beforeOrder = beforeList.get(beforeList.size()-1);
+				beforeOrder.setState("下家已收货");
+				baseDao.update(beforeOrder);
+			}else{
+				//TODO 后台管理者收到消息
+			}
+			baseDao.update(o);
+			
+			
 			return true;
 		}
 		return false;

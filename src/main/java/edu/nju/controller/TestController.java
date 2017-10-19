@@ -26,7 +26,8 @@ public class TestController {
 //		System.out.println(service.checkReserve("12345"));
 //		System.out.println(service.checkReserve("hahaha"));
 //		System.out.println(service.getBefore("hahaha").toString());
-		System.out.println(service.getOrderState("oRTgpweSZbOxfrg9H57JwuPwMJLo"));
+//		System.out.println(service.getOrderState("oRTgpweSZbOxfrg9H57JwuPwMJLo"));
+		service.confirm("oRTgpweSZbOxfrg9H57JwuPwMJLo");
 		return "success";
 	}
 }
