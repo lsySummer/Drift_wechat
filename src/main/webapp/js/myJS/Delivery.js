@@ -2,19 +2,16 @@
  * 
  */
 $.getJSON('/Drift_wechat/api/delivery/get',function(json){
-	console.log(json);
-	var before = json.before;
-	var after = json.after;
-	if(before == null){
+	if(json.before == null){
 		document.getElementById("item1").style.display="none";
 		document.getElementById("container").innerHTML="暂无订单";
 	}else{
-		document.getElementById('previous').innerHTML=before.name;
+		document.getElementById('previous').innerHTML=json.before;
 		document.getElementById('deliveryNum1').innerHTML=json.receive;
 		document.getElementById('deviceId1').innerHTML=json.deviceId;
-		if(after != null){
-			document.getElementById('next').innerHTML=after.name;
-			document.getElementById('deliveryNum2').innerHTML=json.deliveryNum2;
+		if(json.after != null){
+			document.getElementById('next').innerHTML=json.after;
+			document.getElementById('deliveryNum2').innerHTML=json.send;
 			document.getElementById('deviceId2').innerHTML=json.deviceId;
 		}else{document.getElementById("item2").style.display="none";}
 	}

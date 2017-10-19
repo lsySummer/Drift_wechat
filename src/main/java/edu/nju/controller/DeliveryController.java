@@ -36,8 +36,8 @@ public class DeliveryController {
 //		result.put("receive", service.getRecDid((String)session.getAttribute("openid")));
 //		result.put("send", service.getSendDid((String)session.getAttribute("openid")));
 		Device device = service.getDeviceByOpenId("hahaha");
-		result.put("before", service.getBefore("hahaha"));
-		result.put("after", service.getAfter("hahaha"));
+		result.put("before", service.getBefore("hahaha").getName());
+		result.put("after", service.getAfter("hahaha").getName());
 		result.put("receive", service.getRecDid("hahaha"));
 		result.put("send", service.getSendDid("hahaha"));
 		result.put("deviceId", device.getId());
@@ -56,13 +56,15 @@ public class DeliveryController {
 	@RequestMapping(value = "/set")
 	public String setDelivery(String deliveryNum, HttpSession session, HttpServletResponse response) throws ParseException{
 		String openid = (String) session.getAttribute("openid");
-		boolean result = service.saveDelInfo(openid,deliveryNum);
+//		boolean result = service.saveDelInfo(openid,deliveryNum);
+		service.saveDelInfo("hahaha",deliveryNum);
 		return "jsp/Delivery";
 	}
 	
 	@RequestMapping(value = "/confirm")
 	public String deliveryConfirm(HttpSession session, HttpServletResponse response){
-		service.confirm((String)session.getAttribute("openid"));
+//		service.confirm((String)session.getAttribute("openid"));
+		service.confirm("hahaha");
 		return "jsp/Delivery";
 	}
 }
