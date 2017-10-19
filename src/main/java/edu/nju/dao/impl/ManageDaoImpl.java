@@ -3,12 +3,14 @@ package edu.nju.dao.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import edu.nju.dao.BaseDao;
 import edu.nju.dao.ManageDao;
 import edu.nju.entities.Device;
 import edu.nju.entities.UserInfo;
 
+@Repository
 public class ManageDaoImpl implements ManageDao{
 	
 	 @Autowired
