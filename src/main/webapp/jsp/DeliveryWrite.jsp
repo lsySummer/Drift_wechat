@@ -65,12 +65,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </body>
   <script type="text/javascript">
 		$("#submit").click(function(){
-			if($("#deliveryDate").val().trim().length && $("#deliveryNum").val().trim().length){
+			if($("#deliveryNum").val().trim().length){
 					$('#deliveryWrite').submit();
 			}else{
 				$.toptip('操作失败，请确保所有内容均已填写', 'error');
 				return false;
 			}
 		})
-	</script>
+  </script>
 </html>

@@ -1,12 +1,16 @@
 package edu.nju.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,6 +58,24 @@ public class UserController {
 	public String getUser(String openid) {
 		service.getUser(openid);
 		return "jsp/index";
+	}
+	
+	@RequestMapping(value = "/getDetail")
+	public void getDetail(HttpSession session, HttpServletResponse response) {
+		JSONObject result=new JSONObject();
+		User user= service.getUser(session.getAttribute("openid")
+		result.put("nickName", session.getAttribute("nickname"));
+		result.put("image", session.getAttribute("headimgurl"));
+		result.put("address", ));
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(result);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 

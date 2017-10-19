@@ -2,11 +2,12 @@
  * 
  */
 $.getJSON('/Drift_wechat/api/order/delivery',function(json){
-	var item = json.length;
-	if(item == 0){
+	var before = json.before;
+	var after = json.after;
+	if(before == null){
 		document.getElementById("item1").style.display="none";
 		document.getElementById("container").innerHTML="暂无订单";
-	}else if(item == 1){
+	}else if(after == null){
 		document.getElementById('previous').innerHTML=json.previous;
 		document.getElementById('deliveryNum1').innerHTML=json.deliveryNum1;
 		document.getElementById('deviceId1').innerHTML=json.deliveryDate1;
@@ -18,5 +19,6 @@ $.getJSON('/Drift_wechat/api/order/delivery',function(json){
 });
 
 function confirm(){
+	$.toptip('确认收货成功', 'success');
 	$.get('/Drift_wechat/api/delivery/confirm');
 }
