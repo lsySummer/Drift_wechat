@@ -21,7 +21,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <div class="container" id="container">
+ <div class="weui-tab">
+  	<div class="weui-navbar">
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/BaiduMap.jsp">
+	    	首页
+	    </a>
+	  </div>
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Orders.jsp">
+	    	我的订单
+	    </a>
+	  </div>
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Delivery.jsp">
+	    	仪器传递
+	    </a>
+	  </div>
+	  <div class="weui-navbar__item weui-bar__item--on">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/MyIndex.jsp">
+	    	个人中心
+	    </a>
+	  </div>
+	</div>
+    <div class="weui-tab__bd" id="container">
+    <div id="tab" class="weui-tab__bd-item weui-tab__bd-item--active">
+    </br>
+    </br>
     	<div style="text-align: center">
 			<img alt="" class="img-circle" src="/Drift_wechat/images/icon.jpg" style="margin: 0 auto;width: 100px; heigth: 100px;" />
 		</div>
@@ -80,6 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        </div>
     	</form>
   	</div>
+  	</div>
 	<script type="text/javascript">
 		$("#submit").click(function(){
 			if($("#deliveryPerson").val().trim().length && $("phone").val().trim().length && $("address_detail").val().trim().length && $("address").val().trim().length){
@@ -90,7 +117,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				return false;
 			}
 		})
-  	</script>
-  	<script type="text/javascript" src="/Drift_wechat/js/myJS/MyIndex.js"></script>
+	</script>
+  </div>
   </body>
+  	<script type="text/javascript" src="/Drift_wechat/js/myJS/MyIndex.js"></script>
 </html>

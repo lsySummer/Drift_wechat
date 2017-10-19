@@ -30,25 +30,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <div class="weui-navbar">
 	  <div class="weui-navbar__item">
-	    首页
-	  </div>
-	  <div class="weui-navbar__item weui_bar__item_on">
-	  我的预约
-	  </div>
-	  <div class="weui-navbar__item">
-	   仪器传递
+	  	<a class="weui-navbar__item weui-bar__item--on" href="/Drift_wechat/jsp/BaiduMap.jsp">
+	    	首页
+	    </a>
 	  </div>
 	  <div class="weui-navbar__item">
-	    个人中心
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Orders.jsp">
+	    	我的订单
+	    </a>
+	  </div>
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Delivery.jsp">
+	    	仪器传递
+	    </a>
+	  </div>
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/MyIndex.jsp">
+	    	个人中心
+	    </a>
 	  </div>
 	</div>
 		
 	<div class="weui-flex weui-footer weui-footer_fixed-bottom">
 		  <div class="weui-flex__item placeholder">
-		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="">我要预约</button>
+		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/index.jsp'">我要预约</button>
 		  </div>
 		  <div class="weui-flex__item placeholder">
-		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="">我要插队</button>
+		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:;">我要插队</button>
 		  </div>
 	</div>
 </body>

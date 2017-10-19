@@ -20,8 +20,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  	<div class="weui-navbar">
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/BaiduMap.jsp">
+	    	首页
+	    </a>
+	  </div>
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item weui-bar__item--on" href="/Drift_wechat/jsp/Orders.jsp">
+	    	我的订单
+	    </a>
+	  </div>
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Delivery.jsp">
+	    	仪器传递
+	    </a>
+	  </div>
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/MyIndex.jsp">
+	    	个人中心
+	    </a>
+	  </div>
+	</div>
   	<header class='demos-header'>
-      <h2 class="demos-title">我的预约</h2>
+      <h3 class="demos-title">我的预约</h3>
     </header>
     <div class="container" id="container">
     	<div class="weui-form-preview" id="item1">
@@ -56,7 +78,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		</div>
-		<a href="javascript:;" class="weui-btn weui-btn_plain-default">回到首页</a>
 	</div>
   </body>
   <script type="text/javascript" src="/Drift_wechat/js/myJS/Orders.js"></script>

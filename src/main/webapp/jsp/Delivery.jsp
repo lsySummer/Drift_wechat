@@ -20,10 +20,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<header class='demos-header'>
+  	<div class="weui-tab">
+  	<div class="weui-navbar">
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/BaiduMap.jsp">
+	    	首页
+	    </a>
+	  </div>
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Orders.jsp">
+	    	我的订单
+	    </a>
+	  </div>
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item weui-bar__item--on" href="/Drift_wechat/jsp/Delivery.jsp">
+	    	仪器传递
+	    </a>
+	  </div>
+	  <div class="weui-navbar__item">
+	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/MyIndex.jsp">
+	    	个人中心
+	    </a>
+	  </div>
+	</div>
+	<div class="weui-tab__bd">
+    <div class="weui-tab__bd-item weui-tab__bd-item--active" id="container">
+    
       <h2 class="demos-title">仪器传递</h2>
-    </header>
-    <div class="container" id="container">
+      
     	<div class="weui-form-preview" id="item1">
 		  <div class="weui-form-preview__hd">
 		    <label class="weui-form-preview__label">上家名称</label>
@@ -66,7 +90,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		  </div>
 		</div>
 		</br>
-		<a href="javascript:;" class="weui-btn weui-btn_plain-default">回到首页</a>
+	</div>
+	</div>
 	</div>
   </body>
   <script type="text/javascript" src="/Drift_wechat/js/myJS/Delivery.js"></script>

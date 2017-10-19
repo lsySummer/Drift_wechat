@@ -28,7 +28,7 @@ public class OrderController {
 //		String openid = (String) session.getAttribute("openid");
 		try {
 			PrintWriter out = response.getWriter();
-			out.print(service.getOrder("oRTgpwXFnHUxJVa1ttSC8Tu_edXw"));
+			out.print(service.getOrder("hahaha"));
 			out.flush();
 			out.close();
 		} catch (IOException e) {
