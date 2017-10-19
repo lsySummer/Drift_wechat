@@ -108,7 +108,8 @@ public class ReserveDaoImpl implements ReserveDao{
 			if(orderList.size()>0){
 				Order o = orderList.get(0);
 				o.setState(2);
-				o.setDeliveryId(did);
+				//TODO
+//				o.setDeliveryId(did);
 				baseDao.save(o);
 				return true;
 			}
@@ -165,8 +166,9 @@ public class ReserveDaoImpl implements ReserveDao{
 		Date queueDate = device.getQueueDate();
 		Date startDate = Utility.getSpecifiedDayAfter(queueDate,1);
 		Date endDate = Utility.getSpecifiedDayAfter(startDate,1);
-		Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),0,num,ifPay,"");
-		baseDao.save(o);
+//		Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),0,num,ifPay,"");
+		//TODO
+//		baseDao.save(o);
 		return true;
 	}
 	

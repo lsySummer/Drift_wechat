@@ -63,7 +63,7 @@ public class ReserveService {
 	
 	/**
 	 * @param did 快递单号
-	 * @param deviceId Device主键
+	 * @param openId 
 	 * @return
 	 * 保存快递信息
 	 */
@@ -114,5 +114,14 @@ public class ReserveService {
 		return b;
 	}
 
+	/**
+	 * 用户确认收货，
+	 * @param openid
+	 * @return
+	 */
+	public boolean confirm(String openid){
+		//TODO
+		return true;
+	}
 
 }

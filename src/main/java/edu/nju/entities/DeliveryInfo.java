@@ -3,31 +3,48 @@ package edu.nju.entities;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * @author lsy
  * 快递信息
  */
+
+@Entity
+@Table(name = "device")
 public class DeliveryInfo {
-	private String del_id;
-	private List<Date> time;
-	private List<String> info;
-	public String getDel_id() {
-		return del_id;
+	private String id;
+	private String sendId;//发出方openid
+	private String receiveId;//接收方openid
+	
+	@Id
+	@Column(length = 32)
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	public String getId() {
+		return id;
 	}
-	public void setDel_id(String del_id) {
-		this.del_id = del_id;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public List<Date> getTime() {
-		return time;
+	public String getSendId() {
+		return sendId;
 	}
-	public void setTime(List<Date> time) {
-		this.time = time;
+	public void setSendId(String sendId) {
+		this.sendId = sendId;
 	}
-	public List<String> getInfo() {
-		return info;
+	public String getReceiveId() {
+		return receiveId;
 	}
-	public void setInfo(List<String> info) {
-		this.info = info;
+	public void setReceiveId(String receiveId) {
+		this.receiveId = receiveId;
 	}
+	
 	
 }
