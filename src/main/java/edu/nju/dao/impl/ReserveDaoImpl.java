@@ -73,6 +73,10 @@ public class ReserveDaoImpl implements ReserveDao{
 				return u;
 			}
 		}
+		else{
+			UserInfo u = userDao.getUser("thisiscomponyinfomation");
+			return u;
+		}
 		return null;
 	}
 
@@ -93,10 +97,10 @@ public class ReserveDaoImpl implements ReserveDao{
 				String userId = resultOrder.getOpenId();
 				UserInfo u = userDao.getUser(userId);
 				return u;
-			}else{
-				UserInfo u = userDao.getUser("thisiscomponyinfomation");
-				return u;
-			}
+		}
+		}else{
+			UserInfo u = userDao.getUser("thisiscomponyinfomation");
+			return u;
 		}
 		return null;
 	}
