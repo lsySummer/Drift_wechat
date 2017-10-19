@@ -2,7 +2,8 @@
  * 
  */
 $.getJSON('/Drift_wechat/api/order/get',function(json){
-	if(json == null){
+	var data = json.data;
+	if(data == null){
 		document.getElementById("item1").style.display="none";
 		document.getElementById("container").innerHTML="暂无订单";
 	}else{
