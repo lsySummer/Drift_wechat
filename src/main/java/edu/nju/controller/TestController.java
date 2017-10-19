@@ -17,9 +17,10 @@ public class TestController {
 	
 	@RequestMapping(value = "/insert")
 	public String register() {
-		service.confirm("hahaha");
+//		service.confirm("hahaha");
 //		System.out.println(service.getBefore("hahaha").toString());
 //		System.out.println(userService.getUser("thisiscomponyinfomation").toString());
+		userService.setZMXY("ZMXYopenID", "UPDATEzmxyid");
 		return "success";
 	}
 }

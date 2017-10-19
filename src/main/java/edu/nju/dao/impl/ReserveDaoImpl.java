@@ -119,7 +119,7 @@ public class ReserveDaoImpl implements ReserveDao{
 				info.setSendId(openId);
 				UserInfo afterUser = getAfter(openId);
 				info.setReceiveId(afterUser.getId());
-				baseDao.save(o);
+				baseDao.update(o);
 				return true;
 			}
 		}
