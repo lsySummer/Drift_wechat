@@ -2,8 +2,7 @@
  * 
  */
 $.getJSON('/Drift_wechat/api/user/getDetail',function(json){
-	console.log(json);
-	var nickNmae = json.nickName;
+	var nickName = json.nickName;
 	var image = json.image;
 	var flag = json.flag;
 	if(flag){
