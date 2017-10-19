@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        </div>
 	        </br>
 	        <div style="text-align: center">		    	
-	          <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" style="text-align:center">修改个人信息</a>
+	          <a href="/Drift_wechat/api/user/save" class="weui-btn weui-btn_mini weui-btn_primary" id="submit" style="text-align:center">修改个人信息</a>
 	        </div>
     	</form>
   	</div>
@@ -84,6 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#submit").click(function(){
 			if($("#deliveryPerson").val().trim().length && $("phone").val().trim().length && $("address_detail").val().trim().length && $("address").val().trim().length){
 					$('#personDetail').submit();
+					$.toptip('提交成功', 'success');
 			}else{
 				$.toptip('操作失败，请确保所有内容均已填写', 'error');
 				return false;

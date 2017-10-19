@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.nju.entities.UserInfo;
 import edu.nju.service.UserService;
 
 
@@ -63,10 +64,9 @@ public class UserController {
 	@RequestMapping(value = "/getDetail")
 	public void getDetail(HttpSession session, HttpServletResponse response) {
 		JSONObject result=new JSONObject();
-		User user= service.getUser(session.getAttribute("openid")
 		result.put("nickName", session.getAttribute("nickname"));
 		result.put("image", session.getAttribute("headimgurl"));
-		result.put("address", ));
+//		result.put("user",service.getUser(session.getAttribute("openid")));
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(result);
@@ -76,6 +76,12 @@ public class UserController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value = "/save")
+	public String saveUser(HttpSession session, String name, String address, String phone) {
+		
+		return "jsp/index";
 	}
 }
 
