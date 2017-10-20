@@ -48,7 +48,7 @@ public class OrderController {
 		UserInfo user = userService.getUser((String)session.getAttribute("openid"));
 //		UserInfo user = userService.getUser("hahaha");
 		if(user == null){
-			return "jsp/MyIndex.jsp";
+			return "jsp/MyIndex";
 		}else if(user.getZmxyid() == null){
 			return "jsp/index";
 		}else if(service.checkReserve((String)session.getAttribute("openid"))){
