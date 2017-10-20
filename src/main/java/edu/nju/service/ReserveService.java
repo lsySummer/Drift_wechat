@@ -154,7 +154,7 @@ public class ReserveService {
 			if(volist.size()>0){//有下家
 				OrderVO vo = volist.get(0);
 				String state = vo.getState();
-				if(state.equals("已收货")||state.equals("已寄出")){
+				if(state.equals("已收货")||state.equals("已寄出")||state.equals("下家已收货")){
 					return true;
 				}else{
 					return false;

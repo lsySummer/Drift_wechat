@@ -51,7 +51,7 @@ public class OrderController {
 			return "jsp/MyIndex";
 		}else if(user.getZmxyid() == null){
 			return "jsp/index";
-		}else if(service.checkReserve((String)session.getAttribute("openid"))){
+		}else if(!service.checkReserve((String)session.getAttribute("openid"))){
 			return "jsp/Warn";
 		}
 		else{
