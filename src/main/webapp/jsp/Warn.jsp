@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
         <div class="weui-msg__text-area">
             <h2 class="weui-msg__title">操作失败</h2>
-            <p class="weui-msg__desc">Whoops，别贪心哦，您已经有一个订单了！<a href="javascript:void(0);">文字链接</a></p>
+            <p class="weui-msg__desc">Whoops，别贪心哦，您已经有一个订单了！</p>
         </div>
         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
