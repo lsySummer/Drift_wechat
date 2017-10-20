@@ -105,8 +105,12 @@ public class UserDaoImpl implements UserDao{
 			List<UserInfo> ulist = getUserById(o.getOpenId());
 			if(ulist.size()>0){
 			UserInfo u = ulist.get(0);
+			int state = 0;//0代表正在使用，1代表理事用过
+			if(o.getState().equals("下家已收货")||o.getState().equals("已寄出")){
+				state = 1;
+			}
 			UserVO vo = new UserVO(u.getOpenid(),u.getNickName(),u.getAddress(),o.getStartDate(),
-			o.getDeviceNumber(),0);
+			o.getDeviceNumber(),state);
 			volist.add(vo);
 			}
 		}

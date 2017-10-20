@@ -19,7 +19,7 @@ public class Order {
 	private Date endDate;
 	private String deviceNumber;//甲醛仪设备编号
 	private String deviceId;
-	private String state;//已收货 已寄出 等待发货 上家已发货 下家已收货
+	private String state;//等待发货 上家已发货 已收货 已寄出 下家已收货
 	private int num;//购买耗材数量
 	private int ifPay;//是否是付费用户,0代表免费用户，1代表付费用户
 //	private String deliveryId;//快递信息
