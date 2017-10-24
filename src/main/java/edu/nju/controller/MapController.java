@@ -39,7 +39,6 @@ public class MapController {
 		JSONObject myJsonObject = new JSONObject(service.getUserVO());
 		JSONArray userAll = (JSONArray) myJsonObject.get(Constants.RESPONSE_DATA_KEY);
 		List<Object> list1 = new ArrayList<Object>();
-		userAll.getJSONObject(0).put("deviceState", 1);
 		if(userAll.length()>0){
 		  for(int i=0;i<userAll.length();i++){
 		    JSONObject job = userAll.getJSONObject(i);
