@@ -8,10 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import edu.nju.entities.UserInfo;
 import edu.nju.service.ReserveService;
@@ -29,8 +27,6 @@ public class OrderController {
 	
 	@RequestMapping(value = "/get")
 	public void getDetail(HttpSession session, HttpServletResponse response){
-		Gson result = new GsonBuilder().create();
-//		String openid = (String) session.getAttribute("openid");
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(service.getOrder((String)session.getAttribute("openid")));
@@ -44,10 +40,11 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/set")
-	public String ZMXY(HttpSession session) {
+	public String ZMXY(HttpSession session,Model model) {
 		UserInfo user = userService.getUser((String)session.getAttribute("openid"));
 //		UserInfo user = userService.getUser("hahaha");
 		if(user == null){
+			model.addAttribute("state", "no");
 			return "jsp/MyIndex";
 		}else if(user.getZmxyid() == null){
 			return "jsp/index";

@@ -51,9 +51,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<img alt="" id="image" class="img-circle" src="/Drift_wechat/images/icon.jpg" style="margin: 0 auto;width: 100px; heigth: 100px;" />
 		</div>
 
-		<div style="text-align: center">
-			<a id="zmxy" href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default" style="text-align:center">绑定芝麻信用并预约</a>
-		</div>
 		<div class="weui-cells">
 		  <div class="weui-cell">
 		    <div class="weui-cell__bd">
@@ -101,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        </div>
 	        </br>
 	        <div style="text-align: center">		    	
-	          <button type="submit"class="weui-btn weui-btn_mini weui-btn_primary" id="submit" style="text-align:center">修改个人信息</button>
+	          <button type="submit"class="weui-btn weui-btn_mini weui-btn_primary" id="submit" style="text-align:center">保存个人信息</button>
 	        </div>
     	</form>
   	</div>

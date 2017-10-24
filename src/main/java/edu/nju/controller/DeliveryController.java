@@ -3,8 +3,6 @@ package edu.nju.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,9 +11,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import edu.nju.entities.Device;
 import edu.nju.service.ReserveService;
@@ -56,7 +51,7 @@ public class DeliveryController {
 	
 	@RequestMapping(value = "/set")
 	public String setDelivery(String deliveryNum, HttpSession session, HttpServletResponse response) throws ParseException{
-		boolean result = service.saveDelInfo((String) session.getAttribute("openid"),deliveryNum);
+		service.saveDelInfo((String) session.getAttribute("openid"),deliveryNum);
 //		service.saveDelInfo("hahaha",deliveryNum);
 		return "jsp/Delivery";
 	}

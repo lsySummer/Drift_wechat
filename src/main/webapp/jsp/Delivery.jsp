@@ -15,8 +15,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 	<script>
 	function confirm(){
-		$.toptip('确认收货成功', 'success');
 		$.get('/Drift_wechat/api/delivery/confirm');
+		$.toptip('确认收货成功', 'success');
 	}
 	</script>
   <head>
