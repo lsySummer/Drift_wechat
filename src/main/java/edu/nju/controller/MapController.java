@@ -3,20 +3,28 @@ package edu.nju.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.nju.entities.Point;
 import edu.nju.model.UserVO;
+import edu.nju.service.UserService;
+import edu.nju.utils.Constants;
 
 @Controller
 @RequestMapping(value="/map")
 public class MapController {
+	@Autowired
+	UserService service;
 	
 	@RequestMapping(value = "/map")
 	public String getMap1(String openid,HttpSession session) {
@@ -27,6 +35,23 @@ public class MapController {
 	@RequestMapping(value = "/getMap")
 	@ResponseBody  
 	public Map<String, Object> getMap() {		
+		Map<String, Object> map = new HashMap<String, Object>();
+		JSONObject myJsonObject = new JSONObject(service.getUserVO());
+		JSONArray userAll = (JSONArray) myJsonObject.get(Constants.RESPONSE_DATA_KEY);
+		List<Object> list1 = new ArrayList<Object>();
+		if(userAll.length()>0){
+		  for(int i=0;i<userAll.length();i++){
+		    JSONObject job = userAll.getJSONObject(i);
+		    list1.add(job);
+		  }
+		}
+		map.put("userArr", list1);
+		return map;
+	}
+	
+	@RequestMapping(value = "/getMap2")
+	@ResponseBody  
+	public Map<String, Object> getMap2() {		
 		Map<String, Object> map = new HashMap<String, Object>(); 
 		UserVO user1 = new UserVO("1", "aaa", "江苏省南京市鼓楼区北京西路二号新村小区12栋101", new Date(11110), "甲醛仪1号",1);
 		UserVO user2 = new UserVO("2", "bbb", "江苏省南京市鼓楼区汉口路22号",  new Date(10110), "甲醛仪2号",1);
