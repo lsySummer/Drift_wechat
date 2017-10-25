@@ -24,7 +24,6 @@ public class DeliveryController {
 	
 	@RequestMapping(value = "/get")
 	public void getDelivery(HttpSession session, HttpServletResponse response){
-//		session.setAttribute("openid", "hahaha");
 		JSONObject result=new JSONObject();
 		Device device = service.getDeviceByOpenId((String)session.getAttribute("openid"));
 		result.put("before", service.getBefore((String)session.getAttribute("openid")).getName());

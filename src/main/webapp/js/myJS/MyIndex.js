@@ -5,6 +5,11 @@ $.getJSON('/Drift_wechat/api/user/getDetail',function(json){
 	var nickName = json.nickName;
 	var image = json.image;
 	var flag = json.flag;
+	
+	if(getParmFormUrl('state') != null){
+		$.toptip('请先填写个人信息', 'error');
+	}
+	
 	if(flag){
 		var address = json.address.split(" ");
 		var phone = json.phone;
@@ -17,3 +22,10 @@ $.getJSON('/Drift_wechat/api/user/getDetail',function(json){
 		document.getElementById("address_detail").value = address[3];
 	}
 });
+
+function getParmFormUrl(name){
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null){return decodeURI(r[2]);}
+    return null;
+}

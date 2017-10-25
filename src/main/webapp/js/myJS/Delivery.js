@@ -14,7 +14,7 @@ $.getJSON('/Drift_wechat/api/delivery/get',function(json){
 		document.getElementById('deliveryNum1').innerHTML=json.receive;
 		document.getElementById('deviceId1').innerHTML=json.deviceId;
 		if(json.after != null){
-			if(json.enable != "已收货"){
+			if(json.enable != "已确认收货"){
 //				$('#detail').attr('disabled',"true");
 				document.getElementById('detail').disabled="true";
 			}
