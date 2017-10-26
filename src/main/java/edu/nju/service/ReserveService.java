@@ -12,6 +12,7 @@ import edu.nju.dao.ReserveGetDao;
 import edu.nju.entities.Device;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.OrderVO;
+import edu.nju.utils.Utility;
 
 @Transactional
 @Service
@@ -45,8 +46,8 @@ public class ReserveService {
 	 * @return
 	 * 用户下订单过程
 	 */
-	public boolean makeOrder(String openid, int type,Date startDate,Date endDate){
-		boolean b = dao.makeOrder(openid,type,startDate,endDate);
+	public boolean makeOrder(String openid, int type,Date startDate){
+		boolean b = dao.makeOrder(openid,type,startDate,Utility.getSpecifiedDayAfter(startDate, 1));
 		return b;
 	}
 
