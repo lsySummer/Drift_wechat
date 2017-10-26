@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h1> 快递查询 </h1>
 	  </br>
 	    <div id="lists">暂无数据</div>
-	    <a href="javascript:test3();" class="weui-btn weui-btn_primary">关闭</a>
+	    <a href="javascript:close();" class="weui-btn weui-btn_primary">关闭</a>
 	  </div>
 	</div>
 	
@@ -113,12 +113,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   function query(x){
   	var delivery = '';
   	if(x == 1){
-  		delivery = document.getElementById("deliveryNum1");
+  		delivery = document.getElementById("deliveryNum1").innerHTML;
   	}else{
-  		delivery = document.getElementById("deliveryNum2");
+  		delivery = document.getElementById("deliveryNum2").innerHTML;
   	}
   	if(delivery == '暂无物流信息'){
-  		$.toast("无法查询", "forbidden");
+  		$.toast("暂无信息，无法查询", "forbidden");
   	}else{
   		$.ajax({
 		  url:"http://jisukdcx.market.alicloudapi.com/express/query?number="+ delivery +"&type=auto",

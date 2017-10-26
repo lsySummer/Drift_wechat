@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 		</div>
 		<form method="get" id="personDetail" name="personDetail" action="/Drift_wechat/api/user/save">
-		<input id="state" name="state" value="true" style="display:none;"></input>		
+		<input id="redict" name="redict" value="true" style="display:none;"></input>		
     		<div class="page__bd">
 		        <div class="weui-cells weui-cells_form">		            
 		            <div class="weui-cell">

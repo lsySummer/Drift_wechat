@@ -63,21 +63,18 @@ public class UserController {
 	
 	@RequestMapping(value = "/getDetail")
 	public void getDetail(HttpSession session, HttpServletResponse response) {
-		boolean flag = false;
 		JSONObject result=new JSONObject();
 		result.put("nickName", session.getAttribute("nickname"));
 		result.put("image", session.getAttribute("headimgurl"));
 		UserInfo user = service.getUser((String)session.getAttribute("openid"));
-		if(user.getZmxyid() != null){
-			result.put("zmxy",false);
-		}
-		if(user != null){
-			flag = true;
+		if(user == null){
+			result.put("flag", false);
+		}else{
 			result.put("address", user.getAddress());
 			result.put("name", user.getName());
 			result.put("phone",user.getPhone());
+			result.put("flag", true);
 		}
-		result.put("flag", flag);
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(result);
@@ -90,7 +87,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/save")
-	public String saveUser(HttpSession session, String deliveryPerson, String address, String phone, String address_detail, String state) {
+	public String saveUser(HttpSession session, String deliveryPerson, String address, String phone, String address_detail, String redict) {
 		UserInfo user = new UserInfo();
 		user.setOpenid((String)session.getAttribute("openid"));
 		log.info("UserController openId"+session.getAttribute("openid"));
@@ -98,7 +95,7 @@ public class UserController {
 		user.setPhone(phone);
 		user.setName(deliveryPerson);
 		service.saveOrUpdate(user);
-		if(state == "true"){
+		if(redict.equals("true")){
 			return "jsp/MyIndex";
 		}else{
 			return "jsp/index";

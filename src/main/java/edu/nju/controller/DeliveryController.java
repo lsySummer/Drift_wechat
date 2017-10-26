@@ -28,7 +28,7 @@ public class DeliveryController {
 	
 	@RequestMapping(value = "/get")
 	public void getDelivery(HttpSession session, HttpServletResponse response){
-//		session.setAttribute("openid", "12345");
+		session.setAttribute("openid", "12345");
 		JSONObject result=new JSONObject();
 		Device device = getservice.getDeviceByOpenId((String)session.getAttribute("openid"));
 		try{
