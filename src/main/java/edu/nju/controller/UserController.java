@@ -68,7 +68,6 @@ public class UserController {
 		result.put("nickName", session.getAttribute("nickname"));
 		result.put("image", session.getAttribute("headimgurl"));
 		UserInfo user = service.getUser((String)session.getAttribute("openid"));
-//		UserInfo user = service.getUser("hahaha");
 		if(user.getZmxyid() != null){
 			result.put("zmxy",false);
 		}
@@ -94,7 +93,6 @@ public class UserController {
 	public String saveUser(HttpSession session, String deliveryPerson, String address, String phone, String address_detail) {
 		UserInfo user = new UserInfo();
 		user.setOpenid((String)session.getAttribute("openid"));
-//		user.setOpenid("hahaha");
 		user.setAddress(address + " " + address_detail);
 		user.setPhone(phone);
 		user.setName(deliveryPerson);

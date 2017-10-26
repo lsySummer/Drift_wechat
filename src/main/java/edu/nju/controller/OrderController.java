@@ -12,12 +12,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.nju.entities.UserInfo;
+import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.service.UserService;
 
 @Controller
 @RequestMapping(value="/order")
 public class OrderController {
+	
+	@Autowired
+	ReserveGetService getservice;
 	
 	@Autowired
 	ReserveService service;
@@ -29,8 +33,7 @@ public class OrderController {
 	public void getDetail(HttpSession session, HttpServletResponse response){
 		try {
 			PrintWriter out = response.getWriter();
-			out.print(service.getOrder((String)session.getAttribute("openid")));
-//			out.print(service.getOrder("hahaha"));
+			out.print(getservice.getOrder((String)session.getAttribute("openid")));
 			out.flush();
 			out.close();
 		} catch (IOException e) {
@@ -42,7 +45,6 @@ public class OrderController {
 	@RequestMapping(value = "/set")
 	public String ZMXY(HttpSession session,Model model) {
 		UserInfo user = userService.getUser((String)session.getAttribute("openid"));
-//		UserInfo user = userService.getUser("hahaha");
 		if(user == null){
 			model.addAttribute("state", "no");
 			return "jsp/MyIndex";
@@ -52,10 +54,14 @@ public class OrderController {
 			return "jsp/Warn";
 		}
 		else{
-			service.makeOrder((String)session.getAttribute("openid"), 0, 0);
-//			service.makeOrder("hahaha", 0, 0);
-			return "jsp/Result";
+			return "jsp/DateChoose";
 		}
+	}
+	
+	@RequestMapping(value = "/date")
+	public String confirm(String startDate, HttpSession session){
+//		service.makeOrder((String)session.getAttribute("openid"), 0, 0);
+		return "jsp/Result";
 	}
 	
 }
