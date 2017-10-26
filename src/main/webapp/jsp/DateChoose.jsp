@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									  cols: [
 									    {
 									      textAlign: 'center',
-									      values: json.date
+									      values: json.data
 									    }
 									  ]
 									});
