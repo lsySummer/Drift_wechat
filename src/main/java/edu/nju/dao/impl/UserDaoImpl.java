@@ -137,18 +137,22 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public boolean setZMXY(String openid, String zmxyid) {
-		List<UserInfo> list = getUserById(openid);
-		if(list.size()==0){
-			UserInfo user = new UserInfo();
-			user.setZmxyid(zmxyid);
-			user.setOpenid(openid);
-			baseDao.save(user);
-			return true;
-		}else{
-			UserInfo u = list.get(0);
-			u.setZmxyid(zmxyid);
-			baseDao.update(u);
-			return true;
-		}
+//		List<UserInfo> list = getUserById(openid);
+//		if(list.size()==0){
+//			UserInfo user = new UserInfo();
+//			user.setZmxyid(zmxyid);
+//			user.setOpenid(openid);
+//			baseDao.save(user);
+//			return true;
+//		}else{
+//			UserInfo u = list.get(0);
+//			u.setZmxyid(zmxyid);
+//			baseDao.update(u);
+//			return true;
+//		}
+		UserInfo user = getUser(openid);
+		user.setZmxyid(zmxyid);
+		baseDao.update(user);
+		return true;
 	}
 }
