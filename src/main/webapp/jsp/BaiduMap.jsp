@@ -172,12 +172,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                		temp["point"] = point;
                		addInfoWindow(maker, temp); 
 				}else{
-					alert("您选择地址没有解析到结果!");
+					/*alert("您选择地址没有解析到结果!"+add.map.address);*/
 				}
 		}, ""); 
 	}
 	
-	function addPoint(userArr,icon){
+	/*function addPoint(userArr,icon){
 	    // 创建地址解析器实例
 		var myGeo = new BMap.Geocoder();
 		
@@ -197,12 +197,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                		console.log(temp);
                		addInfoWindow(maker, temp); 
 				}else{
-					alert("您选择地址没有解析到结果!");
+					alert(userArr[i].map.address+"您选择地址没有解析到结果!");
 				}
 			}, "");
 			
            }
-	}	
+	}*/	
    // 添加检测仪信息窗口  
    function addInfoWindow(marker, poi) {
    		
