@@ -13,8 +13,8 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import edu.nju.dao.impl.UserDaoImpl;
 import edu.nju.entities.Device;
@@ -52,18 +52,23 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/set")
-	public String ZMXY(HttpSession session,Model model) {
+	public ModelAndView ZMXY(HttpSession session) {
+		ModelAndView modelAndView = new ModelAndView();
 		UserInfo user = userService.getUser((String)session.getAttribute("openid"));
 		if(user == null){
-			model.addAttribute("state", "no");
-			return "jsp/MyIndex";
+			modelAndView.addObject("state", "no");
+			modelAndView.setViewName("redirect:/jsp/MyIndex.jsp");
+			return modelAndView;
 		}else if(user.getZmxyid() == null){
-			return "jsp/index";
+			modelAndView.setViewName("redirect:/jsp/index.jsp");
+			return modelAndView;
 		}else if(!service.checkReserve((String)session.getAttribute("openid"))){
-			return "jsp/Warn";
+			modelAndView.setViewName("redirect:/jsp/Warn.jsp");
+			return modelAndView;
 		}
 		else{
-			return "jsp/DateChoose";
+			modelAndView.setViewName("redirect:/jsp/DateChoose.jsp");
+			return modelAndView;
 		}
 	}
 	
