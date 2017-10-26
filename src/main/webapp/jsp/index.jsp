@@ -70,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
      <div class="weui-btn-area">
-      <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick=verity>授权芝麻信用</button>
+      <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary">授权芝麻信用</button>
    	 </div>
    </form>
         <div class="weui-footer">
