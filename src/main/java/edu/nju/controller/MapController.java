@@ -28,7 +28,7 @@ public class MapController {
 	
 	@RequestMapping(value = "/map")
 	public String getMap1(String openid,HttpSession session) {
-		session.setAttribute("ip", "218.94.159.98");
+		session.setAttribute("ipAddress", "218.94.159.98");
 		return "jsp/BaiduMap";
 	}
 	

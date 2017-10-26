@@ -78,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          });
          
 	$("document").ready(function(){
-		var ip="<%=session.getAttribute("ip")%>";
+		var ip="<%=session.getAttribute("ipAddress")%>";
 		var url = "https://api.map.baidu.com/location/ip?ip="+ip+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";
 		$.get(url,function(data){
 			myLocation = data.content.point;
