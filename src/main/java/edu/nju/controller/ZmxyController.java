@@ -53,8 +53,8 @@ public class ZmxyController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView ask(@RequestParam("name") String name,@RequestParam("phone") String phone, HttpSession session)
 	{
-		session.setAttribute("name", name);
-		session.setAttribute("phone", phone);
+//		session.setAttribute("name", name);
+//		session.setAttribute("phone", phone);
 		return new ModelAndView(new RedirectView(zmxyService.askRequest(name,phone)));
 	}
 }
