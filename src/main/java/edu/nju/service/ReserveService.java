@@ -45,8 +45,8 @@ public class ReserveService {
 	 * @return
 	 * 用户下订单过程
 	 */
-	public boolean makeOrder(String openid, String area,int type,Date startDate,Date endDate){
-		boolean b = dao.makeOrder(openid,area,type,startDate,endDate);
+	public boolean makeOrder(String openid, int type,Date startDate,Date endDate){
+		boolean b = dao.makeOrder(openid,type,startDate,endDate);
 		return b;
 	}
 
@@ -67,8 +67,8 @@ public class ReserveService {
 	 * @return
 	 * 用户预订时，获得可供其预订的设备
 	 */
-	public Device reserveDevice(String area,int type){
-		return dao.reserveDevice(area,type);
+	public Device reserveDevice(String openId,int type){
+		return dao.reserveDevice(openId,type);
 	};
 	
 	/**

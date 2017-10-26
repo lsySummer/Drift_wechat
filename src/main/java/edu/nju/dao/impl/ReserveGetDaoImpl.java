@@ -165,6 +165,14 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 				dateList.remove(sdf.format(Utility.getSpecifiedDayAfter(o.getStartDate(), 1)));
 			}
 		}
+		for(int i=0;i<dateList.size();i++){
+			String dateStr = dateList.get(i);
+			try{
+				Date date = sdf.parse(dateStr);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 		return dateList;
 	}
 

@@ -55,6 +55,18 @@ public class ReserveGetService {
 			return d;
 		}
 		
+		/**
+		 * @param did
+		 * @return
+		 * 根据甲醛仪id获得甲醛仪
+		 */
+		public Device getDeviceById(String did){
+			List<Device> dlist = dao.getDeviceById(did);
+			if(dlist.size()>0){
+				return dlist.get(0);
+			}
+			return null;
+		}
 		
 		/**
 		 * @param openid

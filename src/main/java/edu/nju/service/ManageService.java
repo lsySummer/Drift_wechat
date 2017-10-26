@@ -10,6 +10,8 @@ import edu.nju.dao.ManageDao;
 import edu.nju.entities.Device;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
+import edu.nju.model.DeviceVO;
+import edu.nju.model.OrderVO;
 
 @Transactional
 @Service
@@ -17,10 +19,12 @@ public class ManageService {
 	
 	@Autowired
 	ManageDao manageDao;
+	@Autowired
+	ReserveGetService gservice;
 	
 	//获得所有设备状态信息
-	public List<Device> getDevices(){
-		List<Device> dlist = manageDao.getDevices();
+	public List<DeviceVO> getDevices(){
+		List<DeviceVO> dlist = manageDao.getDevices();
 		return dlist;
 	};
 
@@ -31,12 +35,16 @@ public class ManageService {
 	};
 	
 	//添加设备
-	public boolean addDevice(Device d){
-		return manageDao.addDevice(d);
+	public Device addDevice(Device d,String area,int type){
+		Device device = gservice.getDeviceById(d.getId());
+//		Device device = null;
+		device = manageDao.addDevice(d);
+		manageDao.setArea(device.getId(), area, type);
+		return device;
 	}
 	
-	public List<Order> getOrders(){
-		List<Order> olist = manageDao.getOrders();
+	public List<OrderVO> getOrders(){
+		List<OrderVO> olist = manageDao.getOrders();
 		return olist;
 	}
 	

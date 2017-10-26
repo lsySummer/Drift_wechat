@@ -8,7 +8,7 @@ public interface ReserveDao {
 
 	boolean saveDelInfo(String openId,String did);
 
-	boolean makeOrder(String openid,  String area,int type,Date date,Date endDate);
+	boolean makeOrder(String openid,int type,Date date,Date endDate);
 
 	boolean confirm(String openid);
 

@@ -3,18 +3,19 @@ package edu.nju.dao;
 import java.util.List;
 
 import edu.nju.entities.Device;
-import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
+import edu.nju.model.DeviceVO;
+import edu.nju.model.OrderVO;
 
 public interface ManageDao {
 
-	List<Device> getDevices();
+	List<DeviceVO> getDevices();
 
 	List<UserInfo> getUsers();
 
-	boolean addDevice(Device d);
+	Device addDevice(Device d);
 
-	List<Order> getOrders();
+	List<OrderVO> getOrders();
 
 	boolean confirm(String deviceId);
 
