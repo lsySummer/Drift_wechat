@@ -9,4 +9,8 @@ public class Constants {
 	/*是否开启查询缓存*/
 	public static boolean SELECT_CACHE = true;
 	
+	public static int USER_DATE = 2;
+	
+	private static int DEVICE_NUM=50;
+	
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.nju.dao.ManageDao;
 import edu.nju.entities.Device;
+import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 
 @Transactional
@@ -28,5 +29,23 @@ public class ManageService {
 		List<UserInfo> ulist = manageDao.getUsers();
 		return ulist;
 	};
+	
+	//添加设备
+	public boolean addDevice(Device d){
+		return manageDao.addDevice(d);
+	}
+	
+	public List<Order> getOrders(){
+		List<Order> olist = manageDao.getOrders();
+		return olist;
+	}
+	
+	//确认收货
+	public boolean confirm(String deviceId){
+		return manageDao.confirm(deviceId);
+	}
 
+	public boolean setArea(String deviceId,String area,int type){
+		return manageDao.setArea(deviceId,area,type);
+	}
 }

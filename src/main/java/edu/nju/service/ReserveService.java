@@ -1,80 +1,25 @@
 package edu.nju.service;
 
+import java.util.Date;
 import java.util.List;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.nju.dao.ReserveDao;
+import edu.nju.dao.ReserveGetDao;
 import edu.nju.entities.Device;
-import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.OrderVO;
-import edu.nju.model.RESCODE;
-import edu.nju.utils.Constants;
 
 @Transactional
 @Service
 public class ReserveService {
 	@Autowired
 	ReserveDao dao;
-	
-	//获得某个用户的预约信息
-	public String getOrder(String openId){
-		JSONObject resultObj=new JSONObject();
-		List<OrderVO> list = dao.getOrder(openId);
-		if (list!=null&&list.size()!=0) {
-			resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.SUCCESS);
-			resultObj.put(Constants.RESPONSE_MSG_KEY, RESCODE.SUCCESS.getMsg());
-			resultObj.put(Constants.RESPONSE_DATA_KEY, list);
-			return resultObj.toString();
-		}
-		resultObj.put(Constants.RESPONSE_CODE_KEY, RESCODE.NOT_FOUND);
-		resultObj.put(Constants.RESPONSE_MSG_KEY,
-				RESCODE.NOT_FOUND.getMsg());
-		return resultObj.toString();
-	};
-	//获得上家信息
-	public UserInfo getBefore(String openId){
-		UserInfo u = dao.getBefore(openId);
-		return u;
-	};
-	//获得下家信息
-	public UserInfo getAfter(String openId){
-		UserInfo u = dao.getAfter(openId);
-		return u;
-	};
-	
-	/**
-	 * 根据用户id获得其设备信息
-	 * @return
-	 */
-	public Device getDeviceByOpenId(String openId){
-		Device d = dao.getDeviceByOpenId(openId);
-		return d;
-	}
-	/**
-	 * @param openid
-	 * @return
-	 * 根据用户id获得其接收的快递单号信息
-	 */
-	public String getRecDid(String openid){
-		String did = dao.getRecDid(openid);
-		return did;
-	}
-	
-	
-	/**
-	 * @param openid
-	 * @return
-	 * 根据用户id获得其寄出的快递单号信息
-	 */
-	public String getSendDid(String openid){
-		String did = dao.getSendDid(openid);
-		return did;
-	}
+	@Autowired
+	ReserveGetDao gdao;
 	
 	/**
 	 * @param did 快递单号
@@ -110,22 +55,22 @@ public class ReserveService {
 	 * @return 设备id
 	 * 后台分配设备给用户
 	 */
-	public Device reserve(String openId){
-		Device d = dao.reserve(openId);
-		return d;
-	};
+//	public Device reserve(String openId){
+//		Device d = dao.reserve(openId);
+//		return d;
+//	};
 	//后台优先分配设备给付费用户
-	public Device priorReserve(String openId){
-		Device d = dao.priorReserve(openId);
-		return d;
-	};
+//	public Device priorReserve(String openId){
+//		Device d = dao.priorReserve(openId);
+//		return d;
+//	};
 	
 	/**
 	 * @return
-	 * 管理员为用户下订单过程
+	 * 用户下订单过程
 	 */
-	public boolean makeOrder(String openid,int ifPay,int num){
-		boolean b = dao.makeOrder(openid,ifPay,num);
+	public boolean makeOrder(String openid, String area,int type,Date startDate,Date endDate){
+		boolean b = dao.makeOrder(openid,area,type,startDate,endDate);
 		return b;
 	}
 
@@ -139,18 +84,29 @@ public class ReserveService {
 		return b;
 	}
 	
+	
+	/**
+	 * @param openId
+	 * @param area
+	 * @return
+	 * 用户预订时，获得可供其预订的设备
+	 */
+	public Device reserveDevice(String area,int type){
+		return dao.reserveDevice(area,type);
+	};
+	
 	/**
 	 * @param openid
 	 * @return
 	 * 检验是否能够预约。判断方法是下家order的状态
 	 */
 	public boolean checkReserve(String openid){
-		Device d = dao.getDeviceByOpenId(openid);
+		Device d = gdao.getDeviceByOpenId(openid);
 		if(d==null){//没有预约过
 			return true;
 		}else{
-			UserInfo after = dao.getAfter(openid);
-			List<OrderVO> volist = dao.getOrder(after.getOpenid());
+			UserInfo after = gdao.getAfter(openid);
+			List<OrderVO> volist = gdao.getOrder(after.getOpenid());
 			if(volist.size()>0){//有下家
 				OrderVO vo = volist.get(0);
 				String state = vo.getState();
@@ -167,19 +123,6 @@ public class ReserveService {
 				}
 			}
 		}
-	}
-	/**
-	 * @param openId
-	 * @return
-	 * 根据openid获得其订单状态
-	 */
-	public String getOrderState(String openId){
-		List<Order> olist = dao.getOrderById(openId);
-		if(olist.size()>0){
-			Order o = olist.get(olist.size()-1);
-			return o.getState();
-		}
-		return "暂无";
 	}
 
 }

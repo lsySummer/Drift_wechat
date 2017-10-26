@@ -1,9 +1,14 @@
 package edu.nju.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.nju.service.ManageService;
+import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.service.UserService;
 
@@ -14,6 +19,10 @@ public class TestController {
 	ReserveService service;
 	@Autowired
 	UserService userService;
+	@Autowired
+	ManageService mservice;
+	@Autowired
+	ReserveGetService gservice;
 	
 	@RequestMapping(value = "/insert")
 	public String register() {
@@ -28,7 +37,12 @@ public class TestController {
 //		System.out.println(service.getBefore("hahaha").toString());
 //		System.out.println(service.getOrderState("oRTgpweSZbOxfrg9H57JwuPwMJLo"));
 //		service.confirm("oRTgpweSZbOxfrg9H57JwuPwMJLo");
-		System.out.println(service.checkReserve("oRTgpweSZbOxfrg9H57JwuPwMJLo"));
+//		System.out.println(service.checkReserve("oRTgpweSZbOxfrg9H57JwuPwMJLo"));
+//		System.out.println(mservice.getUsers().size());
+		List<String> list = gservice.getByDeviceId(1+"");
+		for(int i = 0 ;i<list.size();i++){
+			System.out.println(list.get(i));
+		}
 		return "success";
 	}
 }

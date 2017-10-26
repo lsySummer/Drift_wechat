@@ -1,37 +1,17 @@
 package edu.nju.dao;
 
-import java.util.List;
+import java.util.Date;
 
 import edu.nju.entities.Device;
-import edu.nju.entities.Order;
-import edu.nju.entities.UserInfo;
-import edu.nju.model.OrderVO;
 
 public interface ReserveDao {
 
-	List<OrderVO> getOrder(String openId);
-
-	UserInfo getBefore(String openId);
-
-	UserInfo getAfter(String openId);
-
 	boolean saveDelInfo(String openId,String did);
 
-//	String getDelNum(String openId);
-
-	Device reserve(String openId);
-
-	Device priorReserve(String openId);
-
-	boolean makeOrder(String openid, int ifPay, int num);
-
-	Device getDeviceByOpenId(String openId);
-
-	String getSendDid(String openid);
-
-	String getRecDid(String openid);
+	boolean makeOrder(String openid,  String area,int type,Date date,Date endDate);
 
 	boolean confirm(String openid);
 
-	List<Order> getOrderById(String openId);
+	public Device reserveDevice(String area,int type);
+
 }
