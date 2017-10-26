@@ -53,8 +53,10 @@ public class TestController {
 //		d.setNumber("甲醛仪11号");
 //		d.setQueueNum(0);
 //		mservice.addDevice(d, "上海市", 0);
-		Device device = gservice.getDeviceById("40288d815f586674015f586704bc0000");
-		mservice.addDevice(device, "北京市", 0);
+//		Device device = gservice.getDeviceById("40288d815f586674015f586704bc0000");
+//		mservice.addDevice(device, "北京市", 0);
+//		System.out.println(mservice.getDevices().get(0).toString());
+		System.out.println(mservice.getOrders().get(0).toString());
 		return "success";
 	}
 }

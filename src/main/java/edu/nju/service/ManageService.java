@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.nju.dao.ManageDao;
 import edu.nju.entities.Device;
-import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
@@ -37,10 +36,14 @@ public class ManageService {
 	//添加设备
 	public Device addDevice(Device d,String area,int type){
 		Device device = gservice.getDeviceById(d.getId());
-//		Device device = null;
-		device = manageDao.addDevice(d);
-		manageDao.setArea(device.getId(), area, type);
-		return device;
+		if(device==null){
+			device = manageDao.addDevice(d);
+			manageDao.setArea(device.getId(), area, type);
+			return device;
+		}else{
+			manageDao.updateArea(d.getId(),area,type);
+			return d;
+		}
 	}
 	
 	public List<OrderVO> getOrders(){

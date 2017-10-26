@@ -68,7 +68,7 @@ public class ManageDaoImpl implements ManageDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderVO> getOrders() {
-		String hql = "from Orders";
+		String hql = "from Order";
 		List<Order> list = baseDao.getNewSession().createQuery(hql).getResultList();
 		List<OrderVO> volist = new ArrayList<OrderVO>();
 		for(int i=0;i<list.size();i++){
@@ -109,6 +109,19 @@ public class ManageDaoImpl implements ManageDao{
 			return true;
 		}catch(Exception e){
 			return false;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void updateArea(String id, String area, int type) {
+		String hql = "from DeviceArea where deviceId=:did";
+		List<DeviceArea> list = baseDao.getNewSession().createQuery(hql).setParameter("did", id).getResultList();
+		if(list.size()>0){
+			DeviceArea d = list.get(0);
+			d.setArea(area);
+			d.setType(type);
+			baseDao.update(d);
 		}
 	}
 

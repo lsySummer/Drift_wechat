@@ -54,6 +54,11 @@ public class DeviceVO {
 		this.queueNum = queueNum;
 		this.area = area;
 		this.type = type;
+	}
+	@Override
+	public String toString() {
+		return "DeviceVO [id=" + id + ", number=" + number + ", loc=" + loc + ", queueNum=" + queueNum + ", area="
+				+ area + ", type=" + type + "]";
 	}	
 	
 	

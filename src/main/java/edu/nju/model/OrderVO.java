@@ -72,5 +72,11 @@ public class OrderVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	@Override
+	public String toString() {
+		return "OrderVO [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", deviceNumber="
+				+ deviceNumber + ", name=" + name + ", phone=" + phone + ", address=" + address + ", state=" + state
+				+ "]";
+	}
 	
 }
