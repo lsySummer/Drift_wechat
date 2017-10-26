@@ -7,7 +7,8 @@ $.getJSON('/Drift_wechat/api/user/getDetail',function(json){
 	var flag = json.flag;
 	
 	if(getParmFormUrl('state') != null){
-		$.toptip('请先填写个人信息', 'error');
+		$.toast("请先填写个人信息", "cancel");
+		document.getElementById("state").value = "false";
 	}
 	
 	if(flag){

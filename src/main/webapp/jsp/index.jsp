@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </a>
    </div>
    <form method="get" id="basic" name="basic" action="/Drift_wechat/api/zmxy/register">
-     <div class="weui-cells__title">手机号</div>
+     
         <div class="weui-cells">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
         </div>
-       <div class="weui-cells__title">姓名</div>
+       
         <div class="weui-cells">
             <div class="weui-cell">
                 <div class="weui-cell__bd">

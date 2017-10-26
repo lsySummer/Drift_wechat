@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
 	function confirm(){
 		$.get('/Drift_wechat/api/delivery/confirm');
-		$.toptip('确认收货成功', 'success');
+		$.toast("收货成功");
 	}
 	</script>
   <head>
@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		delivery = document.getElementById("deliveryNum2");
   	}
   	if(delivery == '暂无物流信息'){
-  		$.toptip('暂无物流信息，无法查询！', 'error');
+  		$.toast("无法查询", "forbidden");
   	}else{
   		$.ajax({
 		  url:"http://jisukdcx.market.alicloudapi.com/express/query?number="+ delivery +"&type=auto",

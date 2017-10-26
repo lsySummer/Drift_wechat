@@ -59,7 +59,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    <div id="nickName" class="weui-cell__ft">暂无</div>
 		  </div>
 		</div>
-		<form method="get" id="personDetail" name="personDetail" action="/Drift_wechat/api/user/save">		
+		<form method="get" id="personDetail" name="personDetail" action="/Drift_wechat/api/user/save">
+		<div id="state" name="state" value="true" style="display:none;"></div>		
     		<div class="page__bd">
 		        <div class="weui-cells weui-cells_form">		            
 		            <div class="weui-cell">
@@ -107,9 +108,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#submit").click(function(){
 			if($("#deliveryPerson").val().trim().length && $("phone").val().trim().length && $("address_detail").val().trim().length && $("address").val().trim().length){
 					$('#personDetail').submit();
-					$.toptip('提交成功', 'success');
+					$.toast("提交成功");
 			}else{
-				$.toptip('操作失败，请确保所有内容均已填写', 'error');
+				$.toast("请确保所有内容均已填写", "cancel");
 				return false;
 			}
 		})
