@@ -74,6 +74,7 @@ public class OrderController {
 	
 	@RequestMapping(value = "/getDate")
 	public void getDate(HttpSession session, HttpServletResponse response){
+		log.info(session.getAttribute("openid"));
 		Device device = service.reserveDevice((String)session.getAttribute("openid"), 0);
 		JSONObject result=new JSONObject();
 		try {

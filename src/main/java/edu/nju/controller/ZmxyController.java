@@ -31,18 +31,21 @@ public class ZmxyController {
 	@RequestMapping(value = "/cb", method = RequestMethod.GET)
 	public ModelAndView callback(@RequestParam("params") String params,@RequestParam("sign") String sign, HttpSession session)
 	{
-		log.info("params:" + params);
-		log.info("sign:" + params);
 		String state = zmxyService.cb(params,sign);
 		ModelAndView modelAndView = new ModelAndView();
 		log.info("state:" + state);
+		log.info("session"+session.getAttribute("openid"));
 		if(state.equals("failed")){
+			log.info("ZMXYfailed");
+			log.info("session"+session.getAttribute("openid"));
 			modelAndView.addObject("state", state);
 			modelAndView.setViewName("redirect:/jsp/Warn.jsp");
 			return modelAndView;
 		}else{
 			session.setAttribute("zmxyid", state);
 //			modelAndView.addObject("state", state);
+			log.info("ZMXYElse");
+			log.info("session"+session.getAttribute("openid"));
 			userService.setZMXY((String)session.getAttribute("openid"), state);
 			modelAndView.setViewName("redirect:/jsp/DateChoose.jsp");
 			return modelAndView;

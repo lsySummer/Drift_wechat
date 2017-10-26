@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import edu.nju.controller.UserController;
 import edu.nju.dao.BaseDao;
 import edu.nju.dao.ReserveDao;
 import edu.nju.dao.ReserveGetDao;
@@ -28,7 +30,7 @@ public class ReserveDaoImpl implements ReserveDao{
 	 private UserDao userDao;
 	 @Autowired
 	 private ReserveGetDao rgetDao;
-	 
+	 private Logger log = Logger.getLogger(UserController.class);
 
 
 	@Override
@@ -59,12 +61,10 @@ public class ReserveDaoImpl implements ReserveDao{
 	
 
 	@SuppressWarnings("unchecked")
-	public Device reserveDevice(String openid,int type) {
-		UserInfo userInfo = userDao.getUser(openid);
-		String[] arr =userInfo.getAddress().split(" ");
+	public Device reserveDevice(String area,int type) {
 		String hql = "from DeviceArea where area=:area and type=:type";
 		List<DeviceArea> list = baseDao.getNewSession().createQuery(hql)
-				.setParameter("area", arr[0]).setParameter("type", type).getResultList();
+				.setParameter("area", area).setParameter("type", type).getResultList();
 		List<Device> dlist = new ArrayList<Device>();
 		for(int i=0;i<list.size();i++){
 			DeviceArea da = list.get(i);
