@@ -1,6 +1,5 @@
 package edu.nju.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,23 +25,30 @@ public class TestController {
 	
 	@RequestMapping(value = "/insert")
 	public String register() {
-//		service.confirm("hahaha");
-//		System.out.println(service.getBefore("hahaha").toString());
-//		System.out.println(userService.getUser("thisiscomponyinfomation").toString());
-//		userService.setZMXY("ZMXYopenID", "UPDATEzmxyid");
-//		service.saveDelInfo("hahaha","7654");
-//		service.makeOrder("qwertyu", 0, 2);
-//		System.out.println(service.checkReserve("12345"));
-//		System.out.println(service.checkReserve("hahaha"));
-//		System.out.println(service.getBefore("hahaha").toString());
-//		System.out.println(service.getOrderState("oRTgpweSZbOxfrg9H57JwuPwMJLo"));
-//		service.confirm("oRTgpweSZbOxfrg9H57JwuPwMJLo");
-//		System.out.println(service.checkReserve("oRTgpweSZbOxfrg9H57JwuPwMJLo"));
-//		System.out.println(mservice.getUsers().size());
-		List<String> list = gservice.getByDeviceId(1+"");
-		for(int i = 0 ;i<list.size();i++){
-			System.out.println(list.get(i));
-		}
+//		for(int i=0;i<10;i++){
+//			Device d = new Device();
+//			d.setNumber("甲醛仪"+i+"号");
+//			d.setLoc("company");
+//			d.setQueueNum(0);
+//			mservice.addDevice(d);
+//		}
+//		String[] areas={"江苏","浙江","广东","北京","上海","黑龙江","山东","湖南","湖北","福建"};
+//		List<Device> dlist = mservice.getDevices();
+//		for(int i=0;i<dlist.size();i++){
+//		mservice.setArea(dlist.get(i).getId(), areas[i], 0);
+//		}
+//		System.out.println(service.reserveDevice("江苏", 0).getId());
+//		System.out.println(service.reserveDevice("江苏", 1).getId());
+//		service.makeOrder("34567", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 6), Utility.getSpecifiedDayAfter(new Date(), 7));
+//		service.makeOrder("45678", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 8), Utility.getSpecifiedDayAfter(new Date(), 9));
+//		System.out.println(gservice.getBefore("23456").getName());
+//		System.out.println(gservice.getAfter("12345").getName());
+//		System.out.println(gservice.getAfter("23456").getName());
+//		System.out.println(gservice.getBefore("12345").getName());
+//		List<String> str = gservice.getByDeviceId("40288d815f5787ba015f5787ee760002");
+//		for(int i = 0;i<str.size();i++){
+//			System.out.println(str.get(i));
+//		}
 		return "success";
 	}
 }

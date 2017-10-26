@@ -1,5 +1,6 @@
 package edu.nju.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import edu.nju.dao.ReserveGetDao;
 import edu.nju.dao.UserDao;
 import edu.nju.entities.DeliveryInfo;
 import edu.nju.entities.Device;
+import edu.nju.entities.DeviceArea;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.utils.Constants;
@@ -47,8 +49,6 @@ public class ReserveDaoImpl implements ReserveDao{
 				Order afterOrder = afterList.get(afterList.size()-1);
 				afterOrder.setState("上家已发货");
 				baseDao.update(afterOrder);
-			}else{
-				d.setLoc("Company");
 			}
 			baseDao.update(o);
 			baseDao.save(info);
@@ -60,12 +60,20 @@ public class ReserveDaoImpl implements ReserveDao{
 
 	@SuppressWarnings("unchecked")
 	public Device reserveDevice(String area,int type) {
-		//TODO
 		String hql = "from DeviceArea where area=:area and type=:type";
-		List<Device> list = baseDao.getNewSession().createQuery(hql)
+		List<DeviceArea> list = baseDao.getNewSession().createQuery(hql)
 				.setParameter("area", area).setParameter("type", type).getResultList();
-		Utility.sortInt(list);//按照排队人数对设备进行排序
-		Device device = list.get(0);//排队人数最少的设备被预定
+		List<Device> dlist = new ArrayList<Device>();
+		for(int i=0;i<list.size();i++){
+			DeviceArea da = list.get(i);
+			String did = da.getDeviceId();
+			List<Device> tempList = rgetDao.getDeviceById(did);
+			if(tempList.size()>0){
+				dlist.add(tempList.get(0));
+			}
+		}
+		Utility.sortInt(dlist);//按照排队人数对设备进行排序
+		Device device = dlist.get(0);//排队人数最少的设备被预定
 		device.setQueueNum(device.getQueueNum()+1);//排队人数+1
 		baseDao.update(device);
 		return device;
@@ -111,8 +119,6 @@ public class ReserveDaoImpl implements ReserveDao{
 				Order beforeOrder = beforeList.get(beforeList.size()-1);
 				beforeOrder.setState("下家已收货");
 				baseDao.update(beforeOrder);
-			}else{
-				//TODO 后台管理者收到消息
 			}
 			baseDao.update(o);
 			

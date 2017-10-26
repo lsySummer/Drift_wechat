@@ -1,6 +1,5 @@
 package edu.nju.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import edu.nju.entities.Device;
@@ -25,5 +24,7 @@ public interface ReserveGetDao {
 	List<Order> getOrderById(String openId);
 
 	List<String> getByDeviceId(String deviceId);
+	
+	List<Device> getDeviceById(String deviceId);
 
 }

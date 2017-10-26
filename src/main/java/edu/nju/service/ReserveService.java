@@ -32,16 +32,6 @@ public class ReserveService {
 		return b;
 	}
 	
-	/**
-	 * @param deviceId
-	 * @return
-	 * 根据甲醛仪id获得其快递单号
-	 */
-//	public String getDelNum(String deviceId){
-//		String num = dao.getDelNum(deviceId);
-//		return num;
-//	}
-	
 	//用户购买耗材
 	public boolean paySupply(String openId,int num,int ifPay){
 		return true;
@@ -50,20 +40,6 @@ public class ReserveService {
 	public boolean payDonate(String openId){
 		return true;
 	};
-	/**
-	 * @param openId 
-	 * @return 设备id
-	 * 后台分配设备给用户
-	 */
-//	public Device reserve(String openId){
-//		Device d = dao.reserve(openId);
-//		return d;
-//	};
-	//后台优先分配设备给付费用户
-//	public Device priorReserve(String openId){
-//		Device d = dao.priorReserve(openId);
-//		return d;
-//	};
 	
 	/**
 	 * @return
@@ -116,7 +92,7 @@ public class ReserveService {
 					return false;
 				}
 			}else{//退回给公司
-				if(d.getLoc().equals("Company")){
+				if(d.getLoc().equals("company")){
 					return true;
 				}else{
 					return false;

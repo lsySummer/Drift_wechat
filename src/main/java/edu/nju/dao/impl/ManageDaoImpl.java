@@ -40,6 +40,7 @@ public class ManageDaoImpl implements ManageDao{
 			baseDao.save(d);
 			return true;
 		}catch(Exception e){
+			e.printStackTrace();
 			return false;
 		}
 	}

@@ -50,8 +50,9 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public UserInfo getBefore(String openId) {
-		String hql = "from Order";
-		List<Order> list =baseDao.getNewSession().createQuery(hql).getResultList();
+		Device device = getDeviceByOpenId(openId);
+		String hql = "from Order where deviceId = :did";
+		List<Order> list =baseDao.getNewSession().createQuery(hql).setParameter("did", device.getId()).getResultList();
 		if(list.size()>0){
 			for(int i=0;i<list.size();i++){
 				Order o = list.get(i);
@@ -73,8 +74,9 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public UserInfo getAfter(String openId) {
-		String hql = "from Order";
-		List<Order> list =baseDao.getNewSession().createQuery(hql).getResultList();
+		Device device = getDeviceByOpenId(openId);
+		String hql = "from Order where deviceId = :did";
+		List<Order> list =baseDao.getNewSession().createQuery(hql).setParameter("did", device.getId()).getResultList();
 		if(list.size()>0){
 			for(int i=0;i<list.size();i++){
 				Order o = list.get(i);
@@ -110,6 +112,7 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 	}
 	
 	@SuppressWarnings("unchecked")
+	@Override
 	public List<Device> getDeviceById(String deviceId){
 		String hql = "from Device where id =:deviceId";
 		List<Device> list = baseDao.getNewSession().createQuery(hql).setParameter("deviceId", deviceId).getResultList();
@@ -143,7 +146,7 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<String> getByDeviceId(String deviceId) {
-		String hql = "from Order where deviceId = :deviceId and startDate >:todayDate";
+		String hql = "from Order where deviceId = :deviceId and endDate >:todayDate";
 		Date todayDate = new Date();
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("deviceId", deviceId).
 				setParameter("todayDate",todayDate).getResultList();

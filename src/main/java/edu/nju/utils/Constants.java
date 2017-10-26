@@ -11,6 +11,6 @@ public class Constants {
 	
 	public static int USER_DATE = 2;
 	
-	private static int DEVICE_NUM=50;
+//	private static int DEVICE_NUM=50;
 	
 }

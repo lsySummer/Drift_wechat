@@ -18,7 +18,7 @@ public class Device {
 	private int queueNum;//当前排队人数
 	
 	@Id
-	@Column(length = 16)
+	@Column(length = 32)
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	public String getId() {
