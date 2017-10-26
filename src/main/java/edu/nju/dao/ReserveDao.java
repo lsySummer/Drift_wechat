@@ -12,6 +12,6 @@ public interface ReserveDao {
 
 	boolean confirm(String openid);
 
-	public Device reserveDevice(String area,int type);
+	public Device reserveDevice(String openid,int type);
 
 }
