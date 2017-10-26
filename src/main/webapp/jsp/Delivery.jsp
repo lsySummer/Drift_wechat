@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="/Drift_wechat/js/myJS/Delivery.js"></script>
 <html>
 	<script>
 	function confirm(){
@@ -49,6 +50,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </a>
 	  </div>
 	</div>
+	
+	<div id="about" class="weui-popup__container">
+	  <div class="weui-popup__overlay"></div>
+	  <div class="weui-popup__modal">
+	  <h1> 快递查询 </h1>
+	  </br>
+	    <div id="lists">暂无数据</div>
+	    <a href="javascript:test3();" class="weui-btn weui-btn_primary">关闭</a>
+	  </div>
+	</div>
+	
 	<div class="weui-tab__bd">
     <div class="weui-tab__bd-item weui-tab__bd-item--active" id="container">
       </br>
@@ -68,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		  <div class="weui-form-preview__ft">
-		  	<a class="weui-form-preview__btn weui-form-preview__btn_default" href="#">快递查询</a>
+		  	<a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(1);">快递查询</a>
     		<button id="confirm" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascript:confirm();">确认收货</button>
   		  </div>
 		</div>
@@ -89,14 +101,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		  <div class="weui-form-preview__ft">
-		  	<a class="weui-form-preview__btn weui-form-preview__btn_default" href="#">快递查询</a>
+		  	<a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(2);">快递查询</a>
     		<button id="detail" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp'">填写快递信息</button>
   		  </div>
 		</div>
-		</br>
 	</div>
 	</div>
 	</div>
   </body>
-  <script type="text/javascript" src="/Drift_wechat/js/myJS/Delivery.js"></script>
+  <script type="text/javascript">
+  function query(x){
+	$.ajax({
+		  url:"http://jisukdcx.market.alicloudapi.com/express/query?number=3341827469889&type=auto",
+		  type:"get",
+		  dataType:"json",
+		  data:"hello world",
+		  headers: {'Content-Type': 'application/json',
+			  		'Authorization':'APPCODE f4726618e0cd48249485fdc44286e869'	
+		  },
+		  success: function (res) {
+		    var temp = res.result;
+		    var list = temp.list;
+		    var result = "";
+		    list.forEach(function(item){
+		    	result += '<p>' + item.time +'</p>';
+		    	result += '<p>' + item.status +'</p>';
+		    });
+		    document.getElementById('lists').innerHTML = result;
+		  }
+		});
+	$('#about').popup();
+	}
+	function close(){$.closePopup();}
+  </script>
 </html>
