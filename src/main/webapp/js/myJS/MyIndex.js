@@ -5,7 +5,7 @@ $.getJSON('/Drift_wechat/api/user/getDetail',function(json){
 	var nickName = json.nickName;
 	var image = json.image;
 	var flag = json.flag;
-	
+	alert(getParmFormUrl('state'));
 	if(getParmFormUrl('state') != null){
 		$.toast("请先填写个人信息", "cancel");
 		document.getElementById("state").value = "false";
