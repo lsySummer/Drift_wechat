@@ -61,10 +61,12 @@ public class ReserveDaoImpl implements ReserveDao{
 	
 
 	@SuppressWarnings("unchecked")
-	public Device reserveDevice(String area,int type) {
+	public Device reserveDevice(String openid,int type) {
+		UserInfo userInfo = userDao.getUser(openid);
+		String[] arr =userInfo.getAddress().split(" ");
 		String hql = "from DeviceArea where area=:area and type=:type";
 		List<DeviceArea> list = baseDao.getNewSession().createQuery(hql)
-				.setParameter("area", area).setParameter("type", type).getResultList();
+				.setParameter("area", arr[0]).setParameter("type", type).getResultList();
 		List<Device> dlist = new ArrayList<Device>();
 		for(int i=0;i<list.size();i++){
 			DeviceArea da = list.get(i);
@@ -84,9 +86,7 @@ public class ReserveDaoImpl implements ReserveDao{
 	@Override
 	public boolean makeOrder(String openid,int type,Date startDate,Date endDate) {
 		UserInfo user = userDao.getUser(openid);
-		String add = user.getAddress();
-		String[] arr = add.split(" ");
-		Device device = reserveDevice(arr[0],type);
+		Device device = reserveDevice(openid,type);
 		endDate = Utility.getSpecifiedDayAfter(startDate,Constants.USER_DATE-1);
 		device.setLoc(user.getAddress());
 		baseDao.update(device);
