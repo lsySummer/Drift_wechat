@@ -59,10 +59,12 @@ public class ReserveDaoImpl implements ReserveDao{
 	
 
 	@SuppressWarnings("unchecked")
-	public Device reserveDevice(String area,int type) {
+	public Device reserveDevice(String openid,int type) {
+		UserInfo userInfo = userDao.getUser(openid);
+		String[] arr =userInfo.getAddress().split(" ");
 		String hql = "from DeviceArea where area=:area and type=:type";
 		List<DeviceArea> list = baseDao.getNewSession().createQuery(hql)
-				.setParameter("area", area).setParameter("type", type).getResultList();
+				.setParameter("area", arr[0]).setParameter("type", type).getResultList();
 		List<Device> dlist = new ArrayList<Device>();
 		for(int i=0;i<list.size();i++){
 			DeviceArea da = list.get(i);
