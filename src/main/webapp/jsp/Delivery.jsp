@@ -60,7 +60,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <a href="javascript:close();" class="weui-btn weui-btn_primary">关闭</a>
 	  </div>
 	</div>
-	
+	<h1>仪器传递</h1>
+	</br>
 	<div class="weui-tab__bd">
     <div class="weui-tab__bd-item weui-tab__bd-item--active" id="container">
       </br>
