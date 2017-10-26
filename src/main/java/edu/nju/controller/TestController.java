@@ -1,10 +1,11 @@
 package edu.nju.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edu.nju.entities.Device;
 import edu.nju.service.ManageService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
@@ -44,10 +45,10 @@ public class TestController {
 //		System.out.println(gservice.getAfter("12345").getName());
 //		System.out.println(gservice.getAfter("23456").getName());
 //		System.out.println(gservice.getBefore("12345").getName());
-//		List<String> str = gservice.getByDeviceId("40288d815f5787ba015f5787ee760002");
-//		for(int i = 0;i<str.size();i++){
-//			System.out.println(str.get(i));
-//		}
+		List<String> str = gservice.getByDeviceId("40288d815f5787ba015f5787ebb90010");
+		for(int i = 0;i<str.size();i++){
+			System.out.println(str.get(i));
+		}
 //		Device d = new Device();
 //		d.setLoc("company");
 //		d.setNumber("甲醛仪11号");
@@ -56,7 +57,7 @@ public class TestController {
 //		Device device = gservice.getDeviceById("40288d815f586674015f586704bc0000");
 //		mservice.addDevice(device, "北京市", 0);
 //		System.out.println(mservice.getDevices().get(0).toString());
-		System.out.println(mservice.getOrders().get(0).toString());
+//		System.out.println(mservice.getOrders().get(0).toString());
 		return "success";
 	}
 }
