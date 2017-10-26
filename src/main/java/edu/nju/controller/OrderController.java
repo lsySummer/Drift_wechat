@@ -2,15 +2,20 @@ package edu.nju.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.nju.entities.Device;
 import edu.nju.entities.UserInfo;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
@@ -58,10 +63,28 @@ public class OrderController {
 		}
 	}
 	
-	@RequestMapping(value = "/date")
-	public String confirm(String startDate, HttpSession session){
-//		service.makeOrder((String)session.getAttribute("openid"), 0, 0);
-		return "jsp/Result";
+	@RequestMapping(value = "/getDate")
+	public void getDate(HttpSession session, HttpServletResponse response){
+		Device device = service.reserveDevice((String)session.getAttribute("openid"), 0);
+		JSONObject result=new JSONObject();
+		try {
+			PrintWriter out = response.getWriter();
+			result.put("number", device.getNumber());
+			result.put("data",getservice.getByDeviceId(device.getId()));
+			out.print(result);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
+	@RequestMapping(value = "/date")
+	public String confirm(String startDate, HttpSession session) throws ParseException{
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		Date date = sdf.parse(startDate);
+		service.makeOrder((String)session.getAttribute("openid"), 0, date);
+		return "jsp/Result";
+	}
 }

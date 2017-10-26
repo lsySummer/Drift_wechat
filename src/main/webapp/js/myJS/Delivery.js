@@ -2,9 +2,10 @@
  * 
  */
 $.getJSON('/Drift_wechat/api/delivery/get',function(json){
-	if(json.before == null){
+	console.log(json);
+	if(json.before == 'null'){
 		document.getElementById("item1").style.display="none";
-		document.getElementById("container").innerHTML="暂无订单";
+		document.getElementById("container").innerHTML="<h1>暂无订单</h1></br><p>暂无订单</p>";
 	}else{
 		if(json.enable != "上家已发货"){
 //			$('#confirm').attr('disabled',"true");

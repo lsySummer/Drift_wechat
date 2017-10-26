@@ -40,7 +40,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <div class="weui-cell">
 		                <div class="weui-cell__hd"><label for="" class="weui-label">选择时间</label></div>
 		                <div class="weui-cell__bd">
-		                    <input id="startDate" name="startDate" class="weui-input" type="date" value="" required=""/>
+		                    <input id="startDate" name="startDate" class="weui-input" value="" required=""/>
+		                    <script type="text/javascript">
+		                    	$.getJSON('/Drift_wechat/api/order/getDate',function(json){
+		                    		document.getElementById("deviceNum").innerHTML = json.name;
+		                    		$("#startDate").picker({
+									  title: "请选择预约日期",
+									  cols: [
+									    {
+									      textAlign: 'center',
+									      values: json.date
+									    }
+									  ]
+									});
+		                    	})
+							</script>
 		                </div>
 		            </div>
 		        </div>
@@ -64,6 +78,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$.toptip('操作失败，请确保所有内容均已填写', 'error');
 				return false;
 			}
-		})
+		});
   </script>
 </html>

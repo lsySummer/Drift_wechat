@@ -111,8 +111,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </body>
   <script type="text/javascript">
   function query(x){
-	$.ajax({
-		  url:"http://jisukdcx.market.alicloudapi.com/express/query?number=3341827469889&type=auto",
+  	var delivery = '';
+  	if(x == 1){
+  		delivery = document.getElementById("deliveryNum1");
+  	}else{
+  		delivery = document.getElementById("deliveryNum2");
+  	}
+  	if(delivery == '暂无物流信息'){
+  		$.toptip('暂无物流信息，无法查询！', 'error');
+  	}else{
+  		$.ajax({
+		  url:"http://jisukdcx.market.alicloudapi.com/express/query?number="+ delivery +"&type=auto",
 		  type:"get",
 		  dataType:"json",
 		  data:"hello world",
@@ -120,17 +129,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  		'Authorization':'APPCODE f4726618e0cd48249485fdc44286e869'	
 		  },
 		  success: function (res) {
-		    var temp = res.result;
-		    var list = temp.list;
-		    var result = "";
-		    list.forEach(function(item){
-		    	result += '<p>' + item.time +'</p>';
-		    	result += '<p>' + item.status +'</p>';
-		    });
-		    document.getElementById('lists').innerHTML = result;
+		  	if(res.status == '0'){
+			  	var temp = res.result;
+			    var list = temp.list;
+			    var result = "";
+			    list.forEach(function(item){
+			    	result += '<p>' + item.time +'</p>';
+			    	result += '<p>' + item.status +'</p>';
+			    });
+			    document.getElementById('lists').innerHTML = result;
+		  	}else{
+		  		document.getElementById('lists').innerHTML = res.msg;
+		  	}
 		  }
 		});
-	$('#about').popup();
+		$('#about').popup();
+  	}
 	}
 	function close(){$.closePopup();}
   </script>

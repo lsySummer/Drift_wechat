@@ -28,15 +28,20 @@ public class DeliveryController {
 	
 	@RequestMapping(value = "/get")
 	public void getDelivery(HttpSession session, HttpServletResponse response){
-		session.setAttribute("openid", "hahaha");
+		session.setAttribute("openid", "12345");
 		JSONObject result=new JSONObject();
 		Device device = getservice.getDeviceByOpenId((String)session.getAttribute("openid"));
-		result.put("before", getservice.getBefore((String)session.getAttribute("openid")).getName());
-		result.put("after", getservice.getAfter((String)session.getAttribute("openid")).getName());
+		try{
+			result.put("before", getservice.getBefore((String)session.getAttribute("openid")).getName());
+			result.put("after", getservice.getAfter((String)session.getAttribute("openid")).getName());
+			result.put("deviceId", device.getNumber());
+		}catch (Exception e){
+			result.put("before", "null");
+		}
 		result.put("receive", getservice.getRecDid((String)session.getAttribute("openid")));
 		result.put("send", getservice.getSendDid((String)session.getAttribute("openid")));
 		result.put("enable", getservice.getOrderState((String)session.getAttribute("openid")));
-		result.put("deviceId", device.getId());
+	
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(result);
