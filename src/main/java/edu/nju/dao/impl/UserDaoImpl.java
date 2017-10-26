@@ -120,6 +120,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public boolean saveOrUpdate(UserInfo user) {
 		List<UserInfo> list = getUserById(user.getOpenid());
+		log.info("saveorupdate"+user.getOpenid());
 		if(list.size()==0){
 			baseDao.save(user);
 		}else{

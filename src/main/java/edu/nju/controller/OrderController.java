@@ -9,12 +9,14 @@ import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.nju.dao.impl.UserDaoImpl;
 import edu.nju.entities.Device;
 import edu.nju.entities.UserInfo;
 import edu.nju.service.ReserveGetService;
@@ -24,6 +26,8 @@ import edu.nju.service.UserService;
 @Controller
 @RequestMapping(value="/order")
 public class OrderController {
+	
+	private static final Logger log = Logger.getLogger(UserDaoImpl.class);
 	
 	@Autowired
 	ReserveGetService getservice;
@@ -84,6 +88,8 @@ public class OrderController {
 	public String confirm(String startDate, HttpSession session) throws ParseException{
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(startDate);
+		log.info("startDate"+startDate);
+		log.info("openIdfromsession"+session.getAttribute("openid"));
 		service.makeOrder((String)session.getAttribute("openid"), 0, date);
 		return "jsp/Result";
 	}
