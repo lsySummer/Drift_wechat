@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import edu.nju.controller.UserController;
 import edu.nju.dao.BaseDao;
 import edu.nju.dao.ReserveDao;
 import edu.nju.dao.ReserveGetDao;
@@ -30,7 +28,7 @@ public class ReserveDaoImpl implements ReserveDao{
 	 private UserDao userDao;
 	 @Autowired
 	 private ReserveGetDao rgetDao;
-	 private Logger log = Logger.getLogger(UserController.class);
+//	 private Logger log = Logger.getLogger(UserController.class);
 
 
 	@Override

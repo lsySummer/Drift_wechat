@@ -21,6 +21,6 @@ public interface ManageDao {
 
 	boolean setArea(String deviceId, String area,int type);
 
-	void updateArea(String id, String area, int type);
+	void updateArea(String id, List<String> area, int type);
 
 }

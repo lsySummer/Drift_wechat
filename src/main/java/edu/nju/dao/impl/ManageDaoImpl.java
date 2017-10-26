@@ -114,14 +114,20 @@ public class ManageDaoImpl implements ManageDao{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void updateArea(String id, String area, int type) {
+	public void updateArea(String id, List<String> area, int type) {
 		String hql = "from DeviceArea where deviceId=:did";
 		List<DeviceArea> list = baseDao.getNewSession().createQuery(hql).setParameter("did", id).getResultList();
 		if(list.size()>0){
-			DeviceArea d = list.get(0);
-			d.setArea(area);
-			d.setType(type);
-			baseDao.update(d);
+			for(int i =0;i<list.size();i++){
+				DeviceArea d = list.get(i);
+				baseDao.delete(d);
+				DeviceArea da = new DeviceArea();
+				da.setArea(area.get(i));
+				da.setDeviceId(id);
+				da.setType(type);
+				baseDao.save(da);
+			}
+			
 		}
 	}
 

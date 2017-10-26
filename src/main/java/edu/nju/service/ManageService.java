@@ -34,14 +34,28 @@ public class ManageService {
 	};
 	
 	//添加设备
-	public Device addDevice(Device d,String area,int type){
+//	public Device addDevice(Device d,String area,int type){
+//		Device device = gservice.getDeviceById(d.getId());
+//		if(device==null){
+//			device = manageDao.addDevice(d);
+//			manageDao.setArea(device.getId(), area, type);
+//			return device;
+//		}else{
+//			manageDao.updateArea(d.getId(),area,type);
+//			return d;
+//		}
+//	}
+	
+	public Device addDeviceList(Device d,List<String> list,int type){
 		Device device = gservice.getDeviceById(d.getId());
 		if(device==null){
 			device = manageDao.addDevice(d);
-			manageDao.setArea(device.getId(), area, type);
+			for(int i=0;i<list.size();i++){
+				manageDao.setArea(device.getId(), list.get(i), type);
+			}
 			return device;
 		}else{
-			manageDao.updateArea(d.getId(),area,type);
+			manageDao.updateArea(d.getId(),list,type);
 			return d;
 		}
 	}
