@@ -36,7 +36,7 @@ public class ManageController {
 		return "jsp/AddDevice";
 	}
 	
-	@RequestMapping(value = "/")
+	@RequestMapping(value = "/index")
 	public String getIndex(HttpSession session,Model model) {
 		List<DeviceVO> deviceList = manageService.getDevices();
 		model.addAttribute("deviceList", deviceList);
