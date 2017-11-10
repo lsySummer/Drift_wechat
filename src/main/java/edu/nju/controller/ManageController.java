@@ -76,6 +76,8 @@ public class ManageController {
 		return "success";
 	}
 	
+	
+	
 	public static List<String> readFile()
 	{   
 		String filePath = ManageController.class.getClassLoader().getResource("../province.txt").getPath();
