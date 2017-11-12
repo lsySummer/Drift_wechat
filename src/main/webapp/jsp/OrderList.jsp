@@ -71,28 +71,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <h4 class="modal-title" id="myModalLabel">订单设备修改</h4>
             </div>
             <div class="modal-body" id="modal-body">
-              <div id="main"  class="col-sm-8">
-			<table class="table table-hover">
-			  <thead>
-			    <tr>
-			      <th>可用设备列表</th>
-			      <th>可选择时间</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-					<tr>
-						<td id="device"></td>
-						<td id="date"></td>
-					</tr> 
-			  </tbody>
-			</table>
-			<button type="button" id="modify" onclick="javascript:confirm();">确认提交</button>
-		</div> 
+             <div class="form-group">
+			    <label for="name" class="col-sm-2 control-label">设备编号:</label>
+			    <div class="col-sm-6">
+					<select class="form-control" name="deviceNum" id="deviceNum" onchange="changetime(this)">
+						<c:forEach items="${devices}" var="device">
+							<option value="${device}">${device}</option>
+						</c:forEach>
+					</select>
+			    </div>
+			  </div>
+			  </br>
+			  <div class="form-group">
+			    <label for="name" class="col-sm-2 control-label">可用时间:</label>
+			    <div class="col-sm-6">
+					<select class="form-control" name="times" id="times">
+						
+					</select>
+			    </div>
+			  </div>
+			</div> 
+			</br>
+			<div align="center"><button class="btn btn-success" type="button" id="modify" onclick="javascript:confirm();">确认提交</button></div>
+            </br>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
     </div>
 		<script>
+		var result;
 		$(function(){
 			$('#naviUL li').click(function(){
 				$(".active").attr("class",null);
@@ -101,17 +108,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 		function modify(obj){
 			$.getJSON('/Drift_wechat/api/manage/modify?order='+obj.id,function(json){
-				
+				result = json;
+				var insert = "";
+				for(var key in json){
+					insert += '<option value="'+ key +'">'+ key +'</option>';
+				}
+				document.getElementById("deviceNum").innerHTML = insert;
 				$('#myModal').modal('show');
 			});
 		}
 		function confirm(){
-			var device = document.getElementById("device").value;
-			var date = document.getElementById("device").value;
+			var device = document.getElementById("deviceNum").value;
+			var date = document.getElementById("times").value;
 			$.getJSON('/Drift_wechat/api/manage/confirm?device='+device+"&date="+date,function(json){
+				$('#myModal').modal('hide');
 				window.location.href='/Drift_wechat/api/manage/orderList';
 			});
 		}
+		function changetime(obj){
+			var insert = '';
+			var start = new Date(result[obj.value]);
+			console.log(start);
+			for(var i = 0; i < 7; i ++){
+				insert += '<option value="'+ getNextDay(start) +'">'+ getNextDay(start) +'</option>';
+			}
+			document.getElementById("times").innerHTML = insert;
+		}
+		function getNextDay(d){
+	        d = new Date(d);
+	        d = + d + 1000*60*60*24;
+	        d = new Date(d);
+	        //return d;
+	        //格式化
+	        return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+        }
 		</script>               
     </body>
 </html>

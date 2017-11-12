@@ -64,6 +64,8 @@ public class ManageController {
 	@RequestMapping(value = "/modify")
 	public void modifyOrder(String order, HttpServletResponse response) {
 		JSONObject result=new JSONObject();
+		result.put("test", "2017-11-12");
+		result.put("test2", "2017-11-13");
 		//调用service
 		try {
 			PrintWriter out = response.getWriter();
