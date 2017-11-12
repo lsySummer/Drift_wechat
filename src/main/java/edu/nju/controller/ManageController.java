@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -88,8 +90,12 @@ public class ManageController {
 	}
 	
 	@RequestMapping(value = "/confirm")
-	public void confirm(String device, String date,HttpServletResponse response) {
+	public void confirm(String orderId, String deviceNumber, String deviceId, String date,HttpServletResponse response) throws ParseException {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
+		Date startDate=sdf.parse(date);
+		
 		//调用service
+		manageService.updateOrder(orderId, deviceNumber, deviceId, startDate);
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(true);
