@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.nju.dao.BaseDao;
 import edu.nju.dao.ManageDao;
 import edu.nju.dao.ReserveGetDao;
 import edu.nju.entities.Device;
@@ -22,7 +23,8 @@ import edu.nju.utils.Utility;
 @Transactional
 @Service
 public class ManageService {
-	
+	@Autowired
+	BaseDao baseDao;
 	@Autowired
 	ManageDao manageDao;
 	@Autowired
@@ -55,13 +57,13 @@ public class ManageService {
 //		}
 //	}
 	/**
-	 * 重新调整订单时，获得可用的device
+	 * 重新调整订单时，获得可用的device和对应的可用时间
 	 * @param orderID
 	 * @return
 	 * @author liushao
 	 */
-	public Map<String,Date> getAvailableDevice(String orderID){
-		Map<String, Date> result = new HashMap<>();
+	public Map<DeviceVO,Date> getAvailableDevice(String orderID){
+		Map<DeviceVO, Date> result = new HashMap<>();
 		//获得要修改的订单里的DeviceId
 		Order order = reserveGetDao.getOrderByorderId(orderID);
 		String deviceId = order.getDeviceId();
@@ -78,7 +80,7 @@ public class ManageService {
 			Date today = new Date();
 			//如果这个设备没有订单，那么就从明天可预订
 			if(null == orders || orders.isEmpty()){
-				result.put(deviceVO.getNumber(),  Utility.getSpecifiedDayAfter(today, 1));
+				result.put(deviceVO,  Utility.getSpecifiedDayAfter(today, 1));
 			}else{
 				//如果有订单，找到最新的endDate
 				Date date = orders.get(0).getEndDate();
@@ -88,14 +90,24 @@ public class ManageService {
 					}
 				}
 				if(date.before(today)){
-					result.put(deviceVO.getNumber(), Utility.getSpecifiedDayAfter(today, 1));
+					result.put(deviceVO, Utility.getSpecifiedDayAfter(today, 1));
 				}else{
-					result.put(deviceVO.getNumber(), Utility.getSpecifiedDayAfter(date, 1));
+					result.put(deviceVO, Utility.getSpecifiedDayAfter(date, 1));
 				}
 			} 
 		}
 		return result;
 	}
+	
+	public Order updateOrder(String orderId,String deviceNumber,
+			String deviceId,Date startDate,Date endDate){
+		Order o = reserveGetDao.getOrderByorderId(orderId);
+		o.setDeviceId(deviceId);o.setDeviceNumber(deviceNumber);
+		o.setStartDate(startDate);;o.setEndDate(endDate);
+		baseDao.update(o);
+		return o;
+	}
+	
 	public Device addDeviceList(Device d,List<String> list,int type){
 		Device device = gservice.getDeviceById(d.getId());
 		if(device==null){
