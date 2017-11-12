@@ -106,10 +106,12 @@ public class ManageService {
 	}
 	
 	public Order updateOrder(String orderId,String deviceNumber,
-			String deviceId,Date startDate,Date endDate){
+			String deviceId,Date startDate){
 		Order o = reserveGetDao.getOrderByorderId(orderId);
 		o.setDeviceId(deviceId);o.setDeviceNumber(deviceNumber);
-		o.setStartDate(startDate);;o.setEndDate(endDate);
+		o.setStartDate(startDate);
+		Date endDate = Utility.getSpecifiedDayAfter(startDate, 1);
+		o.setEndDate(endDate);
 		baseDao.update(o);
 		return o;
 	}
