@@ -26,5 +26,11 @@ public interface ReserveGetDao {
 	List<String> getByDeviceId(String deviceId);
 	
 	List<Device> getDeviceById(String deviceId);
+	/*
+	 *新增接口，根据orderId得到此order
+	 */
+	Order getOrderByorderId(String oderId);
+	
+	List<Order> getOrdersByDeviceId(String deviceId);
 
 }

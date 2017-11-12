@@ -20,7 +20,7 @@ import edu.nju.utils.Constants;
 import edu.nju.utils.Utility;
 
 @Repository
-public class ReserveGetDaoImpl implements ReserveGetDao{
+public class ReserveGetDaoImpl implements ReserveGetDao{ 
 	 @Autowired
 	 private BaseDao baseDao;
 	 @Autowired
@@ -187,5 +187,24 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openId).getResultList();
 		return list;
 	}
+
+	@Override
+	public Order getOrderByorderId(String oderId) {
+		String hql = "from Order where id =:orderId";
+		Order o = (Order) baseDao.getNewSession().createQuery(hql).setParameter("orderId", oderId).getSingleResult();
+		return o;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> getOrdersByDeviceId(String deviceId) {
+		String hql = "from order where deviceId=:deviceId";
+		List<Order> orders = baseDao.getNewSession().createQuery(hql).setParameter("deviceId", deviceId).getResultList();
+		return orders;
+	}
+
+	
+	
+	
 
 }
