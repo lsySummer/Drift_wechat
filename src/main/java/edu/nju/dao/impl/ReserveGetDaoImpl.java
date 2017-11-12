@@ -198,7 +198,7 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Order> getOrdersByDeviceId(String deviceId) {
-		String hql = "from order where deviceId=:deviceId";
+		String hql = "from Order where deviceId=:deviceId";
 		List<Order> orders = baseDao.getNewSession().createQuery(hql).setParameter("deviceId", deviceId).getResultList();
 		return orders;
 	}

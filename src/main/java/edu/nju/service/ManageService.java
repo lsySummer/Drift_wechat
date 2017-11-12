@@ -66,9 +66,13 @@ public class ManageService {
 		Map<DeviceVO, Date> result = new HashMap<>();
 		//获得要修改的订单里的DeviceId
 		Order order = reserveGetDao.getOrderByorderId(orderID);
+		
+		System.out.println("order:" + order.getId());
 		String deviceId = order.getDeviceId();
+		System.out.println("deviceId:" + deviceId);
 		//获得所有的Device
 		List<DeviceVO> devices = manageDao.getDevices();
+		System.out.println("devices:"+ devices);
 		for(DeviceVO deviceVO:devices){
 			String id = deviceVO.getId();
 			//排除掉现在使用的device
@@ -77,6 +81,7 @@ public class ManageService {
 			}
 			//获得这个设备的所有订单
 			List<Order> orders = reserveGetDao.getOrdersByDeviceId(id);
+			System.out.println("deviceId=" + id + ": orders:" +orders);
 			Date today = new Date();
 			//如果这个设备没有订单，那么就从明天可预订
 			if(null == orders || orders.isEmpty()){
@@ -96,6 +101,7 @@ public class ManageService {
 				}
 			} 
 		}
+		System.out.println("result" + result);
 		return result;
 	}
 	
