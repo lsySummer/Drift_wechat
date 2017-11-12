@@ -67,12 +67,14 @@ public class ManageController {
 	@RequestMapping(value = "/modify")
 	public void modifyOrder(String order, HttpServletResponse response) {
 		JSONObject result = new JSONObject();
+		result.put("test1", "2017-11-14");
+		result.put("test2", "2017-11-13");
 		//调用service
-		Map<DeviceVO, Date> query = new HashMap<>();
-		manageService.getAvailableDevice(order);
-		for(Map.Entry<DeviceVO, Date> entry : query.entrySet()){
-			result.put(entry.getKey().getId(), entry.getValue().toString());
-		}
+//		Map<DeviceVO, Date> query = new HashMap<>();
+//		manageService.getAvailableDevice(order);
+//		for(Map.Entry<DeviceVO, Date> entry : query.entrySet()){
+//			result.put(entry.getKey().getId(), entry.getValue().toString());
+//		}
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(result);
