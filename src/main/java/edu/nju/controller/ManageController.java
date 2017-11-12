@@ -37,7 +37,7 @@ public class ManageController {
 		List<String> provinces = new ArrayList<String>();
 		provinces = readFile();
 		model.addAttribute("provinces", provinces);
-		return "jsp/AddDevice";
+		return "jsp/addDevice";
 	}
 	
 	@RequestMapping(value = "/index")

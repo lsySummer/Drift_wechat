@@ -53,8 +53,8 @@ public class TestController {
 //		}
 //		Device device = service.reserveDevice("oRTgpweSZbOxfrg9H57JwuPwMJLo",0);
 //		System.out.println(device.getNumber());
-//		Device d = new Device();
-		Device d = gservice.getDeviceById("40288d815f599f39015f599f59880000");
+		Device d = new Device();
+//		Device d = gservice.getDeviceById("40288d815f599f39015f599f59880000");
 		List<String> list = new ArrayList<String>();
 		list.add("广东省");
 		list.add("湖南省");
