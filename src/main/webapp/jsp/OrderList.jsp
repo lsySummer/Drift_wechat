@@ -75,18 +75,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <label for="name" class="col-sm-2 control-label">设备编号:</label>
 			    <div class="col-sm-6">
 					<select class="form-control" name="deviceNum" id="deviceNum" onchange="changetime(this)">
-						<c:forEach items="${devices}" var="device">
-							<option value="${device}">${device}</option>
-						</c:forEach>
 					</select>
 			    </div>
 			  </div>
+			  </br>
 			  </br>
 			  <div class="form-group">
 			    <label for="name" class="col-sm-2 control-label">可用时间:</label>
 			    <div class="col-sm-6">
 					<select class="form-control" name="times" id="times">
-						
 					</select>
 			    </div>
 			  </div>
@@ -114,6 +111,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					insert += '<option value="'+ key +'">'+ key +'</option>';
 				}
 				document.getElementById("deviceNum").innerHTML = insert;
+				var insert2 = '';
+				var start = json[document.getElementById("deviceNum").value];
+				for(var i = 0; i < 7; i ++){
+					insert2 += '<option value="'+ start +'">'+ start +'</option>';
+					start = getNextDay(start);
+				}
+				document.getElementById("times").innerHTML = insert2;
 				$('#myModal').modal('show');
 			});
 		}
@@ -127,21 +131,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		function changetime(obj){
 			var insert = '';
-			var start = new Date(result[obj.value]);
-			console.log(start);
+			var start = result[obj.value];
 			for(var i = 0; i < 7; i ++){
-				insert += '<option value="'+ getNextDay(start) +'">'+ getNextDay(start) +'</option>';
+				insert += '<option value="'+ start +'">'+ start +'</option>';
+				start = getNextDay(start);
 			}
 			document.getElementById("times").innerHTML = insert;
 		}
-		function getNextDay(d){
-	        d = new Date(d);
-	        d = + d + 1000*60*60*24;
-	        d = new Date(d);
-	        //return d;
-	        //格式化
-	        return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+		function getNextDay(date){
+	       	var date = new Date(date);
+		    date.setDate(date.getDate() + 1);
+		    var month = date.getMonth() + 1;
+		    var day = date.getDate();
+		    return date.getFullYear() + '-' + getFormatDate(month) + '-' + getFormatDate(day);
         }
-		</script>               
+        function getFormatDate(arg) {
+		    if (arg == undefined || arg == '') {
+		        return '';
+		    }
+		    var re = arg + '';
+		    if (re.length < 2) {
+		        re = '0' + re;
+		    }
+		    return re;
+		}
+		</script>  
+           
     </body>
-</html>
+<html>
