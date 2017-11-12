@@ -108,11 +108,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				result = json;
 				var insert = "";
 				for(var key in json){
-					insert += '<option value="'+ key +'">'+ key +'</option>';
+					insert += '<option value="'+ json[key].id +'">'+ json[key].number +'</option>';
 				}
 				document.getElementById("deviceNum").innerHTML = insert;
 				var insert2 = '';
-				var start = json[document.getElementById("deviceNum").value];
+				var temp = new Date(getDate(document.getElementById("deviceNum").value));
+				var start = temp.getFullYear() + '-' + getFormatDate(temp.getMonth()+1)+'-'+getFormatDate(temp.getDate());
 				for(var i = 0; i < 7; i ++){
 					insert2 += '<option value="'+ start +'">'+ start +'</option>';
 					start = getNextDay(start);
@@ -131,7 +132,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		function changetime(obj){
 			var insert = '';
-			var start = result[obj.value];
+			var temp = new Date(getDate(obj.value));
+			var start = temp.getFullYear() + '-' + getFormatDate(temp.getMonth()+1)+'-'+getFormatDate(temp.getDate());
 			for(var i = 0; i < 7; i ++){
 				insert += '<option value="'+ start +'">'+ start +'</option>';
 				start = getNextDay(start);
@@ -154,6 +156,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        re = '0' + re;
 		    }
 		    return re;
+		}
+		function getDate(id){
+			for(var key in result){
+				if(result[key].id == id){
+					return result[key].date;
+				}
+			}
 		}
 		</script>  
            
