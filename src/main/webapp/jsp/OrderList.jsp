@@ -42,6 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <th>电话</th>
 			      <th>地址</th>
 			      <th>订单状态</th>
+			      <th>修改订单</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -55,12 +56,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td >${order.phone} </td>
 						<td >${order.address} </td>
 						<td >${order.state}</td>
+						<td ><button type="button" id="${order.id}" onclick="javascript:modify(this);">修改</button></td>
 					</tr>
 				</c:forEach> 
 			  </tbody>
 			</table>
 		</div> 
 	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">订单设备修改</h4>
+            </div>
+            <div class="modal-body" id="modal-body">
+              <div id="main"  class="col-sm-8">
+			<table class="table table-hover">
+			  <thead>
+			    <tr>
+			      <th>可用设备列表</th>
+			      <th>可选择时间</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+					<tr>
+						<td id="device"></td>
+						<td id="date"></td>
+					</tr> 
+			  </tbody>
+			</table>
+			<button type="button" id="modify" onclick="javascript:confirm();">确认提交</button>
+		</div> 
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+    </div>
 		<script>
 		$(function(){
 			$('#naviUL li').click(function(){
@@ -68,6 +99,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$(this).attr("class","active")
 			});
 		});
+		function modify(obj){
+			$.getJSON('/Drift_wechat/api/manage/modify?order='+obj.id,function(json){
+				
+				$('#myModal').modal('show');
+			});
+		}
+		function confirm(){
+			var device = document.getElementById("device").value;
+			var date = document.getElementById("device").value;
+			$.getJSON('/Drift_wechat/api/manage/confirm?device='+device+"&date="+date,function(json){
+				window.location.href='/Drift_wechat/api/manage/orderList';
+			});
+		}
 		</script>               
     </body>
 </html>
