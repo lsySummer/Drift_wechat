@@ -17,12 +17,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	设备管理<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="deviceList">查看设备</a></li>
+                    <li><a href="/Drift_wechat/api/manage/deviceList">查看设备</a></li>
                     <li class="divider"></li>
-                    <li><a href="addDevice">增加设备</a></li>
+                    <li><a href="/Drift_wechat/api/manage/addDevice">增加设备</a></li>
                 </ul>
             </li>
-            <li class=""><a href="orderList">订单管理</a></li>
+            <li class=""><a href="/Drift_wechat/api/manage/orderList">订单管理</a></li>
         </ul>
     </div>
 	</div>

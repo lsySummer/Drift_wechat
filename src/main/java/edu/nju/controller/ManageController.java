@@ -3,12 +3,16 @@ package edu.nju.controller;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +37,7 @@ public class ManageController {
 		List<String> provinces = new ArrayList<String>();
 		provinces = readFile();
 		model.addAttribute("provinces", provinces);
-		return "jsp/AddDevice";
+		return "jsp/addDevice";
 	}
 	
 	@RequestMapping(value = "/index")
@@ -55,6 +59,35 @@ public class ManageController {
 		List<OrderVO> orderList = manageService.getOrders();
 		model.addAttribute("orderList", orderList);
 		return "jsp/OrderList";
+	}
+	
+	@RequestMapping(value = "/modify")
+	public void modifyOrder(String order, HttpServletResponse response) {
+		JSONObject result=new JSONObject();
+		//调用service
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(result);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/confirm")
+	public void confirm(String device, String date,HttpServletResponse response) {
+		//调用service
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(true);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value = "/addDeviceAction")
