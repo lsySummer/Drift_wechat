@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Orders.jsp">
 	    	我的订单
 	    </a>
-	  </div>
+	  </div>  
 	  <div class="weui-navbar__item">
 	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Delivery.jsp">
 	    	仪器传递
@@ -86,7 +86,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}); --%>
 	
 	$("document").ready(function(){
-		
 	 	wx.config({
 	        appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
 	        timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
@@ -98,9 +97,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    wx.ready(function(){
 	    	 wx.getLocation({
 			        success: function (res) {
-			       	 	alert("获取成功");	
-			            myLocation = {"x":res.longitude,"y":res.latitude};
-			            getMap(myLocation);
+			            myLocation = Convert_GCJ02_To_BD09({"x":res.longitude,"y":res.latitude});
+			            console.log(myLocation);
+			            getMap(myLocation);  
 			        },
 			        fail: function(error) {
 			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
@@ -111,6 +110,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    wx.error(function(res){
 	    });
 	});
+	
+	function Convert_GCJ02_To_BD09(tencentPoint){
+		var x = tencentPoint.x, y = tencentPoint.y;
+		var z =Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
+		var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
+		lng = z * Math.cos(theta) + 0.0065;
+		lat = z * Math.sin(theta) + 0.006;
+		return {"x":lng,"y":lat}
+	}
 	
 	//得到用户userVO列表
 	function getMap(myLocation){
