@@ -20,6 +20,7 @@ import edu.nju.service.UserService;
 import edu.nju.utils.HttpRequest;
 import edu.nju.utils.HttpXmlClient;
 import edu.nju.utils.Utility;
+import edu.nju.utils.WechatConfig;
 import edu.nju.utils.WechatLoginUse;
 
 @Controller
@@ -60,36 +61,38 @@ public class WeChatController {
 				 getAddress(session,request,url,accessToken);
 				return "jsp/BaiduMap";
 			} else {
-				return null;
+				return "jsp/BaiduMap";
 			}
 		} catch (JSONException e) {
+			log.info(e);
 			e.printStackTrace();
-			return null;
+			return "jsp/BaiduMap";
 		}
 	}
 
 	@RequestMapping(value = "/getAddress")
 	public void getAddress(HttpSession session,HttpServletRequest request,String url,String accessToken) {
-		String xml = HttpXmlClient.get("https://api.weixin.qq.com/cgi-bin/ticket/getticket?"
-				+ "access_token="+accessToken+"&type=jsapi");
-		net.sf.json.JSONObject jsonMap = net.sf.json.JSONObject.fromObject(xml);
-		HashMap<String, String> map = new HashMap<String, String>();
-		@SuppressWarnings("unchecked")
-		Iterator<String> it = jsonMap.keys();
-		while (it.hasNext()) {
-			String key = (String) it.next();
-			String u = jsonMap.get(key).toString();
-			map.put(key, u);
-		}
-		String jsapi_ticket = map.get("ticket");
-		log.info("jsapi_ticket=" + jsapi_ticket);
+//		String xml = HttpXmlClient.get("https://api.weixin.qq.com/cgi-bin/ticket/getticket?"
+//				+ "access_token="+accessToken+"&type=jsapi");
+//		net.sf.json.JSONObject jsonMap = net.sf.json.JSONObject.fromObject(xml);
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		@SuppressWarnings("unchecked")
+//		Iterator<String> it = jsonMap.keys();
+//		while (it.hasNext()) {
+//			String key = (String) it.next();
+//			String u = jsonMap.get(key).toString();
+//			map.put(key, u);
+//		}
+//		String jsapi_ticket = map.get("ticket");
+		JSONObject ticket = WechatConfig.getJsApiTicketByWX();
+		log.info("jsapi_ticket=" + ticket.get("ticket"));
 
 		// 获取签名signature
 		String noncestr = UUID.randomUUID().toString();
 		String timestamp = Long.toString(System.currentTimeMillis() / 1000); 
         //以为我配置的菜单是http://yo.bbdfun.com/first_maven_project/，最后是有"/"的，所以url也加上了"/"
         log.info(url);
-		String str = "jsapi_ticket=" + jsapi_ticket + "&noncestr=" + noncestr + "&timestamp=" + timestamp + "&url="
+		String str = "jsapi_ticket=" + ticket.get("ticket") + "&noncestr=" + noncestr + "&timestamp=" + timestamp + "&url="
 				+ url;
 		// // sha1加密
 		String signature = Utility.SHA1(str);
