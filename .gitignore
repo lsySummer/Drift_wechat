@@ -41,7 +41,9 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-target/
+/target/
 target/classes/jdbc.properties
-
-
+target/classes/jdbc.properties
+target/classes/jdbc.properties
+target/m2e-wtp/web-resources/META-INF/maven/edu.nju/Drift_wechat/pom.properties
+target/m2e-wtp/web-resources/META-INF/maven/edu.nju/Drift_wechat/pom.properties
