@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	 wx.getLocation({
 			        success: function (res) {
 			       	 	alert("获取成功");	
-			            myLocation = {"x":res.latitude,"y":res.longitude};
+			            myLocation = {"x":res.longitude,"y":res.latitude};
 			            getMap(myLocation);
 			        },
 			        fail: function(error) {
