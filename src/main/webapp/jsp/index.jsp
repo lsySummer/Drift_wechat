@@ -58,19 +58,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="weui-cell">
             	<div class="weui-cell__hd"><label class="weui-label" style="color:black;">手机号</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" id="phone" name="phone" type="tel" required pattern="[0-9]{11}" placeholder="${param.phone}" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
+                    <input class="weui-input" id="phone" name="phone" type="tel" required pattern="[0-9]{11}" value="${param.phone}" placeholder="${param.phone}" emptyTips="请输入手机号" notMatchTips="请输入正确的手机号">
                 </div>
             </div>
         </div>
        
-        <%-- <div class="weui-cells">
+        <div class="weui-cells">
             <div class="weui-cell">
             	<div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" id="name" name="name" type="text" placeholder="${param.name}"/>
+                    <input class="weui-input" id="name" name="name" type="text" value="${param.name}" placeholder="${param.name}"/>
                 </div>
             </div>
-        </div> --%>
+        </div>
      <div class="weui-btn-area">
       <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary">授权芝麻信用</button>
    	 </div>
