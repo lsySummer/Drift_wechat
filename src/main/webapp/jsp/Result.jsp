@@ -59,11 +59,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  			</div>
 		</div>
 	</div>
-    <div class="weui-msg__extra-area">
         <div class="weui-footer">
                 <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
         </div>
-  </div>
 	<script>
 		$.getJSON('/Drift_wechat/api/order/get',function(json){
 			var data = json.data;

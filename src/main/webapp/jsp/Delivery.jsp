@@ -56,7 +56,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <div class="weui-popup__modal">
 	  <h1> 快递查询 </h1>
 	  </br>
-	    <div id="lists">暂无数据</div>
+	  <table class="table table-hover">
+			  <thead>
+			    <tr>
+			      <th>时间</th>
+			      <th>消息</th>
+			    </tr>
+			  </thead>
+			  <tbody id="lists">
+			  </tbody>
+			</table>
 	    <a href="javascript:close();" class="weui-btn weui-btn_primary">关闭</a>
 	  </div>
 	</div>
@@ -135,8 +144,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    var list = temp.list;
 			    var result = "";
 			    list.forEach(function(item){
-			    	result += '<p>' + item.time +'</p>';
-			    	result += '<p>' + item.status +'</p>';
+			    	result += '<tr>';
+			    	var temp = item.time.split(" ");
+			    	result += '<td>' + temp[0] + '<br>' + temp[1] +'</td>';
+			    	result += '<td>' + item.status +'</td>';
+			    	result += '</tr>';
 			    });
 			    document.getElementById('lists').innerHTML = result;
 		  	}else{
