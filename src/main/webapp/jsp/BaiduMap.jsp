@@ -23,6 +23,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
     <title>Drift</title>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script>
+	    wx.config({
+	        appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
+	        timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
+	        nonceStr: "<%=session.getAttribute("noncestr")%>", // 必填，生成签名的随机串
+	        signature: "<%=session.getAttribute("signature")%>",// 必填，签名，见附录1
+	        jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	    });
+	    wx.ready(function(){
+	    	 wx.getLocation({
+			        success: function (res) {
+			            alert("经纬度为：（" + res.latitude + "，" + res.longitude + "）" );
+			        },
+			        fail: function(error) {
+			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
+			        }
+			    });
+	    });
+	 
+	    wx.error(function(res){
+	    });
+	</script>
 </head> 
 
 <body ontouchstart>

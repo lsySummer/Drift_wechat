@@ -30,6 +30,7 @@ public class WechatLoginUse {
 		wechatInfo.put("openid", openid);
 		wechatInfo.put("nickname", name);
 		wechatInfo.put("headimgurl", head);
+		wechatInfo.put("access_token", accessToken);
 		return wechatInfo.toString();
 	
 	}
