@@ -87,6 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	$("document").ready(function(){
 		
+	}
 	 	wx.config({
 	        appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
 	        timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
