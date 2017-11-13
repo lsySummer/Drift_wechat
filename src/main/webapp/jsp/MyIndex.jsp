@@ -53,10 +53,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		<div class="weui-cells">
 		  <div class="weui-cell">
-		    <div class="weui-cell__hd" style="color:black;font-size:17px;font-weight:bold;">
-		      <p>昵称</p>
+		    <div class="weui-cell__hd">
+		      <label class="weui-label" style="color:black;font-size:17px;font-weight:bold;">昵称</label>
 		    </div>
-		    <div id="nickName" class="weui-cell__ft">暂无</div>
+		    <div id="nickName" class="weui-cell__bd">暂无</div>
 		  </div>
 		</div>
 		<form method="get" id="personDetail" name="personDetail" action="/Drift_wechat/api/user/save">
