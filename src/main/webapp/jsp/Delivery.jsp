@@ -59,8 +59,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <table class="table table-hover">
 			  <thead>
 			    <tr>
-			      <th>时间</th>
-			      <th>消息</th>
+			      <th width="35%">时间</th>
+			      <th width="65%">消息</th>
 			    </tr>
 			  </thead>
 			  <tbody id="lists">
