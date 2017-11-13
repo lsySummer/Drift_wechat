@@ -60,6 +60,8 @@ public class OrderController {
 			modelAndView.setViewName("redirect:/jsp/MyIndex.jsp");
 			return modelAndView;
 		}else if(user.getZmxyid() == null){
+			modelAndView.getModel().put("phone", user.getPhone());
+//			modelAndView.getModel().put("name", user.getName());
 			modelAndView.setViewName("redirect:/jsp/index.jsp");
 			return modelAndView;
 		}else if(!service.checkReserve((String)session.getAttribute("openid"))){

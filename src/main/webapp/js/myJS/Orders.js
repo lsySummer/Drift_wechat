@@ -2,7 +2,6 @@
  * 
  */
 $.getJSON('/Drift_wechat/api/order/get',function(json){
-	console.log(json);
 	var data = json.data;
 	if(data == null){
 		document.getElementById("item1").style.display="none";

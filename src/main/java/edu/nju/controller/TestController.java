@@ -39,7 +39,7 @@ public class TestController {
 //		for(int i=0;i<dlist.size();i++){
 //		mservice.setArea(dlist.get(i).getId(), areas[i], 0);
 //		}
-//		System.out.println(service.reserveDevice("江苏", 0).getId());
+		System.out.println(service.reserveDevice("江苏省", 0).getId());
 //		System.out.println(service.reserveDevice("江苏", 1).getId());
 //		service.makeOrder("34567", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 6), Utility.getSpecifiedDayAfter(new Date(), 7));
 //		service.makeOrder("45678", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 8), Utility.getSpecifiedDayAfter(new Date(), 9));
@@ -53,12 +53,12 @@ public class TestController {
 //		}
 //		Device device = service.reserveDevice("oRTgpweSZbOxfrg9H57JwuPwMJLo",0);
 //		System.out.println(device.getNumber());
-		Device d = new Device();
+//		Device d = new Device();
 //		Device d = gservice.getDeviceById("40288d815f599f39015f599f59880000");
-		List<String> list = new ArrayList<String>();
-		list.add("广东省");
-		list.add("湖南省");
-		mservice.addDeviceList(d, list, 0);
+//		List<String> list = new ArrayList<String>();
+//		list.add("广东省");
+//		list.add("湖南省");
+//		mservice.addDeviceList(d, list, 0);
 //		System.out.println(mservice.getDevices().get(0).toString());
 //		System.out.println(mservice.getOrders().get(0).toString());
 		return "success";

@@ -97,6 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 		<script>
 		var result;
+		var orderId;
 		$(function(){
 			$('#naviUL li').click(function(){
 				$(".active").attr("class",null);
@@ -106,13 +107,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function modify(obj){
 			$.getJSON('/Drift_wechat/api/manage/modify?order='+obj.id,function(json){
 				result = json;
+				orderId = obj.id;
 				var insert = "";
 				for(var key in json){
-					insert += '<option value="'+ key +'">'+ key +'</option>';
+					insert += '<option value="'+ json[key].id +'">'+ json[key].number +'</option>';
 				}
 				document.getElementById("deviceNum").innerHTML = insert;
 				var insert2 = '';
-				var start = json[document.getElementById("deviceNum").value];
+				var temp = new Date(getDate(document.getElementById("deviceNum").value));
+				var start = temp.getFullYear() + '-' + getFormatDate(temp.getMonth()+1)+'-'+getFormatDate(temp.getDate());
 				for(var i = 0; i < 7; i ++){
 					insert2 += '<option value="'+ start +'">'+ start +'</option>';
 					start = getNextDay(start);
@@ -122,16 +125,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}
 		function confirm(){
-			var device = document.getElementById("deviceNum").value;
+			var deviceId = document.getElementById("deviceNum").value;
+			var deviceNumber = getName(document.getElementById("deviceNum").value);
 			var date = document.getElementById("times").value;
-			$.getJSON('/Drift_wechat/api/manage/confirm?device='+device+"&date="+date,function(json){
+			$.getJSON('/Drift_wechat/api/manage/confirm?deviceId='+deviceId+"&date="+date+"&deviceNumber="+deviceNumber+"&orderId="+orderId,function(json){
 				$('#myModal').modal('hide');
 				window.location.href='/Drift_wechat/api/manage/orderList';
 			});
 		}
 		function changetime(obj){
 			var insert = '';
-			var start = result[obj.value];
+			var temp = new Date(getDate(obj.value));
+			var start = temp.getFullYear() + '-' + getFormatDate(temp.getMonth()+1)+'-'+getFormatDate(temp.getDate());
 			for(var i = 0; i < 7; i ++){
 				insert += '<option value="'+ start +'">'+ start +'</option>';
 				start = getNextDay(start);
@@ -154,6 +159,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        re = '0' + re;
 		    }
 		    return re;
+		}
+		function getDate(id){
+			for(var key in result){
+				if(result[key].id == id){
+					return result[key].date;
+				}
+			}
+		}
+		function getName(id){
+			for(var key in result){
+				if(result[key].id == id){
+					return result[key].number;
+				}
+			}
 		}
 		</script>  
            

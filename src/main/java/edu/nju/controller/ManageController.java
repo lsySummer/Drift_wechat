@@ -6,9 +6,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,18 +67,20 @@ public class ManageController {
 	
 	@RequestMapping(value = "/modify")
 	public void modifyOrder(String order, HttpServletResponse response) {
-		JSONObject result = new JSONObject();
-		result.put("test1", "2017-11-14");
-		result.put("test2", "2017-11-13");
+		List<JSONObject> data = new ArrayList<JSONObject>();
+//		result.put("test1", "2017-11-14");
+//		result.put("test2", "2017-11-13");
 		//调用service
-//		Map<DeviceVO, Date> query = new HashMap<>();
-//		manageService.getAvailableDevice(order);
-//		for(Map.Entry<DeviceVO, Date> entry : query.entrySet()){
-//			result.put(entry.getKey().getId(), entry.getValue().toString());
-//		}
+		for(Map.Entry<DeviceVO, Date> entry : manageService.getAvailableDevice(order).entrySet()){
+			JSONObject result=new JSONObject();
+			result.put("id", entry.getKey().getId());
+			result.put("number", entry.getKey().getNumber());
+			result.put("date", entry.getValue().toString());
+			data.add(result);
+		}
 		try {
 			PrintWriter out = response.getWriter();
-			out.print(result);
+			out.print(data);
 			out.flush();
 			out.close();
 		} catch (IOException e) {
@@ -87,8 +90,12 @@ public class ManageController {
 	}
 	
 	@RequestMapping(value = "/confirm")
-	public void confirm(String device, String date,HttpServletResponse response) {
+	public void confirm(String orderId, String deviceNumber, String deviceId, String date,HttpServletResponse response) throws ParseException {
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
+		Date startDate=sdf.parse(date);
+		
 		//调用service
+		manageService.updateOrder(orderId, deviceNumber, deviceId, startDate);
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(true);

@@ -53,11 +53,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 		  <div class="weui-form-preview__bd">
 		    <div class="weui-form-preview__item">
-		      <label class="weui-form-preview__label">下单日期</label>
+		      <label class="weui-form-preview__label">预约开始日期</label>
 		      <span class="weui-form-preview__value" id="startDate">暂无</span>
 		    </div>
 		    <div class="weui-form-preview__item">
-		      <label class="weui-form-preview__label">预约结束</label>
+		      <label class="weui-form-preview__label">预约结束日期</label>
 		      <span class="weui-form-preview__value" id="endDate">暂无</span>
 		    </div>
 		    <div class="weui-form-preview__item">
