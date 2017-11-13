@@ -56,11 +56,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <div class="weui-popup__modal">
 	  <h1> 快递查询 </h1>
 	  </br>
-	  <table class="table table-hover">
+	  <table class="table table-hover" cellspacing="8">
 			  <thead>
 			    <tr>
-			      <th width="35%">时间</th>
-			      <th width="65%">消息</th>
+			      <th width="30%">时间</th>
+			      <th width="70%">消息</th>
 			    </tr>
 			  </thead>
 			  <tbody id="lists">
