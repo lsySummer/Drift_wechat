@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 <script src="/Drift_wechat/js/bootstrap.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2"></script>
@@ -23,31 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
     <title>Drift</title>
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-	<script>
-	    wx.config({
-	        appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
-	        timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
-	        nonceStr: "<%=session.getAttribute("noncestr")%>", // 必填，生成签名的随机串
-	        signature: "<%=session.getAttribute("signature")%>",// 必填，签名，见附录1
-	        jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-	    });
-	    wx.ready(function(){
-	    	 wx.getLocation({
-			        success: function (res) {
-			            alert("经纬度为：（" + res.latitude + "，" + res.longitude + "）" );
-			        },
-			        fail: function(error) {
-			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
-			        }
-			    });
-	    });
-	 
-	    wx.error(function(res){
-	    });
-	</script>
-</head> 
-
+</head>
 <body ontouchstart>
     <div style="height:100%; width: 100%;position:absolute;" id="map"></div>
     
@@ -88,25 +65,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//session中获取ip并得到位置信息
 	var index=0;
 	var userArr=[];
-	 var icon1 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
+	var icon1 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
 	            new BMap.Size(23, 25), {  
 	                offset: new BMap.Size(10, 25),  
 	                imageOffset: new BMap.Size(0, -275)                        
 	            });
-      var icon2 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
+    var icon2 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
          new BMap.Size(23, 25), {  
              offset: new BMap.Size(10, 25),  
              imageOffset: new BMap.Size(0, -300)  
                
          });
-         
-	$("document").ready(function(){
+<%--    $("document").ready(function(){
 		var ip="<%=session.getAttribute("ipAddress")%>";
 		var url = "https://api.map.baidu.com/location/ip?ip="+ip+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";
 		$.get(url,function(data){
 			myLocation = data.content.point;
 			getMap(myLocation);
 		},"JSONP");
+	}); --%>
+	
+	$("document").ready(function(){
+		
+	 	wx.config({
+	        appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
+	        timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
+	        nonceStr: "<%=session.getAttribute("noncestr")%>", // 必填，生成签名的随机串
+	        signature: "<%=session.getAttribute("signature")%>",// 必填，签名，见附录1
+	        jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	    });
+	    
+	    wx.ready(function(){
+	    	 wx.getLocation({
+			        success: function (res) {
+			       	 	alert("获取成功");	
+			            myLocation = {"x":res.longitude,"y":res.latitude};
+			            getMap(myLocation);
+			        },
+			        fail: function(error) {
+			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
+			        }
+			    });
+	    });
+	 
+	    wx.error(function(res){
+	    });
 	});
 	
 	//得到用户userVO列表
@@ -156,7 +159,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             map.addOverlay(myMaker);
             var myWindow = {};
             myWindow["point"] = myPoint;
-            myWindow["info"] = "欢迎使用甲醛仪，预计排队时间一天";
+            myWindow["info"] = "您的位置<br>"+"欢迎使用甲醛仪，预计排队时间一天";
             
             addMyInfoWindow(myMaker, myWindow);
             bdGEO();
@@ -180,6 +183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		// 创建地址解析器实例
 		var myGeo = new BMap.Geocoder();
 		var temp = {};
+		temp["nickname"] = add.map.deviceNumber;
 		temp["deviceNumber"] = add.map.deviceNumber;
 		temp["address"] = add.map.address;
 		temp["startDate"] = add.map.startDate;
@@ -228,14 +232,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}*/	
    // 添加检测仪信息窗口  
    function addInfoWindow(marker, poi) {
-   		
+   		var startDateStr = poi.startDate.substring(0,poi.startDate.indexOf(" "));
+   		var commonInfo = "用户："+poi.nickname+"<br>"+"仪器编号："+poi.deviceNumber+"<br>"+"检测时间："+startDateStr+"<br>";
    		var startDate = poi.startDate;
    		var startDateStr = startDate.substring(0,startDate.indexOf(" "));
    		if(poi.deviceState==1){
-   			var titleStr = "历史订单<br>"+"用户：张三<br>"+"仪器编号："+poi.deviceNumber+"<br>"+"检测时间："+startDateStr+"<br>";
+   			var titleStr = "历史订单<br>"+commonInfo;
    		}
    		else{
-   			var titleStr = "预约订单<br>"+"用户：李四<br>"+"仪器编号："+poi.deviceNumber+"<br>"+"检测时间："+startDateStr+"<br>";
+   			var titleStr = "预约订单<br>"+commonInfo;
    		}
 	    var opts = {
 		  width : 150,     // 信息窗口宽度

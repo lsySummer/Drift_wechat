@@ -71,7 +71,7 @@ public class WeChatController {
 	@RequestMapping(value = "/getAddress")
 	public void getAddress(HttpSession session,HttpServletRequest request,String url,String accessToken) {
 		String xml = HttpXmlClient.get("https://api.weixin.qq.com/cgi-bin/ticket/getticket?"
-				+ "access_token=tcbD-nsjcaN3PZ8-7q_ol9UGkyThBEDLCQ_ViKdCeyaSN6HnjWJd4QL34D6YhuvG3l2KohxA3vUqWv_mmDbN5N1VcT9cuqVj7RK8pUkhuPW-Vg9cj9uKwCoNfERQPr6eYZPgADABCS&type=jsapi");
+				+ "access_token="+accessToken+"&type=jsapi");
 		net.sf.json.JSONObject jsonMap = net.sf.json.JSONObject.fromObject(xml);
 		HashMap<String, String> map = new HashMap<String, String>();
 		@SuppressWarnings("unchecked")
