@@ -65,21 +65,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        <div class="weui-cells weui-cells_form">		            
 		            <div class="weui-cell">
 		            	<div class="weui-cell__hd">
-					      <label class="weui-label">真实姓名</label>
+					      <label class="weui-label" style="color:black;">真实姓名</label>
 					    </div>
 					    <div class="weui-cell__bd">
 					      <input class="weui-input" name="deliveryPerson" id="deliveryPerson" placeholder="请输入收货人姓名">
 					    </div>
 		            </div>
 		            <div class="weui-cell">
-					    <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
+					    <div class="weui-cell__hd"><label class="weui-label" style="color:black;">手机号</label></div>
 					    <div class="weui-cell__bd">
 					      <input id="phone" name="phone" class="weui-input" type="tel" pattern="[0-9]*" placeholder="请输入手机号">
 					    </div>
 					</div>
 		        </div>
 		    </div>
-		    <div class="weui-cells__title">地址选择</div>   
+		    <div class="weui-cells__title" style="color:black;">地址选择</div>   
 	        <div class="weui-cells">
 	            <div class="weui-cell">
 	                <div class="weui-cell__bd">

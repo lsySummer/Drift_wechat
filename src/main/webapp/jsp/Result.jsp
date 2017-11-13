@@ -26,10 +26,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
         <div class="weui-msg__text-area">
             <h2 class="weui-msg__title">操作成功</h2>
-            <p class="weui-msg__desc">请加入微信群，方便客服与您联系</p>
+            <p class="weui-msg__desc">请加客服微信，方便客服与您联系</p>
         </div>
     		<img src="/Drift_wechat/images/QR_code.jpg" height="200px" width="200px"/>
     		</br>
+    	<div class="weui-form-preview" id="item1">
+		  <div class="weui-form-preview__bd">
+		    <label class="weui-form-preview__label">订单编号</label>
+		    <em class="weui-form-preview__value" id="orderId">暂无</em>
+		  </div>
+		  <div class="weui-form-preview__bd">
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">预约开始日期</label>
+		      <span class="weui-form-preview__value" id="startDate">暂无</span>
+		    </div>
+		  </div>
+		</div>
     		<a href="/Drift_wechat/jsp/BaiduMap.jsp" class="weui-btn weui-btn_default">返回首页</a>
 <!--         <div class="weui-msg__opr-area">
             <p class="weui-btn-area">
@@ -52,6 +64,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
         </div>
   </div>
-
+	<script>
+		$.getJSON('/Drift_wechat/api/order/get',function(json){
+			var data = json.data;
+			document.getElementById('orderId').innerHTML=data[data.length-1].id.slice(-12);
+			document.getElementById('startDate').innerHTML=data[data.length-1].startDate;
+		});
+	</script>
   </body>
 </html>
