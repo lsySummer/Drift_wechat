@@ -98,7 +98,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	 wx.getLocation({
 			        success: function (res) {
 			            myLocation = Convert_GCJ02_To_BD09({"x":res.longitude,"y":res.latitude});
-			            console.log(myLocation);
 			            getMap(myLocation);  
 			        },
 			        fail: function(error) {
@@ -110,8 +109,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    wx.error(function(res){
 	    });
 	});
+
 	
 	function Convert_GCJ02_To_BD09(tencentPoint){
+		var x_pi = 3.14159265358979324 * 3000.0 / 180.0
 		var x = tencentPoint.x, y = tencentPoint.y;
 		var z =Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
 		var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
