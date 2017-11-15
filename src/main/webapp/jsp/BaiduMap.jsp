@@ -76,13 +76,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              imageOffset: new BMap.Size(0, -300)  
                
          });
-<%--    $("document").ready(function(){
-		var ip="<%=session.getAttribute("ipAddress")%>";
-		var url = "https://api.map.baidu.com/location/ip?ip="+ip+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";
-		$.get(url,function(data){
-			myLocation = data.content.point;
-			getMap(myLocation);
-		},"JSONP");
+<%-- 	$("document").ready(function(){
+			var ip="<%=session.getAttribute("ipAddress")%>";
+			var url = "https://api.map.baidu.com/location/ip?ip="+ip+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";
+			$.get(url,function(data){
+				myLocation = data.content.point;
+				getMap(myLocation);
+			},"JSONP");
 	}); --%>
 	
 	$("document").ready(function(){
@@ -97,8 +97,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    wx.ready(function(){
 	    	 wx.getLocation({
 			        success: function (res) {
-			            myLocation = Convert_GCJ02_To_BD09({"x":res.longitude,"y":res.latitude});
-			            getMap(myLocation);  
+			        	jssdkPoint = {"x":res.longitude,"y":res.latitude};
+			            toBaiduLoc(jssdkPoint);
 			        },
 			        fail: function(error) {
 			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
@@ -111,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	});
 
 	
-	function Convert_GCJ02_To_BD09(tencentPoint){
+/* 	function Convert_GCJ02_To_BD09(tencentPoint){
 		var x_pi = 3.14159265358979324 * 3000.0 / 180.0
 		var x = tencentPoint.x, y = tencentPoint.y;
 		var z =Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
@@ -119,6 +119,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		lng = z * Math.cos(theta) + 0.0065;
 		lat = z * Math.sin(theta) + 0.006;
 		return {"x":lng,"y":lat}
+	} */
+	
+	function toBaiduLoc(jssdkPoint){
+		url = "http://api.map.baidu.com/geoconv/v1/?coords="+jssdkPoint.x+","+jssdkPoint.y+"&from=1&to=5&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2"
+		$.get(url,function(data){
+			myLocation = {"x":data.result[0].x,"y":data.result[0].y};
+			getMap(myLocation);
+		},"JSONP");
 	}
 	
 	//得到用户userVO列表
