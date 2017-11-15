@@ -122,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	} */
 	
 	function toBaiduLoc(jssdkPoint){
-		url = "http://api.map.baidu.com/geoconv/v1/?coords="+jssdkPoint.x+","+jssdkPoint.y+"&from=1&to=5&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2"
+		url = "http://api.map.baidu.com/geoconv/v1/?coords="+jssdkPoint.x+","+jssdkPoint.y+"&from=1&to=5&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2";
 		$.get(url,function(data){
 			myLocation = {"x":data.result[0].x,"y":data.result[0].y};
 			getMap(myLocation);
