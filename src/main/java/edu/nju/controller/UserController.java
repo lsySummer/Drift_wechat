@@ -90,6 +90,7 @@ public class UserController {
 	public String saveUser(HttpSession session, String deliveryPerson, String address, String phone, String address_detail, String redict) {
 		UserInfo user = new UserInfo();
 		user.setOpenid((String)session.getAttribute("openid"));
+		user.setNickName((String)session.getAttribute("nickname"));
 		log.info("UserController openId"+session.getAttribute("openid"));
 		user.setAddress(address + " " + address_detail);
 		user.setPhone(phone);
