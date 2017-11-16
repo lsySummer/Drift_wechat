@@ -97,8 +97,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    wx.ready(function(){
 	    	 wx.getLocation({
 			        success: function (res) {
-			        	jssdkPoint = {"x":res.longitude,"y":res.latitude};
-			            toBaiduLoc(jssdkPoint);
+			            var ggPoint = new BMap.Point(res.longitude,res.latitude);
+						var convertor = new BMap.Convertor();
+				        var pointArr = [];
+				        pointArr.push(ggPoint);
+				        convertor.translate(pointArr, 1, 5, translateCallback);
 			        },
 			        fail: function(error) {
 			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
@@ -109,7 +112,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    wx.error(function(res){
 	    });
 	});
-
+	
+	translateCallback = function (data){
+      if(data.status === 0) {
+      	myLocation = {"x":data.points[0].lng,"y":data.points[0].lat};
+		getMap(myLocation);
+      }
+      else{
+      	AlertUtil.error("无法获取您的位置！");
+      }
+    }
 	
 /* 	function Convert_GCJ02_To_BD09(tencentPoint){
 		var x_pi = 3.14159265358979324 * 3000.0 / 180.0
@@ -121,13 +133,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		return {"x":lng,"y":lat}
 	} */
 	
-	function toBaiduLoc(jssdkPoint){
+/* 	function toBaiduLoc(jssdkPoint){
 		url = "http://api.map.baidu.com/geoconv/v1/?coords="+jssdkPoint.x+","+jssdkPoint.y+"&from=1&to=5&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2";
 		$.get(url,function(data){
 			myLocation = {"x":data.result[0].x,"y":data.result[0].y};
 			getMap(myLocation);
 		},"JSONP");
-	}
+	} */
 	
 	//得到用户userVO列表
 	function getMap(myLocation){
