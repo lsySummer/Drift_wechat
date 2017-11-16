@@ -76,13 +76,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              imageOffset: new BMap.Size(0, -300)  
                
          });
-<%--    $("document").ready(function(){
-		var ip="<%=session.getAttribute("ipAddress")%>";
-		var url = "https://api.map.baidu.com/location/ip?ip="+ip+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";
-		$.get(url,function(data){
-			myLocation = data.content.point;
-			getMap(myLocation);
-		},"JSONP");
+<%-- 	$("document").ready(function(){
+			var ip="<%=session.getAttribute("ipAddress")%>";
+			var url = "https://api.map.baidu.com/location/ip?ip="+ip+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";
+			$.get(url,function(data){
+				myLocation = data.content.point;
+				getMap(myLocation);
+			},"JSONP");
 	}); --%>
 	
 	$("document").ready(function(){
@@ -97,9 +97,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    wx.ready(function(){
 	    	 wx.getLocation({
 			        success: function (res) {
-			            myLocation = Convert_GCJ02_To_BD09({"x":res.longitude,"y":res.latitude});
-			            console.log(myLocation);
-			            getMap(myLocation);  
+			            var ggPoint = new BMap.Point(res.longitude,res.latitude);
+						var convertor = new BMap.Convertor();
+				        var pointArr = [];
+				        pointArr.push(ggPoint);
+				        convertor.translate(pointArr, 1, 5, translateCallback);
 			        },
 			        fail: function(error) {
 			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
@@ -111,14 +113,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    });
 	});
 	
-	function Convert_GCJ02_To_BD09(tencentPoint){
+	translateCallback = function (data){
+      if(data.status === 0) {
+      	myLocation = {"x":data.points[0].lng,"y":data.points[0].lat};
+		getMap(myLocation);
+      }
+      else{
+      	AlertUtil.error("无法获取您的位置！");
+      }
+    }
+	
+/* 	function Convert_GCJ02_To_BD09(tencentPoint){
+		var x_pi = 3.14159265358979324 * 3000.0 / 180.0
 		var x = tencentPoint.x, y = tencentPoint.y;
 		var z =Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
 		var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
 		lng = z * Math.cos(theta) + 0.0065;
 		lat = z * Math.sin(theta) + 0.006;
 		return {"x":lng,"y":lat}
-	}
+	} */
+	
+/* 	function toBaiduLoc(jssdkPoint){
+		url = "http://api.map.baidu.com/geoconv/v1/?coords="+jssdkPoint.x+","+jssdkPoint.y+"&from=1&to=5&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2";
+		$.get(url,function(data){
+			myLocation = {"x":data.result[0].x,"y":data.result[0].y};
+			getMap(myLocation);
+		},"JSONP");
+	} */
 	
 	//得到用户userVO列表
 	function getMap(myLocation){
