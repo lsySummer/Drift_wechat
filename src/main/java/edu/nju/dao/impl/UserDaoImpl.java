@@ -126,7 +126,6 @@ public class UserDaoImpl implements UserDao{
 		}else{
 			UserInfo u = list.get(0);
 			user.setId(u.getId());
-			user.setNickName(u.getNickName());
 			user.setScore(u.getScore());
 			user.setTransactionid(u.getTransactionid());
 			user.setZmxyid(u.getZmxyid());

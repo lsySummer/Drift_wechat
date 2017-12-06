@@ -22,6 +22,7 @@ public class Order {
 	private String state;//等待发货 上家已发货 已收货 已寄出 下家已收货
 	private int num;//购买耗材数量
 	private int ifPay;//是否是付费用户,0代表免费用户，1代表付费用户
+//	private String area;
 //	private String deliveryId;//快递信息
 	
 	public Order(){
@@ -36,6 +37,7 @@ public class Order {
 		this.state=state;
 		this.num = num;
 		this.ifPay = ifPay;
+//		this.area = area;
 //		this.deliveryId = deliveryId;
 	}
 	
@@ -103,6 +105,14 @@ public class Order {
 	public void setIfPay(int ifPay) {
 		this.ifPay = ifPay;
 	}
+
+//	public String getArea() {
+//		return area;
+//	}
+//
+//	public void setArea(String area) {
+//		this.area = area;
+//	}
 
 //	public String getDeliveryId() {
 //		return deliveryId;

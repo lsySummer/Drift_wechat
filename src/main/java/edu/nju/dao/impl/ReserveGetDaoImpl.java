@@ -13,6 +13,7 @@ import edu.nju.dao.ReserveGetDao;
 import edu.nju.dao.UserDao;
 import edu.nju.entities.DeliveryInfo;
 import edu.nju.entities.Device;
+import edu.nju.entities.DeviceArea;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.OrderVO;
@@ -203,7 +204,17 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 		return orders;
 	}
 
-	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getAreaByDid(String did){
+		String hql = "from DeviceArea where deviceId = :did";
+		List<DeviceArea> das = baseDao.getNewSession().createQuery(hql).setParameter("did", did).getResultList();
+		List<String> areas = new ArrayList<String>();
+		for(int i=0;i<das.size();i++){
+			areas.add(das.get(i).getArea());
+		}
+		return areas;
+	}
 	
 	
 
