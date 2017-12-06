@@ -34,7 +34,6 @@ public class MapController {
 	@RequestMapping(value = "/getMap")
 	@ResponseBody  
 	public Map<String, Object> getMap() {
-		System.out.println("获取前台请求");
 		Map<String, Object> map = new HashMap<String, Object>();
 		JSONObject myJsonObject = new JSONObject(service.getUserVO());
 		JSONArray userAll = (JSONArray) myJsonObject.get(Constants.RESPONSE_DATA_KEY);

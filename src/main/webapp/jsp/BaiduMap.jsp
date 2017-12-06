@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2"></script>
+<script type='text/javascript' src='/Drift_wechat/js/swiper.js' charset='utf-8'></script>
 <style type="text/css">  
 	.placeholder {
 	  padding: 0 10px;
@@ -53,16 +54,83 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:;">我要插队</button>
 		  </div>
 	</div>
+	
+	<div id="comment" class='weui-popup__container popup-bottom'>
+      <div class="weui-popup__overlay"></div>
+      <div class="weui-popup__modal">
+      
+        <div class="toolbar">
+          <div class="toolbar-inner">
+            <a href="javascript:;" class="picker-button close-popup">关闭</a>
+            <p class="title">评论区</p>
+          </div>
+        </div>
+        
+        <div class="modal-content">
+          <div class="weui-grids">
+          
+            <a href="javascript:;" class="weui-grid js_grid pb" >
+            	<div>
+                	<img  width=100% height=100% src="/Drift_wechat/images/product.png" alt="">
+                </div>	
+            </a>
+            
+            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+            	<div>
+                	<img  width=100% height=100% src="/Drift_wechat/images/product.png" alt="">
+                </div>	
+            </a>
+            
+            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+            	<div>
+                	<img  width=100% height=100% src="/Drift_wechat/images/product.png" alt="">
+                </div>	
+            </a>
+            
+         <article class="weui-article">
+	          <section>
+	              <p>甲醛检测仪太好用了！！！为你打call!</p>
+		          <p>非常感谢云草纲目公司！</p>
+		      </section>
+	      </article>
+                   
+          </div>
+        </div>
+          
+      </div>
+    <div>
 </body>
-
 <script type="text/javascript">
-	//初始化信息
+
+	 var pbset = $.photoBrowser({
+        items: [
+          {
+            image: "/Drift_wechat/images/product.png",
+            caption: "尝试 Vue.js 最简单的方法是使用 JSFiddle Hello World 例子。在浏览器新标签页中打开它，跟着我们查看一些基础示例。如果你喜欢用包管理器下载/安装，查看安装教程。"
+          },
+          {
+            image: "/Drift_wechat/images/product.png",
+            caption: "组件（Component）是 Vue.js 最强大的功能之一。"
+          },
+          {
+            image: "/Drift_wechat/images/product.png",
+            caption: "组件可以扩展 HTML 元素，封装可重用的代码"
+          },
+          {
+            image: "/Drift_wechat/images/product.png",
+            caption: "在较高层面上，组件是自定义元素，Vue.js 的编译器为它添加特殊功能。在有些情况下，组件也可以是原生 HTML 元素的形式，以 is 特性扩展。"
+          }
+        ],
+        initIndex: 1
+      });
+      $(".pb").click(function() {
+      	$.closePopup();
+        pbset.open();
+      });
+      	//初始化信息
 	var index = 0;
-	var index2 = 0;
 	var allAddressVO = [];
-	var userArr = [];
-	var myLocation = {};
-	var airAddress = [];
+	var myLocation = {"x":118.786078,"y":32.061531};
 	
 	var icon1 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
          new BMap.Size(23, 25), {  
@@ -178,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     function map_init() {  
             map = new BMap.Map("map");  
             //第1步：设置地图中心点，当前城市  
-            var point = new BMap.Point(myLocation.x,myLocation.y);  
+            var point = new BMap.Point(myLocation.x,myLocation.y);
             //第2步：初始化地图,设置中心点坐标和地图级别。  
             map.centerAndZoom(point, 18);  
             //第3步：启用滚轮放大缩小  
@@ -269,6 +337,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var infoWindow = new BMap.InfoWindow("检测地址："+addPoint.address, opts);  // 创建信息窗口对象 
 		marker.addEventListener("click", function(){          
 			this.openInfoWindow(infoWindow,addPoint.point);
+			$("#comment").popup();
 		});
 	}
 	
