@@ -61,6 +61,7 @@ public class CommunityDaoImpl implements CommunityDao{
 			}
 		}
 		String urllst="";
+		log.info("mfssize"+mfs.size());
 		for(int i=0;i<mfs.size();i++){
 			MultipartFile mf = mfs.get(i);
 			String fileName = mf.getOriginalFilename();
@@ -70,7 +71,7 @@ public class CommunityDaoImpl implements CommunityDao{
 						fileName.length());
 				String newName=i+suffix;
 				String url = baseUrl + newName;
-				urllst = newName+";";
+				urllst = urllst+newName+";";
 				try {
 					mf.transferTo(new File(url));
 				}catch(Exception e){
