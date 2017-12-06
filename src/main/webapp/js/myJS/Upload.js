@@ -75,7 +75,7 @@ document.getElementById("uploaderCustomBtn").addEventListener('click', function(
 	text = document.getElementById('txt_des').value;
 	$.getJSON('/Drift_wechat/api/community/txt?txt='+text,function(data){
 		$.alert('成功！');
-		window.location.href='/Drift_wechat/jsp/Orders.jsp';
+		window.location.href='/Drift_wechat/jsp/Delivery.jsp';
 	});
 });
 

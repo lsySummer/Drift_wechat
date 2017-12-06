@@ -56,12 +56,12 @@ public class DeliveryController {
 	@RequestMapping(value = "/set")
 	public String setDelivery(String deliveryNum, HttpSession session, HttpServletResponse response) throws ParseException{
 		service.saveDelInfo((String) session.getAttribute("openid"),deliveryNum);
-		return "jsp/Delivery";
+		return "jsp/Upload";
 	}
 	
 	@RequestMapping(value = "/confirm")
 	public String deliveryConfirm(HttpSession session, HttpServletResponse response){
 		service.confirm((String)session.getAttribute("openid"));
-		return "jsp/Upload";
+		return "jsp/Orders";
 	}
 }
