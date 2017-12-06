@@ -49,7 +49,7 @@ public class CommunityDaoImpl implements CommunityDao{
 	
 	public String saveFile(String openid,List<MultipartFile> mfs){
 //		String baseUrl="D:\\upload\\community\\";
-		String baseUrl = context.getRealPath("") + "upload/comment/"+openid+"/";
+		String baseUrl = "../upload/comment/"+openid+"/";
 		System.out.println(baseUrl);
 		log.info("上传图片地址"+baseUrl);
 		Path path = Paths.get(baseUrl);
@@ -68,7 +68,7 @@ public class CommunityDaoImpl implements CommunityDao{
 				// 获取后缀
 				String suffix = fileName.substring(fileName.indexOf("."),
 						fileName.length());
-				String newName=i+"_"+suffix;
+				String newName=i+suffix;
 				String url = baseUrl + newName;
 				urllst = newName+";";
 				try {
