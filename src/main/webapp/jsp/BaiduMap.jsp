@@ -16,15 +16,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2"></script>
-        <style type="text/css">  
-	      .placeholder {
-	        padding: 0 10px;
-	      }
-            </style> 
+<style type="text/css">  
+	.placeholder {
+	  padding: 0 10px;
+	}
+</style> 
+
 <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
     <title>Drift</title>
 </head>
+
 <body ontouchstart>
     <div style="height:100%; width: 100%;position:absolute;" id="map"></div>
     
@@ -54,31 +56,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 
 <script type="text/javascript">
-	//session中获取ip并得到位置信息
-	var index=0;
-	var userArr=[];
+	//初始化信息
+	var index = 0;
+	var index2 = 0;
+	var allAddressVO = [];
+	var userArr = [];
+	var myLocation = {};
+	var airAddress = [];
+	
 	var icon1 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
-	            new BMap.Size(23, 25), {  
-	                offset: new BMap.Size(10, 25),  
-	                imageOffset: new BMap.Size(0, -275)                        
-	            });
+         new BMap.Size(23, 25), {  
+             offset: new BMap.Size(10, 25),  
+             imageOffset: new BMap.Size(0, -275)                        
+         });
     var icon2 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
          new BMap.Size(23, 25), {  
              offset: new BMap.Size(10, 25),  
              imageOffset: new BMap.Size(0, -300)  
                
          });
-<%-- 	$("document").ready(function(){
-			var ip="<%=session.getAttribute("ipAddress")%>";
-			var url = "https://api.map.baidu.com/location/ip?ip="+ip+"&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2&coor=bd09ll&";
-			$.get(url,function(data){
-				myLocation = data.content.point;
-				getMap(myLocation);
-			},"JSONP");
-	}); --%>
+    var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
+         new BMap.Size(23, 25), {  
+             offset: new BMap.Size(10, 25),  
+             imageOffset: new BMap.Size(0, -250)      
+         });
 	
+	//页面加载完成启动
 	$("document").ready(function(){
-	 	wx.config({
+		weChatMap();
+	});
+	
+	function weChatMap(){
+		wx.config({
 	        appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
 	        timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
 	        nonceStr: "<%=session.getAttribute("noncestr")%>", // 必填，生成签名的随机串
@@ -103,46 +112,70 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 
 	    wx.error(function(res){
 	    });
-	});
+	    
+		//变换坐标函数
+		translateCallback = function (data){
+	    if(data.status === 0) {
+		      myLocation = {"x":data.points[0].lng,"y":data.points[0].lat};
+				//getMap(myLocation);
+				getMap();
+		      }
+	    else{
+	      		AlertUtil.error("无法获取您的位置！");
+	    	}
+	    }
+	}
+
 	
-	translateCallback = function (data){
-      if(data.status === 0) {
-      	myLocation = {"x":data.points[0].lng,"y":data.points[0].lat};
-		getMap(myLocation);
-      }
-      else{
-      	AlertUtil.error("无法获取您的位置！");
-      }
-    }
-	
-/* 	function Convert_GCJ02_To_BD09(tencentPoint){
-		var x_pi = 3.14159265358979324 * 3000.0 / 180.0
-		var x = tencentPoint.x, y = tencentPoint.y;
-		var z =Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
-		var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
-		lng = z * Math.cos(theta) + 0.0065;
-		lat = z * Math.sin(theta) + 0.006;
-		return {"x":lng,"y":lat}
-	} */
-	
-/* 	function toBaiduLoc(jssdkPoint){
-		url = "http://api.map.baidu.com/geoconv/v1/?coords="+jssdkPoint.x+","+jssdkPoint.y+"&from=1&to=5&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2";
-		$.get(url,function(data){
-			myLocation = {"x":data.result[0].x,"y":data.result[0].y};
-			getMap(myLocation);
-		},"JSONP");
-	} */
-	
-	//得到用户userVO列表
-	function getMap(myLocation){
+	//获取用户userVO列表
+	function getMap(){
 		$.get("/Drift_wechat/api/map/getMap",function(data){
-			userArr = data.userArr;
-			map_init(myLocation);				
+			for(var i=0;i<data.userArr.length;i++){
+				temp = {};
+				temp["deviceNumber"] = data.userArr[i].map.deviceNumber;
+				temp["address"] = data.userArr[i].map.address;
+				temp["startDate"] = data.userArr[i].map.startDate;
+				temp["nickname"] = data.userArr[i].map.nickname;
+				temp["deviceState"] = data.userArr[i].map.deviceState;
+				temp["airBoolean"] = 0;
+				allAddressVO.push(temp);
+			}
+			//map_init(myLocation);
+			//map_init();	
+			//getAirCleanAddress();
+			getAir();					
 		},"json");
 	}
 	
+	//获取空气净化器地址
+	function getAir(){
+	   $.ajax({    
+		   url:'http://measure.qingair.net/management/deviceAddress/all',
+		   type:'get',    
+		   dataType:"json",       
+		   timeout:3000,
+		   success:function(res,textStatus){    
+			    if(res.responseCode=="RESPONSE_OK"){
+					for(var i=0;i<res.data.length;i++){
+						temp = {};
+						temp["deviceNumber"] = res.data[i].device_id;
+						temp["address"] = res.data[i].province+res.data[i].city+res.data[i].address;
+						temp["nickname"] = res.data[i].owner;
+						temp["phone"] = res.data[i].phone;
+						temp["airBoolean"] = 1;
+						allAddressVO.push(temp);
+					}			
+				}
+				else{
+					alert("获取净化器地址失败！")
+				}
+				map_init();
+		   }       
+	   });   
+	}
+	
 	//初始化地图
-    function map_init(myLocation) {  
+    function map_init() {  
             map = new BMap.Map("map");  
             //第1步：设置地图中心点，当前城市  
             var point = new BMap.Point(myLocation.x,myLocation.y);  
@@ -169,33 +202,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });  
             map.addControl(ctrlSca);  
              
+            //添加我的位置信息
 			var myPoint = new BMap.Point(myLocation.x,myLocation.y);
-            var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
-            new BMap.Size(23, 25), {  
-                offset: new BMap.Size(10, 25),  
-                imageOffset: new BMap.Size(0, -250)      
-            });
-
             var myMaker =  new BMap.Marker(myPoint,{icon:myIcon});
             map.addOverlay(myMaker);
             var myWindow = {};
             myWindow["point"] = myPoint;
-            myWindow["info"] = "您的位置<br>"+"欢迎使用甲醛仪，预计排队时间一天";
-            
+            myWindow["info"] = "您的位置<br>"+"欢迎使用甲醛仪，预计排队时间一天";          
             addMyInfoWindow(myMaker, myWindow);
+            //批量添加地址信息
             bdGEO();
                  
     }
       
-   	// 将地址解析结果显示在地图上,并调整地图视野
+   	//将地址解析结果显示在地图上,并调整地图视野
    	function bdGEO(){
-		var add = userArr[index];
+		//var add = userArr[index];
+		var add = allAddressVO[index];
 		index++;
 		geocodeSearch(add);
 	}
 		
 	function geocodeSearch(add){
-		if(add.map.deviceState==1){
+		if(add.airBoolean==1){
 			var icon = icon1;
 		}
 		else{
@@ -203,65 +232,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		// 创建地址解析器实例
 		var myGeo = new BMap.Geocoder();
-		var temp = {};
-		temp["nickname"] = add.map.deviceNumber;
-		temp["deviceNumber"] = add.map.deviceNumber;
-		temp["address"] = add.map.address;
-		temp["startDate"] = add.map.startDate;
-		temp["nickname"] = add.map.nickname;
-		temp["deviceState"] = add.map.deviceState;
-		if(index <userArr.length){
+		if(index < allAddressVO.length){
 			setTimeout(window.bdGEO(),200);
 		}
-		myGeo.getPoint(add.map.address, function(point){
-				if (point) {		
-					var maker =  new BMap.Marker(point,{icon:icon});
-               		map.addOverlay(maker);
-               		temp["point"] = point;
-               		addInfoWindow(maker, temp); 
-				}else{
-					/*alert("您选择地址没有解析到结果!"+add.map.address);*/
-				}
+		myGeo.getPoint(add.address, function(point){
+			if (point) {		
+				var maker =  new BMap.Marker(point,{icon:icon});
+              		map.addOverlay(maker);
+              		add["point"] = point;
+              		addInfoWindow(maker, add); 
+			}else{
+				alert("您选择地址没有解析到结果!"+add.map.address);
+			}
 		}, ""); 
 	}
-	
-	/*function addPoint(userArr,icon){
-	    // 创建地址解析器实例
-		var myGeo = new BMap.Geocoder();
-		
-		for (var i = 0; i < userArr.length; i++) {
-			var temp = {};
-			temp["deviceNumber"] = userArr[i].map.deviceNumber;
-			temp["address"] = userArr[i].map.address;
-			temp["startDate"] = userArr[i].map.startDate;
-			temp["nickname"] = userArr[i].map.nickname;
-			temp["deviceState"] = userArr[i].map.deviceState;
-			alert(userArr[i].map.address);
-			myGeo.getPoint(userArr[i].map.address, function(point){
-				if (point) {	
-					var maker =  new BMap.Marker(point,{icon:icon});
-               		map.addOverlay(maker);
-               		temp["point"] = point;
-               		console.log(temp);
-               		addInfoWindow(maker, temp); 
-				}else{
-					alert(userArr[i].map.address+"您选择地址没有解析到结果!");
-				}
-			}, "");
-			
-           }
-	}*/	
    // 添加检测仪信息窗口  
-   function addInfoWindow(marker, poi) {
-   		var startDateStr = poi.startDate.substring(0,poi.startDate.indexOf(" "));
-   		var commonInfo = "用户："+poi.nickname+"<br>"+"仪器编号："+poi.deviceNumber+"<br>"+"检测时间："+startDateStr+"<br>";
-   		var startDate = poi.startDate;
-   		var startDateStr = startDate.substring(0,startDate.indexOf(" "));
-   		if(poi.deviceState==1){
-   			var titleStr = "历史订单<br>"+commonInfo;
+   function addInfoWindow(marker, addPoint) {
+   		var commonInfo;
+   		var titleStr;
+   		if(addPoint.airBoolean==1){
+   			commonInfo = "用户："+addPoint.nickname+"<br>"+"仪器编号："+addPoint.deviceNumber+"<br>"+"电话："+addPoint.phone+"<br>";
+   			titleStr = "空气净化器<br>"+commonInfo;
    		}
    		else{
-   			var titleStr = "预约订单<br>"+commonInfo;
+	   		var startDateStr = addPoint.startDate.substring(0,addPoint.startDate.indexOf(" "));
+	   		var commonInfo = "用户："+addPoint.nickname+"<br>"+"仪器编号："+addPoint.deviceNumber+"<br>"+"检测时间："+startDateStr+"<br>";
+	   		titleStr = "甲醛检测仪<br>"+commonInfo;
    		}
 	    var opts = {
 		  width : 150,     // 信息窗口宽度
@@ -270,9 +266,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  enableMessage:true,//设置允许信息窗发送短息
 		  message:""
 		}
-		var infoWindow = new BMap.InfoWindow("检测地址："+poi.address, opts);  // 创建信息窗口对象 
+		var infoWindow = new BMap.InfoWindow("检测地址："+addPoint.address, opts);  // 创建信息窗口对象 
 		marker.addEventListener("click", function(){          
-			this.openInfoWindow(infoWindow,poi.point);
+			this.openInfoWindow(infoWindow,addPoint.point);
 		});
 	}
 	
@@ -290,5 +286,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			this.openInfoWindow(infoWindow,poi.point);
 		});
 	}
-       	</script>      
+</script>      
 </html>  
