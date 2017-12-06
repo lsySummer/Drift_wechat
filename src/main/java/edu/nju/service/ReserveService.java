@@ -3,6 +3,7 @@ package edu.nju.service;
 import java.util.Date;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,8 @@ import edu.nju.entities.Device;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.OrderVO;
 import edu.nju.utils.Utility;
+import edu.nju.utils.WechatConfig;
+import edu.nju.utils.WechatSend;
 
 @Transactional
 @Service
@@ -30,6 +33,11 @@ public class ReserveService {
 	 */
 	public boolean saveDelInfo(String openId,String did){
 		boolean b = dao.saveDelInfo(openId,did);
+		UserInfo u = gdao.getAfter(openId);
+//		JSONObject data = WechatSend.packJsonmsg(o.getDeviceNumber(),o.getStartDate(),o.getEndDate());
+		//TODO
+		String url="http://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80e3eed8e26e852f&redirect_uri=http%3A%2F%2Fdrift.gmair.net%2FDrift_wechat%2Fapi%2Fwechat%2Fdeliver&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+		WechatSend.sendWechatmsgToUser(u.getOpenid(),"4J8WZn8LtCyvmV5yMpT8RMlcUnUQOVsnCeRxL4DdUDw",url,"",new JSONObject());
 		return b;
 	}
 	

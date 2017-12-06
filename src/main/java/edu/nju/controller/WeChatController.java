@@ -35,15 +35,28 @@ public class WeChatController {
 	@RequestMapping(value = "/center")
 	public String toCenter(HttpServletRequest request, String code,String state, HttpSession session)
 			throws IOException {
-		String htmlPage = "center";
-		String redir = getWechatInfo(htmlPage, code, state,session,request);
+		String redir = getWechatInfo( code, state,session,request);
 		 String ipAdd = HttpRequest.getIpAddress(request);
 		 session.setAttribute("ipAddress", ipAdd);
 		 log.info("ipAdd"+ipAdd);
 		return redir;
 	}
+	
+	@RequestMapping(value = "/getOrder")//管理员修改订单
+	public String getOrder(HttpServletRequest request, String code,String state, HttpSession session)
+			throws IOException {
+		getWechatInfo(code, state,session,request);
+		return "/jsp/Orders";
+	}
+	
+	@RequestMapping(value = "/deliver")//商家发货提醒
+	public String deliver(HttpServletRequest request, String code,String state, HttpSession session)
+			throws IOException {
+		getWechatInfo(code, state,session,request);
+		return "/jsp/Delivery";
+	}
 
-	public String getWechatInfo(String htmlPage, String code, String state,HttpSession session,HttpServletRequest request) throws UnsupportedEncodingException {
+	public String getWechatInfo(String code, String state,HttpSession session,HttpServletRequest request) throws UnsupportedEncodingException {
 		String wechatInfo = WechatLoginUse.wechatInfo(code);
 		JSONObject resultJson;
 		try {

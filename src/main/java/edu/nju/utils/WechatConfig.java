@@ -31,7 +31,7 @@ public class WechatConfig {
 	
 	
 	//微信推送的ma
-//	public static final String PUSH_CODE = "L9Y9HHSN96_maQXSYUyYAbZf_fMeHB2EsR1hk2Eft0s";
+	public static final String TEMPLAT_ID = "wT_MDp_lGUgqA_VPlqE3aaIJtqiBgqMzs1fRuQeqUZs";
 
 	//public static String key = "zimerwechatcreatetimeymd20160816"; //签名秘钥，在微信商户平台里面设置z`z`
 
