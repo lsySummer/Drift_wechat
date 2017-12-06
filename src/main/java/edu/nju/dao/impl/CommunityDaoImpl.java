@@ -50,7 +50,7 @@ public class CommunityDaoImpl implements CommunityDao{
 	public String saveFile(String openid,List<MultipartFile> mfs){
 //		String baseUrl="D:\\upload\\community\\";
 		String baseUrl = context.getRealPath("") + "\\upload\\comment\\";
-		
+		System.out.println(baseUrl);
 		Path path = Paths.get(baseUrl);
 		if(Files.notExists(path)){
 			try {

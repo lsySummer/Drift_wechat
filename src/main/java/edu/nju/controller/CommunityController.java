@@ -3,6 +3,8 @@ package edu.nju.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,7 @@ import edu.nju.service.CommunityService;
 @Controller
 @RequestMapping(value="/community")
 public class CommunityController {
+	List<MultipartFile> photoLists = new ArrayList<MultipartFile>();
 	
 	@Autowired
 	CommunityService service;
@@ -28,7 +31,8 @@ public class CommunityController {
 	@RequestMapping(value = "/upload",method = RequestMethod.POST)
 	public void upload(@RequestParam(value = "file") MultipartFile photo, HttpSession session, HttpServletResponse response){
 		JSONObject result=new JSONObject();
-		
+		photoLists.add(photo);
+		service.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", photoLists, "test");
 		result.put("test", "test");
 		try {
 			PrintWriter out = response.getWriter();
