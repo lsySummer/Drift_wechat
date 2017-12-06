@@ -60,9 +60,9 @@ public class TestController {
 //		mservice.addDeviceList(d, list, 0);
 //		System.out.println(mservice.getDevices().get(0).toString());
 //		System.out.println(mservice.getOrders().get(0).toString());
-		cservice.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", "/usr/local/123.jpg;/usr/234.jpg", "不错很好哈哈哈");
-		System.out.println("写入成功");
-		System.out.println(cservice.getComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").toString());
+//		cservice.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", "/usr/local/123.jpg;/usr/234.jpg", "不错很好哈哈哈");
+//		System.out.println("写入成功");
+//		System.out.println(cservice.getComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").toString());
 		return "success";
 	}
 }
