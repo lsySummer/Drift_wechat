@@ -62,6 +62,6 @@ public class DeliveryController {
 	@RequestMapping(value = "/confirm")
 	public String deliveryConfirm(HttpSession session, HttpServletResponse response){
 		service.confirm((String)session.getAttribute("openid"));
-		return "jsp/Orders";
+		return "jsp/Upload";
 	}
 }

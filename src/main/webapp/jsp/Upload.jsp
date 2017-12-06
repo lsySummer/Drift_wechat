@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="weui-cells weui-cells_form">
                     <div class="weui-cell">
                         <div class="weui-cell__bd">
-                            <textarea id="txt_des" class="weui-textarea" placeholder="" rows="3"></textarea>
+                            <textarea id="txt_des" name="txt" class="weui-textarea" placeholder="" rows="3"></textarea>
                             <div class="weui-textarea-counter"><span id="des_count">0</span>/140</div>
                         </div>
                     </div>

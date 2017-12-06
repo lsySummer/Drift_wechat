@@ -1,6 +1,5 @@
 package edu.nju.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -27,18 +26,33 @@ public class CommunityController {
 	@Autowired
 	CommunityService service;
 	
-	
 	@RequestMapping(value = "/upload",method = RequestMethod.POST)
 	public void upload(@RequestParam(value = "file") MultipartFile photo, HttpSession session, HttpServletResponse response){
 		JSONObject result=new JSONObject();
 		photoLists.add(photo);
-		service.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", photoLists, "test");
-		result.put("test", "test");
+		result.put("status", "200");
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(result);
 			out.flush();
 			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/txt")
+	public void textUplood(String txt, HttpSession session, HttpServletResponse response){
+		JSONObject result = new JSONObject();
+		service.addComment((String)session.getAttribute("openid"), photoLists, txt);
+		result.put("status", "200");
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(result);
+			out.flush();
+			out.close();
+			photoLists.clear();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
