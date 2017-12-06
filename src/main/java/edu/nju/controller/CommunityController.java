@@ -45,6 +45,7 @@ public class CommunityController {
 	@RequestMapping(value = "/txt")
 	public void textUplood(String txt, HttpSession session, HttpServletResponse response){
 		JSONObject result = new JSONObject();
+//		service.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", photoLists, txt);
 		service.addComment((String)session.getAttribute("openid"), photoLists, txt);
 		result.put("status", "200");
 		try {
