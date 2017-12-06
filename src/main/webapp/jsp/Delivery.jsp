@@ -16,8 +16,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 	<script>
 	function confirm(){
-		$.get('/Drift_wechat/api/delivery/confirm');
-		$.toast("收货成功");
+		if(document.getElementById('confirm').value == "true"){
+			$.get('/Drift_wechat/api/delivery/confirm');
+			$.toast("收货成功");
+		}else{
+			$.toast("暂时无法收货", "forbidden");
+		}
+	}
+	function detail(){
+		if(document.getElementById('detail').value == "true"){
+			window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp';
+		}else{
+			$.toast("暂时无法填写", "forbidden");
+		}
 	}
 	</script>
   <head>
@@ -27,35 +38,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<div class="weui-tab">
+  	<!-- <div class="weui-tab"> -->
   	<div class="weui-navbar">
-	  <div class="weui-navbar__item">
 	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/BaiduMap.jsp">
 	    	首页
 	    </a>
-	  </div>
-	  <div class="weui-navbar__item">
 	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Orders.jsp">
 	    	我的订单
-	    </a>
-	  </div>
-	  <div class="weui-navbar__item">
+	    </a> 
 	  	<a class="weui-navbar__item weui-bar__item--on" href="/Drift_wechat/jsp/Delivery.jsp">
 	    	仪器传递
 	    </a>
-	  </div>
-	  <div class="weui-navbar__item">
 	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/MyIndex.jsp">
 	    	个人中心
 	    </a>
-	  </div>
 	</div>
 	
 	<div id="about" class="weui-popup__container">
 	  <div class="weui-popup__overlay"></div>
 	  <div class="weui-popup__modal">
-	  <h1> 快递查询 </h1>
-	  </br>
+	 <h1> 快递查询 </h1>
 	  <table class="table table-hover" cellspacing="8">
 			  <thead>
 			    <tr>
@@ -69,7 +71,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <a href="javascript:close();" class="weui-btn weui-btn_primary">关闭</a>
 	  </div>
 	</div>
-	<h1>仪器传递</h1>
 	</br>
 	<div class="weui-tab__bd">
     <div class="weui-tab__bd-item weui-tab__bd-item--active" id="container">
@@ -90,8 +91,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		  <div class="weui-form-preview__ft">
-		  	<a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(1);">快递查询</a>
-    		<button id="confirm" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascript:confirm();">确认收货</button>
+		  	<a id="d1" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(1);">快递查询</a>
+    		<button id="confirm" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascript:confirm();">确认收货</button>
   		  </div>
 		</div>
 		</br>
@@ -111,8 +112,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		  <div class="weui-form-preview__ft">
-		  	<a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(2);">快递查询</a>
-    		<button id="detail" class="weui-form-preview__btn weui-form-preview__btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp'">填写快递信息</button>
+		  	<a id="d2" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(2);">快递查询</a>
+    		<button id="detail" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascrtpt:detail();">填写快递信息</button>
   		  </div>
 		</div>
 	</div>

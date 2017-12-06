@@ -1,13 +1,10 @@
 package edu.nju.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edu.nju.entities.Device;
+import edu.nju.service.CommunityService;
 import edu.nju.service.ManageService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
@@ -24,6 +21,8 @@ public class TestController {
 	ManageService mservice;
 	@Autowired
 	ReserveGetService gservice;
+	@Autowired
+	CommunityService cservice;
 	
 	@RequestMapping(value = "/insert")
 	public String register() {
@@ -39,7 +38,7 @@ public class TestController {
 //		for(int i=0;i<dlist.size();i++){
 //		mservice.setArea(dlist.get(i).getId(), areas[i], 0);
 //		}
-		System.out.println(service.reserveDevice("江苏省", 0).getId());
+//		System.out.println(service.reserveDevice("江苏省", 0).getId());
 //		System.out.println(service.reserveDevice("江苏", 1).getId());
 //		service.makeOrder("34567", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 6), Utility.getSpecifiedDayAfter(new Date(), 7));
 //		service.makeOrder("45678", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 8), Utility.getSpecifiedDayAfter(new Date(), 9));
@@ -61,6 +60,9 @@ public class TestController {
 //		mservice.addDeviceList(d, list, 0);
 //		System.out.println(mservice.getDevices().get(0).toString());
 //		System.out.println(mservice.getOrders().get(0).toString());
+		cservice.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", "/usr/local/123.jpg;/usr/234.jpg", "不错很好哈哈哈");
+		System.out.println("写入成功");
+		System.out.println(cservice.getComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").toString());
 		return "success";
 	}
 }

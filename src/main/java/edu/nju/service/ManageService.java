@@ -1,6 +1,5 @@
 package edu.nju.service;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.nju.dao.BaseDao;
 import edu.nju.dao.ManageDao;
 import edu.nju.dao.ReserveGetDao;
+import edu.nju.dao.UserDao;
 import edu.nju.entities.Device;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
@@ -31,6 +31,8 @@ public class ManageService {
 	ReserveGetService gservice;
 	@Autowired
 	ReserveGetDao reserveGetDao;
+	@Autowired
+	UserDao userDao;
 	
 	//获得所有设备状态信息
 	public List<DeviceVO> getDevices(){
@@ -66,37 +68,42 @@ public class ManageService {
 		Map<DeviceVO, Date> result = new HashMap<>();
 		//获得要修改的订单里的DeviceId
 		Order order = reserveGetDao.getOrderByorderId(orderID);
-		
-		String deviceId = order.getDeviceId();
-		//获得所有的Device
-		List<DeviceVO> devices = manageDao.getDevices();
-		for(DeviceVO deviceVO:devices){
-			String id = deviceVO.getId();
-			//排除掉现在使用的device
-			if(id.equals(deviceId)){
-				continue;
-			}
-			//获得这个设备的所有订单
-			List<Order> orders = reserveGetDao.getOrdersByDeviceId(id);
-			Date today = new Date();
-			//如果这个设备没有订单，那么就从明天可预订
-			if(null == orders || orders.isEmpty()){
-				result.put(deviceVO,  Utility.getSpecifiedDayAfter(today, 1));
-			}else{
-				//如果有订单，找到最新的endDate
-				Date date = orders.get(0).getEndDate();
-				for(Order o:orders){
-					if (o.getEndDate().after(date)) {
-						date = o.getEndDate();
-					}
+		String uid = order.getOpenId();
+		List<UserInfo> ulist = userDao.getUserById(uid);
+		if(ulist.size()>0){
+			String area = ulist.get(0).getAddress().split(" ")[0];
+			String deviceId = order.getDeviceId();
+			//获得所有的Device
+			List<DeviceVO> devices = manageDao.getDevices();
+			for(DeviceVO deviceVO:devices){
+				String id = deviceVO.getId();
+				//排除掉现在使用的device
+				if(id.equals(deviceId)||(!deviceVO.getArea().contains(area))){
+					continue;
 				}
-				if(date.before(today)){
-					result.put(deviceVO, Utility.getSpecifiedDayAfter(today, 1));
+				//获得这个设备的所有订单
+				List<Order> orders = reserveGetDao.getOrdersByDeviceId(id);
+				Date today = new Date();
+				//如果这个设备没有订单，那么就从明天可预订
+				if(null == orders || orders.isEmpty()){
+					result.put(deviceVO,  Utility.getSpecifiedDayAfter(today, 1));
 				}else{
-					result.put(deviceVO, Utility.getSpecifiedDayAfter(date, 1));
-				}
-			} 
+					//如果有订单，找到最新的endDate
+					Date date = orders.get(0).getEndDate();
+					for(Order o:orders){
+						if (o.getEndDate().after(date)) {
+							date = o.getEndDate();
+						}
+					}
+					if(date.before(today)){
+						result.put(deviceVO, Utility.getSpecifiedDayAfter(today, 1));
+					}else{
+						result.put(deviceVO, Utility.getSpecifiedDayAfter(date, 1));
+					}
+				} 
+			}
 		}
+		
 		return result;
 	}
 	

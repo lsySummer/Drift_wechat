@@ -21,29 +21,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   	<div class="weui-navbar">
-	  <div class="weui-navbar__item">
 	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/BaiduMap.jsp">
 	    	首页
 	    </a>
-	  </div>
-	  <div class="weui-navbar__item">
 	  	<a class="weui-navbar__item weui-bar__item--on" href="/Drift_wechat/jsp/Orders.jsp">
 	    	我的订单
-	    </a>
-	  </div>
-	  <div class="weui-navbar__item">
+	    </a> 
 	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Delivery.jsp">
 	    	仪器传递
 	    </a>
-	  </div>
-	  <div class="weui-navbar__item">
 	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/MyIndex.jsp">
 	    	个人中心
 	    </a>
-	  </div>
 	</div>
   	<header class='demos-header'>
-      <h3 class="demos-title">我的预约</h3>
+      <!-- <h3 class="demos-title">我的预约</h3> -->
     </header>
     <div class="container" id="container">
     	<div class="weui-form-preview" id="item1">
