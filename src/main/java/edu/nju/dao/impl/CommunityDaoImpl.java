@@ -70,7 +70,7 @@ public class CommunityDaoImpl implements CommunityDao{
 						fileName.length());
 				String newName=i+"_"+suffix;
 				String url = baseUrl + newName;
-				urllst = urllst+url+";";
+				urllst = newName+";";
 				try {
 					mf.transferTo(new File(url));
 				}catch(Exception e){
