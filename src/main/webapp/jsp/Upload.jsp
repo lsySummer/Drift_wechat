@@ -19,18 +19,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
  <body>
-  <p class="weui-cells__title">图片手动上传</p>
+ <div class="weui-cells__title">使用心得</div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <textarea id="txt_des" class="weui-textarea" placeholder="" rows="3"></textarea>
+                            <div class="weui-textarea-counter"><span id="des_count">0</span>/140</div>
+                        </div>
+                    </div>
+                </div>
+  <p class="weui-cells__title">图片上传</p>
             <div class="weui-cells weui-cells_form" id="uploaderCustom">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
                         <div class="weui-uploader">
                             <div class="weui-uploader__hd">
                                 <p class="weui-uploader__title">图片上传</p>
+                                <div class="weui-uploader__info"><span id="uploadCount">0</span>/5</div>
                             </div>
                             <div class="weui-uploader__bd">
                                 <ul class="weui-uploader__files" id="uploaderCustomFiles"></ul>
                                 <div class="weui-uploader__input-box">
-                                    <input id="uploaderCustomInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                    <input id="uploaderCustomInput" name="photo" class="weui-uploader__input" type="file" accept="image/*" multiple="">
                                 </div>
                             </div>
                         </div>
@@ -40,7 +50,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="weui-btn-area">
                 <a id="uploaderCustomBtn" href="javascript:" class="weui-btn weui-btn_primary">上传</a>
             </div>
-        </div>
  
   <script type="text/javascript" src="/Drift_wechat/js/myJS/Upload.js"></script>
 </body>
