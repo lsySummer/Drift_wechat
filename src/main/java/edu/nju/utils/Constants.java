@@ -10,7 +10,7 @@ public class Constants {
 	public static boolean SELECT_CACHE = true;
 	
 	public static int USER_DATE = 2;
-	
+	public static final String DOMAIN = "drift.gmair.net";
 //	private static int DEVICE_NUM=50;
 	
 }

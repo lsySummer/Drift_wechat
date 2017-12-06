@@ -1,8 +1,11 @@
 package edu.nju.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.nju.dao.CommunityDao;
 import edu.nju.entities.UserComment;
@@ -18,8 +21,8 @@ public class CommunityService {
 	@Autowired
 	CommunityDao dao;
 	
-	public boolean addComment(String openid,String urls,String comment){
-		boolean b = dao.addComment(openid,urls,comment);
+	public boolean addComment(String openid,List<MultipartFile> files,String comment){
+		boolean b = dao.addComment(openid,files,comment);
 		return b;
 	}
 	
