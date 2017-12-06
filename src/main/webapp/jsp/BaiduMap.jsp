@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2"></script>
+<script type='text/javascript' src='/Drift_wechat/js/swiper.js' charset='utf-8'></script>
 <style type="text/css">  
 	.placeholder {
 	  padding: 0 10px;
@@ -61,54 +62,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="toolbar">
           <div class="toolbar-inner">
             <a href="javascript:;" class="picker-button close-popup">关闭</a>
-            <p class="title">标题</p>
+            <p class="title">评论区</p>
           </div>
         </div>
         
         <div class="modal-content">
           <div class="weui-grids">
-            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
-              <div class="weui-grid__icon">
-                <img src="/Drift_wechat/images/icon_nav_article.png" alt="">
-              </div>
-              <p class="weui-grid__label">发布</p>
+          
+            <a href="javascript:;" class="weui-grid js_grid pb" >
+            	<div>
+                	<img  width=100% height=100% src="/Drift_wechat/images/product.png" alt="">
+                </div>	
             </a>
             
             <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
-              <div class="weui-grid__icon">
-                <img src="/Drift_wechat/images/icon_nav_article.png" alt="">
-              </div>
-              <p class="weui-grid__label">发布</p>
+            	<div>
+                	<img  width=100% height=100% src="/Drift_wechat/images/product.png" alt="">
+                </div>	
             </a>
             
             <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
-              <div class="weui-grid__icon">
-                <img src="/Drift_wechat/images/icon_nav_article.png" alt="">
-              </div>
-              <p class="weui-grid__label">发布</p>
+            	<div>
+                	<img  width=100% height=100% src="/Drift_wechat/images/product.png" alt="">
+                </div>	
             </a>
             
          <article class="weui-article">
-          <section>
-            <h2 class="title">章标题</h2>
-            <section>
-              <h3>1.1 节标题</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.
-              </p>
-	           <h3>1.2 节标题</h3>
-	           <p>
-	                Lorem ipsum dolor sit aet, consectetur adipsicing elit, sed do eiusod
-	                tepor incididunt ut labore et doloe magna aliqua. Ut nim ad minim veniam,
-	                cillum dolore eu fugiat nulla pariatur. Excepteur snt occaecat cupidatat non
-	                proident, sunt in culpa qui officia deserunt molli anim id est laborum.
-	              </p>
-	            </section>
-	          </section>
-	       </article>
+	          <section>
+	              <p>甲醛检测仪太好用了！！！为你打call!</p>
+		          <p>非常感谢云草纲目公司！</p>
+		      </section>
+	      </article>
                    
           </div>
         </div>
@@ -116,8 +100,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     <div>
 </body>
-<script tpe="text/javascript">	//初始化信息
-	var indvar allAddressVO = [];
+<script type="text/javascript">
+
+	 var pbset = $.photoBrowser({
+        items: [
+          {
+            image: "/Drift_wechat/images/product.png",
+            caption: "尝试 Vue.js 最简单的方法是使用 JSFiddle Hello World 例子。在浏览器新标签页中打开它，跟着我们查看一些基础示例。如果你喜欢用包管理器下载/安装，查看安装教程。"
+          },
+          {
+            image: "/Drift_wechat/images/product.png",
+            caption: "组件（Component）是 Vue.js 最强大的功能之一。"
+          },
+          {
+            image: "/Drift_wechat/images/product.png",
+            caption: "组件可以扩展 HTML 元素，封装可重用的代码"
+          },
+          {
+            image: "/Drift_wechat/images/product.png",
+            caption: "在较高层面上，组件是自定义元素，Vue.js 的编译器为它添加特殊功能。在有些情况下，组件也可以是原生 HTML 元素的形式，以 is 特性扩展。"
+          }
+        ],
+        initIndex: 1
+      });
+      $(".pb").click(function() {
+      	$.closePopup();
+        pbset.open();
+      });
+      	//初始化信息
+	var index = 0;
+	var allAddressVO = [];
 	var myLocation = {"x":118.786078,"y":32.061531};
 	
 	var icon1 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
@@ -139,7 +151,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	//页面加载完成启动
 	$("document").ready(function(){
-		getMap();
+		weChatMap();
 	});
 	
 	function weChatMap(){
