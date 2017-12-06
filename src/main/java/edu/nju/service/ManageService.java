@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,10 @@ import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
+import edu.nju.utils.Constants;
 import edu.nju.utils.Utility;
+import edu.nju.utils.WechatConfig;
+import edu.nju.utils.WechatSend;
 
 @Transactional
 @Service
@@ -115,6 +119,11 @@ public class ManageService {
 		Date endDate = Utility.getSpecifiedDayAfter(startDate, 1);
 		o.setEndDate(endDate);
 		baseDao.update(o);
+//		String tOpenid="oBaSqs929zqFraeZy2YXWeqAQJ7o";
+		//TODO
+		JSONObject data = WechatSend.packJsonmsg(o.getDeviceNumber(),o.getStartDate(),o.getEndDate());
+		String url="http://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80e3eed8e26e852f&redirect_uri=http%3A%2F%2Fdrift.gmair.net%2FDrift_wechat%2Fapi%2Fwechat%2FgetOrder&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+		WechatSend.sendWechatmsgToUser(o.getOpenId(),WechatConfig.TEMPLAT_ID,url,"",data);
 		return o;
 	}
 	
