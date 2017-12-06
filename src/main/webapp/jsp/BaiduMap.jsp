@@ -53,16 +53,72 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:;">我要插队</button>
 		  </div>
 	</div>
+	
+	<div id="comment" class='weui-popup__container popup-bottom'>
+      <div class="weui-popup__overlay"></div>
+      <div class="weui-popup__modal">
+      
+        <div class="toolbar">
+          <div class="toolbar-inner">
+            <a href="javascript:;" class="picker-button close-popup">关闭</a>
+            <p class="title">标题</p>
+          </div>
+        </div>
+        
+        <div class="modal-content">
+          <div class="weui-grids">
+            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="/Drift_wechat/images/icon_nav_article.png" alt="">
+              </div>
+              <p class="weui-grid__label">发布</p>
+            </a>
+            
+            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="/Drift_wechat/images/icon_nav_article.png" alt="">
+              </div>
+              <p class="weui-grid__label">发布</p>
+            </a>
+            
+            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="/Drift_wechat/images/icon_nav_article.png" alt="">
+              </div>
+              <p class="weui-grid__label">发布</p>
+            </a>
+            
+         <article class="weui-article">
+          <section>
+            <h2 class="title">章标题</h2>
+            <section>
+              <h3>1.1 节标题</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat.
+              </p>
+	           <h3>1.2 节标题</h3>
+	           <p>
+	                Lorem ipsum dolor sit aet, consectetur adipsicing elit, sed do eiusod
+	                tepor incididunt ut labore et doloe magna aliqua. Ut nim ad minim veniam,
+	                cillum dolore eu fugiat nulla pariatur. Excepteur snt occaecat cupidatat non
+	                proident, sunt in culpa qui officia deserunt molli anim id est laborum.
+	              </p>
+	            </section>
+	          </section>
+	       </article>
+                   
+          </div>
+        </div>
+          
+      </div>
+    <div>
 </body>
-
-<script type="text/javascript">
-	//初始化信息
-	var index = 0;
-	var index2 = 0;
-	var allAddressVO = [];
-	var userArr = [];
-	var myLocation = {};
-	var airAddress = [];
+<script tpe="text/javascript">	//初始化信息
+	var indvar allAddressVO = [];
+	var myLocation = {"x":118.786078,"y":32.061531};
 	
 	var icon1 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
          new BMap.Size(23, 25), {  
@@ -83,7 +139,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	//页面加载完成启动
 	$("document").ready(function(){
-		weChatMap();
+		getMap();
 	});
 	
 	function weChatMap(){
@@ -178,7 +234,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     function map_init() {  
             map = new BMap.Map("map");  
             //第1步：设置地图中心点，当前城市  
-            var point = new BMap.Point(myLocation.x,myLocation.y);  
+            var point = new BMap.Point(myLocation.x,myLocation.y);
             //第2步：初始化地图,设置中心点坐标和地图级别。  
             map.centerAndZoom(point, 18);  
             //第3步：启用滚轮放大缩小  
@@ -269,6 +325,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var infoWindow = new BMap.InfoWindow("检测地址："+addPoint.address, opts);  // 创建信息窗口对象 
 		marker.addEventListener("click", function(){          
 			this.openInfoWindow(infoWindow,addPoint.point);
+			$("#comment").popup();
 		});
 	}
 	
