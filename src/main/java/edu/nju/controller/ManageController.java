@@ -28,12 +28,16 @@ import edu.nju.entities.Device;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
 import edu.nju.service.ManageService;
+import edu.nju.service.ReserveService;
 
 @Controller
 @RequestMapping(value="/manage")
 public class ManageController {
 	@Autowired
 	ManageService manageService;
+	
+	@Autowired
+	ReserveService reserveService;
 	
 	@RequestMapping(value = "/addDevice")
 	public String toAddDevice(HttpSession session,Model model) {
@@ -67,7 +71,7 @@ public class ManageController {
 	
 	@RequestMapping(value = "/companySend")
 	public String companySend(HttpSession session,Model model) {
-		List<OrderVO> orderList = manageService.getOrders();
+		List<OrderVO> orderList = reserveService.getCompanySend();
 		model.addAttribute("orderList", orderList);
 		return "jsp/Manage/companySend";
 	}
@@ -80,8 +84,14 @@ public class ManageController {
 	
 	@RequestMapping(value = "/companyRevice")
 	public String companyRevice(String orderId, HttpSession session,Model model) {
-		List<OrderVO> orderList = manageService.getOrders();
+		List<OrderVO> orderList = reserveService.getCompanyReceive();
 		model.addAttribute("orderList", orderList);
+		return "jsp/Manage/companyRevice";
+	}
+	
+	@RequestMapping(value = "/reviceConfirm")
+	public String reviceConfirm(String orderId, HttpSession session,Model model) {
+		reserveService.companyReceive(orderId);
 		return "jsp/Manage/companyRevice";
 	}
 	

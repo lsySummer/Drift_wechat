@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 		function confirm(obj){
 			orderId = obj.id;
-			$.getJSON('/Drift_wechat/api/manage/companyRevice?orderId='+orderId, function(json){
+			$.getJSON('/Drift_wechat/api/manage/reviceConfirm?orderId='+orderId, function(json){
 				$("#myAlert").show();
 			});
 		}
