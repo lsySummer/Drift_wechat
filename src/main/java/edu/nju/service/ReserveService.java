@@ -138,6 +138,9 @@ public class ReserveService {
 	 */
 	public boolean companyReceive(String orderid){
 		Order o = gdao.getOrderByorderId(orderid);
+		Device d = gdao.getDeviceById(o.getDeviceId()).get(0);
+		d.setQueueNum(d.getQueueNum()-1);
+		baseDao.update(d);
 		o.setState("下家已收货");
 		try{
 			baseDao.update(o);

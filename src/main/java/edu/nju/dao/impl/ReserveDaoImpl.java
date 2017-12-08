@@ -34,7 +34,7 @@ public class ReserveDaoImpl implements ReserveDao{
 	@Override
 	public boolean saveDelInfo(String openId,String did) {
 		Device d = rgetDao.getDeviceByOpenId(openId);
-		d.setQueueNum(d.getQueueNum()-1);
+//		d.setQueueNum(d.getQueueNum()-1);
 		List<Order> orderList = getById(d.getId());
 		if(orderList.size()>0){
 			Order o = orderList.get(orderList.size()-1);
@@ -53,7 +53,7 @@ public class ReserveDaoImpl implements ReserveDao{
 			baseDao.update(o);
 			baseDao.save(info);
 		}
-		baseDao.update(d);
+//		baseDao.update(d);
 		return true;
 	}
 	
@@ -105,6 +105,7 @@ public class ReserveDaoImpl implements ReserveDao{
 	@Override
 	public boolean confirm(String openid) {
 		Device d = rgetDao.getDeviceByOpenId(openid);
+		d.setQueueNum(d.getQueueNum()-1);
 		String hql = "from Order where openId =:openid";
 		UserInfo currentUser = userDao.getUser(openid);
 		d.setLoc(currentUser.getAddress());
@@ -123,8 +124,6 @@ public class ReserveDaoImpl implements ReserveDao{
 				baseDao.update(beforeOrder);
 			}
 			baseDao.update(o);
-			
-			
 			return true;
 		}
 		return false;
