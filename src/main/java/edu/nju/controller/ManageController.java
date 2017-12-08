@@ -28,6 +28,7 @@ import edu.nju.entities.Device;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
 import edu.nju.service.ManageService;
+import edu.nju.service.ReserveService;
 
 @Controller
 @RequestMapping(value="/manage")
@@ -35,34 +36,79 @@ public class ManageController {
 	@Autowired
 	ManageService manageService;
 	
+	@Autowired
+	ReserveService reserveService;
+	
 	@RequestMapping(value = "/addDevice")
 	public String toAddDevice(HttpSession session,Model model) {
 		//String filePath = ManageController.class.getClassLoader().getResource("../province.txt").getPath();
 		List<String> provinces = new ArrayList<String>();
 		provinces = readFile();
 		model.addAttribute("provinces", provinces);
-		return "jsp/addDevice";
+		return "jsp/Manage/addDevice";
 	}
 	
 	@RequestMapping(value = "/index")
 	public String getIndex(HttpSession session,Model model) {
 		List<DeviceVO> deviceList = manageService.getDevices();
 		model.addAttribute("deviceList", deviceList);
-		return "jsp/DeviceList";
+		return "jsp/Manage/DeviceList";
 	}
 	
 	@RequestMapping(value = "/deviceList")
 	public String getDeviceList(HttpSession session,Model model) {
 		List<DeviceVO> deviceList = manageService.getDevices();
 		model.addAttribute("deviceList", deviceList);
-		return "jsp/DeviceList";
+		return "jsp/Manage/DeviceList";
 	}
 	
 	@RequestMapping(value = "/orderList")
 	public String getOrderList(HttpSession session,Model model) {
 		List<OrderVO> orderList = manageService.getOrders();
 		model.addAttribute("orderList", orderList);
-		return "jsp/OrderList";
+		return "jsp/Manage/OrderList";
+	}
+	
+	@RequestMapping(value = "/companySend")
+	public String companySend(HttpSession session,Model model) {
+		List<OrderVO> orderList = reserveService.getCompanySend();
+		model.addAttribute("orderList", orderList);
+		return "jsp/Manage/companySend";
+	}
+	
+	@RequestMapping(value = "/deliveryNum")
+	public void writeDeliveryNum(String orderId, String deliveryNum, HttpSession session, HttpServletResponse response) {
+		reserveService.companySend(orderId, deliveryNum);
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(true);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/companyReceive")
+	public String companyRevice(String orderId, HttpSession session,Model model) {
+		List<OrderVO> orderList = reserveService.getCompanyReceive();
+		model.addAttribute("orderList", orderList);
+		return "jsp/Manage/companyReceive";
+	}
+	
+	@RequestMapping(value = "/receiveConfirm")
+	public void reviceConfirm(String orderId, HttpSession session, HttpServletResponse response) {
+		reserveService.companyReceive(orderId);
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(true);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value = "/modify")
