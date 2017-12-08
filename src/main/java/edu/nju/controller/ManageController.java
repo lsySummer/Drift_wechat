@@ -41,28 +41,48 @@ public class ManageController {
 		List<String> provinces = new ArrayList<String>();
 		provinces = readFile();
 		model.addAttribute("provinces", provinces);
-		return "jsp/addDevice";
+		return "jsp/Manage/addDevice";
 	}
 	
 	@RequestMapping(value = "/index")
 	public String getIndex(HttpSession session,Model model) {
 		List<DeviceVO> deviceList = manageService.getDevices();
 		model.addAttribute("deviceList", deviceList);
-		return "jsp/DeviceList";
+		return "jsp/Manage/DeviceList";
 	}
 	
 	@RequestMapping(value = "/deviceList")
 	public String getDeviceList(HttpSession session,Model model) {
 		List<DeviceVO> deviceList = manageService.getDevices();
 		model.addAttribute("deviceList", deviceList);
-		return "jsp/DeviceList";
+		return "jsp/Manage/DeviceList";
 	}
 	
 	@RequestMapping(value = "/orderList")
 	public String getOrderList(HttpSession session,Model model) {
 		List<OrderVO> orderList = manageService.getOrders();
 		model.addAttribute("orderList", orderList);
-		return "jsp/OrderList";
+		return "jsp/Manage/OrderList";
+	}
+	
+	@RequestMapping(value = "/companySend")
+	public String companySend(HttpSession session,Model model) {
+		List<OrderVO> orderList = manageService.getOrders();
+		model.addAttribute("orderList", orderList);
+		return "jsp/Manage/companySend";
+	}
+	
+	@RequestMapping(value = "/deliveryNum")
+	public String writeDeliveryNum(String orderId, String deliveryNum, HttpSession session,Model model) {
+		
+		return "jsp/Manage/companySend";
+	}
+	
+	@RequestMapping(value = "/companyRevice")
+	public String companyRevice(String orderId, HttpSession session,Model model) {
+		List<OrderVO> orderList = manageService.getOrders();
+		model.addAttribute("orderList", orderList);
+		return "jsp/Manage/companyRevice";
 	}
 	
 	@RequestMapping(value = "/modify")

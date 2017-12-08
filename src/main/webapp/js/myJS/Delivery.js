@@ -25,6 +25,8 @@ $.getJSON('/Drift_wechat/api/delivery/get',function(json){
 			}
 			if(json.send != "暂无物流信息"){
 				document.getElementById('d2').style.color="green";
+				document.getElementById('detail').style.color="grey";
+				document.getElementById('detail').value="false";
 			}
 			document.getElementById('next').innerHTML=json.after;
 			document.getElementById('deliveryNum2').innerHTML=json.send;

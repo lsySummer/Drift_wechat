@@ -28,6 +28,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <body>
     <c:import url="manageNavi.jsp"/>
      <!--主要区域开始-->
+     <div id="myAlert" class="alert alert-success" style="display:none;text-align:center">
+				<a href="#" class="close" data-dismiss="alert">&times;</a>
+				<strong>发货成功！</strong>
+	</div>
      <div class="row">
      	<div class="col-sm-2"></div> 
         <div id="main"  class="col-sm-8">
@@ -42,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <th>电话</th>
 			      <th>地址</th>
 			      <th>订单状态</th>
-			      <th>修改订单</th>
+			      <th>填写快递</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -68,35 +72,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">订单设备修改</h4>
+                <h4 class="modal-title" id="myModalLabel">公司发货</h4>
             </div>
             <div class="modal-body" id="modal-body">
              <div class="form-group">
-			    <label for="name" class="col-sm-2 control-label">设备编号:</label>
-			    <div class="col-sm-6">
-					<select class="form-control" name="deviceNum" id="deviceNum" onchange="changetime(this)">
-					</select>
+			    <label  class="col-sm-2 control-label">快递号:</label>
+			    <div class="col-sm-8">
+			      <input  class="form-control" id="number" name="number" placeholder="请输入快递号">
 			    </div>
 			  </div>
-			  </br>
-			  </br>
-			  <div class="form-group">
-			    <label for="name" class="col-sm-2 control-label">可用时间:</label>
-			    <div class="col-sm-6">
-					<select class="form-control" name="times" id="times">
-					</select>
-			    </div>
-			  </div>
-			</div> 
 			</br>
 			<div align="center"><button class="btn btn-success" type="button" id="modify" onclick="javascript:confirm();">确认提交</button></div>
             </br>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
-    </div>
 		<script>
-		var result;
 		var orderId;
 		$(function(){
 			$('#naviUL li').click(function(){
@@ -105,76 +96,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		});
 		function modify(obj){
-			$.getJSON('/Drift_wechat/api/manage/modify?order='+obj.id,function(json){
-				result = json;
-				orderId = obj.id;
-				var insert = "";
-				for(var key in json){
-					insert += '<option value="'+ json[key].id +'">'+ json[key].number +'</option>';
-				}
-				document.getElementById("deviceNum").innerHTML = insert;
-				var insert2 = '';
-				var temp = new Date(getDate(document.getElementById("deviceNum").value));
-				var start = temp.getFullYear() + '-' + getFormatDate(temp.getMonth()+1)+'-'+getFormatDate(temp.getDate());
-				for(var i = 0; i < 7; i ++){
-					insert2 += '<option value="'+ start +'">'+ start +'</option>';
-					start = getNextDay(start);
-				}
-				document.getElementById("times").innerHTML = insert2;
-				$('#myModal').modal('show');
-			});
+			orderId = obj.id;
+			$('#myModal').modal('show');
 		}
 		function confirm(){
-			var deviceId = document.getElementById("deviceNum").value;
-			var deviceNumber = getName(document.getElementById("deviceNum").value);
-			var date = document.getElementById("times").value;
-			$.getJSON('/Drift_wechat/api/manage/confirm?deviceId='+deviceId+"&date="+date+"&deviceNumber="+deviceNumber+"&orderId="+orderId,function(json){
+			var deliveryNum = document.getElementById("number").value;
+			$.getJSON('/Drift_wechat/api/manage/deliveryNum?orderId='+orderId+"&deliveryNum="+deliveryNum,function(json){
 				$('#myModal').modal('hide');
 				window.location.href='/Drift_wechat/api/manage/orderList';
 			});
 		}
-		function changetime(obj){
-			var insert = '';
-			var temp = new Date(getDate(obj.value));
-			var start = temp.getFullYear() + '-' + getFormatDate(temp.getMonth()+1)+'-'+getFormatDate(temp.getDate());
-			for(var i = 0; i < 7; i ++){
-				insert += '<option value="'+ start +'">'+ start +'</option>';
-				start = getNextDay(start);
-			}
-			document.getElementById("times").innerHTML = insert;
-		}
-		function getNextDay(date){
-	       	var date = new Date(date);
-		    date.setDate(date.getDate() + 1);
-		    var month = date.getMonth() + 1;
-		    var day = date.getDate();
-		    return date.getFullYear() + '-' + getFormatDate(month) + '-' + getFormatDate(day);
-        }
-        function getFormatDate(arg) {
-		    if (arg == undefined || arg == '') {
-		        return '';
-		    }
-		    var re = arg + '';
-		    if (re.length < 2) {
-		        re = '0' + re;
-		    }
-		    return re;
-		}
-		function getDate(id){
-			for(var key in result){
-				if(result[key].id == id){
-					return result[key].date;
-				}
-			}
-		}
-		function getName(id){
-			for(var key in result){
-				if(result[key].id == id){
-					return result[key].number;
-				}
-			}
-		}
 		</script>  
-           
     </body>
-<html>
+</html>
