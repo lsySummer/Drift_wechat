@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.nju.dao.BaseDao;
 import edu.nju.dao.ReserveDao;
 import edu.nju.dao.ReserveGetDao;
+import edu.nju.dao.UserDao;
+import edu.nju.entities.DeliveryInfo;
 import edu.nju.entities.Device;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
@@ -28,6 +30,8 @@ public class ReserveService {
 	ReserveGetDao gdao;
 	@Autowired
 	BaseDao baseDao;
+	@Autowired
+	UserDao userDao;
 	
 	/**
 	 * @param did 快递单号
@@ -119,9 +123,15 @@ public class ReserveService {
 	 * @return
 	 * 公司发货
 	 */
-	public boolean companySend(String orderid){
+	public boolean companySend(String orderid,String deliveryId){
 		Order o = gdao.getOrderByorderId(orderid);
 		o.setState("上家已发货");
+		DeliveryInfo dinfo = new DeliveryInfo();
+		dinfo.setDeliveryNumber(deliveryId);
+		UserInfo u = userDao.getUser(o.getOpenId());
+		dinfo.setReceiveId(u.getOpenid());
+		dinfo.setSendId("thisiscomponyinfomation");
+		baseDao.save(dinfo);
 		try{
 			baseDao.update(o);
 			return true;
@@ -155,14 +165,17 @@ public class ReserveService {
 	 * @return
 	 * 获取所有需要公司发货的订单列表
 	 */
-	public List<Order> getCompanySend(){
+	public List<OrderVO> getCompanySend(){
 		List<Order> orders = gdao.getOrders();
-		List<Order> result = new ArrayList<Order>();
+		List<OrderVO> result = new ArrayList<OrderVO>();
 		for(Order o:orders){
 			UserInfo before = gdao.getBefore(o.getOpenId());
+			UserInfo u = userDao.getUser(o.getOpenId());
 			if(before.getOpenid().equals("thisiscomponyinfomation")&&
 					o.getState().equals("等待发货")){
-				result.add(o);
+				OrderVO vo = new OrderVO(o.getId(), o.getStartDate(),o.getEndDate(), o.getDeviceNumber(), u.getName(), u.getPhone(),
+						u.getAddress(),o.getState());
+				result.add(vo);
 			}
 		}
 		return result;
@@ -172,14 +185,17 @@ public class ReserveService {
 	 * @return
 	 * 获得所有需要公司收货的订单列表
 	 */
-	public List<Order> getCompanyReceive(){
+	public List<OrderVO> getCompanyReceive(){
 		List<Order> orders = gdao.getOrders();
-		List<Order> result = new ArrayList<Order>();
+		List<OrderVO> result = new ArrayList<OrderVO>();
 		for(Order o:orders){
 			UserInfo after = gdao.getAfter(o.getOpenId());
+			UserInfo u = userDao.getUser(o.getOpenId());
 			if(after.getOpenid().equals("thisiscomponyinfomation")&&
 					o.getState().equals("已寄出")){
-				result.add(o);
+				OrderVO vo = new OrderVO(o.getId(), o.getStartDate(),o.getEndDate(), o.getDeviceNumber(), u.getName(), u.getPhone(),
+						u.getAddress(),o.getState());
+				result.add(vo);
 			}
 		}
 		return result;
