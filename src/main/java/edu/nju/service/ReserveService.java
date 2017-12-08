@@ -1,5 +1,6 @@
 package edu.nju.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -145,5 +146,41 @@ public class ReserveService {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	/**
+	 * @return
+	 * 获取所有需要公司发货的订单列表
+	 */
+	public List<Order> getCompanySend(){
+		List<Order> orders = gdao.getOrders();
+		List<Order> result = new ArrayList<Order>();
+		for(Order o:orders){
+			UserInfo before = gdao.getBefore(o.getOpenId());
+			if(before.getOpenid().equals("thisiscomponyinfomation")&&
+					o.getState().equals("等待发货")){
+				result.add(o);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @return
+	 * 获得所有需要公司收货的订单列表
+	 */
+	public List<Order> getCompanyReceive(){
+		List<Order> orders = gdao.getOrders();
+		List<Order> result = new ArrayList<Order>();
+		for(Order o:orders){
+			UserInfo after = gdao.getAfter(o.getOpenId());
+			if(after.getOpenid().equals("thisiscomponyinfomation")&&
+					o.getState().equals("已寄出")){
+				result.add(o);
+			}
+		}
+		return result;
+	
+		
 	}
 }
