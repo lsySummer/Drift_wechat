@@ -49,7 +49,7 @@ public class CommunityDaoImpl implements CommunityDao{
 	
 	public String saveFile(String openid,List<MultipartFile> mfs){
 //		String baseUrl="D:\\upload\\community\\";
-		String baseUrl = context.getRealPath("") + "upload/comment/"+openid+"/";
+		String baseUrl = "/home/airstaff/Server/apache-tomcat-8.0.33/upload/comment/"+openid+"/";
 		System.out.println(baseUrl);
 		log.info("上传图片地址"+baseUrl);
 		Path path = Paths.get(baseUrl);
@@ -61,6 +61,7 @@ public class CommunityDaoImpl implements CommunityDao{
 			}
 		}
 		String urllst="";
+		log.info("mfssize"+mfs.size());
 		for(int i=0;i<mfs.size();i++){
 			MultipartFile mf = mfs.get(i);
 			String fileName = mf.getOriginalFilename();
@@ -68,9 +69,9 @@ public class CommunityDaoImpl implements CommunityDao{
 				// 获取后缀
 				String suffix = fileName.substring(fileName.indexOf("."),
 						fileName.length());
-				String newName=i+"_"+suffix;
+				String newName=i+suffix;
 				String url = baseUrl + newName;
-				urllst = newName+";";
+				urllst = urllst+newName+";";
 				try {
 					mf.transferTo(new File(url));
 				}catch(Exception e){

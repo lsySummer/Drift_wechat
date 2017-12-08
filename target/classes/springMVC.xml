@@ -18,6 +18,11 @@
 		<property name="prefix" value="/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	<bean id="multipartResolver"  
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">    <property name="defaultEncoding" value="utf-8"></property>  
+    <property name="maxUploadSize" value="10485760000"></property>  
+    <property name="maxInMemorySize" value="4194304"></property>  
+</bean>  
 	
 	<mvc:annotation-driven >
     <!-- 消息转换器 -->

@@ -18,8 +18,8 @@ weui.uploader('#uploaderCustom', {
         	$.alert('请上传图片');
             return false;
         }
-        if(this.size > 10 * 1024 * 1024){
-        	$.alert('请上传不超过10M的图片');
+        if(this.size > 50 * 1024 * 1024){
+        	$.alert('请上传不超过50M的图片');
             return false;
         }
         if (files.length > 5) { // 防止一下子选中过多文件
@@ -52,12 +52,16 @@ weui.uploader('#uploaderCustom', {
         console.log('progress');
     },
     onSuccess: function (ret) {
-    	 if (ret.Result == true)
+    	 if (ret.status == '200')
          {
              uploadSuccessCount++;
              if (uploadSuccessCount == uploadCount)
              {
-            	 console.log(uploadSuccessCount);
+            	 	var text = document.getElementById('txt_des').value;
+            		$.getJSON('/Drift_wechat/api/community/txt?txt='+text,function(data){
+            			$.alert('成功！');
+            			window.location.href='/Drift_wechat/jsp/Delivery.jsp';
+            		});
              }
          }
     },
@@ -71,12 +75,6 @@ document.getElementById("uploaderCustomBtn").addEventListener('click', function(
 	uploadList.forEach(function(file){
         file.upload();
     });
-	var text = 'Nothing';
-	text = document.getElementById('txt_des').value;
-	$.getJSON('/Drift_wechat/api/community/txt?txt='+text,function(data){
-		$.alert('成功！');
-		window.location.href='/Drift_wechat/jsp/Orders.jsp';
-	});
 });
 
 // 缩略图预览

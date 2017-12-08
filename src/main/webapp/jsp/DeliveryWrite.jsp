@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        </div>
 		    </div>
 		    <div class="weui-btn-area">
-	            <button class="weui-btn weui-btn_primary" type="submit" id="submit">确定并提交</button>
+	            <button class="weui-btn weui-btn_primary" type="submit" id="submit">确定并发布感受</button>
 	        </div>
     	</form>
 	</div>
