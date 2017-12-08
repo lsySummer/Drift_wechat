@@ -215,6 +215,14 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 		}
 		return areas;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Order> getOrders() {
+		String hql = "from Order";
+		List<Order> orders = baseDao.getNewSession().createQuery(hql).getResultList();
+		return orders;
+	}
 	
 	
 

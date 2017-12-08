@@ -63,6 +63,7 @@ public class TestController {
 //		cservice.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", "/usr/local/123.jpg;/usr/234.jpg", "不错很好哈哈哈");
 //		System.out.println("写入成功");
 //		System.out.println(cservice.getComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").toString());
+		System.out.println(service.getCompanyReceive().size());
 		return "success";
 	}
 }

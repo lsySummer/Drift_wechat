@@ -1,5 +1,6 @@
 package edu.nju.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.nju.dao.BaseDao;
 import edu.nju.dao.ReserveDao;
 import edu.nju.dao.ReserveGetDao;
 import edu.nju.entities.Device;
+import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.OrderVO;
 import edu.nju.utils.Utility;
-import edu.nju.utils.WechatConfig;
 import edu.nju.utils.WechatSend;
 
 @Transactional
@@ -24,6 +26,8 @@ public class ReserveService {
 	ReserveDao dao;
 	@Autowired
 	ReserveGetDao gdao;
+	@Autowired
+	BaseDao baseDao;
 	
 	/**
 	 * @param did 快递单号
@@ -109,5 +113,77 @@ public class ReserveService {
 			}
 		}
 	}
+	
+	/**
+	 * @param orderid
+	 * @return
+	 * 公司发货
+	 */
+	public boolean companySend(String orderid){
+		Order o = gdao.getOrderByorderId(orderid);
+		o.setState("上家已发货");
+		try{
+			baseDao.update(o);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
 
+	/**
+	 * @param orderid
+	 * @return
+	 * 公司收货
+	 */
+	public boolean companyReceive(String orderid){
+		Order o = gdao.getOrderByorderId(orderid);
+		Device d = gdao.getDeviceById(o.getDeviceId()).get(0);
+		d.setQueueNum(d.getQueueNum()-1);
+		baseDao.update(d);
+		o.setState("下家已收货");
+		try{
+			baseDao.update(o);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	/**
+	 * @return
+	 * 获取所有需要公司发货的订单列表
+	 */
+	public List<Order> getCompanySend(){
+		List<Order> orders = gdao.getOrders();
+		List<Order> result = new ArrayList<Order>();
+		for(Order o:orders){
+			UserInfo before = gdao.getBefore(o.getOpenId());
+			if(before.getOpenid().equals("thisiscomponyinfomation")&&
+					o.getState().equals("等待发货")){
+				result.add(o);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @return
+	 * 获得所有需要公司收货的订单列表
+	 */
+	public List<Order> getCompanyReceive(){
+		List<Order> orders = gdao.getOrders();
+		List<Order> result = new ArrayList<Order>();
+		for(Order o:orders){
+			UserInfo after = gdao.getAfter(o.getOpenId());
+			if(after.getOpenid().equals("thisiscomponyinfomation")&&
+					o.getState().equals("已寄出")){
+				result.add(o);
+			}
+		}
+		return result;
+	
+		
+	}
 }

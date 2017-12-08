@@ -119,6 +119,9 @@ public class ManageService {
 		Date endDate = Utility.getSpecifiedDayAfter(startDate, 1);
 		o.setEndDate(endDate);
 		baseDao.update(o);
+		Device device = gservice.getDeviceById(deviceId);
+		device.setQueueNum(device.getQueueNum()+1);
+		baseDao.update(device);
 //		String tOpenid="oBaSqs929zqFraeZy2YXWeqAQJ7o";
 		//TODO
 		JSONObject data = WechatSend.packJsonmsg(o.getDeviceNumber(),o.getStartDate(),o.getEndDate());
