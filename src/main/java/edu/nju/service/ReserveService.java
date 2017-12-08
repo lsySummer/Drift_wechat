@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.nju.dao.BaseDao;
 import edu.nju.dao.ReserveDao;
 import edu.nju.dao.ReserveGetDao;
 import edu.nju.entities.Device;
+import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.OrderVO;
 import edu.nju.utils.Utility;
-import edu.nju.utils.WechatConfig;
 import edu.nju.utils.WechatSend;
 
 @Transactional
@@ -24,6 +25,8 @@ public class ReserveService {
 	ReserveDao dao;
 	@Autowired
 	ReserveGetDao gdao;
+	@Autowired
+	BaseDao baseDao;
 	
 	/**
 	 * @param did 快递单号
@@ -109,5 +112,38 @@ public class ReserveService {
 			}
 		}
 	}
+	
+	/**
+	 * @param orderid
+	 * @return
+	 * 公司发货
+	 */
+	public boolean companySend(String orderid){
+		Order o = gdao.getOrderByorderId(orderid);
+		o.setState("上家已发货");
+		try{
+			baseDao.update(o);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
 
+	/**
+	 * @param orderid
+	 * @return
+	 * 公司收货
+	 */
+	public boolean companyReceive(String orderid){
+		Order o = gdao.getOrderByorderId(orderid);
+		o.setState("下家已收货");
+		try{
+			baseDao.update(o);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
