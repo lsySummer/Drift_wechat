@@ -129,8 +129,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var comment;
 		var itemsArray = [];
 		var tempUrl = "/Drift_wechat/images/product.png";
-		var baseUrl = "/home/airstaff/Server/apache-tomcat-8.0.33/upload/comment/"+openid+"/";
-		//var baseUrl = "/Drift_wechat/testImages/";	
+		//var baseUrl = "/home/airstaff/Server/apache-tomcat-8.0.33/upload/comment/"+openid+"/";
+		var baseUrl = "/Drift_wechat/upload/comment/"+openid+"/";	
 		$.get("/Drift_wechat/api/comment/getComment?openid="+openid,function(data){
 			if(JSON.stringify(data.uc.map) != "{}"){	
 				var uc = data.uc;
