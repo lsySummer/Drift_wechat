@@ -49,7 +49,7 @@ public class CommunityDaoImpl implements CommunityDao{
 	
 	public String saveFile(String openid,List<MultipartFile> mfs){
 //		String baseUrl="D:\\upload\\community\\";
-		String baseUrl = "/home/airstaff/Server/apache-tomcat-8.0.33/upload/comment/"+openid+"/";
+		String baseUrl = context.getRealPath("")+"upload/comment/"+openid+"/";
 		System.out.println(baseUrl);
 		log.info("上传图片地址"+baseUrl);
 		Path path = Paths.get(baseUrl);
