@@ -66,33 +66,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
         </div>
         
-        <div class="modal-content">
+		<div class="modal-content">
           <div class="weui-grids" id="ptContent">          
             <a class="weui-grid js_grid pb" >
-                <img  width=100% height=100% src="/Drift_wechat/images/product.png">
+                <img  id="img1" width=200px height=100px src="/Drift_wechat/images/product.png">
             </a>
             
             <a class="weui-grid js_grid pb" >
-                <img  width=100% height=100% src="/Drift_wechat/images/product.png">
+                <img  id="img2" width=200px height=100px src="/Drift_wechat/images/product.png">
             </a>
             
             <a class="weui-grid js_grid pb" >
-                <img  width=100% height=100% src="/Drift_wechat/images/product.png">
+                <img  id="img3" width=200px height=100px src="/Drift_wechat/images/product.png">
             </a>
             
             <div class="weui-article" id="commentDiv">
-	              <p>甲醛检测仪太好用了！！！为你打call!</p>
 	     	</div>
 	     	
 	     	</div> 
-         </div> 
+         </div>
 	         
       </div>
     <div>
 </body>
 <script type="text/javascript">
 
-	var pbset = $.photoBrowser({
+/* 	var pbset = $.photoBrowser({
        items: [
          {
            image: "/Drift_wechat/images/product.png",
@@ -116,29 +115,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      $(".pb").click(function() {
      	$.closePopup();
        pbset.open();
-     });
+     }); */
      
     var pbset;
 	$(".pb").click(function() {
       	$.closePopup();
         pbset.open();
     });
-	function getComment(){
+    
+    //评论区初始化展示
+	function getComment(openid){
 		var ptUrls = [];
 		var comment;
-		var itemsArray = [];	
-		$.get("/Drift_wechat/api/comment/getComment",function(data){
-			for(var i=0;i<ptUrls.length;i++){
-				$("<a/>").appendTo("#ptContent").html("<img  width=100% height=100% src="+ptUrls[i]+">");
-				$("<a/>").attr("class","weui-grid js_grid pb");
-			}
-			$("<p/>").appendTo("#commentDiv").html(comment);
-			
-			pbset = $.photoBrowser({
-		        items: itemsArray,
-		        initIndex: 1
-		    });	    
-		    $("#comment").popup();				
+		var itemsArray = [];
+		var tempUrl = "/Drift_wechat/images/product.png";
+		var baseUrl = "/home/airstaff/Server/apache-tomcat-8.0.33/upload/comment/"+openid+"/";
+		//var baseUrl = "/Drift_wechat/testImages/";	
+		$.get("/Drift_wechat/api/comment/getComment?openid="+openid,function(data){
+			if(JSON.stringify(data.uc.map) != "{}"){	
+				var uc = data.uc;
+				comment = uc.map.comment;
+				var pts = uc.map.picURLS.split(";");
+				pts.pop();
+				for(var i=0;i<(pts.length>3?3:pts.length);i++){
+					var temp = baseUrl+pts[i];
+					var tempImage = {"image":temp};
+					itemsArray.push(tempImage);
+					ptUrls.push(temp);
+				}
+				while(ptUrls.length<3){
+					ptUrls.push(tempUrl);
+				}
+				$("#img1").attr('src',ptUrls[0]); 
+				$("#img2").attr('src',ptUrls[1]); 
+				$("#img3").attr('src',ptUrls[2]); 
+	/* 			for(var i=0;i<ptUrls.length;i++){
+					$("#imgId").attr('src',path); 
+					$("<a/>").appendTo("#ptContent").html("<img  width=100% height=100% src="+ptUrls[i]+">");
+					$("<a/>").attr("class","weui-grid");
+					$("<a/>").attr("class","js_grid");
+					$("<a/>").attr("class","pb");
+				} */
+				$("#commentDiv").empty();
+				$("<p/>").appendTo("#commentDiv").html(comment);
+				
+				pbset = $.photoBrowser({
+			        items: itemsArray,
+			        initIndex: 1
+			    });	    
+			    $("#comment").popup();
+			}				
 		},"json");
 		
 	}
@@ -166,7 +192,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	//页面加载完成启动
 	$("document").ready(function(){
-		getMap();
+		weChatMap();
 	});
 	
 	function weChatMap(){
@@ -200,7 +226,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		translateCallback = function (data){
 	    if(data.status === 0) {
 		      myLocation = {"x":data.points[0].lng,"y":data.points[0].lat};
-				//getMap(myLocation);
 				getMap();
 		      }
 	    else{
@@ -220,6 +245,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				temp["startDate"] = data.userArr[i].map.startDate;
 				temp["nickname"] = data.userArr[i].map.nickname;
 				temp["deviceState"] = data.userArr[i].map.deviceState;
+				temp["openId"] = data.userArr[i].map.openId;
 				temp["airBoolean"] = 0;
 				allAddressVO.push(temp);
 			}
@@ -352,7 +378,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var infoWindow = new BMap.InfoWindow("检测地址："+addPoint.address, opts);  // 创建信息窗口对象 
 		marker.addEventListener("click", function(){          
 			this.openInfoWindow(infoWindow,addPoint.point);
-			$("#comment").popup();
+			if(addPoint.airBoolean == 0){
+				getComment(addPoint.openId);
+				//getComment("oRTgpweSZbOxfrg9H57JwuPwMJLo");
+			}
 		});
 	}
 	
