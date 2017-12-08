@@ -67,67 +67,82 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         
         <div class="modal-content">
-          <div class="weui-grids">
-          
-            <a href="javascript:;" class="weui-grid js_grid pb" >
-            	<div>
-                	<img  width=100% height=100% src="/Drift_wechat/images/product.png" alt="">
-                </div>	
+          <div class="weui-grids" id="ptContent">          
+            <a class="weui-grid js_grid pb" >
+                <img  width=100% height=100% src="/Drift_wechat/images/product.png">
             </a>
             
-            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
-            	<div>
-                	<img  width=100% height=100% src="/Drift_wechat/images/product.png" alt="">
-                </div>	
+            <a class="weui-grid js_grid pb" >
+                <img  width=100% height=100% src="/Drift_wechat/images/product.png">
             </a>
             
-            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
-            	<div>
-                	<img  width=100% height=100% src="/Drift_wechat/images/product.png" alt="">
-                </div>	
+            <a class="weui-grid js_grid pb" >
+                <img  width=100% height=100% src="/Drift_wechat/images/product.png">
             </a>
             
-         <article class="weui-article">
-	          <section>
+            <div class="weui-article" id="commentDiv">
 	              <p>甲醛检测仪太好用了！！！为你打call!</p>
-		          <p>非常感谢云草纲目公司！</p>
-		      </section>
-	      </article>
-                   
-          </div>
-        </div>
-          
+	     	</div>
+	     	
+	     	</div> 
+         </div> 
+	         
       </div>
     <div>
 </body>
 <script type="text/javascript">
 
-	 var pbset = $.photoBrowser({
-        items: [
-          {
-            image: "/Drift_wechat/images/product.png",
-            caption: "尝试 Vue.js 最简单的方法是使用 JSFiddle Hello World 例子。在浏览器新标签页中打开它，跟着我们查看一些基础示例。如果你喜欢用包管理器下载/安装，查看安装教程。"
-          },
-          {
-            image: "/Drift_wechat/images/product.png",
-            caption: "组件（Component）是 Vue.js 最强大的功能之一。"
-          },
-          {
-            image: "/Drift_wechat/images/product.png",
-            caption: "组件可以扩展 HTML 元素，封装可重用的代码"
-          },
-          {
-            image: "/Drift_wechat/images/product.png",
-            caption: "在较高层面上，组件是自定义元素，Vue.js 的编译器为它添加特殊功能。在有些情况下，组件也可以是原生 HTML 元素的形式，以 is 特性扩展。"
-          }
-        ],
-        initIndex: 1
-      });
-      $(".pb").click(function() {
+	var pbset = $.photoBrowser({
+       items: [
+         {
+           image: "/Drift_wechat/images/product.png",
+           caption: "尝试 Vue.js 最简单的方法是使用 JSFiddle Hello World 例子。在浏览器新标签页中打开它，跟着我们查看一些基础示例。如果你喜欢用包管理器下载/安装，查看安装教程。"
+         },
+         {
+           image: "/Drift_wechat/images/product.png",
+           caption: "组件（Component）是 Vue.js 最强大的功能之一。"
+         },
+         {
+           image: "/Drift_wechat/images/product.png",
+           caption: "组件可以扩展 HTML 元素，封装可重用的代码"
+         },
+         {
+           image: "/Drift_wechat/images/product.png",
+           caption: "在较高层面上，组件是自定义元素，Vue.js 的编译器为它添加特殊功能。在有些情况下，组件也可以是原生 HTML 元素的形式，以 is 特性扩展。"
+         }
+       ],
+       initIndex: 1
+     });
+     $(".pb").click(function() {
+     	$.closePopup();
+       pbset.open();
+     });
+     
+    var pbset;
+	$(".pb").click(function() {
       	$.closePopup();
         pbset.open();
-      });
-      	//初始化信息
+    });
+	function getComment(){
+		var ptUrls = [];
+		var comment;
+		var itemsArray = [];	
+		$.get("/Drift_wechat/api/comment/getComment",function(data){
+			for(var i=0;i<ptUrls.length;i++){
+				$("<a/>").appendTo("#ptContent").html("<img  width=100% height=100% src="+ptUrls[i]+">");
+				$("<a/>").attr("class","weui-grid js_grid pb");
+			}
+			$("<p/>").appendTo("#commentDiv").html(comment);
+			
+			pbset = $.photoBrowser({
+		        items: itemsArray,
+		        initIndex: 1
+		    });	    
+		    $("#comment").popup();				
+		},"json");
+		
+	}
+        	//初始化信息
 	var index = 0;
 	var allAddressVO = [];
 	var myLocation = {"x":118.786078,"y":32.061531};
@@ -151,7 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	//页面加载完成启动
 	$("document").ready(function(){
-		weChatMap();
+		getMap();
 	});
 	
 	function weChatMap(){
