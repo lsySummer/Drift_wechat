@@ -103,7 +103,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var deliveryNum = document.getElementById("number").value;
 			$.getJSON('/Drift_wechat/api/manage/deliveryNum?orderId='+orderId+"&deliveryNum="+deliveryNum,function(json){
 				$('#myModal').modal('hide');
-				window.location.href='/Drift_wechat/api/manage/orderList';
+				$("#myAlert").show();
+				window.location.href='/Drift_wechat/api/manage/companySend';
 			});
 		}
 		</script>  

@@ -77,22 +77,38 @@ public class ManageController {
 	}
 	
 	@RequestMapping(value = "/deliveryNum")
-	public String writeDeliveryNum(String orderId, String deliveryNum, HttpSession session,Model model) {
-		
-		return "jsp/Manage/companySend";
+	public void writeDeliveryNum(String orderId, String deliveryNum, HttpSession session, HttpServletResponse response) {
+		reserveService.companySend(orderId, deliveryNum);
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(true);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	@RequestMapping(value = "/companyRevice")
+	@RequestMapping(value = "/companyReceive")
 	public String companyRevice(String orderId, HttpSession session,Model model) {
 		List<OrderVO> orderList = reserveService.getCompanyReceive();
 		model.addAttribute("orderList", orderList);
-		return "jsp/Manage/companyRevice";
+		return "jsp/Manage/companyReceive";
 	}
 	
-	@RequestMapping(value = "/reviceConfirm")
-	public String reviceConfirm(String orderId, HttpSession session,Model model) {
+	@RequestMapping(value = "/receiveConfirm")
+	public void reviceConfirm(String orderId, HttpSession session, HttpServletResponse response) {
 		reserveService.companyReceive(orderId);
-		return "jsp/Manage/companyRevice";
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(true);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value = "/modify")

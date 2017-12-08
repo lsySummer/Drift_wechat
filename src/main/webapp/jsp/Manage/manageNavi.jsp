@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li class="divider"></li>
                     <li><a href="/Drift_wechat/api/manage/companySend">公司发货</a></li>
                     <li class="divider"></li>
-                    <li><a href="/Drift_wechat/api/manage/companyRecive">公司收货</a></li>
+                    <li><a href="/Drift_wechat/api/manage/companyReceive">公司收货</a></li>
                 </ul>
             </li>
         </ul>
