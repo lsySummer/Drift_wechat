@@ -24,7 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <h2 class="demos-title">产品预约</h2>
     </header>
     <div class="container" id="container">
-    	<form method="get" id="DateChoose" name="DateChoose" action="/Drift_wechat/api/order/date">
     		<div class="page__bd">
     			<div class="weui-cells__title">已分配设备</div>
     			<div class="weui-cells">
@@ -32,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    <div class="weui-cell__bd">
 				      <p>设备编号</p>
 				    </div>
-				    <div class="weui-cell__ft" id="deviceNum" name="deviceNum">暂无</div>
+				    <div class="weui-cell__ft" id="deviceNum">暂无</div>
 				  </div>
 				</div>
 		        <div class="weui-cells__title">预约使用</div>
@@ -42,10 +41,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                <div class="weui-cell__bd">
 		                    <input id="startDate" name="startDate" class="weui-input" value="" required=""/>
 		                    <script type="text/javascript">
+		                    	var deviceNum;
 		                    	$.getJSON('/Drift_wechat/api/order/getDate',function(json){
 		                    		var date = json.data;
+		                    		deviceNum = json.id;
 		                    		document.getElementById("deviceNum").innerHTML = json.number;
-		                    		document.getElementById("deviceNum").value = json.id;
 		                    		document.getElementById("startDate").value = date[0]; 
 		                    		$("#startDate").picker({
 									  title: "请选择预约日期",
@@ -63,9 +63,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        </div>
 		    </div>
 		    <div class="weui-btn-area">
-	            <button class="weui-btn weui-btn_primary" type="submit" id="submit">确定并提交</button>
+	            <button class="weui-btn weui-btn_primary" id="submit">确定并提交</button>
 	        </div>
-    	</form>
 	</div>
     <div class="weui-msg__extra-area">
         <div class="weui-footer">
@@ -76,7 +75,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript">
 		$("#submit").click(function(){
 			if($("#startDate").val().trim().length){
-					$('#DateChoose').submit();
+				var startDate = document.getElementById("startDate").value;
+				$.ajax({url:"/Drift_wechat/api/order/date?deviceNum="+deviceNum+"&startDate="+startDate, success: function(){
+        			window.location.href='/Drift_wechat/jsp/Result.jsp';
+      			}});
 			}else{
 				$.toptip('操作失败，请确保所有内容均已填写', 'error');
 				return false;
