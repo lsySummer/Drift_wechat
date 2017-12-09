@@ -36,6 +36,14 @@ public enum RESCODE {
 		return nMsg;
 	}
 
+	public int getnCode() {
+		return nCode;
+	}
+
+	public void setnCode(int nCode) {
+		this.nCode = nCode;
+	}
+
 	@Override
 	public String toString() {
 

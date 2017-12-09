@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.nju.entities.Point;
+import edu.nju.model.RESCODE;
 import edu.nju.model.UserVO;
 import edu.nju.service.UserService;
 import edu.nju.utils.Constants;
@@ -37,7 +38,7 @@ public class MapController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Object> list1 = new ArrayList<Object>();
 		JSONObject myJsonObject = new JSONObject(service.getUserVO());
-		if(myJsonObject.has("Constants.RESPONSE_DATA_KEY")){
+		if(myJsonObject.get(Constants.RESPONSE_CODE_KEY).equals("0")){
 			JSONArray userAll = (JSONArray) myJsonObject.get(Constants.RESPONSE_DATA_KEY);
 			if(userAll.length()>0){
 			  for(int i=0;i<userAll.length();i++){
