@@ -205,6 +205,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    });
 	    
 	    wx.ready(function(){
+	    	//alert(location.href.split('#')[0]);
 	    	 wx.getLocation({
 			        success: function (res) {
 			            var ggPoint = new BMap.Point(res.longitude,res.latitude);

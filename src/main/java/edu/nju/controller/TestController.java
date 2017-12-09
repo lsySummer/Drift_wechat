@@ -64,6 +64,7 @@ public class TestController {
 //		System.out.println("写入成功");
 //		System.out.println(cservice.getComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").toString());
 //		System.out.println(service.getCompanyReceive().size());
+		service.saveDelInfo("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", "166681986110");
 		return "success";
 	}
 }

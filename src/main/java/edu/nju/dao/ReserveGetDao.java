@@ -36,4 +36,6 @@ public interface ReserveGetDao {
 	public List<String> getAreaByDid(String did);
 	
 	List<Order> getOrders();
+	
+	Order getByOpenAndDid(String openid,String deviceid);
 }

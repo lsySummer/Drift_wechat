@@ -223,6 +223,17 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 		List<Order> orders = baseDao.getNewSession().createQuery(hql).getResultList();
 		return orders;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Order getByOpenAndDid(String openid, String deviceid) {
+		String hql = "from Order where deviceId=:deviceId and openId = :openid";
+		List<Order> orders = baseDao.getNewSession().createQuery(hql).setParameter("deviceId", deviceid).setParameter("openid", openid).getResultList();
+		if(orders.size()>0){
+			return orders.get(orders.size()-1);
+		}
+		return null;
+	}
 	
 	
 
