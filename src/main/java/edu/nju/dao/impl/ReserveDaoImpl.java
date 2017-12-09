@@ -80,9 +80,9 @@ public class ReserveDaoImpl implements ReserveDao{
 	}
 
 	@Override
-	public boolean makeOrder(String openid,int type,Date startDate,Date endDate) {
+	public boolean makeOrder(String deviceId,String openid,int type,Date startDate,Date endDate) {
 		UserInfo user = userDao.getUser(openid);
-		Device device = reserveDevice(openid,type);
+		Device device = rgetDao.getDeviceById(deviceId).get(0);
 		endDate = Utility.getSpecifiedDayAfter(startDate,Constants.USER_DATE-1);
 		device.setLoc(user.getAddress());
 		baseDao.update(device);
