@@ -125,7 +125,7 @@ public class ManageService {
 //		String tOpenid="oBaSqs929zqFraeZy2YXWeqAQJ7o";
 		//TODO
 		JSONObject data = WechatSend.packJsonmsg(o.getDeviceNumber(),o.getStartDate(),o.getEndDate());
-		String url="http://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80e3eed8e26e852f&redirect_uri=http%3A%2F%2Fdrift.gmair.net%2FDrift_wechat%2Fapi%2Fwechat%2FgetOrder&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+		String url="http://open.weixin.qq.com/connect/oauth2/authorize?appid=wx80e3eed8e26e852f&redirect_uri=http%3A%2F%2Fdrift.gmair.net%2FDrift_wechat%2Fapi%2Fwechat%2Fcenter&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 		WechatSend.sendWechatmsgToUser(o.getOpenId(),WechatConfig.TEMPLAT_ID,url,"",data);
 		return o;
 	}

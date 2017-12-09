@@ -31,26 +31,29 @@ public class ReserveDaoImpl implements ReserveDao{
 //	 private Logger log = Logger.getLogger(UserController.class);
 
 
+	/* (non-Javadoc)
+	 * @see edu.nju.dao.ReserveDao#saveDelInfo(java.lang.String, java.lang.String)
+	 * 保存快递信息
+	 */
 	@Override
 	public boolean saveDelInfo(String openId,String did) {
-		Device d = rgetDao.getDeviceByOpenId(openId);
-		List<Order> orderList = getById(d.getId());
-		if(orderList.size()>0){
-			Order o = orderList.get(orderList.size()-1);
-			o.setState("已寄出");
-			DeliveryInfo info = new DeliveryInfo();
-			info.setDeliveryNumber(did);
-			info.setSendId(openId);
-			UserInfo afterUser = rgetDao.getAfter(openId);
-			info.setReceiveId(afterUser.getOpenid());
-			List<Order> afterList = rgetDao.getOrderById(afterUser.getOpenid());
-			if(afterList.size()>0){
-				Order afterOrder = afterList.get(afterList.size()-1);
-				afterOrder.setState("上家已发货");
-				baseDao.update(afterOrder);
-			}
-			baseDao.update(o);
-			baseDao.save(info);
+		Device d = rgetDao.getDeviceByOpenId(openId);//当前用户的手中设备
+		//把当前用户的订单改成已寄出
+		Order o = rgetDao.getByOpenAndDid(openId,d.getId());
+		o.setState("已寄出");
+		baseDao.update(o);
+		DeliveryInfo info = new DeliveryInfo();
+		info.setDeliveryNumber(did);
+		info.setSendId(openId);
+		baseDao.save(info);
+		
+		//把下家的订单改成上家已发货
+		UserInfo afterUser = rgetDao.getAfter(openId);
+		info.setReceiveId(afterUser.getOpenid());
+		if(!afterUser.getOpenid().equals("thisiscomponyinfomation")){
+			Order afterOrder = rgetDao.getByOpenAndDid(afterUser.getOpenid(), d.getId());
+			afterOrder.setState("上家已发货");
+			baseDao.update(afterOrder);
 		}
 		return true;
 	}

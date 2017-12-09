@@ -2,8 +2,6 @@ package edu.nju.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.nju.service.UserService;
-import edu.nju.utils.HttpRequest;
-import edu.nju.utils.HttpXmlClient;
 import edu.nju.utils.Utility;
 import edu.nju.utils.WechatConfig;
 import edu.nju.utils.WechatLoginUse;
@@ -35,28 +31,78 @@ public class WeChatController {
 	@RequestMapping(value = "/center")
 	public String toCenter(HttpServletRequest request, String code,String state, HttpSession session)
 			throws IOException {
-		String redir = getWechatInfo( code, state,session,request);
-		 String ipAdd = HttpRequest.getIpAddress(request);
-		 session.setAttribute("ipAddress", ipAdd);
-		 log.info("ipAdd"+ipAdd);
+//		if(code==null||code.equals("")){
+//			code = (String) session.getAttribute("code");
+//		}
+//		if(state==null||state.equals("")){
+//			state = (String) session.getAttribute("state");
+//		}
+		String redir = getWechatInfo( code, state,session);
+//		session.setAttribute("code", code);
+//		session.setAttribute("state", state);
+		log.info("code "+code+" state"+state);
 		return redir;
 	}
 	
-	@RequestMapping(value = "/getOrder")//管理员修改订单
-	public String getOrder(HttpServletRequest request, String code,String state, HttpSession session)
-			throws IOException {
-		getWechatInfo(code, state,session,request);
-		return "/jsp/Orders";
-	}
+//	@RequestMapping(value = "/getOrder")//管理员修改订单
+//	public String getOrder(HttpServletRequest request, String code,String state, HttpSession session)
+//			throws IOException {
+//		session.setAttribute("code", code);
+//		session.setAttribute("state", state);
+//		String wechatInfo = WechatLoginUse.wechatInfo(code);
+//		JSONObject resultJson;
+//		try {
+//			log.info("用户信息:" + wechatInfo);
+//			resultJson = new JSONObject(wechatInfo);
+//			if (resultJson.get("message").equals("success")) {
+//				String openid = resultJson.getString("openid");
+//				String nickname = resultJson.getString("nickname");
+//				String headimgurl = resultJson.getString("headimgurl");
+//				session.setAttribute("openid", openid);
+//				session.setAttribute("nickname", nickname);
+//				session.setAttribute("headimgurl", headimgurl);
+//				return "jsp/Orders";
+//			} else {
+//				return "jsp/Orders";
+//			}
+//		} catch (JSONException e) {
+//			log.info(e);
+//			e.printStackTrace();
+//			return "jsp/Orders";
+//		}
+//	}
+//	
+//	
+//	@RequestMapping(value = "/deliver")//商家发货提醒
+//	public String deliver(HttpServletRequest request, String code,String state, HttpSession session)
+//			throws IOException {
+//		session.setAttribute("code", code);
+//		session.setAttribute("state", state);
+//		String wechatInfo = WechatLoginUse.wechatInfo(code);
+//		JSONObject resultJson;
+//		try {
+//			log.info("用户信息:" + wechatInfo);
+//			resultJson = new JSONObject(wechatInfo);
+//			if (resultJson.get("message").equals("success")) {
+//				String openid = resultJson.getString("openid");
+//				String nickname = resultJson.getString("nickname");
+//				String headimgurl = resultJson.getString("headimgurl");
+//				session.setAttribute("openid", openid);
+//				session.setAttribute("nickname", nickname);
+//				session.setAttribute("headimgurl", headimgurl);
+//				return "jsp/Delivery";
+//			} else {
+//				return "jsp/Delivery";
+//			}
+//		} catch (JSONException e) {
+//			log.info(e);
+//			e.printStackTrace();
+//			return "jsp/Delivery";
+//		}
+//	}
 	
-	@RequestMapping(value = "/deliver")//商家发货提醒
-	public String deliver(HttpServletRequest request, String code,String state, HttpSession session)
-			throws IOException {
-		getWechatInfo(code, state,session,request);
-		return "/jsp/Delivery";
-	}
 
-	public String getWechatInfo(String code, String state,HttpSession session,HttpServletRequest request) throws UnsupportedEncodingException {
+	public String getWechatInfo(String code, String state,HttpSession session) throws UnsupportedEncodingException {
 		String wechatInfo = WechatLoginUse.wechatInfo(code);
 		JSONObject resultJson;
 		try {
@@ -71,7 +117,7 @@ public class WeChatController {
 				session.setAttribute("nickname", nickname);
 				session.setAttribute("headimgurl", headimgurl);
 				String url="http://drift.gmair.net/Drift_wechat/api/wechat/center?code="+code+"&state="+state;
-				 getAddress(session,request,url,accessToken);
+				 getAddress(session,url,accessToken);
 				return "jsp/BaiduMap";
 			} else {
 				return "jsp/BaiduMap";
@@ -84,7 +130,7 @@ public class WeChatController {
 	}
 
 	@RequestMapping(value = "/getAddress")
-	public void getAddress(HttpSession session,HttpServletRequest request,String url,String accessToken) {
+	public void getAddress(HttpSession session,String url,String accessToken) {
 //		String xml = HttpXmlClient.get("https://api.weixin.qq.com/cgi-bin/ticket/getticket?"
 //				+ "access_token="+accessToken+"&type=jsapi");
 //		net.sf.json.JSONObject jsonMap = net.sf.json.JSONObject.fromObject(xml);
