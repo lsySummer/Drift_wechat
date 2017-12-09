@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td >${order.phone} </td>
 						<td >${order.address} </td>
 						<td >${order.state}</td>
-						<td ><button type="button" id="${order.id}" onclick="javascript:modify(this);">修改</button></td>
+						<td ><button type="button" id="${order.id}" onclick="javascript:modify(this);">发货</button></td>
 					</tr>
 				</c:forEach> 
 			  </tbody>
@@ -81,6 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <input  class="form-control" id="number" name="number" placeholder="请输入快递号">
 			    </div>
 			  </div>
+			</br>
 			</br>
 			<div align="center"><button class="btn btn-success" type="button" id="modify" onclick="javascript:confirm();">确认提交</button></div>
             </br>
