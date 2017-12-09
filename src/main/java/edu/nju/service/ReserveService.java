@@ -62,8 +62,8 @@ public class ReserveService {
 	 * @return
 	 * 用户下订单过程
 	 */
-	public boolean makeOrder(String openid, int type,Date startDate){
-		boolean b = dao.makeOrder(openid,type,startDate,Utility.getSpecifiedDayAfter(startDate, 1));
+	public boolean makeOrder(String deviceId,String openid, int type,Date startDate){
+		boolean b = dao.makeOrder(deviceId,openid,type,startDate,Utility.getSpecifiedDayAfter(startDate, 1));
 		return b;
 	}
 
