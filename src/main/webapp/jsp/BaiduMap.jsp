@@ -69,15 +69,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="modal-content">
           <div class="weui-grids" id="ptContent">          
             <a class="weui-grid js_grid pb" >
-                <img  id="img1" width=200px height=100px src="/Drift_wechat/images/product.png">
+                <img  id="img1" width=150px height=100px src="/Drift_wechat/images/product.png">
             </a>
             
             <a class="weui-grid js_grid pb" >
-                <img  id="img2" width=200px height=100px src="/Drift_wechat/images/product.png">
+                <img  id="img2" width=150px height=100px src="/Drift_wechat/images/product.png">
             </a>
             
             <a class="weui-grid js_grid pb" >
-                <img  id="img3" width=200px height=100px src="/Drift_wechat/images/product.png">
+                <img  id="img3" width=150px height=100px src="/Drift_wechat/images/product.png">
             </a>
             
             <div class="weui-article" id="commentDiv">
