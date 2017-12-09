@@ -95,12 +95,18 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/date")
-	public String confirm(String deviceNum, String startDate, HttpSession session) throws ParseException{
+	public void confirm(String deviceNum, String startDate, HttpSession session, HttpServletResponse response) throws ParseException{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(startDate);
-		log.info("startDate"+startDate);
-		log.info("openIdfromsession"+session.getAttribute("openid"));
 		service.makeOrder(deviceNum, (String)session.getAttribute("openid"), 0, date);
-		return "jsp/Result";
+		try {
+			PrintWriter out = response.getWriter();
+			out.print("200");
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
