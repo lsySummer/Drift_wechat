@@ -45,13 +45,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    	$.getJSON('/Drift_wechat/api/order/getDate',function(json){
 		                    		var date = json.data;
 		                    		document.getElementById("deviceNum").innerHTML = json.number;
-		                    		document.getElementById("startDate").value = data[0];
+		                    		document.getElementById("startDate").value = date[0]; 
 		                    		$("#startDate").picker({
 									  title: "请选择预约日期",
 									  cols: [
 									    {
 									      textAlign: 'center',
-									      values: data
+									      values: date
 									    }
 									  ]
 									});
