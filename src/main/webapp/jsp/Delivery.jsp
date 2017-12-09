@@ -19,6 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(document.getElementById('confirm').value == "true"){
 			$.get('/Drift_wechat/api/delivery/confirm');
 			$.toast("收货成功");
+			window.location.href='/Drift_wechat/jsp/Delivery.jsp';
 		}else{
 			$.toast("暂时无法收货", "forbidden");
 		}
