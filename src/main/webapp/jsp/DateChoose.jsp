@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    <div class="weui-cell__bd">
 				      <p>设备编号</p>
 				    </div>
-				    <div class="weui-cell__ft" id="deviceNum">暂无</div>
+				    <div class="weui-cell__ft" id="deviceNum" name="deviceNum">暂无</div>
 				  </div>
 				</div>
 		        <div class="weui-cells__title">预约使用</div>
@@ -45,6 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    	$.getJSON('/Drift_wechat/api/order/getDate',function(json){
 		                    		var date = json.data;
 		                    		document.getElementById("deviceNum").innerHTML = json.number;
+		                    		document.getElementById("deviceNum").value = json.id;
 		                    		document.getElementById("startDate").value = date[0]; 
 		                    		$("#startDate").picker({
 									  title: "请选择预约日期",
