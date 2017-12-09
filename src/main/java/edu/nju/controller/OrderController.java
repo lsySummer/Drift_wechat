@@ -40,7 +40,7 @@ public class OrderController {
 	
 	@RequestMapping(value = "/get")
 	public void getDetail(HttpSession session, HttpServletResponse response){
-		session.setAttribute("openid", "oRTgpwQkDZKxGFvNnfKpJLWvxsyw");
+//		session.setAttribute("openid", "oRTgpwQkDZKxGFvNnfKpJLWvxsyw");
 		try {
 			PrintWriter out = response.getWriter();
 			out.print(getservice.getOrder((String)session.getAttribute("openid")));
