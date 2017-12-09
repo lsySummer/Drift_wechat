@@ -122,7 +122,9 @@ public class UserDaoImpl implements UserDao{
 		List<UserInfo> list = getUserById(user.getOpenid());
 		log.info("saveorupdate"+user.getOpenid());
 		if(list.size()==0){
-			baseDao.save(user);
+			if(!user.getOpenid().equals("")){
+				baseDao.save(user);
+			}
 		}else{
 			UserInfo u = list.get(0);
 			user.setId(u.getId());
