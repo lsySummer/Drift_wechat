@@ -35,14 +35,16 @@ public class MapController {
 	@ResponseBody  
 	public Map<String, Object> getMap() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		JSONObject myJsonObject = new JSONObject(service.getUserVO());
-		JSONArray userAll = (JSONArray) myJsonObject.get(Constants.RESPONSE_DATA_KEY);
 		List<Object> list1 = new ArrayList<Object>();
-		if(userAll.length()>0){
-		  for(int i=0;i<userAll.length();i++){
-		    JSONObject job = userAll.getJSONObject(i);
-		    list1.add(job);
-		  }
+		JSONObject myJsonObject = new JSONObject(service.getUserVO());
+		if(myJsonObject.has("Constants.RESPONSE_DATA_KEY")){
+			JSONArray userAll = (JSONArray) myJsonObject.get(Constants.RESPONSE_DATA_KEY);
+			if(userAll.length()>0){
+			  for(int i=0;i<userAll.length();i++){
+			    JSONObject job = userAll.getJSONObject(i);
+			    list1.add(job);
+			  }
+			}
 		}
 		map.put("userArr", list1);
 		return map;
