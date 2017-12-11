@@ -64,7 +64,9 @@ public class TestController {
 //		System.out.println("写入成功");
 //		System.out.println(cservice.getComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").toString());
 //		System.out.println(service.getCompanyReceive().size());
-		service.saveDelInfo("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", "166681986110");
+//		service.saveDelInfo("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", "166681986110");
+//		System.out.println(mservice.getRoute("000000005fa5ec9f015fae298e3b0007").size());
+		System.out.println(mservice.getAllRoute().size());
 		return "success";
 	}
 }

@@ -1,7 +1,9 @@
 package edu.nju.dao.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,7 @@ import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
+import edu.nju.model.RouteVO;
 
 @Repository
 public class ManageDaoImpl implements ManageDao{
@@ -130,6 +133,37 @@ public class ManageDaoImpl implements ManageDao{
 			}
 			
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RouteVO> getRoute(String deviceid) {
+		List<RouteVO> result = new ArrayList<RouteVO>();
+		String hql = "from Order where deviceId=:deviceid";
+		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("deviceid", deviceid).getResultList();
+		for(Order o:list){
+			String openid = o.getOpenId();
+			UserInfo u = userDao.getUser(openid);
+			RouteVO vo = new RouteVO(o.getStartDate(),o.getEndDate(),o.getDeviceId(),o.getDeviceNumber(),u.getAddress());
+			result.add(vo);
+		}
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, List<RouteVO>> getAllRoute() {
+		String hql = "from Device";
+		List<Device> list = baseDao.getNewSession().createQuery(hql).getResultList();
+		Map<String, List<RouteVO>> map = new HashMap<String,List<RouteVO>>();
+		for(int i=0;i<list.size();i++){
+			Device d = list.get(i);
+			List<RouteVO> onelist = getRoute(d.getId());
+			if(onelist.size()>0){
+				map.put(d.getId(), onelist);
+			}
+		}
+		return map;
 	}
 
 }

@@ -1,11 +1,13 @@
 package edu.nju.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import edu.nju.entities.Device;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
+import edu.nju.model.RouteVO;
 
 public interface ManageDao {
 
@@ -23,4 +25,7 @@ public interface ManageDao {
 
 	void updateArea(String id, List<String> area, int type);
 
+	List<RouteVO> getRoute(String deviceid);
+	
+	public Map<String,List<RouteVO>> getAllRoute();
 }
