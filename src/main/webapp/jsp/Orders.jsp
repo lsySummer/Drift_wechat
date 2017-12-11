@@ -70,6 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		</div>
+		<a href="/Drift_wechat/jsp/Delivery.jsp" class="weui-btn weui-btn_primary">查看详情</a>
 	</div>
   </body>
   <script type="text/javascript" src="/Drift_wechat/js/myJS/Orders.js"></script>

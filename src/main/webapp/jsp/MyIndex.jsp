@@ -94,18 +94,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	</form>
   	</div>
   	</div>
-	<script type="text/javascript">
-		$("#submit").click(function(){
-			if($("#deliveryPerson").val().trim().length && $("phone").val().trim().length && $("address_detail").val().trim().length && $("address").val().trim().length){
-					$('#personDetail').submit();
-					$.toast("提交成功");
-			}else{
-				$.toast("请确保所有内容均已填写", "cancel");
-				return false;
-			}
-		})
-	</script>
-  </div>
   </body>
   	<script type="text/javascript" src="/Drift_wechat/js/myJS/MyIndex.js"></script>
 </html>
