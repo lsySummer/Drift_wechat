@@ -13,6 +13,12 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "order_list")
 public class Order {
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", openId=" + openId + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", deviceNumber=" + deviceNumber + ", deviceId=" + deviceId + ", state=" + state + ", num=" + num
+				+ ", ifPay=" + ifPay + "]";
+	}
 	private String id;
 	private String openId;//用戶openid
 	private Date startDate;
