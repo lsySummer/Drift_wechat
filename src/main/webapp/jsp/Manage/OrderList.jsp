@@ -29,8 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <c:import url="manageNavi.jsp"/>
      <!--主要区域开始-->
      <div class="row">
-     	<div class="col-sm-2"></div> 
-        <div id="main"  class="col-sm-8">
+     	<div class="col-sm-1"></div> 
+        <div id="main"  class="col-sm-9">
 			<table class="table table-hover">
 			  <thead>
 			    <tr>
@@ -42,6 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <th>电话</th>
 			      <th>地址</th>
 			      <th>订单状态</th>
+			      <th>甲醛数值</th>
 			      <th>修改设备</th>
 			    </tr>
 			  </thead>
@@ -56,6 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td >${order.phone} </td>
 						<td >${order.address} </td>
 						<td >${order.state}</td>
+						<td >${order.jqNum}</td>
 						<td ><button type="button" id="${order.id}" onclick="javascript:modify(this);">修改</button></td>
 					</tr>
 				</c:forEach> 
