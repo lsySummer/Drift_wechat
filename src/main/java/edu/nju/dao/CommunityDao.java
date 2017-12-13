@@ -8,7 +8,7 @@ import edu.nju.entities.UserComment;
 
 public interface CommunityDao {
 	
-	public boolean addComment(String openid,List<MultipartFile> files,String comment);
+	public boolean addComment(String openid,List<MultipartFile> files,String comment,float num);
 	
 	public UserComment getComment(String openid);
 }

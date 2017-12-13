@@ -114,11 +114,13 @@ public class ReserveDaoImpl implements ReserveDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean confirm(String openid) {
-		Device d = rgetDao.getDeviceByOpenId(openid);
+		//自己的订单状态修改为“已确认收货”
+		//上家的订单状态改为“下家已收货”
+		Device d = rgetDao.getDeviceByOpenId(openid);//当前用户的手中设备
 		d.setQueueNum(d.getQueueNum()-1);
 		String hql = "from Order where openId =:openid";
 		UserInfo currentUser = userDao.getUser(openid);
-		d.setLoc(currentUser.getAddress());
+		d.setLoc(currentUser.getAddress());//地址修改为当前用户的地址
 		baseDao.update(d);
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openid).getResultList();
 		if(list.size()>0){
@@ -133,7 +135,6 @@ public class ReserveDaoImpl implements ReserveDao{
 				beforeOrder.setState("下家已收货");
 				baseDao.update(beforeOrder);
 			}
-			baseDao.update(o);
 			return true;
 		}
 		return false;
