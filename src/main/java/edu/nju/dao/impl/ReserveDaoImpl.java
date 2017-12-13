@@ -101,7 +101,6 @@ public class ReserveDaoImpl implements ReserveDao{
 		}else{
 			return false;
 		}
-		//TODO 加锁
 	}
 	
 	@SuppressWarnings("unchecked")
