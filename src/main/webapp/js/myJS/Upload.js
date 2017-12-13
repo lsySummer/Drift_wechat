@@ -58,8 +58,9 @@ weui.uploader('#uploaderCustom', {
              if (uploadSuccessCount == uploadCount)
              {
             	 	var text = document.getElementById('txt_des').value;
-            	 	var methanal = document.getElementById('methanal').value;
-            		$.getJSON('/Drift_wechat/api/community/txt?txt='+text+'&methanal='+methanal,function(data){
+            	 	var num = document.getElementById('methanal').value;
+            	 	$.alert(num);
+            		$.getJSON('/Drift_wechat/api/community/txt?txt='+text+'&num='+num,function(data){
             			$.alert('成功！');
             			window.location.href='/Drift_wechat/jsp/Delivery.jsp';
             		});
