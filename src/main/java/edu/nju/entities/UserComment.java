@@ -19,7 +19,9 @@ public class UserComment {
 	private String openid;
 	private String orderid;
 	private String comment;
-	private String picURLS;//split by ;
+	private String picURLS;//split by
+	private float num;
+	
 	@Id
 	@Column(length = 32)
 	@GeneratedValue(generator = "system-uuid")
@@ -53,6 +55,12 @@ public class UserComment {
 	}
 	public void setOrderid(String orderid) {
 		this.orderid = orderid;
+	}
+	public float getNum() {
+		return num;
+	}
+	public void setNum(float num) {
+		this.num = num;
 	}
 	@Override
 	public String toString() {

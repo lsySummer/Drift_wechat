@@ -73,10 +73,11 @@ public class TestController {
 //		System.out.println(new Date().toString());
 //		service.makeOrder("000000005fa5ec9f015fae298e3b0007", "oRTgpwQkDZKxGFvNnfKpJLWvxsyw", 0, Utility.getSpecifiedDayAfter(new Date(),3));
 		//		List<String> str = gservice.getByDeviceId("000000005fa5ec9f015fae298e3b0007");
-		MyThread myThread1 = new MyThread(service);
-		MyThread myThread2 = new MyThread(service);
-		myThread1.start();
-		myThread2.start();
+//		MyThread myThread1 = new MyThread(service);
+//		MyThread myThread2 = new MyThread(service);
+//		myThread1.start();
+//		myThread2.start();
+		service.confirm("oRTgpwQkDZKxGFvNnfKpJLWvxsyw");
 		return "success";
 	}
 }
