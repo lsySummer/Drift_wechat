@@ -11,9 +11,10 @@ public class OrderVO {
 	private String phone;
 	private String address;
 	private String state;
+	private float jqNum;//室内甲醛含量
 	
 	public OrderVO(String id, Date startDate, Date endDate, String deviceNumber, String name, String phone,
-			String address,String state) {
+			String address,String state,float jqNum) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -23,6 +24,7 @@ public class OrderVO {
 		this.phone = phone;
 		this.address = address;
 		this.state = state;
+		this.jqNum = jqNum;
 	}
 	public String getState() {
 		return state;
@@ -71,6 +73,12 @@ public class OrderVO {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public float getJqNum() {
+		return jqNum;
+	}
+	public void setJqNum(float jqNum) {
+		this.jqNum = jqNum;
 	}
 	@Override
 	public String toString() {

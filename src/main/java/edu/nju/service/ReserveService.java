@@ -176,7 +176,7 @@ public class ReserveService {
 			if(before.getOpenid().equals("thisiscomponyinfomation")&&
 					o.getState().equals("等待发货")){
 				OrderVO vo = new OrderVO(o.getId(), o.getStartDate(),o.getEndDate(), o.getDeviceNumber(), u.getName(), u.getPhone(),
-						u.getAddress(),o.getState());
+						u.getAddress(),o.getState(),-1);
 				result.add(vo);
 			}
 		}
@@ -196,7 +196,7 @@ public class ReserveService {
 			if(after.getOpenid().equals("thisiscomponyinfomation")&&
 					o.getState().equals("已寄出")){
 				OrderVO vo = new OrderVO(o.getId(), o.getStartDate(),o.getEndDate(), o.getDeviceNumber(), u.getName(), u.getPhone(),
-						u.getAddress(),o.getState());
+						u.getAddress(),o.getState(),-1);
 				result.add(vo);
 			}
 		}
