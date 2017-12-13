@@ -1,5 +1,7 @@
 package edu.nju.dao.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -77,21 +79,29 @@ public class ReserveDaoImpl implements ReserveDao{
 		}
 		Utility.sortInt(dlist);//按照排队人数对设备进行排序
 		Device device = dlist.get(0);//排队人数最少的设备被预定
-		device.setQueueNum(device.getQueueNum()+1);//排队人数+1
-		baseDao.update(device);
 		return device;
 	}
 
 	@Override
-	public boolean makeOrder(String deviceId,String openid,int type,Date startDate,Date endDate) {
+	synchronized public boolean makeOrder(String deviceId,String openid,int type,Date startDate,Date endDate) {
 		UserInfo user = userDao.getUser(openid);
 		Device device = rgetDao.getDeviceById(deviceId).get(0);
+		device.setQueueNum(device.getQueueNum()+1);//排队人数+1
+		baseDao.update(device);
 		endDate = Utility.getSpecifiedDayAfter(startDate,Constants.USER_DATE-1);
 		device.setLoc(user.getAddress());
 		baseDao.update(device);
-		Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),"等待发货",0,type);
-		baseDao.save(o);
-		return true;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String startStr = sdf.format(startDate);
+		List<String> dates = rgetDao.getByDeviceId(deviceId);
+		if(dates.contains(startStr)){
+			Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),"等待发货",0,type);
+			baseDao.save(o);
+			return true;
+		}else{
+			return false;
+		}
+		//TODO 加锁
 	}
 	
 	@SuppressWarnings("unchecked")

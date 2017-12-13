@@ -28,3 +28,13 @@ function getParmFormUrl(name){
     if (r != null){return decodeURI(r[2]);}
     return null;
 }
+
+$("#submit").click(function(){
+	if($("#deliveryPerson").val().trim().length && $("phone").val().trim().length && $("address_detail").val().trim().length && $("address").val().trim().length){
+			$('#personDetail').submit();
+			$.toast("提交成功");
+	}else{
+		$.toast("请确保所有内容均已填写", "cancel");
+		return false;
+	}
+})

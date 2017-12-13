@@ -19,7 +19,7 @@ import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
-import edu.nju.utils.Constants;
+import edu.nju.model.RouteVO;
 import edu.nju.utils.Utility;
 import edu.nju.utils.WechatConfig;
 import edu.nju.utils.WechatSend;
@@ -156,5 +156,21 @@ public class ManageService {
 
 	public boolean setArea(String deviceId,String area,int type){
 		return manageDao.setArea(deviceId,area,type);
+	}
+	
+	/**
+	 * @return
+	 * 根据设备id获得设备流转路线
+	 */
+	public List<RouteVO> getRoute(String deviceid){
+		return manageDao.getRoute(deviceid);
+	}
+	
+	/**
+	 * @return
+	 * 获得所有设备流转路线
+	 */
+	public Map<String,List<RouteVO>> getAllRoute(){
+		return manageDao.getAllRoute();
 	}
 }

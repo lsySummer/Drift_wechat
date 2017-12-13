@@ -1,5 +1,7 @@
 package edu.nju.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import edu.nju.service.ManageService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.service.UserService;
+import edu.nju.utils.Utility;
 
 @Controller
 @RequestMapping(value="/test")
@@ -64,7 +67,18 @@ public class TestController {
 //		System.out.println("写入成功");
 //		System.out.println(cservice.getComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").toString());
 //		System.out.println(service.getCompanyReceive().size());
-		service.saveDelInfo("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", "166681986110");
+//		service.saveDelInfo("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", "166681986110");
+//		System.out.println(mservice.getRoute("000000005fa5ec9f015fae298e3b0007").size());
+//		System.out.println(mservice.getAllRoute().size());
+//		System.out.println(new Date().toString());
+//		service.makeOrder("000000005fa5ec9f015fae298e3b0007", "oRTgpwQkDZKxGFvNnfKpJLWvxsyw", 0, Utility.getSpecifiedDayAfter(new Date(),3));
+		//		List<String> str = gservice.getByDeviceId("000000005fa5ec9f015fae298e3b0007");
+		MyThread myThread1 = new MyThread(service);
+		MyThread myThread2 = new MyThread(service);
+		myThread1.start();
+		myThread2.start();
 		return "success";
 	}
 }
+
+
