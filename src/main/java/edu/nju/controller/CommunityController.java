@@ -43,10 +43,10 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value = "/txt")
-	public void textUplood(String txt, HttpSession session, HttpServletResponse response){
+	public void textUplood(String txt, String methanal, HttpSession session, HttpServletResponse response){
 		JSONObject result = new JSONObject();
 //		service.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", photoLists, txt);
-		service.addComment((String)session.getAttribute("openid"), photoLists, txt);
+		service.addComment((String)session.getAttribute("openid"), photoLists, txt, Float.parseFloat(methanal));
 		result.put("status", "200");
 		try {
 			PrintWriter out = response.getWriter();

@@ -24,12 +24,10 @@ public class CommunityDaoImpl implements CommunityDao{
 	private static final Logger log = Logger.getLogger(CommunityDaoImpl.class);
 	 @Autowired
 	 private BaseDao baseDao;
-	 @Autowired
-	 private ServletContext context;
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean addComment(String openid,List<MultipartFile> files,String comment) {
+	public boolean addComment(String openid,List<MultipartFile> files,String comment,float num) {
 		
 		String hql = "from Order where openId =:openid";
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openid).getResultList();
@@ -39,6 +37,7 @@ public class CommunityDaoImpl implements CommunityDao{
 			u.setComment(comment);
 			u.setOpenid(openid);
 			u.setOrderid(o.getId());
+			u.setNum(num);
 			String urls = saveFile(openid,files);
 			u.setPicURLS(urls);
 			baseDao.save(u);

@@ -11,8 +11,9 @@ public class UserVO {
 	private Date startDate;
 	private String deviceNumber;
 	private int deviceState;
+	private float jqNum;
 	public UserVO(String openId, String nickname, String address,  Date startDate,
-			String deviceNumber,int deviceState) {
+			String deviceNumber,int deviceState,float jqNum) {
 		super();
 		this.openId = openId;
 		this.nickname = nickname;
@@ -22,6 +23,13 @@ public class UserVO {
 		this.startDate = startDate;
 		this.deviceNumber = deviceNumber;
 		this.deviceState = deviceState;
+		this.jqNum = jqNum;
+	}
+	public float getJqNum() {
+		return jqNum;
+	}
+	public void setJqNum(float jqNum) {
+		this.jqNum = jqNum;
 	}
 	public String getOpenId() {
 		return openId;

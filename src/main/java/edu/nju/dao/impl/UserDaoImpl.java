@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.nju.dao.BaseDao;
+import edu.nju.dao.CommunityDao;
 import edu.nju.dao.UserDao;
 import edu.nju.entities.Order;
+import edu.nju.entities.UserComment;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.UserVO;
 
@@ -23,6 +25,8 @@ public class UserDaoImpl implements UserDao{
 
 	 @Autowired
 	 private BaseDao baseDao;
+	 @Autowired
+	 private CommunityDao communityDao;
 	
 	@Override
 	public boolean register(String openId, String nickName) {
@@ -105,12 +109,17 @@ public class UserDaoImpl implements UserDao{
 			List<UserInfo> ulist = getUserById(o.getOpenId());
 			if(ulist.size()>0){
 			UserInfo u = ulist.get(0);
-			int state = 0;//0代表正在使用，1代表理事用过
+			int state = 0;//0代表正在使用，1代表使用过
 			if(o.getState().equals("下家已收货")||o.getState().equals("已寄出")){
 				state = 1;
 			}
+			UserComment comment = communityDao.getComment(u.getOpenid());
+			float jqNum = -1;
+			if(comment!=null){
+				jqNum = comment.getNum();
+			}
 			UserVO vo = new UserVO(u.getOpenid(),u.getNickName(),u.getAddress(),o.getStartDate(),
-			o.getDeviceNumber(),state);
+			o.getDeviceNumber(),state,jqNum);
 			volist.add(vo);
 			}
 		}

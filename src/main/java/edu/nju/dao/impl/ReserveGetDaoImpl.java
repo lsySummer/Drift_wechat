@@ -40,7 +40,7 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 			UserInfo u = userDao.getUser(openid);
 			if(u!=null){
 				OrderVO vo = new OrderVO(o.getId(), o.getStartDate(),o.getEndDate(), o.getDeviceNumber(), u.getName(), u.getPhone(),
-						u.getAddress(),o.getState());
+						u.getAddress(),o.getState(),-1);
 				volist.add(vo);
 			}
 			
