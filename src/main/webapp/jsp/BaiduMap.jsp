@@ -25,10 +25,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
-    <title>Drift</title>
+    <title>果麦公益检测</title>
 </head>
 
 <body ontouchstart>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:20%;position:relative;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" align="center">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						甲醛检测仪
+					</h4>
+				</div>
+				<div class="modal-body" align="center">
+					 <img  id="img2" width=80% height=70%  src="/Drift_wechat/images/info.jpg">
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+
     <div style="height:100%; width: 100%;position:absolute;" id="map"></div>
     
     <div class="weui-navbar">
@@ -44,8 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/MyIndex.jsp">
 	    	个人中心
 	    </a>
-	</div>
-		
+	</div>	
 	<div class="weui-flex weui-footer weui-footer_fixed-bottom">
 		  <div class="weui-flex__item placeholder">
 		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set'">我要预约</button>
@@ -54,6 +72,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:;">我要插队</button>
 		  </div>
 	</div>
+	
+	<div style="top:20%;left:80%;position:relative;">
+		<img alt="" src="/Drift_wechat/images/map/yiqi2.png"  height="32px" width="32px" data-toggle="modal" data-target="#myModal">
+	</div>
+	
+	<div style="top:70%;left:80%;position:relative;">
+		<img alt="" src="/Drift_wechat/images/map/china.png" id="countryMap" height="32px" width="32px">全国
+	</div>
+	
+	<div style="top:75%;left:80%;position:relative;">
+		<img alt="" src="/Drift_wechat/images/map/local.png" id="originalMap" height="32px" width="32px">本地
+	</div>	
 	
 	<div id="comment" class='weui-popup__container popup-bottom'>
       <div class="weui-popup__overlay"></div>
@@ -69,15 +99,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="modal-content">
           <div class="weui-grids" id="ptContent">          
             <a class="weui-grid js_grid pb" >
-                <img  id="img1" width=150px height=100px src="/Drift_wechat/images/product.png">
+                <img  id="img1" width=100px height=100px src="/Drift_wechat/images/product.png">
             </a>
             
             <a class="weui-grid js_grid pb" >
-                <img  id="img2" width=150px height=100px src="/Drift_wechat/images/product.png">
+                <img  id="img2" width=100px height=100px src="/Drift_wechat/images/product.png">
             </a>
             
             <a class="weui-grid js_grid pb" >
-                <img  id="img3" width=150px height=100px src="/Drift_wechat/images/product.png">
+                <img  id="img3" width=100px height=100px src="/Drift_wechat/images/product.png">
             </a>
             
             <div class="weui-article" id="commentDiv">
@@ -90,38 +120,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div>
 </body>
 <script type="text/javascript">
-
-/* 	var pbset = $.photoBrowser({
-       items: [
-         {
-           image: "/Drift_wechat/images/product.png",
-           caption: "尝试 Vue.js 最简单的方法是使用 JSFiddle Hello World 例子。在浏览器新标签页中打开它，跟着我们查看一些基础示例。如果你喜欢用包管理器下载/安装，查看安装教程。"
-         },
-         {
-           image: "/Drift_wechat/images/product.png",
-           caption: "组件（Component）是 Vue.js 最强大的功能之一。"
-         },
-         {
-           image: "/Drift_wechat/images/product.png",
-           caption: "组件可以扩展 HTML 元素，封装可重用的代码"
-         },
-         {
-           image: "/Drift_wechat/images/product.png",
-           caption: "在较高层面上，组件是自定义元素，Vue.js 的编译器为它添加特殊功能。在有些情况下，组件也可以是原生 HTML 元素的形式，以 is 特性扩展。"
-         }
-       ],
-       initIndex: 1
-     });
-     $(".pb").click(function() {
-     	$.closePopup();
-       pbset.open();
-     }); */
      
     var pbset;
 	$(".pb").click(function() {
       	$.closePopup();
         pbset.open();
     });
+    $("#countryMap").click(function(){
+    	level = 4;
+    	getMap();
+    })
+    $("#originalMap").click(function(){
+    	level = 18;
+    	getMap();
+    })
     
     //评论区初始化展示
 	function getComment(openid){
@@ -150,13 +162,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$("#img1").attr('src',ptUrls[0]); 
 				$("#img2").attr('src',ptUrls[1]); 
 				$("#img3").attr('src',ptUrls[2]); 
-	/* 			for(var i=0;i<ptUrls.length;i++){
-					$("#imgId").attr('src',path); 
-					$("<a/>").appendTo("#ptContent").html("<img  width=100% height=100% src="+ptUrls[i]+">");
-					$("<a/>").attr("class","weui-grid");
-					$("<a/>").attr("class","js_grid");
-					$("<a/>").attr("class","pb");
-				} */
 				$("#commentDiv").empty();
 				$("<p/>").appendTo("#commentDiv").html(comment);
 				
@@ -169,12 +174,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},"json");
 		
 	}
-        	//初始化信息
+        
+	//初始化信息
 	var index = 0;
 	var allAddressVO = [];
 	var myLocation = {"x":118.786078,"y":32.061531};
+	var level = 18;
 	
-	var icon1 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
+/* 	var icon1 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
          new BMap.Size(23, 25), {  
              offset: new BMap.Size(10, 25),  
              imageOffset: new BMap.Size(0, -275)                        
@@ -182,9 +189,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     var icon2 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
          new BMap.Size(23, 25), {  
              offset: new BMap.Size(10, 25),  
-             imageOffset: new BMap.Size(0, -300)  
-               
-         });
+             imageOffset: new BMap.Size(0, -300)               
+         }); */
+    var icon1 = new BMap.Icon("/Drift_wechat/images/map/blue.png", new BMap.Size(32,32));
+    var icon2 = new BMap.Icon("/Drift_wechat/images/map/red.png", new BMap.Size(32,32));  
+         
     var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
          new BMap.Size(23, 25), {  
              offset: new BMap.Size(10, 25),  
@@ -251,29 +260,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				temp["airBoolean"] = 0;
 				allAddressVO.push(temp);
 			}
-			//map_init(myLocation);
-			//map_init();	
-			//getAirCleanAddress();
-			getAir();					
+			getAir();
+			//map_init();				
 		},"json");
 	}
 	
-	//获取空气净化器地址
 	function getAir(){
-	   $.ajax({    
-		   url:'http://measure.qingair.net/management/deviceAddress/all',
-		   type:'get',    
-		   dataType:"json",       
-		   timeout:3000,
-		   success:function(res,textStatus){    
-			    if(res.responseCode=="RESPONSE_OK"){
-					for(var i=0;i<res.data.length;i++){
+		$.get("http://measure.qingair.net/management/deviceAddress/all",function(res){
+				if(res.responseCode=="RESPONSE_OK"){
+					for(var i=0;i<10;i++){
 						temp = {};
-						temp["deviceNumber"] = res.data[i].device_id;
+						temp["device_id"] = res.data[i].device_id;
 						temp["address"] = res.data[i].province+res.data[i].city+res.data[i].address;
 						temp["nickname"] = res.data[i].owner;
 						temp["phone"] = res.data[i].phone;
 						temp["airBoolean"] = 1;
+						if(res.data[i].hasOwnProperty("is_power_on")){
+							temp["pm25"] = res.data[i].pm25;
+							temp["update_time"] = new Date(res.data[i].update_time);
+						}
 						allAddressVO.push(temp);
 					}			
 				}
@@ -281,8 +286,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					alert("获取净化器地址失败！")
 				}
 				map_init();
-		   }       
-	   });   
+		},"json");
 	}
 	
 	//初始化地图
@@ -291,7 +295,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             //第1步：设置地图中心点，当前城市  
             var point = new BMap.Point(myLocation.x,myLocation.y);
             //第2步：初始化地图,设置中心点坐标和地图级别。  
-            map.centerAndZoom(point, 18);  
+            map.centerAndZoom(point, level);  
             //第3步：启用滚轮放大缩小  
             map.enableScrollWheelZoom(true);  
             //第4步：向地图中添加缩放控件  
@@ -362,8 +366,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		var commonInfo;
    		var titleStr;
    		if(addPoint.airBoolean==1){
-   			commonInfo = "用户："+addPoint.nickname+"<br>"+"仪器编号："+addPoint.deviceNumber+"<br>"+"电话："+addPoint.phone+"<br>";
-   			titleStr = "空气净化器<br>"+commonInfo;
+   			if(addPoint.hasOwnProperty("pm25")){
+   				commonInfo = "用户："+addPoint.nickname+"<br>"+"仪器编号："+addPoint.device_id+"<br>"+"pm2.5:"+addPoint.pm25+"<br>"+"检测时间:"+addPoint.update_time+"<br>";
+   			}
+   			else{
+   				commonInfo = "用户："+addPoint.nickname+"<br>"+"仪器编号："+addPoint.device_id+"<br>";
+   			}
+   			titleStr = "果麦新风净化<br>"+commonInfo;
    		}
    		else{
 	   		var startDateStr = addPoint.startDate.substring(0,addPoint.startDate.indexOf(" "));
@@ -384,6 +393,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				getComment(addPoint.openId);
 				//getComment("oRTgpweSZbOxfrg9H57JwuPwMJLo");
 			}
+			else{
+				getAirPt(addPoint.device_id);
+			}
 		});
 	}
 	
@@ -400,6 +412,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		marker.addEventListener("click", function(){          
 			this.openInfoWindow(infoWindow,poi.point);
 		});
+	}
+			
+	//空气净化器安装图片获取
+	function getAirPt(device_id){
+		$.get("http://measure.qingair.net/qrcode/"+device_id+"/insight",function(res){
+			var pts = res.data;
+			var ptUrls = [];
+			var comment;
+			var itemsArray = [];
+			var tempUrl = "/Drift_wechat/images/product.png";
+			var baseurl = "http://measure.qingair.net";
+			if(res.responseCode=="RESPONSE_OK"){
+				for(var i=1;i<(pts.length>3?3:pts.length);i++){
+					var temp = baseUrl+pts[i];
+					var tempImage = {"image":temp};
+					itemsArray.push(tempImage);
+					ptUrls.push(temp);
+				}
+				
+				while(ptUrls.length<3){
+					ptUrls.push(tempUrl);
+				}
+					
+				$("#img1").attr('src',ptUrls[0]); 
+				$("#img2").attr('src',ptUrls[1]); 
+				$("#img3").attr('src',ptUrls[2]); 
+				$("#commentDiv").empty();
+					
+				pbset = $.photoBrowser({
+				        items: itemsArray,
+				        initIndex: 1
+				    });	    
+				$("#comment").popup();
+			}
+			else{
+				alert("获取空气净化器图片失败！");
+			} 
+		},"json");	
 	}
 </script>      
 </html>  
