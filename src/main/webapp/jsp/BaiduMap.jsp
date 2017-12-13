@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body ontouchstart>
 	<!-- 模态框（Modal） -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:20%;position:relative;">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header" align="center">
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</h4>
 				</div>
 				<div class="modal-body" align="center">
-					 <img  id="img2" width=80% height=70%  src="/Drift_wechat/images/info.jpg">
+					 <img  width=80% height=70%  src="/Drift_wechat/images/info.jpg">
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	
 	<div style="top:20%;left:80%;position:relative;">
-		<img alt="" src="/Drift_wechat/images/map/yiqi2.png"  id="yiqi" height="32px" width="32px" >
+		<img alt="" src="/Drift_wechat/images/map/yiqi2.png"  id="yiqi" height="32px" width="32px" >详情
 	</div>
 	
 	<div style="top:70%;left:80%;position:relative;">
