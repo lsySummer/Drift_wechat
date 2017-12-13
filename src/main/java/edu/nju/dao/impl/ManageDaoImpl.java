@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.nju.dao.BaseDao;
+import edu.nju.dao.CommunityDao;
 import edu.nju.dao.ManageDao;
 import edu.nju.dao.UserDao;
 import edu.nju.entities.Device;
 import edu.nju.entities.DeviceArea;
 import edu.nju.entities.Order;
+import edu.nju.entities.UserComment;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
@@ -26,6 +28,8 @@ public class ManageDaoImpl implements ManageDao{
 	 private BaseDao baseDao;
 	 @Autowired
 	 private UserDao userDao;
+	 @Autowired
+	 private CommunityDao cDao;
 	 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -79,8 +83,9 @@ public class ManageDaoImpl implements ManageDao{
 			String openid = o.getOpenId();
 			UserInfo u = userDao.getUser(openid);
 			if(u!=null){
+				UserComment comment = cDao.getComment(openid);
 				OrderVO vo = new OrderVO(o.getId(), o.getStartDate(),o.getEndDate(), o.getDeviceNumber(), u.getName(), u.getPhone(),
-						u.getAddress(),o.getState());
+						u.getAddress(),o.getState(),comment.getNum());
 				volist.add(vo);
 			}
 			
