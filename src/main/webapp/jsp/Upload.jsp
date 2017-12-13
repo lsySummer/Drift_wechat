@@ -23,8 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				<div class="weui-cells weui-cells_form">
                     <div class="weui-cell">
                         <div class="weui-cell__bd">
-                            <input id="methanal" name="methanal" class="weui-input" type="number" placeholder="记录您的甲醛数值">
-                            <div class="weui-textarea-counter">毫克/立方米</div>
+                            <input id="methanal" name="methanal" class="weui-input" type="number" placeholder="毫克/立方米">
                         </div>
                     </div>
                 </div>
