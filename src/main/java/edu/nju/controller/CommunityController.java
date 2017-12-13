@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import edu.nju.service.CommunityService;
 @RequestMapping(value="/community")
 public class CommunityController {
 	List<MultipartFile> photoLists = new ArrayList<MultipartFile>();
+	private Logger log = Logger.getLogger(CommunityController.class);
 	
 	@Autowired
 	CommunityService service;
@@ -43,10 +45,12 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(value = "/txt")
-	public void textUplood(String txt, String methanal, HttpSession session, HttpServletResponse response){
+	public void textUplood(String txt, String num, HttpSession session, HttpServletResponse response){
+		log.info("num"+num);
+		log.info("txt"+txt);
 		JSONObject result = new JSONObject();
-//		service.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", photoLists, txt);
-		service.addComment((String)session.getAttribute("openid"), photoLists, txt, Float.parseFloat(methanal));
+//		service.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", photoLists, txt, Float.parseFloat(methanal));
+		service.addComment((String)session.getAttribute("openid"), photoLists, txt, Float.parseFloat(num));
 		result.put("status", "200");
 		try {
 			PrintWriter out = response.getWriter();
