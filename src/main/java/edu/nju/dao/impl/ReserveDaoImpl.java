@@ -47,11 +47,11 @@ public class ReserveDaoImpl implements ReserveDao{
 		DeliveryInfo info = new DeliveryInfo();
 		info.setDeliveryNumber(did);
 		info.setSendId(openId);
-		baseDao.save(info);
 		
 		//把下家的订单改成上家已发货
 		UserInfo afterUser = rgetDao.getAfter(openId);
 		info.setReceiveId(afterUser.getOpenid());
+		baseDao.save(info);
 		if(!afterUser.getOpenid().equals("thisiscomponyinfomation")){
 			Order afterOrder = rgetDao.getByOpenAndDid(afterUser.getOpenid(), d.getId());
 			afterOrder.setState("上家已发货");
