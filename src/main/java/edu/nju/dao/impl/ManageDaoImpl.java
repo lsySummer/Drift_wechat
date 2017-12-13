@@ -84,8 +84,12 @@ public class ManageDaoImpl implements ManageDao{
 			UserInfo u = userDao.getUser(openid);
 			if(u!=null){
 				UserComment comment = cDao.getComment(openid);
+				float jqNum = -1;
+				if(comment != null){
+					jqNum = comment.getNum();
+				}
 				OrderVO vo = new OrderVO(o.getId(), o.getStartDate(),o.getEndDate(), o.getDeviceNumber(), u.getName(), u.getPhone(),
-						u.getAddress(),o.getState(),comment.getNum());
+						u.getAddress(),o.getState(),jqNum);
 				volist.add(vo);
 			}
 			
