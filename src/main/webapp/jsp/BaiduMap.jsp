@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	
 	<div style="top:20%;left:80%;position:relative;">
-		<img alt="" src="/Drift_wechat/images/map/yiqi2.png"  height="32px" width="32px" data-toggle="modal" data-target="#myModal">
+		<img alt="" src="/Drift_wechat/images/map/yiqi2.png"  id="yiqi" height="32px" width="32px" >
 	</div>
 	
 	<div style="top:70%;left:80%;position:relative;">
@@ -128,12 +128,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     });
     $("#countryMap").click(function(){
     	level = 4;
-    	getMap();
+    	map_init();
     })
     $("#originalMap").click(function(){
     	level = 18;
-    	getMap();
+    	map_init();
     })
+    
+    $("#yiqi").click(function() {
+        $('#myModal').modal();
+    });
     
     //评论区初始化展示
 	function getComment(openid){
@@ -181,16 +185,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var myLocation = {"x":118.786078,"y":32.061531};
 	var level = 18;
 	
-/* 	var icon1 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
-         new BMap.Size(23, 25), {  
-             offset: new BMap.Size(10, 25),  
-             imageOffset: new BMap.Size(0, -275)                        
-         });
-    var icon2 = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
-         new BMap.Size(23, 25), {  
-             offset: new BMap.Size(10, 25),  
-             imageOffset: new BMap.Size(0, -300)               
-         }); */
     var icon1 = new BMap.Icon("/Drift_wechat/images/map/blue.png", new BMap.Size(32,32));
     var icon2 = new BMap.Icon("/Drift_wechat/images/map/red.png", new BMap.Size(32,32));  
          
@@ -203,6 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//页面加载完成启动
 	$("document").ready(function(){
 		weChatMap();
+		//map_init();
 	});
 	
 	function weChatMap(){
@@ -237,7 +232,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		translateCallback = function (data){
 	    if(data.status === 0) {
 		      myLocation = {"x":data.points[0].lng,"y":data.points[0].lat};
-				getMap();
+				map_init();
 		      }
 	    else{
 	      		AlertUtil.error("无法获取您的位置！");
@@ -285,7 +280,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				else{
 					alert("获取净化器地址失败！")
 				}
-				map_init();
+				//map_init();
+				addData();
 		},"json");
 	}
 	
@@ -316,18 +312,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 anchor: BMAP_ANCHOR_BOTTOM_LEFT  
             });  
             map.addControl(ctrlSca);  
-             
-            //添加我的位置信息
-			var myPoint = new BMap.Point(myLocation.x,myLocation.y);
-            var myMaker =  new BMap.Marker(myPoint,{icon:myIcon});
-            map.addOverlay(myMaker);
-            var myWindow = {};
-            myWindow["point"] = myPoint;
-            myWindow["info"] = "您的位置<br>"+"欢迎使用甲醛仪，预计排队时间一天";          
-            addMyInfoWindow(myMaker, myWindow);
-            //批量添加地址信息
-            bdGEO();
-                 
+            getMap();     
+    }
+    
+    function addData(){
+   	    //添加我的位置信息
+		var myPoint = new BMap.Point(myLocation.x,myLocation.y);
+        var myMaker =  new BMap.Marker(myPoint,{icon:myIcon});
+        map.addOverlay(myMaker);
+        var myWindow = {};
+        myWindow["point"] = myPoint;
+        myWindow["info"] = "您的位置<br>"+"欢迎使用甲醛仪，预计排队时间一天";          
+        addMyInfoWindow(myMaker, myWindow);
+        //批量添加地址信息
+        bdGEO();
     }
       
    	//将地址解析结果显示在地图上,并调整地图视野
