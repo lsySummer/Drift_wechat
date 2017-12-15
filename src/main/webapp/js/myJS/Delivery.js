@@ -39,7 +39,7 @@ function confirm(){
 	if(document.getElementById('confirm').value == "true"){
 		$.get('/Drift_wechat/api/delivery/confirm');
 		$.toast("收货成功");
-		setTimeout("window.location.href='/Drift_wechat/jsp/Delivery.jsp'", 800);
+		setTimeout("window.location.href='/Drift_wechat/jsp/Delivery.jsp'", 1000);
 	}else{
 		$.toast("暂时无法收货", "forbidden");
 	}

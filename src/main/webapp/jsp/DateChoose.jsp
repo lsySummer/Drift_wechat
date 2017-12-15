@@ -78,11 +78,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var startDate = document.getElementById("startDate").value;
 				$.ajax({url:"/Drift_wechat/api/order/date?deviceNum="+deviceNum+"&startDate="+startDate, success: function(data){
 					if(data == "200"){
-						$.toast("收货成功");
 						window.location.href='/Drift_wechat/jsp/Result.jsp';
 					}else{
 						$.toptip('您的设备已经被预约走了～', 'error');
-						setTimeout("window.location.href='/Drift_wechat/jsp/DateChoose.jsp'", 800);
+						setTimeout("window.location.href='/Drift_wechat/jsp/DateChoose.jsp'", 1000);
 					}
       			}});
 			}else{

@@ -60,8 +60,8 @@ weui.uploader('#uploaderCustom', {
              {
             	 	var text = document.getElementById('txt_des').value;
             		$.getJSON('/Drift_wechat/api/community/txt?txt='+text+'&num='+num,function(data){
-            			$.alert('成功！');
-            			window.location.href='/Drift_wechat/jsp/Delivery.jsp';
+            			$.toast("上传成功！");
+            			setTimeout("window.location.href='/Drift_wechat/jsp/Delivery.jsp'", 1000);
             		});
              }
          }
