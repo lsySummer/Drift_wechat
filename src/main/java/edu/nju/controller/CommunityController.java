@@ -22,14 +22,19 @@ import edu.nju.service.CommunityService;
 @Controller
 @RequestMapping(value="/community")
 public class CommunityController {
-	List<MultipartFile> photoLists = new ArrayList<MultipartFile>();
 	private Logger log = Logger.getLogger(CommunityController.class);
 	
 	@Autowired
 	CommunityService service;
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/upload",method = RequestMethod.POST)
 	public void upload(@RequestParam(value = "file") MultipartFile photo, HttpSession session, HttpServletResponse response){
+		if(session.getAttribute("photo") == null){
+			List<MultipartFile> temp = new ArrayList<MultipartFile>();
+			session.setAttribute("photo", temp);
+		}
+		List<MultipartFile> photoLists = (List<MultipartFile>) session.getAttribute("photo");
 		JSONObject result=new JSONObject();
 		photoLists.add(photo);
 		result.put("status", "200");
@@ -44,11 +49,13 @@ public class CommunityController {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/txt")
 	public void textUplood(String txt, String num, HttpSession session, HttpServletResponse response){
 		log.info("num"+num);
 		log.info("txt"+txt);
 		JSONObject result = new JSONObject();
+		List<MultipartFile> photoLists = (List<MultipartFile>) session.getAttribute("photo");
 //		service.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", photoLists, txt, Float.parseFloat(methanal));
 		service.addComment((String)session.getAttribute("openid"), photoLists, txt, Float.parseFloat(num));
 		result.put("status", "200");
@@ -57,7 +64,7 @@ public class CommunityController {
 			out.print(result);
 			out.flush();
 			out.close();
-			photoLists.clear();
+			session.removeAttribute("photo");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

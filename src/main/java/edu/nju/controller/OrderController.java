@@ -98,10 +98,14 @@ public class OrderController {
 	public void confirm(String deviceNum, String startDate, HttpSession session, HttpServletResponse response) throws ParseException{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(startDate);
-		service.makeOrder(deviceNum, (String)session.getAttribute("openid"), 0, date);
+		boolean flag = service.makeOrder(deviceNum, (String)session.getAttribute("openid"), 0, date);
 		try {
 			PrintWriter out = response.getWriter();
-			out.print("200");
+			if(flag){
+				out.print("200");
+			}else{
+				out.print("500");
+			}
 			out.flush();
 			out.close();
 		} catch (IOException e) {
