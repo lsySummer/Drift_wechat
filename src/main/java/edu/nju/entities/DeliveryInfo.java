@@ -1,5 +1,7 @@
 package edu.nju.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +22,8 @@ public class DeliveryInfo {
 	private String sendId;//发出方openid
 	private String deliveryNumber;//快递单号
 	private String receiveId;//接收方openid
+//	private String deviceId;
+//	private Date createTime;
 	
 	@Id
 	@Column(length = 32)
@@ -49,6 +53,18 @@ public class DeliveryInfo {
 	public void setDeliveryNumber(String deliveryNumber) {
 		this.deliveryNumber = deliveryNumber;
 	}
+//	public String getDeviceId() {
+//		return deviceId;
+//	}
+//	public void setDeviceId(String deviceId) {
+//		this.deviceId = deviceId;
+//	}
+//	public Date getCreateTime() {
+//		return createTime;
+//	}
+//	public void setCreateTime(Date createTime) {
+//		this.createTime = createTime;
+//	}
 	
 	
 }
