@@ -252,6 +252,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				temp["nickname"] = data.userArr[i].map.nickname;
 				temp["deviceState"] = data.userArr[i].map.deviceState;
 				temp["openId"] = data.userArr[i].map.openId;
+				temp["jqNum"] = data.userArr[i].map.jqNum;
 				temp["airBoolean"] = 0;
 				allAddressVO.push(temp);
 			}
@@ -375,6 +376,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		else{
 	   		var startDateStr = addPoint.startDate.substring(0,addPoint.startDate.indexOf(" "));
 	   		var commonInfo = "用户："+addPoint.nickname+"<br>"+"仪器编号："+addPoint.deviceNumber+"<br>"+"检测时间："+startDateStr+"<br>";
+	   		if(addPoint.jqNum!=-1){
+	   			commonInfo = commonInfo+"甲醛含量："+addPoint.jqNum+"<br>";
+	   		}
 	   		titleStr = "甲醛检测仪<br>"+commonInfo;
    		}
 	    var opts = {
