@@ -104,4 +104,8 @@ public class Utility {
         }
         return null;
     }
+    
+    public static long getDaysBetween(Date startDate,Date endDate){
+    	return (long)((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 *24) + 0.5);
+    }
 }
