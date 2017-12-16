@@ -119,11 +119,13 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/deviceTrack")
-	public void deviceTrack(String deviceid, HttpSession session, HttpServletResponse response){
+	public void deviceTrack(HttpSession session, HttpServletResponse response){
+//		session.setAttribute("openid", "test1");
 		JSONObject result=new JSONObject();
 		try {
 			PrintWriter out = response.getWriter();
-			result.put("track", manageService.getRoute(deviceid));
+			Device temp = getservice.getDeviceByOpenId((String)session.getAttribute("openid"));
+			result.put("track", manageService.getRoute(temp.getId()));
 			out.print(result);
 			out.flush();
 			out.close();

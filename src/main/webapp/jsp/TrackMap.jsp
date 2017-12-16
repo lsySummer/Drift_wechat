@@ -44,6 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var points = [];
 	var myLocation = {"x":118.786078,"y":32.061531};
 	var level = 18;
+	var icon = new BMap.Icon("/Drift_wechat/images/map/red.png", new BMap.Size(32,32));
 	
 	//页面加载完成启动
 	$("document").ready(function(){
@@ -94,8 +95,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			setTimeout(window.bdGEO(),200);
 		}
 		myGeo.getPoint(add.address, function(point){
-			if (point) {		
-				points.add(point);
+			if (point) {	
+				var maker =  new BMap.Marker(point,{icon:icon});
+              	map.addOverlay(maker);
+				points.push(point);	
+				addLine(points);
+				setZoom(points);
 			}else{
 				alert("您选择地址没有解析到结果!"+add.map.address);
 			}
@@ -126,11 +131,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		
 		function getLists(id){
-			$.getJSON('/Drift_wechat/api/order/deviceTrack?deviceid='+id,function(json){
+			/* $.getJSON('/Drift_wechat/api/order/deviceTrack?deviceid='+id,function(json){ */
+			$.getJSON('/Drift_wechat/api/order/deviceTrack',function(json){
 				allDevices = json.track;
 				bdGEO();
-				addLine(points);
-				setZoom(points[1]);
 			});
 		}
 </script>      
