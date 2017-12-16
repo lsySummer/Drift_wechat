@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.nju.dao.impl.UserDaoImpl;
 import edu.nju.entities.Device;
 import edu.nju.entities.UserInfo;
+import edu.nju.service.ManageService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.service.UserService;
@@ -37,6 +38,9 @@ public class OrderController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ManageService manageService;
 	
 	@RequestMapping(value = "/get")
 	public void getDetail(HttpSession session, HttpServletResponse response){
@@ -106,6 +110,36 @@ public class OrderController {
 			}else{
 				out.print("500");
 			}
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/deviceTrack")
+	public void deviceTrack(String deviceid, HttpSession session, HttpServletResponse response){
+		JSONObject result=new JSONObject();
+		try {
+			PrintWriter out = response.getWriter();
+			result.put("track", manageService.getRoute(deviceid));
+			out.print(result);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/deviceAll")
+	public void deviceAll(HttpSession session, HttpServletResponse response){
+		JSONObject result=new JSONObject();
+		try {
+			PrintWriter out = response.getWriter();
+			result.put("tracks", manageService.getAllRoute());
+			out.print(result);
 			out.flush();
 			out.close();
 		} catch (IOException e) {
