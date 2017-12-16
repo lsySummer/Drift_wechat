@@ -31,7 +31,7 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderVO> getOrder(String openId) {
-		String hql = "from Order where openid =:openid order";
+		String hql = "from Order where openid =:openid";
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openId).getResultList();
 		List<OrderVO> volist = new ArrayList<OrderVO>();
 		for(int i=0;i<list.size();i++){
@@ -62,6 +62,10 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 						return userDao.getUser("thisiscomponyinfomation");
 					}else{
 						Order beforeOrder = list.get(i-1);
+						//(long)((beforeOrder.getEndDate().getTime() - beforeOrder.getStartDate().getTime()) / (1000 * 60 * 60 *24) + 0.5)
+						if(Utility.getDaysBetween(beforeOrder.getStartDate(),beforeOrder.getEndDate())==Constants.USER_DATE){
+							return userDao.getUser("thisiscomponyinfomation");
+						}
 						UserInfo beforeUser = userDao.getUser(beforeOrder.getOpenId());
 						return beforeUser;
 					}
@@ -85,7 +89,7 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 					if(i==list.size()-1){
 						return userDao.getUser("thisiscomponyinfomation");
 					}else{
-						if((long)((o.getEndDate().getTime() - o.getStartDate().getTime()) / (1000 * 60 * 60 *24) + 0.5)==Constants.USER_DATE){
+						if(Utility.getDaysBetween(o.getStartDate(),o.getEndDate())==Constants.USER_DATE){
 							return userDao.getUser("thisiscomponyinfomation");
 						}
 						Order afterOrder = list.get(i+1);

@@ -45,9 +45,9 @@ public class TestController {
 //		service.makeOrder("34567", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 6), Utility.getSpecifiedDayAfter(new Date(), 7));
 //		service.makeOrder("45678", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 8), Utility.getSpecifiedDayAfter(new Date(), 9));
 //		System.out.println(gservice.getBefore("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
-		System.out.println(gservice.getAfter("oRTgpweSZbOxfrg9H57JwuPwMJLo").getName());
-		System.out.println(gservice.getAfter("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
-		System.out.println(gservice.getAfter("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").getName());
+		System.out.println(gservice.getBefore("oRTgpweSZbOxfrg9H57JwuPwMJLo").getName());
+//		System.out.println(gservice.getAfter("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
+//		System.out.println(gservice.getAfter("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").getName());
 //		List<String> str = gservice.getByDeviceId("40288d815f5787ba015f5787ebb90010");
 //		for(int i = 0;i<str.size();i++){
 //			System.out.println(str.get(i));
