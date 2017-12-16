@@ -143,13 +143,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		
 		function interval(){
-			var myDate = new Date();
-			console.log(myDate.getMinutes() + ':' + myDate.getSeconds());
 			allDevices.push(intervalDevices[device_index]);
 			bdGEO();
 			device_index ++;
 			if(device_index < size){
-				setTimeout(interval, 800);
+				setTimeout(interval, 1000);
 			}else{
 				allDevices.splice(0,size);
 				device_index = 0;

@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
-    <title>Drift</title>
+    <title>共享甲醛检测仪</title>
   </head> 
  <body ontouchstart>
   <script type="text/javascript">
@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </script>
   	<header class='demos-header'>
       <h2 class="demos-title">共享甲醛检测仪</h2>
-      <p class='demos-sub-title'>预报名系统</p>
+      <p class='demos-sub-title'>报名系统</p>
       </br>
       <img src="/Drift_wechat/images/product.png" width="100%" height="160px"/>
     </header>
