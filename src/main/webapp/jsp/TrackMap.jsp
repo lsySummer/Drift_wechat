@@ -41,6 +41,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//初始化信息
 	var index = 0;
 	var allDevices = [];
+	var intervalDevices = [];
+	var device_index = 0;
+	var size = 0;
 	var points = [];
 	var myLocation = {"x":118.786078,"y":32.061531};
 	var level = 18;
@@ -96,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		myGeo.getPoint(add.address, function(point){
 			if (point) {	
-				var maker =  new BMap.Marker(point,{icon:icon});
+				var maker = new BMap.Marker(point,{icon:icon});
               	map.addOverlay(maker);
 				points.push(point);	
 				addLine(points);
@@ -133,9 +136,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function getLists(id){
 			/* $.getJSON('/Drift_wechat/api/order/deviceTrack?deviceid='+id,function(json){ */
 			$.getJSON('/Drift_wechat/api/order/deviceTrack',function(json){
-				allDevices = json.track;
-				bdGEO();
+				intervalDevices = json.track;
+				size = intervalDevices.length;
+				interval();
 			});
+		}
+		
+		function interval(){
+			var myDate = new Date();
+			console.log(myDate.getMinutes() + ':' + myDate.getSeconds());
+			allDevices.push(intervalDevices[device_index]);
+			bdGEO();
+			device_index ++;
+			if(device_index < size){
+				setTimeout(interval, 800);
+			}
 		}
 </script>      
 </html>
