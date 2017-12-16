@@ -150,6 +150,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			device_index ++;
 			if(device_index < size){
 				setTimeout(interval, 800);
+			}else{
+				allDevices.splice(0,size);
+				device_index = 0;
 			}
 		}
 </script>      
