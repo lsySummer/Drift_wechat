@@ -52,17 +52,16 @@ weui.uploader('#uploaderCustom', {
         console.log('progress');
     },
     onSuccess: function (ret) {
+    	 var num = document.getElementById('methanal').value;
     	 if (ret.status == '200')
          {
              uploadSuccessCount++;
              if (uploadSuccessCount == uploadCount)
              {
             	 	var text = document.getElementById('txt_des').value;
-            	 	var num = document.getElementById('methanal').value;
-            	 	$.alert(num);
             		$.getJSON('/Drift_wechat/api/community/txt?txt='+text+'&num='+num,function(data){
-            			$.alert('成功！');
-            			window.location.href='/Drift_wechat/jsp/Delivery.jsp';
+            			$.toast("上传成功！");
+            			setTimeout("window.location.href='/Drift_wechat/jsp/Delivery.jsp'", 1000);
             		});
              }
          }

@@ -76,8 +76,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#submit").click(function(){
 			if($("#startDate").val().trim().length){
 				var startDate = document.getElementById("startDate").value;
-				$.ajax({url:"/Drift_wechat/api/order/date?deviceNum="+deviceNum+"&startDate="+startDate, success: function(){
-        			window.location.href='/Drift_wechat/jsp/Result.jsp';
+				$.ajax({url:"/Drift_wechat/api/order/date?deviceNum="+deviceNum+"&startDate="+startDate, success: function(data){
+					if(data == "200"){
+						window.location.href='/Drift_wechat/jsp/Result.jsp';
+					}else{
+						$.toptip('您的设备已经被预约走了～', 'error');
+						setTimeout("window.location.href='/Drift_wechat/jsp/DateChoose.jsp'", 1000);
+					}
       			}});
 			}else{
 				$.toptip('操作失败，请确保所有内容均已填写', 'error');

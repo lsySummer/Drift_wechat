@@ -18,6 +18,7 @@ import edu.nju.entities.Device;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.OrderVO;
+import edu.nju.utils.Constants;
 import edu.nju.utils.Utility;
 import edu.nju.utils.WechatSend;
 
@@ -63,7 +64,7 @@ public class ReserveService {
 	 * 用户下订单过程
 	 */
 	public boolean makeOrder(String deviceId,String openid, int type,Date startDate){
-		boolean b = dao.makeOrder(deviceId,openid,type,startDate,Utility.getSpecifiedDayAfter(startDate, 1));
+		boolean b = dao.makeOrder(deviceId,openid,type,startDate,Utility.getSpecifiedDayAfter(startDate, Constants.USER_DATE));
 		return b;
 	}
 

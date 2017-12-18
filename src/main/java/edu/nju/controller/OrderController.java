@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.nju.dao.impl.UserDaoImpl;
 import edu.nju.entities.Device;
 import edu.nju.entities.UserInfo;
+import edu.nju.service.ManageService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.service.UserService;
@@ -37,6 +38,9 @@ public class OrderController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ManageService manageService;
 	
 	@RequestMapping(value = "/get")
 	public void getDetail(HttpSession session, HttpServletResponse response){
@@ -98,10 +102,46 @@ public class OrderController {
 	public void confirm(String deviceNum, String startDate, HttpSession session, HttpServletResponse response) throws ParseException{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(startDate);
-		service.makeOrder(deviceNum, (String)session.getAttribute("openid"), 0, date);
+		boolean flag = service.makeOrder(deviceNum, (String)session.getAttribute("openid"), 0, date);
 		try {
 			PrintWriter out = response.getWriter();
-			out.print("200");
+			if(flag){
+				out.print("200");
+			}else{
+				out.print("500");
+			}
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/deviceTrack")
+	public void deviceTrack(HttpSession session, HttpServletResponse response){
+//		session.setAttribute("openid", "test1");
+		JSONObject result=new JSONObject();
+		try {
+			PrintWriter out = response.getWriter();
+			Device temp = getservice.getDeviceByOpenId((String)session.getAttribute("openid"));
+			result.put("track", manageService.getRoute(temp.getId()));
+			out.print(result);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/deviceAll")
+	public void deviceAll(HttpSession session, HttpServletResponse response){
+		JSONObject result=new JSONObject();
+		try {
+			PrintWriter out = response.getWriter();
+			result.put("tracks", manageService.getAllRoute());
+			out.print(result);
 			out.flush();
 			out.close();
 		} catch (IOException e) {

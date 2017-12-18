@@ -56,6 +56,10 @@ public class ReserveDaoImpl implements ReserveDao{
 			Order afterOrder = rgetDao.getByOpenAndDid(afterUser.getOpenid(), d.getId());
 			afterOrder.setState("上家已发货");
 			baseDao.update(afterOrder);
+		}else{
+			//如果是寄回公司的，特殊处理.即给他的结束日期延长一天
+			o.setEndDate(Utility.getSpecifiedDayAfter(o.getEndDate(), 1));
+			baseDao.update(o);
 		}
 		return true;
 	}

@@ -35,7 +35,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </a>
 	</div>
   	<header class='demos-header'>
-      <!-- <h3 class="demos-title">我的预约</h3> -->
     </header>
     <div class="container" id="container">
     	<div class="weui-form-preview" id="item1">
@@ -70,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		</div>
-		<a href="/Drift_wechat/jsp/Delivery.jsp" class="weui-btn weui-btn_primary">查看详情</a>
+		<a href="/Drift_wechat/jsp/TrackMap.jsp" class="weui-btn weui-btn_primary">查看设备历史</a>
 	</div>
   </body>
   <script type="text/javascript" src="/Drift_wechat/js/myJS/Orders.js"></script>

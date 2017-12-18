@@ -1,6 +1,6 @@
 package edu.nju.controller;
 
-import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,6 @@ import edu.nju.service.ManageService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.service.UserService;
-import edu.nju.utils.Utility;
 
 @Controller
 @RequestMapping(value="/test")
@@ -45,10 +44,10 @@ public class TestController {
 //		System.out.println(service.reserveDevice("江苏", 1).getId());
 //		service.makeOrder("34567", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 6), Utility.getSpecifiedDayAfter(new Date(), 7));
 //		service.makeOrder("45678", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 8), Utility.getSpecifiedDayAfter(new Date(), 9));
-//		System.out.println(gservice.getBefore("23456").getName());
-//		System.out.println(gservice.getAfter("12345").getName());
-//		System.out.println(gservice.getAfter("23456").getName());
-//		System.out.println(gservice.getBefore("12345").getName());
+//		System.out.println(gservice.getBefore("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
+		System.out.println(gservice.getBefore("oRTgpweSZbOxfrg9H57JwuPwMJLo").getName());
+//		System.out.println(gservice.getAfter("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
+//		System.out.println(gservice.getAfter("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").getName());
 //		List<String> str = gservice.getByDeviceId("40288d815f5787ba015f5787ebb90010");
 //		for(int i = 0;i<str.size();i++){
 //			System.out.println(str.get(i));
@@ -72,12 +71,12 @@ public class TestController {
 //		System.out.println(mservice.getAllRoute().size());
 //		System.out.println(new Date().toString());
 //		service.makeOrder("000000005fa5ec9f015fae298e3b0007", "oRTgpwQkDZKxGFvNnfKpJLWvxsyw", 0, Utility.getSpecifiedDayAfter(new Date(),3));
-		//		List<String> str = gservice.getByDeviceId("000000005fa5ec9f015fae298e3b0007");
+//		List<String> list = gservice.getByDeviceId("000000005fa5ec9f015fae298e3b0007");
 //		MyThread myThread1 = new MyThread(service);
 //		MyThread myThread2 = new MyThread(service);
 //		myThread1.start();
 //		myThread2.start();
-		service.confirm("oRTgpwQkDZKxGFvNnfKpJLWvxsyw");
+//		service.confirm("oRTgpwQkDZKxGFvNnfKpJLWvxsyw");
 		return "success";
 	}
 }

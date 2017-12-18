@@ -52,7 +52,7 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 	@Override
 	public UserInfo getBefore(String openId) {
 		Device device = getDeviceByOpenId(openId);
-		String hql = "from Order where deviceId = :did";
+		String hql = "from Order where deviceId = :did order by endDate";
 		List<Order> list =baseDao.getNewSession().createQuery(hql).setParameter("did", device.getId()).getResultList();
 		if(list.size()>0){
 			for(int i=0;i<list.size();i++){
@@ -62,6 +62,10 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 						return userDao.getUser("thisiscomponyinfomation");
 					}else{
 						Order beforeOrder = list.get(i-1);
+						//(long)((beforeOrder.getEndDate().getTime() - beforeOrder.getStartDate().getTime()) / (1000 * 60 * 60 *24) + 0.5)
+						if(Utility.getDaysBetween(beforeOrder.getStartDate(),beforeOrder.getEndDate())==Constants.USER_DATE){
+							return userDao.getUser("thisiscomponyinfomation");
+						}
 						UserInfo beforeUser = userDao.getUser(beforeOrder.getOpenId());
 						return beforeUser;
 					}
@@ -76,7 +80,7 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 	@Override
 	public UserInfo getAfter(String openId) {
 		Device device = getDeviceByOpenId(openId);
-		String hql = "from Order where deviceId = :did";
+		String hql = "from Order where deviceId = :did order by endDate";
 		List<Order> list =baseDao.getNewSession().createQuery(hql).setParameter("did", device.getId()).getResultList();
 		if(list.size()>0){
 			for(int i=0;i<list.size();i++){
@@ -85,6 +89,9 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 					if(i==list.size()-1){
 						return userDao.getUser("thisiscomponyinfomation");
 					}else{
+						if(Utility.getDaysBetween(o.getStartDate(),o.getEndDate())==Constants.USER_DATE){
+							return userDao.getUser("thisiscomponyinfomation");
+						}
 						Order afterOrder = list.get(i+1);
 						UserInfo afterUser = userDao.getUser(afterOrder.getOpenId());
 						return afterUser;
@@ -161,9 +168,12 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 		for(int i =0;i<list.size();i++){
 			Order o = list.get(i);
 			dateList.remove(sdf.format(o.getStartDate()));
-			dateList.remove(sdf.format(o.getEndDate()));
-			if(Constants.USER_DATE==3){
-				dateList.remove(sdf.format(Utility.getSpecifiedDayAfter(o.getStartDate(), 1)));
+//			dateList.remove(sdf.format(o.getEndDate()));
+			long betweenDays = (long)((o.getEndDate().getTime() - o.getStartDate().getTime()) / (1000 * 60 * 60 *24) + 0.5); 
+			int index=0;
+			while(index<betweenDays){
+				dateList.remove(sdf.format(Utility.getSpecifiedDayAfter(o.getStartDate(), 1+index)));
+				index++;
 			}
 		}
 		for(int i=0;i<dateList.size();i++){

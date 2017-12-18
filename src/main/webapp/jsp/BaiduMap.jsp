@@ -115,9 +115,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	     	
 	     	</div> 
          </div>
+        </div>
 	         
       </div>
-    <div>
 </body>
 <script type="text/javascript">
      
@@ -451,7 +451,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			else{
 				alert("获取空气净化器图片失败！");
 			} 
-		},"json");	
+		},"json");
 	}
 </script>      
 </html>
