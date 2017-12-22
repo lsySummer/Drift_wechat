@@ -1,6 +1,5 @@
 package edu.nju.dao.impl;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,7 +65,7 @@ public class ReserveDaoImpl implements ReserveDao{
 	
 
 	@SuppressWarnings("unchecked")
-	public Device reserveDevice(String openid,int type) {
+	public List<Device> reserveDevice(String openid,int type) {
 		UserInfo userInfo = userDao.getUser(openid);
 		String[] arr =userInfo.getAddress().split(" ");
 		String hql = "from DeviceArea where area=:area and type=:type";
@@ -81,13 +80,24 @@ public class ReserveDaoImpl implements ReserveDao{
 				dlist.add(tempList.get(0));
 			}
 		}
-		Utility.sortInt(dlist);//按照排队人数对设备进行排序
-		Device device = dlist.get(0);//排队人数最少的设备被预定
-		return device;
+		return dlist;
 	}
 
 	@Override
-	synchronized public boolean makeOrder(String deviceId,String openid,int type,Date startDate,Date endDate) {
+	synchronized public boolean makeOrder(String openid,int type,Date startDate,Date endDate) {
+		List<Device> devices = reserveDevice(openid, type);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String deviceId = "";
+		for(Device d:devices) {
+			List<String> availList = rgetDao.getByDeviceId(d.getId());
+			if(availList.contains(sdf.format(startDate))) {
+				deviceId = d.getId();
+				break;
+			}
+		}
+		if(deviceId.equals("")) {
+			return false;
+		}
 		UserInfo user = userDao.getUser(openid);
 		Device device = rgetDao.getDeviceById(deviceId).get(0);
 		device.setQueueNum(device.getQueueNum()+1);//排队人数+1
@@ -95,7 +105,6 @@ public class ReserveDaoImpl implements ReserveDao{
 		endDate = Utility.getSpecifiedDayAfter(startDate,Constants.USER_DATE-1);
 		device.setLoc(user.getAddress());
 		baseDao.update(device);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String startStr = sdf.format(startDate);
 		List<String> dates = rgetDao.getByDeviceId(deviceId);
 		if(dates.contains(startStr)){

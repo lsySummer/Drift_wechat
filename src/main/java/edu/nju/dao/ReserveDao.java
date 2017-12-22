@@ -1,6 +1,7 @@
 package edu.nju.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import edu.nju.entities.Device;
 
@@ -8,10 +9,10 @@ public interface ReserveDao {
 
 	boolean saveDelInfo(String openId,String did);
 
-	boolean makeOrder(String deviceId,String openid,int type,Date date,Date endDate);
+	boolean makeOrder(String openid,int type,Date date,Date endDate);
 
 	boolean confirm(String openid);
 
-	public Device reserveDevice(String openid,int type);
+	public List<Device> reserveDevice(String openid,int type);
 
 }
