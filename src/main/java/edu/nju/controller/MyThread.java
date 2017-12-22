@@ -14,6 +14,6 @@ public class MyThread extends Thread{
 	
 	
 	public void run(){
-		System.out.println(service.makeOrder("000000005fa5ec9f015fae298e3b0007", "oRTgpwQkDZKxGFvNnfKpJLWvxsyw", 0, Utility.getSpecifiedDayAfter(new Date(),3)));
+		System.out.println(service.makeOrder( "oRTgpwQkDZKxGFvNnfKpJLWvxsyw", 0, Utility.getSpecifiedDayAfter(new Date(),3)));
 	}
 }

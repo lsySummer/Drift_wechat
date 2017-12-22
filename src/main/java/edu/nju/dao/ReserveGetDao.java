@@ -38,4 +38,8 @@ public interface ReserveGetDao {
 	List<Order> getOrders();
 	
 	Order getByOpenAndDid(String openid,String deviceid);
+
+	List<String> getUnavailableDates(String deviceId);
+
+	List<Device> getAllDevice();
 }

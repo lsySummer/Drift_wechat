@@ -160,7 +160,7 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 				setParameter("todayDate",todayDate).getResultList();
 		List<String> dateList = new ArrayList<String>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		for(int i=0;i<15;i++){
+		for(int i=0;i<31;i++){
 			todayDate = Utility.getSpecifiedDayAfter(todayDate, 1);
 			String dateStr = sdf.format(todayDate);
 			dateList.add(dateStr);
@@ -190,6 +190,42 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 		}
 		return dateList;
 	}
+	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getUnavailableDates(String deviceId) {
+		String hql = "from Order where deviceId = :deviceId and endDate >:todayDate";
+		Date todayDate = new Date();
+		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("deviceId", deviceId)
+				.setParameter("todayDate",todayDate).getResultList();
+		List<String> dateList = new ArrayList<String>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		for(int i=0;i<list.size();i++) {
+			Order o = list.get(i);
+			dateList.add(sdf.format(o.getStartDate()));
+			long betweenDays = (long)((o.getEndDate().getTime() - o.getStartDate().getTime()) / (1000 * 60 * 60 *24) + 0.5); 
+			int index=0;
+			while(index<betweenDays){
+				dateList.add(sdf.format(Utility.getSpecifiedDayAfter(o.getStartDate(), 1+index)));
+				index++;
+			}
+		
+		}
+//		for(int i=0;i<dateList.size();i++){
+//			String dateStr = dateList.get(i);
+//			try{
+//				Date date = sdf.parse(dateStr);
+//				if(dateList.contains(sdf.format(Utility.getSpecifiedDayAfter(date, 1)))){
+//					dateList.add(dateStr);
+//				}
+//			}catch(Exception e){
+//				e.printStackTrace();
+//			}
+//		}
+		return dateList;
+	}
+	
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -244,7 +280,13 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 		}
 		return null;
 	}
-	
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Device> getAllDevice() {
+		String hql = "from Device";
+		List<Device> list = baseDao.getNewSession().createQuery(hql).getResultList();
+		return list;
+	}
 
 }

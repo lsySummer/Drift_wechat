@@ -1,5 +1,7 @@
 package edu.nju.service;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.nju.dao.ReserveDao;
 import edu.nju.dao.ReserveGetDao;
 import edu.nju.entities.Device;
 import edu.nju.entities.Order;
@@ -20,6 +23,8 @@ import edu.nju.utils.Constants;
 public class ReserveGetService {
 	@Autowired
 	ReserveGetDao dao;
+	@Autowired
+	ReserveDao rdao;
 	//获得某个用户的预约信息
 		public String getOrder(String openId){
 			JSONObject resultObj=new JSONObject();
@@ -114,5 +119,20 @@ public class ReserveGetService {
 			return list;
 		}
 
+		
+		/**
+		 * 获得不可用的日期
+		 */
+		public List<String> getUnavailableDates(String openid,int type){
+			List<Device> devices = rdao.reserveDevice(openid, type);
+			List<String> result = new ArrayList<String>();
+			for(Device d:devices) {
+				List<String> list = dao.getUnavailableDates(d.getId());
+				result.addAll(list);
+			}
+			LinkedHashSet<String> set = new LinkedHashSet<String>(result);  
+	        ArrayList<String> listWithoutDuplicateElements = new ArrayList<String>(set);  
+			return listWithoutDuplicateElements;
+		}
 	
 }

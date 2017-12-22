@@ -1,5 +1,6 @@
 package edu.nju.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import edu.nju.service.ManageService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.service.UserService;
+import edu.nju.utils.Utility;
 
 @Controller
 @RequestMapping(value="/test")
@@ -42,13 +44,13 @@ public class TestController {
 //		}
 //		System.out.println(service.reserveDevice("江苏省", 0).getId());
 //		System.out.println(service.reserveDevice("江苏", 1).getId());
-//		service.makeOrder("34567", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 6), Utility.getSpecifiedDayAfter(new Date(), 7));
+		service.makeOrder("oRTgpweSZbOxfrg9H57JwuPwMJLo", 0, Utility.getSpecifiedDayAfter(new Date(), 6));
 //		service.makeOrder("45678", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 8), Utility.getSpecifiedDayAfter(new Date(), 9));
 //		System.out.println(gservice.getBefore("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
-		System.out.println(gservice.getBefore("oRTgpweSZbOxfrg9H57JwuPwMJLo").getName());
+//		System.out.println(gservice.getBefore("oRTgpweSZbOxfrg9H57JwuPwMJLo").getName());
 //		System.out.println(gservice.getAfter("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
 //		System.out.println(gservice.getAfter("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").getName());
-//		List<String> str = gservice.getByDeviceId("40288d815f5787ba015f5787ebb90010");
+//		List<String> str = gservice.getUnavailableDates();
 //		for(int i = 0;i<str.size();i++){
 //			System.out.println(str.get(i));
 //		}
