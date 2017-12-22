@@ -212,17 +212,23 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 			}
 		
 		}
-//		for(int i=0;i<dateList.size();i++){
-//			String dateStr = dateList.get(i);
-//			try{
-//				Date date = sdf.parse(dateStr);
-//				if(dateList.contains(sdf.format(Utility.getSpecifiedDayAfter(date, 1)))){
-//					dateList.add(dateStr);
-//				}
-//			}catch(Exception e){
-//				e.printStackTrace();
-//			}
-//		}
+		List<String> resultList = new ArrayList<String>();
+		for(int i=0;i<dateList.size();i++) {
+			resultList.add(dateList.get(i));
+		}
+		if(dateList.size()>2) {
+			for(int i=0;i<dateList.size();i++){
+				String dateStr = dateList.get(i);
+				try{
+					Date date = sdf.parse(dateStr);
+					if(dateList.contains(sdf.format(Utility.getSpecifiedDayAfter(date, 1)))){
+						resultList.add(dateStr);
+					}
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		}
 		return dateList;
 	}
 	
