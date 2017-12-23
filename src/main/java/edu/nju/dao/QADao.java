@@ -17,11 +17,11 @@ public interface QADao {
 
 	List<Answer> getAnswers(String qid);
 
-	int getAnswerNum(String qid);
+	Long getAnswerNum(String qid);
 
 	boolean addlike(LikeInfo like);
 
-	boolean revokeLike(String answerid, String openid);
+	boolean revokeLike(String qid,String answerid, String authorid,String likeid);
 
 	Map<Answer,Integer> sortByLikes(String pid);
 

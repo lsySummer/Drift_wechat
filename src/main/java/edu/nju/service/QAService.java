@@ -57,8 +57,8 @@ public class QAService {
 	/**
 	 * 获得某个问题的回答数量
 	 */
-	public int getAnswerNum(String qid) {
-		int num = dao.getAnswerNum(qid);
+	public Long getAnswerNum(String qid) {
+		Long num = dao.getAnswerNum(qid);
 		return num;
 	}
 	
@@ -79,8 +79,8 @@ public class QAService {
 	/**
 	 * 取消赞
 	 */
-	public boolean revokeLike(String answerid,String openid) {
-		return dao.revokeLike(answerid,openid);
+	public boolean revokeLike(String qid,String answerid, String authorid,String likeid) {
+		return dao.revokeLike(qid,answerid,authorid,likeid);
 	}
 	
 	/**

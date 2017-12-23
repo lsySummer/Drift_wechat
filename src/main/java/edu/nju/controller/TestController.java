@@ -79,7 +79,12 @@ public class TestController {
 //		myThread2.start();
 //		service.confirm("oRTgpwQkDZKxGFvNnfKpJLWvxsyw");
 //		System.out.println(qservice.sortByLikes("1").toString());
-		System.out.println(qservice.sortByDate("1").get(0).toString()+qservice.sortByDate("1").get(1));
+//		System.out.println(qservice.sortByDate("1").get(0).toString()+qservice.sortByDate("1").get(1));
+//		qservice.publishQuestion("123", "publish测试", "hahaha");
+//		qservice.addAnswer("123", "1", "测试addAnswer");
+//		System.out.println(qservice.getAnswerNum("1"));
+//		qservice.addlike("1", "1", "1234", "2345");
+		qservice.revokeLike("1","1", "1234","2345");
 		return "success";
 	}
 }

@@ -1,11 +1,10 @@
 package edu.nju.dao.impl;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Query;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -60,9 +59,9 @@ public class QADaoImpl implements QADao{
 	}
 
 	@Override
-	public int getAnswerNum(String qid) {
+	public Long getAnswerNum(String qid) {
 		String hql = "select count(*) from Answer where qid=:qid";
-		int num = (int) baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).uniqueResult();
+		Long num = (Long) baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).uniqueResult();
 		return num;
 	}
 
@@ -77,11 +76,14 @@ public class QADaoImpl implements QADao{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public boolean revokeLike(String answerid, String openid) {
-		String hql = "delete LikeInfo where answerid=:answerid and openid=:openid";
-		int x =baseDao.getNewSession().createQuery(hql).setParameter("answerid", answerid).setParameter("openid", openid).executeUpdate();
-		if(x>0) {
+	public boolean revokeLike(String qid,String answerid, String authorid,String likeid) {
+		String hql = "from LikeInfo where qid=:qid and answerid=:answerid and authorid=:authorid and likeid=:likeid";
+		List<LikeInfo> list=baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).setParameter("answerid", answerid).
+				setParameter("authorid", authorid).setParameter("likeid", likeid).getResultList();
+		if(list.size()>0) {
+			baseDao.delete(list.get(0));
 			return true;
 		}
 		return false;
