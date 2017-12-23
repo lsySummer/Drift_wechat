@@ -1,6 +1,7 @@
 package edu.nju.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import edu.nju.entities.Answer;
 import edu.nju.entities.LikeInfo;
@@ -16,14 +17,16 @@ public interface QADao {
 
 	List<Answer> getAnswers(String qid);
 
-	int getAnswerNum(String qid);
+	Long getAnswerNum(String qid);
 
 	boolean addlike(LikeInfo like);
 
-	boolean revokeLike(String answerid, String openid);
+	boolean revokeLike(String qid,String answerid, String authorid,String likeid);
 
-	List<Answer> sortByLikes(String pid);
+	Map<Answer,Integer> sortByLikes(String pid);
 
-	Answer getMostLike(String pid);
+	List<Answer> sortByDate(String qid);
+
+	boolean ifAnswer(String openid, String qid);
 
 }

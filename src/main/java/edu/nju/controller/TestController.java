@@ -1,18 +1,15 @@
 package edu.nju.controller;
 
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.nju.service.CommunityService;
 import edu.nju.service.ManageService;
+import edu.nju.service.QAService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.service.UserService;
-import edu.nju.utils.Utility;
 
 @Controller
 @RequestMapping(value="/test")
@@ -27,6 +24,8 @@ public class TestController {
 	ReserveGetService gservice;
 	@Autowired
 	CommunityService cservice;
+	@Autowired
+	QAService qservice;
 	
 	@RequestMapping(value = "/insert")
 	public String register() {
@@ -50,10 +49,10 @@ public class TestController {
 //		System.out.println(gservice.getBefore("oRTgpweSZbOxfrg9H57JwuPwMJLo").getName());
 //		System.out.println(gservice.getAfter("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
 //		System.out.println(gservice.getAfter("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").getName());
-		List<String> str = gservice.getUnavailableDates("oRTgpweSZbOxfrg9H57JwuPwMJLo",0);
-		for(int i = 0;i<str.size();i++){
-			System.out.println(str.get(i));
-		}
+//		List<String> str = gservice.getUnavailableDates("oRTgpweSZbOxfrg9H57JwuPwMJLo",0);
+//		for(int i = 0;i<str.size();i++){
+//			System.out.println(str.get(i));
+//		}
 //		Device device = service.reserveDevice("oRTgpweSZbOxfrg9H57JwuPwMJLo",0);
 //		System.out.println(device.getNumber());
 //		Device d = new Device();
@@ -79,6 +78,13 @@ public class TestController {
 //		myThread1.start();
 //		myThread2.start();
 //		service.confirm("oRTgpwQkDZKxGFvNnfKpJLWvxsyw");
+//		System.out.println(qservice.sortByLikes("1").toString());
+//		System.out.println(qservice.sortByDate("1").get(0).toString()+qservice.sortByDate("1").get(1));
+//		qservice.publishQuestion("123", "publish测试", "hahaha");
+//		qservice.addAnswer("123", "1", "测试addAnswer");
+//		System.out.println(qservice.getAnswerNum("1"));
+//		qservice.addlike("1", "1", "1234", "2345");
+		qservice.revokeLike("1","1", "1234","2345");
 		return "success";
 	}
 }

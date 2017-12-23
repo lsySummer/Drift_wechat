@@ -2,6 +2,7 @@ package edu.nju.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,8 +57,8 @@ public class QAService {
 	/**
 	 * 获得某个问题的回答数量
 	 */
-	public int getAnswerNum(String qid) {
-		int num = dao.getAnswerNum(qid);
+	public Long getAnswerNum(String qid) {
+		Long num = dao.getAnswerNum(qid);
 		return num;
 	}
 	
@@ -65,10 +66,12 @@ public class QAService {
 	/**
 	 * 点赞
 	 */
-	public boolean addlike(String answerid,String openid) {
+	public boolean addlike(String qid,String answerid,String authorid,String likeid) {
 		LikeInfo like = new LikeInfo();
 		like.setAnswerid(answerid);
-		like.setOpenid(openid);
+		like.setAuthorid(authorid);
+		like.setLikeid(likeid);
+		like.setQid(qid);
 		like.setCreateTime(new Date());
 		return dao.addlike(like);
 	}
@@ -76,23 +79,23 @@ public class QAService {
 	/**
 	 * 取消赞
 	 */
-	public boolean revokeLike(String answerid,String openid) {
-		return dao.revokeLike(answerid,openid);
+	public boolean revokeLike(String qid,String answerid, String authorid,String likeid) {
+		return dao.revokeLike(qid,answerid,authorid,likeid);
 	}
 	
 	/**
 	 * 根据点赞数排序
 	 */
-	public List<Answer> sortByLikes(String pid){
-		List<Answer> list = dao.sortByLikes(pid);
+	public Map<Answer,Integer> sortByLikes(String qid){
+		Map<Answer,Integer> list = dao.sortByLikes(qid);
 		return list;
 	}
 	
 	/**
-	 * 获得某个问题最多赞的答案
+	 * 根据日期排序
 	 */
-	public Answer getMostLike(String pid) {
-		Answer a = dao.getMostLike(pid);
-		return a;
+	public List<Answer> sortByDate(String qid){
+		return dao.sortByDate(qid);
 	}
+	
 }
