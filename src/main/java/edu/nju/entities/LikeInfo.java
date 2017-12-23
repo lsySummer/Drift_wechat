@@ -19,7 +19,9 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "likeinfo")
 public class LikeInfo {
 	private String id;
-	private String openid;
+	private String authorid;//回答的人的openid
+	private String likeid;//点赞人的openid
+	private String qid;
 	private String answerid;
 	private Date createTime;
 	@Id
@@ -32,11 +34,17 @@ public class LikeInfo {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getOpenid() {
-		return openid;
+	public String getAuthorid() {
+		return authorid;
 	}
-	public void setOpenid(String openid) {
-		this.openid = openid;
+	public void setAuthorid(String authorid) {
+		this.authorid = authorid;
+	}
+	public String getLikeid() {
+		return likeid;
+	}
+	public void setLikeid(String likeid) {
+		this.likeid = likeid;
 	}
 	public String getAnswerid() {
 		return answerid;
@@ -49,6 +57,12 @@ public class LikeInfo {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public String getQid() {
+		return qid;
+	}
+	public void setQid(String qid) {
+		this.qid = qid;
 	}
 	
 	

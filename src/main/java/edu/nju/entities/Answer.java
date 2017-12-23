@@ -52,5 +52,10 @@ public class Answer {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+	@Override
+	public String toString() {
+		return "Answer [id=" + id + ", qid=" + qid + ", openid=" + openid + ", content=" + content + ", createTime="
+				+ createTime + "]";
+	}
 	
 }

@@ -1,7 +1,11 @@
 package edu.nju.dao.impl;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -83,16 +87,45 @@ public class QADaoImpl implements QADao{
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Answer> sortByLikes(String pid) {
-		//TODO
+	public Map<Answer,Integer> sortByLikes(String qid) {
+		Map<Answer,Integer> map = new HashMap<Answer,Integer>();
+		String hql = "select authorid,count(*) as cnt " + 
+				"from LikeInfo where qid = :qid " + 
+				"group by authorid " + 
+				"order by cnt desc";
+		List<Object[]> list= baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).getResultList();
+		for(int i=0;i<list.size();i++) {
+			String authorid = list.get(i)[0].toString();//authorid
+			Answer a = getAnswer(qid,authorid);
+			map.put(a, Integer.parseInt(list.get(i)[1].toString()));
+		}
+		return map;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Answer getAnswer(String qid,String authorid) {
+		String hql = "from Answer where qid=:qid and openid=:authorid";
+		List<Answer> list = baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).setParameter("authorid", authorid).getResultList();
+		if(list.size()>0) {
+			return list.get(0);
+		}
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Answer getMostLike(String pid) {
+	public List<Answer> sortByDate(String qid) {
+		String hql = "from Answer where qid = :qid " + 
+				"order by createTime desc";
+		List<Answer> list= baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).getResultList();
+		return list;
+	}
+
+	@Override
+	public boolean ifAnswer(String openid, String qid) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
-
 }
