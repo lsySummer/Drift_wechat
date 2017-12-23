@@ -72,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	<hr class="style-four" />		  
 	  <div class="weui-panel__bd">
-	    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
 			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
 		      <div class="weui-media-box__bd">
 			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
@@ -83,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      </div>
 	    </a>
 	    
-	   	<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+	   	<a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
 	      <div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
 	      <div class="weui-media-box__bd">
 		    <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
