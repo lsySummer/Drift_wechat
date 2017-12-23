@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -82,13 +83,12 @@ public class OrderController {
 	@RequestMapping(value = "/getDate")
 	public void getDate(HttpSession session, HttpServletResponse response){
 		log.info(session.getAttribute("openid"));
-		Device device = service.reserveDevice((String)session.getAttribute("openid"), 0);
+		List<String> UnavailableDates = getservice.getUnavailableDates((String)session.getAttribute("openid"), 0);
+		//List<String> UnavailableDates = getservice.getUnavailableDates("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", 0);
 		JSONObject result=new JSONObject();
 		try {
 			PrintWriter out = response.getWriter();
-			result.put("number", device.getNumber());
-			result.put("id", device.getId());
-			result.put("data",getservice.getByDeviceId(device.getId()));
+			result.put("dates", UnavailableDates);
 			out.print(result);
 			out.flush();
 			out.close();
@@ -99,10 +99,10 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/date")
-	public void confirm(String deviceNum, String startDate, HttpSession session, HttpServletResponse response) throws ParseException{
+	public void confirm(String startDate, HttpSession session, HttpServletResponse response) throws ParseException{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(startDate);
-		boolean flag = service.makeOrder(deviceNum, (String)session.getAttribute("openid"), 0, date);
+		boolean flag = service.makeOrder((String)session.getAttribute("openid"), 0, date);
 		try {
 			PrintWriter out = response.getWriter();
 			if(flag){
