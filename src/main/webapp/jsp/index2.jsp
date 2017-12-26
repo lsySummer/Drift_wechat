@@ -79,8 +79,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <p class="weui-tabbar__label">我的</p>
 	  </a>
 	</div>
-	
-
-	 
 </body>
 </html>
