@@ -20,6 +20,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		border: 0;
 		box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
 	}
+	a{color:#6C6C6C; text-decoration:none;font-weight:bold;font-size:15px}/*链接设置*/
+	a:hover{color:#00BFFF; text-decoration:underline;font-weight:bold;}/*鼠标放上的链接设置*/
 </style> 	
 <body>
 	
@@ -33,22 +35,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<hr class="style-four" />
 	
 	<div class="weui-cells weui-cells_form">
-	  <div class="weui-cell">
-	    <div class="weui-cell__bd" style="font-weight:bold">
-	      <p>问题二</p>
-	    </div>
-	  </div>
-	  <div  class="weui-cell">
-		    <div class="weui-cell__bd">
-		      <p>标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
-		    </div>
-	  </div>
-	 </div>
+		  <div class="weui-cell" style="font-weight:bold">
+		      <p>问题二</p>
+		  </div>
+		  <div style="margin:15px">
+			   <p>标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		  </div>
+		  
+		  <div style="margin:15px;font-size:14px ">
+			   <span>0评论</span>
+		  </div>
+		  
+		  <div  class="weui-cell weui-cells_form">
+		  	<div class="weui-cell__bd" align="center" >
+		  		<a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/invite.png">   邀请回答</a>
+		  	</div>
+		  	<div class="weui-cell__bd" align="center">
+		  		<a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/add.png">   添加回答</a>
+		  	</div>
+		  </div>
+	</div>
 </body>
-
-<script type="text/javascript">
-	function changeIncon(){
-		$("#release").attr("src","/Drift_wechat/images/community/release.png")
-	}
-</script>
 </html>

@@ -11,7 +11,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
 <link rel="stylesheet" href="/Drift_wechat/css/jquery-ui.min.css">
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
-<script type="text/javascript" src="/Drift_wechat/js/jquery-ui.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
 
@@ -29,23 +28,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	
   	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:10px ">
-  		<div class="weui-cell__ft"><a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="" src="/Drift_wechat/images/community/close.png"></a></div>
+  		<!-- <div class="weui-cell__ft"><a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="" src="/Drift_wechat/images/community/close.png"></a></div> -->
+  		<div class="weui-cell__ft"><a href="javascript:confirmBack()"><img alt="" style="" src="/Drift_wechat/images/community/close.png"></a></div>
 	    <div class="weui-cell__bd" style="color:black">
-	      <h2>提问</h2>
+	      <h2>撰写回答</h2>
 	    </div>
-	    <div class="weui-cell__ft"><a href="javascript:publishQ()"><img id="release" alt="" style="" src="/Drift_wechat/images/community/before.png"></a></div>
+	    <div class="weui-cell__ft"><a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp"><img id="release" alt="" style="" src="/Drift_wechat/images/community/before.png"></a></div>
 	</div>
 	<hr class="style-four" />
 	<div class="weui-cells weui-cells_form">
 	  <div class="weui-cell">
 	    <div class="weui-cell__bd">
-	      <input class="weui-input" type="text" id="title" placeholder="请输入标题" onblur="changeIncon()" style="font-weight:bold">
-	    </div>
-	  </div>
-	  
-	  <div class="weui-cell">
-	    <div class="weui-cell__bd">
-	      <textarea class="weui-textarea" id="content" placeholder="添加问题的补充说明..." rows="10"></textarea>
+	      <textarea class="weui-textarea" onkeyup="changeIncon()" placeholder="写回答..." rows="10"></textarea>
 	      <div class="weui-textarea-counter"><span>0</span>/200</div>
 	    </div>
 	  </div>
@@ -56,28 +50,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function changeIncon(){
 		$("#release").attr("src","/Drift_wechat/images/community/release.png")
 	}
-	
-	function publishQ(){
-		var title = $("#title").val();
-		var content = $("#content").val();
-		if(title!=""){
-			if(title.charAt(title.length-1)!="?"){
-				title += "?";	
-			}
-			$.get("/Drift_wechat/api/QA/publishQ?title="+title+"&content="+content,function(data){
-				console.log(data);
-				if(data="1"){
-					$.toptip('发布成功', 'success');
-					setTimeout(function() {
-						window.location.href="/Drift_wechat/jsp/community/QuestionPreview.jsp";
-					},1000)
-				}
-				else{
-					$.toptip('操作失败', 'error');
-				}
-			})
-		}
-		//window.location.href="/Drift_wechat/jsp/community/QuestionPreview.jsp";
+	function confirmBack(){
+		$.confirm("确定放弃您的编辑退出么？", function() {
+		  	window.location.href="/Drift_wechat/jsp/community/QuestionAnswer.jsp";//点击确认后的回调函数
+		  }, function() {
+		  //点击取消后的回调函数
+		});
 	}
 </script>
 </html>

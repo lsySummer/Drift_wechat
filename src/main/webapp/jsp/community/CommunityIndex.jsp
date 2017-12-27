@@ -9,6 +9,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
 <link rel="stylesheet" href="/Drift_wechat/css/demos.css">
 <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
+<script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
+<script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
 <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
     <title>果麦公益检测</title>
@@ -35,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
 	<!--导航栏  -->
-	<div class="weui-tabbar">
+	<div class="weui-tabbar weui-footer_fixed-bottom" id="navi" style="bottom:0">
 	  <a href="/Drift_wechat/jsp/BaiduMap.jsp" class="weui-tabbar__item">
 	    <div class="weui-tabbar__icon">
 	      <img src="/Drift_wechat/images/navi/index.png" alt="">
@@ -63,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	
 	<!--问题列表-->
-	<div class="weui-panel weui-panel_access">
+	<div id="questionList" class="weui-panel weui-panel_access">
 		<div class="weui-cell" style="background:#F5F5F5;margin:10px " align="center" >
 		    <div class="weui-cell__bd" style="color:black">
 		      <h3>热门话题</h3>
@@ -72,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	<hr class="style-four" />		  
 	  <div class="weui-panel__bd">
-	    <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
 			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
 		      <div class="weui-media-box__bd">
 			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
@@ -83,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      </div>
 	    </a>
 	    
-	   	<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+	   	<a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
 	      <div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
 	      <div class="weui-media-box__bd">
 		    <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
@@ -91,17 +94,152 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      </div>
 	    </a>
 	    
-	  </div>
-	  <div class="weui-panel__ft">
-	    <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
-	      <div class="weui-cell__bd" align="center">查看更多</div>
-	      <span class="weui-cell__ft"></span>
-	    </a>    
-	  </div>
-	  
+	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    
+	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    
+	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    
+	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    
+	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    	    	    <a href="/Drift_wechat/jsp/community/QuestionAnswer.jsp" class="weui-media-box weui-media-box_appmsg">
+			<div class="weui-cell__hd" style="width:30px"><h3>01</h3></div>
+		      <div class="weui-media-box__bd">
+			      <p class="weui-media-box__title question">标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+		        <p class="weui-media-box__desc">109回答</p>
+		      </div>
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
+		      </div>
+	    </a>
+	    
+	  </div>	  
 	</div>
-	
-
-	 
 </body>
+<script type="text/javascript">
+/* $(document).ready(function(){  
+    var p=0,t=0;  
+    $(window).scroll(function(e){  
+            p = $(this).scrollTop();  
+              
+            if(t<=p){//下滚  
+                $("#navi").hide();
+                console.log($(window).scrollTop());
+                console.log($(window).height());  
+            }  
+              
+            else{//上滚  
+            	
+                $("#navi").show(); 
+            }  
+            setTimeout(function(){t = p;},0);         
+    });   
+});   */
+</script>
 </html>

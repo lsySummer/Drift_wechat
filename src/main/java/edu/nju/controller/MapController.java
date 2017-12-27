@@ -15,9 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.nju.entities.Point;
-import edu.nju.model.RESCODE;
-import edu.nju.model.UserVO;
 import edu.nju.service.UserService;
 import edu.nju.utils.Constants;
 
