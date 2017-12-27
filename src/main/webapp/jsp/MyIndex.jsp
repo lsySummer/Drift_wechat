@@ -21,20 +21,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   <div class="weui-navbar">
-	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/BaiduMap.jsp">
-	    	首页
-	    </a>
-	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Orders.jsp">
-	    	我的订单
-	    </a> 
-	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/Delivery.jsp">
-	    	仪器传递
-	    </a>
-	  	<a class="weui-navbar__item weui-bar__item--on" href="/Drift_wechat/jsp/MyIndex.jsp">
-	    	个人中心
-	    </a>
-	</div>
     <div class="weui-tab__bd" id="container">
     <div id="tab" class="weui-tab__bd-item weui-tab__bd-item--active">
     	<div style="text-align: center">
@@ -92,6 +78,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          <button type="submit"class="weui-btn weui-btn_primary" id="submit" style="text-align:center">保存个人信息</button>
 	        </div>
     	</form>
+    	<!--导航栏  -->
+	<div class="weui-tabbar">
+	  <a href="/Drift_wechat/jsp/BaiduMap.jsp" class="weui-tabbar__item">
+	    <div class="weui-tabbar__icon">
+	      <img src="/Drift_wechat/images/navi/index.png" alt="">
+	    </div>
+	    <p class="weui-tabbar__label">首页</p>
+	  </a>
+	  <a href="/Drift_wechat/jsp/Orders.jsp" class="weui-tabbar__item">
+	    <div class="weui-tabbar__icon">
+	      <img src="/Drift_wechat/images/navi/order.png" alt="">
+	    </div>
+	    <p class="weui-tabbar__label">订单</p>
+	  </a>
+	  <a href="/Drift_wechat/jsp/community/CommunityIndex.jsp" class="weui-tabbar__item">
+	    <div class="weui-tabbar__icon">
+	      <img src="/Drift_wechat/images/navi/community.png" alt="">
+	    </div>
+	    <p class="weui-tabbar__label">社区</p>
+	  </a>
+	  <a href="/Drift_wechat/jsp/MyIndex.jsp" class="weui-tabbar__item weui-bar__item--on">
+	    <div class="weui-tabbar__icon">
+	      <img src="/Drift_wechat/images/navi/my.png" alt="">
+	    </div>
+	    <p class="weui-tabbar__label">我的</p>
+	  </a>
+	</div>
   	</div>
   	</div>
   </body>
