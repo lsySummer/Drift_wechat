@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,6 +34,7 @@ public class QADaoImpl implements QADao{
 	public boolean addAnswer(Answer a) {
 		try {
 			baseDao.save(a);
+			System.out.println(a.getId());
 			return true;
 		}catch(Exception e) {
 			e.printStackTrace();
