@@ -7,11 +7,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.nju.dao.QADao;
 import edu.nju.entities.Answer;
 import edu.nju.entities.LikeInfo;
 import edu.nju.entities.Question;
+import edu.nju.utils.Utility;
 
 @Transactional
 @Service
@@ -22,25 +24,27 @@ public class QAService {
 	/**
 	 * 发布问题
 	 */
-	public boolean publishQuestion(String openid,String title,String content) {
+	public boolean publishQuestion(String openid,List<MultipartFile> files,String title,String content,String identify) {
 		Question q = new Question();
 		Date date = new Date();
 		q.setOpenid(openid);
 		q.setTitle(title);
 		q.setContent(content);
 		q.setCreateTime(date);
+		Utility.saveFile("questions/"+identify+"/",files);
 		return dao.publishQuestion(q);
 	}
 	
 	/**
 	 * 添加回答
 	 */
-	public boolean addAnswer(String openid,String qid,String content) {
+	public boolean addAnswer(String openid,List<MultipartFile> files,String qid,String content) {
 		Answer a = new Answer();
 		a.setContent(content);
 		a.setCreateTime(new Date());
 		a.setOpenid(openid);
 		a.setQid(qid);
+		Utility.saveFile("answers/"+qid+"/"+openid+"/",files);
 		return dao.addAnswer(a);
 	}
 	

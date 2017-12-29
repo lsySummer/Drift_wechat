@@ -2,6 +2,7 @@ package edu.nju.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.nju.service.CommunityService;
@@ -28,7 +29,7 @@ public class TestController {
 	QAService qservice;
 	
 	@RequestMapping(value = "/insert")
-	public String register() {
+	public String register(Model model) {
 //		for(int i=0;i<10;i++){
 //			Device d = new Device();
 //			d.setNumber("甲醛仪"+i+"号");
@@ -84,8 +85,19 @@ public class TestController {
 //		qservice.addAnswer("123", "1", "测试addAnswer");
 //		System.out.println(qservice.getAnswerNum("1"));
 //		qservice.addlike("1", "1", "1234", "2345");
-		qservice.revokeLike("1","1", "1234","2345");
-		return "success";
+//		qservice.revokeLike("1","1", "1234","2345");
+//		try {
+			String result = qservice.getAnswers("1").get(1).getContent();
+			model.addAttribute("result", result);
+//			PrintWriter out = response.getWriter();
+//			out.print(result);
+//			out.flush();
+//			out.close();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		return "jsp/NewFile";
 	}
 }
 

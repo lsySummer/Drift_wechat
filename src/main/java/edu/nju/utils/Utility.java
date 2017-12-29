@@ -1,5 +1,10 @@
 package edu.nju.utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
@@ -8,9 +13,14 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.springframework.web.multipart.MultipartFile;
+
 import edu.nju.entities.Device;
 
 public class Utility {
+	
+	private static final Logger log = Logger.getLogger(Utility.class);
 	@SuppressWarnings({ "unchecked", "rawtypes" })  
 	public static void sortInt(List list){  
 	    Collections.sort(list, new Comparator(){  
@@ -108,4 +118,42 @@ public class Utility {
     public static long getDaysBetween(Date startDate,Date endDate){
     	return (long)((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 *24) + 0.5);
     }
+    
+    public static String saveFile(String identify,List<MultipartFile> mfs){
+//		String baseUrl = context.getRealPath("")+"upload/comment/"+openid+"/";
+		//String baseUrl="/home/airstaff/Server/apache-tomcat-8.0.33/webapps/"+"upload/comment/"+openid+"/";
+		String absUrl = (new File("")).getAbsolutePath();
+		String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+identify;
+		System.out.println(baseUrl);
+		log.info("上传图片地址"+baseUrl);
+		Path path = Paths.get(baseUrl);
+		if(Files.notExists(path)){
+			try {
+				Files.createDirectories(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		String urllst="";
+//		log.info("mfssize"+mfs.size());
+		for(int i=0;i<mfs.size();i++){
+			MultipartFile mf = mfs.get(i);
+			String fileName = mf.getOriginalFilename();
+			if (!"".equals(fileName)) {
+				// 获取后缀
+				String suffix = fileName.substring(fileName.indexOf("."),
+						fileName.length());
+				String newName=i+suffix;
+				String url = baseUrl + newName;
+				urllst = urllst+newName+";";
+				try {
+					mf.transferTo(new File(url));
+				}catch(Exception e){
+					e.printStackTrace();
+					log.error(e.getMessage());
+				}
+			}
+		}
+		return urllst;
+	}
 }
