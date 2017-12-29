@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.nju.service.QAService;
 
@@ -25,7 +26,9 @@ public class QAController {
 	public String publishQuestion(HttpSession session,String title,String content){
 		//String openid = (String)session.getAttribute("openid");
 		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
-		if(qaservice.publishQuestion(openid, title, content)){
+		List<MultipartFile> files = new ArrayList<MultipartFile>();
+		String identify = "suijiString";
+		if(qaservice.publishQuestion(openid,files, title, content,identify)){
 			return "1";
 		}
 		else{
