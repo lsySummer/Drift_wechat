@@ -9,6 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
   <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
   <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+  <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
   <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
@@ -24,23 +25,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </script>
 </head>
 <body>
+	<%@include file="TopBar.html"%>
   	<!--文案 -->
-	<div style="height:70%; width:100%;position:absolute;margin:0px;padding:0px">
-		<img width=100% height=100% src="/Drift_wechat/images/info.jpg" title="甲醛漂流仪"/>
+	<div style="height:100%;width:100%;margin-top:20%;">
+		<img width=100% height=100% src="/Drift_wechat/images/index.png" title="甲醛漂流仪"/>
 	</div>
-	<div style="top:70%;height:30%;width:100%;background:#D3D3D3;position:absolute;"></div>
-	<div style="top:10%;left:90%;position:relative;">
-		<a href="/Drift_wechat/api/map/map" ><img alt="" src="/Drift_wechat/images/tomap.png" id="countryMap" height="32px" width="32px"><h5>详情</h5></a>
+	<!--按钮组 -->
+	<div class="weui-flex" style="bottom:10%;position:absolute;width:100%;">
+	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
+	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set'">我要预约</button>
+	  </div>
+	  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
+	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:;">联系客服</button>
+	  </div>
 	</div>
-	<!--选择按钮 -->
-	<div class="weui-flex">
-	    <div class="weui-flex__item placeholder">
-			<button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set'">我要预约</button>
-	  	</div>
-	  	<div class="weui-flex__item placeholder">
-			<button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:;">联系客服</button>
-	  	</div>
-  	</div>
   	<!--导航栏  -->
 	<div class="weui-tabbar">
 	  <a href="/Drift_wechat/jsp/BaiduMap.jsp" class="weui-tabbar__item">
@@ -68,5 +66,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <p class="weui-tabbar__label">我的</p>
 	  </a>
 	</div>
+	<script>set(1);</script>
 </body>
 </html>
