@@ -1,5 +1,10 @@
 package edu.nju.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +31,16 @@ public class QAController {
 		else{
 			return "0";
 		}
+	}
+	
+	@RequestMapping("/getQList")
+	@ResponseBody  
+	public Map<String, Object> getQList(HttpSession session){
+		//String openid = (String)session.getAttribute("openid");
+		Map<String, Object> map = new HashMap<String, Object>();
+		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		List<Object> qlist = (List)qaservice.getAllQuestion(); 
+		map.put("qlist", qlist);
+		return map;
 	}
 }

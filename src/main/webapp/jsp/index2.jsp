@@ -46,6 +46,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<img width=100% height=100% src="/Drift_wechat/images/info.jpg" title="甲醛漂流仪"/>
 	</div> -->
 	
+	<div style="height:80%;width:100%;background:#D3D3D3;position:absolute;">
+	
+		<div style="height:50%;margin:10px;background:#00BFFF;position:relative;background-image:url(/Drift_wechat/images/sky.jpg);background-size:cover" align="center">
+			<br/>
+			<br/>
+			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计漂流次数10000次</span></marquee>
+			<br/>
+			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流次数10000次</span></marquee>
+		</div>
+		
+		<div style="margin:10px;background:#FFFFFF;position:relative;">
+			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
+		      </div>
+		      <div class="weui-media-box__bd">
+		        <h4 class="weui-media-box__title">你家的甲醛含量超标么？</h4>
+		        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体。</p>
+		      </div>
+		    </a>
+		</div>
+		
+		<div style="margin:10px;background:#FFFFFF;position:relative;">
+			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+		      <div class="weui-media-box__hd">
+		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
+		      </div>
+		      <div class="weui-media-box__bd">
+		        <h4 class="weui-media-box__title">如何清除甲醛呢？</h4>
+		        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。
+		              由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。
+		        </p>
+		      </div>
+		    </a>
+		</div>
+		
+	</div>
+	
+	<div style="top:10%;left:80%;position:relative;">
+		<a href="/Drift_wechat/api/map/map" ><img alt="" src="/Drift_wechat/images/tomap.png" id="countryMap" height="32px" width="32px"></a>
+		<br/><a href="javascript:ShowModel()"><img alt="" src="/Drift_wechat/images/yiqi2.png"  height="32px" width="32px"></a>
+	</div>
+	
+	
+	<!--主要功能  -->
 	<div class="weui-flex" style="top:82%;position: absolute;width:100%;">
 	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
 	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set'">我要预约</button>
@@ -53,51 +98,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
 	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:;">联系客服</button>
 	  </div>
-	</div>
-	
-	<div style="height:80%;width:100%;background:#D3D3D3;position:absolute;"></div>
-	
-	<div style="top:10%;left:80%;position:absolute;">
-		<a href="/Drift_wechat/api/map/map" ><img alt="" src="/Drift_wechat/images/tomap.png" id="countryMap" height="32px" width="32px"><h5>地图</h5></a>
-		<br/><button id="yiqi">详情</button>
-	</div>
-	
-	<div style="height:40%;margin:10px;background:#FFFFFF;position:relative;">
-		<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-	      <div class="weui-media-box__hd">
-	        <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
-	      </div>
-	      <div class="weui-media-box__bd">
-	        <h4 class="weui-media-box__title">你家的甲醛含量超标么？</h4>
-	        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体。</p>
-	      </div>
-	    </a>
-	</div>
-	
-	<div style="margin:10px;background:#FFFFFF;position:relative;">
-		<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-	      <div class="weui-media-box__hd">
-	        <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
-	      </div>
-	      <div class="weui-media-box__bd">
-	        <h4 class="weui-media-box__title">你家的甲醛含量超标么？</h4>
-	        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体。</p>
-	      </div>
-	    </a>
-	</div>
-	
-	<div style="margin:10px;background:#FFFFFF;position:relative;">
-		<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-	      <div class="weui-media-box__hd">
-	        <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
-	      </div>
-	      <div class="weui-media-box__bd">
-	        <h4 class="weui-media-box__title">如何清除甲醛呢？</h4>
-	        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。
-	              由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。
-	        </p>
-	      </div>
-	    </a>
 	</div>
 	
 	<!--导航栏  -->
@@ -132,5 +132,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  $("#yiqi").click(function() {
      $('#myModal').modal();
  });
+  
+ function ShowModel(){
+ 	$('#myModal').modal();
+ }
 </script>
 </html>
