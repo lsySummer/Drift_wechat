@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <div class="weui-cell">
 	    <div class="weui-cell__hd"><label class="weui-label">检测位置</label></div>
 	    <div class="weui-cell__bd">
-	      <input class="weui-input"  id="place" placeholder="请输入检测位置">
+	      <input class="weui-input"  id="place" placeholder="请选择检测位置">
 	    </div>
 	  </div>
 	  
@@ -59,16 +59,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      <label class="weui-label">检测面积</label>
 	    </div>
 	    <div class="weui-cell__bd">
-	      <input class="weui-input"  id="area" placeholder="请输入检测面积">
+	      <input class="weui-input"  id="area" placeholder="请选择检测面积">
+	    </div>
+	    <div class="weui-cell__bd">
+	       <label class="weui-label">m2</label>
 	    </div>
 	  </div>
 	  
-	  <div class="weui-cell">
+	  <div class="weui-cell ">
 	    <div class="weui-cell__hd">
 	      <label class="weui-label">甲醛数值</label>
 	    </div>
 	    <div class="weui-cell__bd">
-	      <input class="weui-input"  id="measure" placeholder="请输入甲醛数值">
+	      <input class="weui-input"  id="measure" type="number" pattern="[1-9]/d*/./d*|0/./d*[1-9]/d*" placeholder="请输入甲醛数值">
+	    </div>
+	    <div class="weui-cell__bd">
+	      <label class="weui-label">mg/m3</label>
 	    </div>
 	  </div>
 	  <div class="weui-cell">
@@ -112,7 +118,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 
 <script type="text/javascript">
-	var jqList = new Array(); 
+	//页面加载完成启动
+	$("document").ready(function(){
+		$("#place").select({
+		  title: "选择职业",
+		  items: ["卧室", "客厅", "厨房", "洗漱间", "其他"]
+		});
+		
+		$("#area").select({
+		  title: "选择职业",
+		  items: ["<10 ", "10-30", "30-50", "50-80", "80-100", "100-150",">150"]
+		});
+	});
+	var jqList = new Array();
+	var amount = 0; 
 	function addFeedback(){
 		$("#feedback").show();
 	}
@@ -126,19 +145,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		temp["place"] = place;
 		temp["area"] = area;
 		temp["measure"] = measure;
+		amount++;
 		jqList.push(temp);
 		var html='';
+		jqList.forEach(function(){
 			html+="<div class='weui-form-preview'>";
+			html+="<input id='index' type='hidden'value="+amount+">";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>甲醛数值</label>";
 			html+="<span class='weui-form-preview__value'>"+measure+"</span></div></div>";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>位置</label>";
 			html+="<span class='weui-form-preview__value'>"+place+"</span></div></div>";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>面积</label>";
 			html+="<span class='weui-form-preview__value'>"+area+"</span></div></div>";
-			html+="<div class='weui-form-preview__ft'><button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary'>修改</button>";
-			html+="<button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary'>删除</button></div></div>";
-			$("#preview").append(html);
+			html+="<div class='weui-form-preview__ft'><button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary' id='edit'>修改</button>";
+			html+="<button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary' id='delete' onclick='deleteOneCase()'>删除</button></div></div>";
+		})
+		$("#preview").html(html);
 	}
+	function deleteOneCase(){
+		alert($(this).parent());
+		alert($(this).parent().parent());
+		alert($(this).parent().parent().find('input'))
+		alert($(this).parent().parent().find('input').val())
+	}
+	
+	$("#delete").click(function(){
+		
+	})
+	$("#edit").click(function(){
+		
+	})
 	
 	function changeIncon(){
 		$("#release").attr("src","/Drift_wechat/images/community/release.png")
