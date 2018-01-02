@@ -23,6 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       }, false);
     }
   </script>
+  <title>等待收货</title>
 </head>
 <body>
 	<!--步骤条 -->
@@ -61,38 +62,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <span class="weui-form-preview__value" id="deviceId1">暂无</span>
 		    </div>
 		  </div>
-		  <div class="weui-form-preview__ft">
+		  <div class="weui-form-preview__ft" style="margin-top:10%;">
 		  	<a id="d1" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(1);">快递查询</a>
     		<button id="confirm" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascript:confirm();">确认收货</button>
   		  </div>
 		</div>
-  	<!--导航栏  -->
-	<div class="weui-tabbar">
-	  <a href="/Drift_wechat/jsp/BaiduMap.jsp" class="weui-tabbar__item">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/index.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">首页</p>
-	  </a>
-	  <a href="/Drift_wechat/jsp/Orders.jsp" class="weui-tabbar__item weui-bar__item--on">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/order.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">订单</p>
-	  </a>
-	  <a href="/Drift_wechat/jsp/community/CommunityIndex.jsp" class="weui-tabbar__item">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/community.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">社区</p>
-	  </a>
-	  <a href="/Drift_wechat/jsp/MyIndex.jsp" class="weui-tabbar__item">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/my.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">我的</p>
-	  </a>
-	</div>
+  	<!--BOTTOM -->
+  	<%@include file="BottomBar.html"%>
 	<script type="text/javascript" src="/Drift_wechat/js/myJS/Step2.js"></script>
 </body>
 </html>

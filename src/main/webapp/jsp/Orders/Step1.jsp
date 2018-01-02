@@ -23,8 +23,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       }, false);
     }
   </script>
+  <title>开始预约</title>
 </head>
 <body>
+	<!--TOP -->
 	<%@include file="TopBar.html"%>
   	<!--文案 -->
 	<div style="height:100%;width:100%;margin-top:20%;">
@@ -39,33 +41,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:;">联系客服</button>
 	  </div>
 	</div>
-  	<!--导航栏  -->
-	<div class="weui-tabbar">
-	  <a href="/Drift_wechat/jsp/BaiduMap.jsp" class="weui-tabbar__item">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/index.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">首页</p>
-	  </a>
-	  <a href="/Drift_wechat/jsp/Orders.jsp" class="weui-tabbar__item weui-bar__item--on">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/order.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">订单</p>
-	  </a>
-	  <a href="/Drift_wechat/jsp/community/CommunityIndex.jsp" class="weui-tabbar__item">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/community.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">社区</p>
-	  </a>
-	  <a href="/Drift_wechat/jsp/MyIndex.jsp" class="weui-tabbar__item">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/my.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">我的</p>
-	  </a>
-	</div>
+	<!--BOTTOM -->
+  	<%@include file="BottomBar.html"%>
 	<script>set(1);</script>
 </body>
 </html>
