@@ -84,8 +84,8 @@ public class OrderController {
 	public void getDate(HttpSession session, HttpServletResponse response){
 		//session.setAttribute("openid", "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg");
 		log.info(session.getAttribute("openid"));
-		List<String> UnavailableDates = getservice.getUnavailableDates((String)session.getAttribute("openid"), 0);
-		//List<String> UnavailableDates = getservice.getUnavailableDates("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", 0);
+//		List<String> UnavailableDates = getservice.getUnavailableDates((String)session.getAttribute("openid"), 0);
+		List<String> UnavailableDates = getservice.getUnavailableDates("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", 0);
 		JSONObject result=new JSONObject();
 		try {
 			PrintWriter out = response.getWriter();

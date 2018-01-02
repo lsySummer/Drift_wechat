@@ -1,0 +1,72 @@
+<%@page pageEncoding="UTF-8"%> 
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- set `maximum-scale` for some compatibility issues -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
+  <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+  <script>
+    if ('addEventListener' in document) {
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+      }, false);
+    }
+    function set(step){
+    	switch(step){
+    		case 1:
+    			document.getElementById("img1").src = "/Drift_wechat/images/number/blue1.png";
+    			break;
+    		case 2:
+    			document.getElementById("img1").src = "/Drift_wechat/images/number/blue1.png";
+    			document.getElementById("span1").innerHTML = "&#8212;"; 
+    			document.getElementById("img2").src = "/Drift_wechat/images/number/blue2.png";
+    			break;
+    		case 3:
+    			document.getElementById("img1").src = "/Drift_wechat/images/number/blue1.png";
+    			document.getElementById("span1").innerHTML = "&#8212;"; 
+    			document.getElementById("img2").src = "/Drift_wechat/images/number/blue2.png";
+    			document.getElementById("span2").innerHTML = "&#8212;"; 
+    			document.getElementById("img3").src = "/Drift_wechat/images/number/blue3.png";
+    			break;
+    		case 4:
+    			document.getElementById("img1").src = "/Drift_wechat/images/number/blue1.png";
+    			document.getElementById("span1").innerHTML = "&#8212;"; 
+    			document.getElementById("img2").src = "/Drift_wechat/images/number/blue2.png";
+    			document.getElementById("span2").innerHTML = "&#8212;"; 
+    			document.getElementById("img3").src = "/Drift_wechat/images/number/blue3.png";
+    			document.getElementById("span3").innerHTML = "&#8212;"; 
+    			document.getElementById("img4").src = "/Drift_wechat/images/number/blue4.png";
+    			break;
+    		case 5:
+    			document.getElementById("img1").src = "/Drift_wechat/images/number/blue1.png";
+    			document.getElementById("span1").innerHTML = "&#8212;"; 
+    			document.getElementById("img2").src = "/Drift_wechat/images/number/blue2.png";
+    			document.getElementById("span2").innerHTML = "&#8212;"; 
+    			document.getElementById("img3").src = "/Drift_wechat/images/number/blue3.png";
+    			document.getElementById("span3").innerHTML = "&#8212;"; 
+    			document.getElementById("img4").src = "/Drift_wechat/images/number/blue4.png";
+    			document.getElementById("span4").innerHTML = "&#8212;"; 
+    			document.getElementById("img5").src = "/Drift_wechat/images/number/blue5.png";
+    			break;
+    	}
+    }
+  </script>
+  <style>
+  	body{ text-align:center }
+  </style>
+</head>
+<body>
+  <div id="TopBar" style="padding-top:6%">
+  	<img src="/Drift_wechat/images/number/grey1.png" id="img1" alt="1" height="8%" width="8%"/>
+  	<span id="span1">&#8230;</span>
+  	<img src="/Drift_wechat/images/number/grey2.png" id="img2" alt="2" height="8%" width="8%"/>
+  	<span id="span2">&#8230;</span>
+  	<img src="/Drift_wechat/images/number/grey3.png" id="img3" alt="3" height="8%" width="8%"/>
+  	<span id="span3">&#8230;</span>
+  	<img src="/Drift_wechat/images/number/grey4.png" id="img4" alt="4" height="8%" width="8%"/>
+  	<span id="span4">&#8230;</span>
+  	<img src="/Drift_wechat/images/number/grey5.png" id="img5" alt="5" height="8%" width="8%"/>
+  </div>
+</body>
+</html>
