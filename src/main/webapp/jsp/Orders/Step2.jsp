@@ -79,7 +79,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		</div>
-		<!-- <a href="/Drift_wechat/jsp/TrackMap.jsp" class="weui-btn weui-btn_primary">查看设备历史</a> -->
   	<!--快递信息 -->
     	<div class="weui-form-preview" id="item1" style="margin-top:5%;">
 		  <div class="weui-form-preview__hd">

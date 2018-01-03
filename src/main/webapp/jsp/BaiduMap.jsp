@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <div style="height:100%; width: 100%;position:absolute;" id="map"></div>
     
-    <div class="weui-navbar">
+<!--     <div class="weui-navbar">
 	  	<a class="weui-navbar__item weui-bar__item--on" href="/Drift_wechat/jsp/BaiduMap.jsp">
 	    	首页
 	    </a>
@@ -63,26 +63,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	<a class="weui-navbar__item" href="/Drift_wechat/jsp/MyIndex.jsp">
 	    	个人中心
 	    </a>
-	</div>	
-	<div class="weui-flex weui-footer weui-footer_fixed-bottom">
+	</div> -->	
+<!-- 	<div class="weui-flex weui-footer weui-footer_fixed-bottom">
 		  <div class="weui-flex__item placeholder">
 		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set'">我要预约</button>
 		  </div>
 		  <div class="weui-flex__item placeholder">
 		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:;">联系客服</button>
 		  </div>
-	</div>
+	</div> -->
 	
-	<div style="top:20%;left:80%;position:relative;">
+<!-- 	<div style="top:20%;left:80%;position:relative;">
 		<img alt="" src="/Drift_wechat/images/map/yiqi2.png"  id="yiqi" height="32px" width="32px" >详情
-	</div>
+	</div> -->
 	
 	<div style="top:70%;left:80%;position:relative;">
-		<img alt="" src="/Drift_wechat/images/map/china.png" id="countryMap" height="32px" width="32px">全国
+		<img alt="" src="/Drift_wechat/images/map/tomap.png" id="countryMap" height="32px" width="32px">全国
 	</div>
 	
 	<div style="top:75%;left:80%;position:relative;">
-		<img alt="" src="/Drift_wechat/images/map/local.png" id="originalMap" height="32px" width="32px">本地
+		<img alt="" src="/Drift_wechat/images/map/tolocal.png" id="originalMap" height="32px" width="32px">本地
 	</div>	
 	
 	<div id="comment" class='weui-popup__container popup-bottom'>
@@ -196,8 +196,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	//页面加载完成启动
 	$("document").ready(function(){
-		weChatMap();
-		//map_init();
+		//weChatMap();
+		map_init();
 	});
 	
 	function weChatMap(){
@@ -375,7 +375,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		}
    		else{
 	   		var startDateStr = addPoint.startDate.substring(0,addPoint.startDate.indexOf(" "));
-	   		var commonInfo = "用户："+addPoint.nickname+"<br>"+"仪器编号："+addPoint.deviceNumber+"<br>"+"检测时间："+startDateStr+"<br>";
+	   		var commonInfo = "用户："+addPoint.nickname+"<br>"+"检测时间："+startDateStr+"<br>";
 	   		if(addPoint.jqNum!=-1){
 	   			commonInfo = commonInfo+"甲醛含量："+addPoint.jqNum+"<br>";
 	   		}
