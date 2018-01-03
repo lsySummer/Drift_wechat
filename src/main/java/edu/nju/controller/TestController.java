@@ -87,8 +87,8 @@ public class TestController {
 //		qservice.addlike("1", "1", "1234", "2345");
 //		qservice.revokeLike("1","1", "1234","2345");
 //		try {
-			String result = qservice.getAnswers("1").get(1).getContent();
-			model.addAttribute("result", result);
+//			String result = qservice.getAnswers("1").get(1).getContent();
+//			model.addAttribute("result", result);
 //			PrintWriter out = response.getWriter();
 //			out.print(result);
 //			out.flush();
@@ -97,6 +97,8 @@ public class TestController {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		System.out.println(cservice.getOrderNum());
+		System.out.println(cservice.getTodayNum());
 		return "jsp/NewFile";
 	}
 }

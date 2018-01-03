@@ -91,6 +91,7 @@ public class UserController {
 		UserInfo user = new UserInfo();
 		user.setOpenid((String)session.getAttribute("openid"));
 		user.setNickName((String)session.getAttribute("nickname"));
+		user.setState(1);
 		log.info("UserController openId"+session.getAttribute("openid"));
 		user.setAddress(address + " " + address_detail);
 		user.setPhone(phone);

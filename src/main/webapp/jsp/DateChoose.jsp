@@ -50,7 +50,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript">
  	var disabledDays =[];//格式要与datepicker中的日期格式一致（yyyy/mm/dd）。  
 	$(document).ready(function() {
-		var d = new Date();
+		var td = new Date();
+		var d = new Date(td);
+		d.setDate(td.getDate() + 1);
 		var startDateStr = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
 		document.getElementById("selectDate").value = startDateStr;
 		var date2 = new Date(d);

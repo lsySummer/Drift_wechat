@@ -13,6 +13,7 @@ import edu.nju.dao.BaseDao;
 import edu.nju.dao.ReserveDao;
 import edu.nju.dao.ReserveGetDao;
 import edu.nju.dao.UserDao;
+import edu.nju.entities.CheckResult;
 import edu.nju.entities.DeliveryInfo;
 import edu.nju.entities.Device;
 import edu.nju.entities.Order;
@@ -202,7 +203,9 @@ public class ReserveService {
 			}
 		}
 		return result;
+	}
 	
-		
+	public boolean addCheckResult(List<CheckResult> list) {
+		return dao.saveList(list);
 	}
 }

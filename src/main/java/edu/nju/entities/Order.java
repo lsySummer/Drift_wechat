@@ -28,12 +28,14 @@ public class Order {
 	private String state;//等待发货 上家已发货 已确认收货 已寄出 下家已收货
 	private int num;//购买耗材数量
 	private int ifPay;//是否是付费用户,0代表免费用户，1代表付费用户
+	private Date createDate;
 //	private String afterOpenid;//下家openid
 	
 	public Order(){
 	}
 	
-	public Order(String openId,Date startDate,Date endDate,String deviceId,String deviceNumber,String state,int num,int ifPay){
+	public Order(String openId,Date startDate,Date endDate,String deviceId,String deviceNumber,
+			String state,int num,int ifPay,Date createDate){
 		this.openId = openId;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -42,6 +44,7 @@ public class Order {
 		this.state=state;
 		this.num = num;
 		this.ifPay = ifPay;
+		this.createDate = createDate;
 	}
 	
 	@Id
@@ -107,6 +110,14 @@ public class Order {
 	}
 	public void setIfPay(int ifPay) {
 		this.ifPay = ifPay;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 //	public String getAfterOpenid() {

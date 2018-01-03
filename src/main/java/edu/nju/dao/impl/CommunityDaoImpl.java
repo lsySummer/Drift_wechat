@@ -1,5 +1,6 @@
 package edu.nju.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class CommunityDaoImpl implements CommunityDao{
 			u.setComment(comment);
 			u.setOpenid(openid);
 			u.setOrderid(o.getId());
-			u.setNum(num);
+//			u.setNum(num);
 			String urls = Utility.saveFile("comment/"+openid+"/",files);
 			u.setPicURLS(urls);
 			baseDao.save(u);
@@ -50,6 +51,23 @@ public class CommunityDaoImpl implements CommunityDao{
 			return uc;
 		}
 		return null;
+	}
+
+
+
+	@Override
+	public Long getOrdernum() {
+		String hql = "select count(*) from Order";
+		Long num = (Long) baseDao.getNewSession().createQuery(hql).getSingleResult();
+		return num;
+	}
+
+	@Override
+	public Long getTodayNum() {
+		Date date = new Date();
+		String hql = "select count(*) from Order where createDate > :today";
+		Long num = (Long) baseDao.getNewSession().createQuery(hql).setParameter("today", Utility.getSpecifiedDayAfter(date, -1)).getSingleResult();
+		return num;
 	}
 
 }

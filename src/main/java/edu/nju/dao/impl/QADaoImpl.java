@@ -61,7 +61,7 @@ public class QADaoImpl implements QADao{
 	@Override
 	public Long getAnswerNum(String qid) {
 		String hql = "select count(*) from Answer where qid=:qid";
-		Long num = (Long) baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).uniqueResult();
+		Long num = (Long) baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).getSingleResult();
 		return num;
 	}
 

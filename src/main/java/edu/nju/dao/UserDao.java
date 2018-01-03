@@ -26,4 +26,6 @@ public interface UserDao {
 
 	boolean setZMXY(String openid, String zmxyid);
 
+	boolean setUserState(String openid, int state);
+
 }

@@ -89,7 +89,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--预显示模块  -->
 	<div id="preview">
 	</div>
-	
+	<div id="indextestdiv">
+		<input id='indextest' type='hidden'value="test">
+	</div>
 <!-- 	<div class="weui-form-preview">
 	  <div class="weui-form-preview__bd">
 	    <div class="weui-form-preview__item">
@@ -109,15 +111,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      <span class="weui-form-preview__value">10</span>
 	    </div>
 	  </div>
-	  <div class="weui-form-preview__ft">
-	    <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">修改</button>
-	    <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">删除</button>
-	  </div>
-	</div>
+		  <div class="weui-form-preview__ft">
+		    <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">修改</button>
+		    <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">删除</button>
+		  </div>
+		</div>
 	 -->
 </body>
 
 <script type="text/javascript">
+	var jqList = new Array();
 	//页面加载完成启动
 	$("document").ready(function(){
 		$("#place").select({
@@ -130,8 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  items: ["<10 ", "10-30", "30-50", "50-80", "80-100", "100-150",">150"]
 		});
 	});
-	var jqList = new Array();
-	var amount = 0; 
+	
 	function addFeedback(){
 		$("#feedback").show();
 	}
@@ -145,28 +147,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		temp["place"] = place;
 		temp["area"] = area;
 		temp["measure"] = measure;
-		amount++;
 		jqList.push(temp);
+		initialPreview();
+	}
+	
+	function initialPreview(){
+		var amount = 0; 
+		$("#preview").html("");
 		var html='';
-		jqList.forEach(function(){
+		jqList.forEach(function(jq){
+			amount++;		
 			html+="<div class='weui-form-preview'>";
 			html+="<input id='index' type='hidden'value="+amount+">";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>甲醛数值</label>";
-			html+="<span class='weui-form-preview__value'>"+measure+"</span></div></div>";
+			html+="<span class='weui-form-preview__value'>"+jq.measure+"</span></div></div>";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>位置</label>";
-			html+="<span class='weui-form-preview__value'>"+place+"</span></div></div>";
+			html+="<span class='weui-form-preview__value'>"+jq.place+"</span></div></div>";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>面积</label>";
-			html+="<span class='weui-form-preview__value'>"+area+"</span></div></div>";
+			html+="<span class='weui-form-preview__value'>"+jq.area+"</span></div></div>";
 			html+="<div class='weui-form-preview__ft'><button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary' id='edit'>修改</button>";
-			html+="<button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary' id='delete' onclick='deleteOneCase()'>删除</button></div></div>";
-		})
+			html+="<button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary' id='delete"+amount;
+			html+="'onclick='deleteOneCase()'>删除</button></div></div>";
+		})	
 		$("#preview").html(html);
 	}
+	
 	function deleteOneCase(){
-		alert($(this).parent());
-		alert($(this).parent().parent());
-		alert($(this).parent().parent().find('input'))
-		alert($(this).parent().parent().find('input').val())
+		var target = event.target || event.srcElement;
+		var id = target.id
+	 	var index = id.substring(6);
+	 	jqList.splice(index-1,1);
+	 	alert(jqList.length);
+	 	initialPreview();
 	}
 	
 	$("#delete").click(function(){
