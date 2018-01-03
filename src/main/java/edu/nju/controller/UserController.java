@@ -102,8 +102,24 @@ public class UserController {
 		}else{
 			return "jsp/index";
 		}
-		
 	}
 	
+	@RequestMapping(value = "/getState")
+	public String getState(HttpSession session) {
+		int state = service.getUserState((String)session.getAttribute("openid"));
+		switch(state){
+			case 1:
+				return "jsp/Orders/Step1";
+			case 2:
+				return "jsp/Orders/Step2";
+			case 3:
+				return "jsp/Orders/Step3";
+			case 4:
+				return "jsp/Orders/Step4";
+			case 5:
+				return "jsp/Orders/Step5";
+			default:
+				return "jsp/Orders/Step1";
+		}
+	}
 }
-

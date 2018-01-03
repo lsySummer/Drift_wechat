@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.nju.service.CommunityService;
+import edu.nju.service.UserService;
 
 @Controller
 @RequestMapping(value="/community")
@@ -26,6 +27,9 @@ public class CommunityController {
 	
 	@Autowired
 	CommunityService service;
+	
+	@Autowired
+	UserService userService;
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/upload",method = RequestMethod.POST)
@@ -51,15 +55,16 @@ public class CommunityController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/txt")
-	public void textUplood(String txt, String num, HttpSession session, HttpServletResponse response){
-		log.info("num"+num);
+	public void textUplood(String txt, HttpSession session, HttpServletResponse response){
 		log.info("txt"+txt);
 		JSONObject result = new JSONObject();
 		List<MultipartFile> photoLists = (List<MultipartFile>) session.getAttribute("photo");
 //		service.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", photoLists, txt, Float.parseFloat(methanal));
-		service.addComment((String)session.getAttribute("openid"), photoLists, txt, Float.parseFloat(num));
+		service.addComment((String)session.getAttribute("openid"), photoLists, txt);
 		result.put("status", "200");
 		try {
+			//设置订单状态为Step4
+			userService.setUserState((String)session.getAttribute("openid"), 4);
 			PrintWriter out = response.getWriter();
 			out.print(result);
 			out.flush();

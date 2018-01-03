@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </div>
 	</div>
 	<!--订单信息 -->
-	    <div class="weui-form-preview" id="item1" style="margin-top:10%;">
+	    <div class="weui-form-preview" id="item1" style="margin-top:5%;">
 		  <div class="weui-form-preview__hd">
 		    <label class="weui-form-preview__label">订单编号</label>
 		    <em class="weui-form-preview__value" id="orderId">暂无</em>
@@ -79,9 +79,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		</div>
-		<a href="/Drift_wechat/jsp/TrackMap.jsp" class="weui-btn weui-btn_primary">查看设备历史</a>
+		<!-- <a href="/Drift_wechat/jsp/TrackMap.jsp" class="weui-btn weui-btn_primary">查看设备历史</a> -->
   	<!--快递信息 -->
-    	<div class="weui-form-preview" id="item1" style="margin-top:10%;">
+    	<div class="weui-form-preview" id="item1" style="margin-top:5%;">
 		  <div class="weui-form-preview__hd">
 		    <label class="weui-form-preview__label">上家名称</label>
 		    <em class="weui-form-preview__value" id="previous">上家正在抽取中……</em>
@@ -96,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <span class="weui-form-preview__value" id="deviceId1">可能有变动哦</span>
 		    </div>
 		  </div>
-		  <div class="weui-form-preview__ft" style="margin-top:10%;">
+		  <div class="weui-form-preview__ft" style="margin-top:5%;">
 		  	<a id="d1" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(1);">快递查询</a>
     		<button id="confirm" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascript:confirm();">确认收货</button>
   		  </div>

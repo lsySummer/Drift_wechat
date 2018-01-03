@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		</div>
-    		<a href="/Drift_wechat/jsp/Orders/Step2.jsp" class="weui-btn weui-btn_default">返回</a>
+    		<a href="/Drift_wechat/api/user/getState" class="weui-btn weui-btn_default">返回</a>
     </div>
     </div>
     <div id="image" class="weui-popup__container popup-bottom">

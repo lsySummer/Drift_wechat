@@ -108,6 +108,8 @@ public class OrderController {
 		try {
 			PrintWriter out = response.getWriter();
 			if(flag){
+				//设置订单状态为Step2
+				userService.setUserState((String)session.getAttribute("openid"), 2);
 				out.print("200");
 			}else{
 				out.print("500");
