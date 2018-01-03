@@ -29,11 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--步骤条 -->
 	<%@include file="TopBar.html"%>
   	<!--文案 -->
-	<div style="height:100%;width:100%;margin-top:10%;">
-		<img width=100% height=100% src="/Drift_wechat/images/index.png" title="甲醛漂流仪"/>
+	<div style="margin-top:6%;">
+		<img src="/Drift_wechat/images/sky.jpg" title="甲醛漂流仪"/>
 	</div>
 	<!--按钮 -->
-	<div class="weui-flex__item placeholder" style="bottom:10%;position:absolute;width:100%;">
+	<div class="weui-flex__item placeholder" style="bottom:10%;position:fixed;width:100%;">
 	   <button id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/Orders/FeedbackWrite.jsp';">填写使用信息</button>
 	</div>
   	<!--BOTTOM -->

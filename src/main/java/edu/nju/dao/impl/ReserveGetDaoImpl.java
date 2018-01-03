@@ -31,7 +31,7 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderVO> getOrder(String openId) {
-		String hql = "from Order where openid =:openid";
+		String hql = "from Order where openid =:openid order by createDate desc";
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openId).getResultList();
 		List<OrderVO> volist = new ArrayList<OrderVO>();
 		for(int i=0;i<list.size();i++){

@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="about" class="weui-popup__container">
 	  <div class="weui-popup__overlay"></div>
 	  <div class="weui-popup__modal">
-	 <h1> 快递查询 </h1>
+	  <h1> 快递查询 </h1>
 	  <table class="table table-hover" cellspacing="8">
 			  <thead>
 			    <tr>
@@ -47,7 +47,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--步骤条 -->
 	<%@include file="TopBar.html"%>
   	<!--信息 -->
-	<div class="weui-form-preview" style="margin-top:30%;">
+  	<i class="weui-icon-waiting weui-icon_msg" style="margin-top:15%;"></i>
+	<div class="weui-form-preview" style="margin-top:15%;">
 		  <div class="weui-form-preview__hd">
 		    <label class="weui-form-preview__label">下家名称</label>
 		    <em class="weui-form-preview__value" id="next">抽取中～</em>
@@ -66,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <span class="weui-form-preview__value" id="deliveryNum2">下家已经等不及了～</span>
 		    </div>
 		  </div>
-		  <div class="weui-form-preview__ft" style="margin-top:10%;">
+		  <div class="weui-form-preview__ft" style="margin-top:15%;">
 		  	<a id="d2" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(2);">快递查询</a>
     		<button id="detail" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp';">填写快递信息</button>
   		  </div>
