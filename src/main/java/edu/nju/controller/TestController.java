@@ -97,8 +97,9 @@ public class TestController {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		System.out.println(cservice.getOrderNum());
-		System.out.println(cservice.getTodayNum());
+//		System.out.println(cservice.getOrderNum());
+//		System.out.println(cservice.getTodayNum());
+		System.out.println(gservice.getOrder("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg"));
 		return "jsp/NewFile";
 	}
 }
