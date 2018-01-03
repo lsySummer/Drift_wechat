@@ -2,6 +2,10 @@
  * 
  */
 $.getJSON('/Drift_wechat/api/delivery/step2',function(json){
+	if(json.receive == "暂无物流信息"){
+		document.getElementById('confirm').style.color="grey";
+		document.getElementById('confirm').value="false";
+	}
 	if(json.nickName != null){
 		console.log(json);
 		document.getElementById('previous').innerHTML = json.nickName;
