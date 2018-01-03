@@ -95,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <span class="weui-form-preview__value" id="deviceId1">可能有变动哦</span>
 		    </div>
 		  </div>
-		  <div class="weui-form-preview__ft" style="margin-top:5%;">
+		  <div class="weui-form-preview__ft" style="bottom:10%;position:fixed;width:100%;">
 		  	<a id="d1" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(1);">快递查询</a>
     		<button id="confirm" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascript:confirm();">确认收货</button>
   		  </div>
