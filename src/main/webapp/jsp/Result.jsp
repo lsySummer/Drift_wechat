@@ -42,16 +42,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		</div>
-    		<a href="/Drift_wechat/jsp/BaiduMap.jsp" class="weui-btn weui-btn_default">返回首页</a>
-<!--         <div class="weui-msg__opr-area">
-            <p class="weui-btn-area">
-            	
-              	<a href="/Drift_wechat/api/wechat/center" class="weui-btn weui-btn_default">返回首页</a>
-            </p>
-        </div> -->
+    		<a href="/Drift_wechat/jsp/Orders/Step2.jsp" class="weui-btn weui-btn_default">返回</a>
     </div>
     </div>
-<!--     <a href="javascript:;" class="open-popup" data-target="#image">微信群二维码</a> -->
     <div id="image" class="weui-popup__container popup-bottom">
   		<div class="weui-popup__overlay"></div>
   			<div class="weui-popup__modal">

@@ -131,4 +131,8 @@ public class UserService {
 		return dao.setUserState(openid,state);
 	}
 	
+	public int getUserState(String openid) {
+		return dao.getUserState(openid);
+	}
+	
 }

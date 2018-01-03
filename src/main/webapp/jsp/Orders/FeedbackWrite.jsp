@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	
   	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:10px ">
-  		<div class="weui-cell__ft"><a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="" src="/Drift_wechat/images/community/close.png"></a></div>
+  		<div class="weui-cell__ft"><a href="/Drift_wechat/jsp/Orders/Step3.jsp"><img alt="" style="" src="/Drift_wechat/images/community/close.png"></a></div>
 	    <div class="weui-cell__bd" style="color:black">
 	      <h2>填写甲醛数值</h2>
 	    </div>

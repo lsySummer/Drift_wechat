@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<!--按钮 -->
 	<div class="weui-flex__item placeholder" style="bottom:10%;position:absolute;width:100%;">
-	   <button id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:;">填写使用信息</button>
+	   <button id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/Orders/FeedbackWrite.jsp';">填写使用信息</button>
 	</div>
   	<!--BOTTOM -->
   	<%@include file="BottomBar.html"%>

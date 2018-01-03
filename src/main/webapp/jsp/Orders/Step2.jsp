@@ -46,20 +46,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <a href="javascript:close();" class="weui-btn weui-btn_primary">关闭</a>
 	  </div>
 	</div>
-  	<!--信息 -->
-    	<div class="weui-form-preview" id="item1" style="margin-top:30%;">
+	<!--订单信息 -->
+	    <div class="weui-form-preview" id="item1" style="margin-top:10%;">
+		  <div class="weui-form-preview__hd">
+		    <label class="weui-form-preview__label">订单编号</label>
+		    <em class="weui-form-preview__value" id="orderId">暂无</em>
+		  </div>
+		  <div class="weui-form-preview__bd">
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">预约开始日期</label>
+		      <span class="weui-form-preview__value" id="startDate">暂无</span>
+		    </div>
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">预约结束日期</label>
+		      <span class="weui-form-preview__value" id="endDate">暂无</span>
+		    </div>
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">送货地址</label>
+		      <span class="weui-form-preview__value" id="address">暂无</span>
+		    </div>
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">收件人</label>
+		      <span class="weui-form-preview__value" id="userName">暂无</span>
+		    </div>
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">联系电话</label>
+		      <span class="weui-form-preview__value" id="userPhone">暂无</span>
+		    </div>
+		    <div class="weui-form-preview__item">
+		      <label class="weui-form-preview__label">设备状态</label>
+		      <span class="weui-form-preview__value" id="state">暂无</span>
+		    </div>
+		  </div>
+		</div>
+		<a href="/Drift_wechat/jsp/TrackMap.jsp" class="weui-btn weui-btn_primary">查看设备历史</a>
+  	<!--快递信息 -->
+    	<div class="weui-form-preview" id="item1" style="margin-top:10%;">
 		  <div class="weui-form-preview__hd">
 		    <label class="weui-form-preview__label">上家名称</label>
-		    <em class="weui-form-preview__value" id="previous">暂无</em>
+		    <em class="weui-form-preview__value" id="previous">上家正在抽取中……</em>
 		  </div>
 		  <div class="weui-form-preview__bd">
 		    <div class="weui-form-preview__item">
 		      <label class="weui-form-preview__label">快递单号</label>
-		      <span class="weui-form-preview__value" id="deliveryNum1">暂无</span>
+		      <span class="weui-form-preview__value" id="deliveryNum1">更新了会告诉你的～</span>
 		    </div>
 		    <div class="weui-form-preview__item">
 		      <label class="weui-form-preview__label">设备id</label>
-		      <span class="weui-form-preview__value" id="deviceId1">暂无</span>
+		      <span class="weui-form-preview__value" id="deviceId1">可能有变动哦</span>
 		    </div>
 		  </div>
 		  <div class="weui-form-preview__ft" style="margin-top:10%;">
@@ -70,5 +104,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<!--BOTTOM -->
   	<%@include file="BottomBar.html"%>
 	<script type="text/javascript" src="/Drift_wechat/js/myJS/Step2.js"></script>
+	<script type="text/javascript" src="/Drift_wechat/js/myJS/Orders.js"></script>
 </body>
 </html>
