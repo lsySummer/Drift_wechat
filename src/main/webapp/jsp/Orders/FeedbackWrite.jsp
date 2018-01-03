@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <div class="weui-cell__bd" style="color:black">
 	      <h2>填写甲醛数值</h2>
 	    </div>
-	    <div class="weui-cell__ft"><a href="javascript:publishQ()"><img id="release" alt="" style="" src="/Drift_wechat/images/community/before.png"></a></div>
+	    <div class="weui-cell__ft"><a href="javascript:saveFeedback()"><img id="release" alt="" style="" src="/Drift_wechat/images/community/before.png"></a></div>
 	</div>
 	<hr class="style-four" />
 	
@@ -148,6 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		temp["area"] = area;
 		temp["num"] = measure;
 		jqList.push(temp);
+		changeIncon();
 		initialPreview();
 	}
 	
