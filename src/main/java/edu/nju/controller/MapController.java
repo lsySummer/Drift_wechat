@@ -12,9 +12,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.nju.service.CommunityService;
 import edu.nju.service.UserService;
 import edu.nju.utils.Constants;
 
@@ -23,10 +25,18 @@ import edu.nju.utils.Constants;
 public class MapController {
 	@Autowired
 	UserService service;
-	
+	@Autowired
+	CommunityService cservice;
 	@RequestMapping(value = "/map")
 	public String getMap1(String openid,HttpSession session) {
 		return "jsp/BaiduMap";
+	}
+	
+	@RequestMapping(value = "/index")
+	public String getMap1(Model model) {
+		model.addAttribute("allnum", cservice.getOrderNum());
+		model.addAttribute("todaynum", cservice.getTodayNum());
+		return "jsp/index2";
 	}
 	
 	@RequestMapping(value = "/getMap")
