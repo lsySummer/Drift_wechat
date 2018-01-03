@@ -144,9 +144,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var area = $("#area").val();
 		var measure = $("#measure").val();
 		var temp = {};
-		temp["place"] = place;
+		temp["location"] = place;
 		temp["area"] = area;
-		temp["measure"] = measure;
+		temp["num"] = measure;
 		jqList.push(temp);
 		initialPreview();
 	}
@@ -160,9 +160,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			html+="<div class='weui-form-preview'>";
 			//html+="<input id='index' type='hidden'value="+amount+">";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>甲醛数值</label>";
-			html+="<span class='weui-form-preview__value'>"+jq.measure+"</span></div></div>";
+			html+="<span class='weui-form-preview__value'>"+jq.num+"</span></div></div>";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>位置</label>";
-			html+="<span class='weui-form-preview__value'>"+jq.place+"</span></div></div>";
+			html+="<span class='weui-form-preview__value'>"+jq.location+"</span></div></div>";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>面积</label>";
 			html+="<span class='weui-form-preview__value'>"+jq.area+"</span></div></div>";
 			html+="<div class='weui-form-preview__ft'><button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary' id='edit"+amount;
@@ -184,9 +184,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var target = event.target || event.srcElement;
 		var id = target.id
 	 	var index = id.substring(4);
-	 	$("#place").val(jqList[index-1]["place"]);
+	 	$("#place").val(jqList[index-1]["location"]);
 		$("#area").val(jqList[index-1]["area"]);
-		$("#measure").val(jqList[index-1]["measure"]);
+		$("#measure").val(jqList[index-1]["num"]);
 	 	jqList.splice(index-1,1);
 	 	$("#feedback").show();
 	}
@@ -196,12 +196,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#release").attr("src","/Drift_wechat/images/community/release.png")
 	}
 	
-	function publishQ(){
-			$.toptip('发布成功', 'success');
-			setTimeout(function() {
-				window.location.href="/Drift_wechat/jsp/Upload.jsp";
-			},1000)
-		}
-		//window.location.href="/Drift_wechat/jsp/community/QuestionPreview.jsp";
+	function saveFeedback(){
+		$.ajax({
+			type:"post",
+			url:"/Drift_wechat/api/FB/save",
+			data:JSON.stringify(jqList),
+			contentType:"application/json",
+			success:function(data,textStatus){
+				if(data="1"){
+					$.toptip('发布成功', 'success');
+					setTimeout(function() {
+						window.location.href="/Drift_wechat/jsp/Upload.jsp";
+					},1000)
+				}
+				else{
+					$.toptip('操作失败', 'error');
+				}
+			}
+		});
+	}
 </script>
 </html>
