@@ -121,12 +121,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//页面加载完成启动
 	$("document").ready(function(){
 		$("#place").select({
-		  title: "选择职业",
+		  title: "选择位置",
 		  items: ["卧室", "客厅", "厨房", "洗漱间", "其他"]
 		});
 		
 		$("#area").select({
-		  title: "选择职业",
+		  title: "选择面积",
 		  items: ["<10 ", "10-30", "30-50", "50-80", "80-100", "100-150",">150"]
 		});
 	});
@@ -181,26 +181,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	
 	function publishQ(){
-		var title = $("#title").val();
-		var content = $("#content").val();
-		if(title!=""){
-			if(title.charAt(title.length-1)!="?"){
-				title += "?";	
-			}
-			$.get("/Drift_wechat/api/QA/publishQ?title="+title+"&content="+content,function(data){
-				console.log(data);
-				if(data="1"){
-					$.toptip('发布成功', 'success');
-					setTimeout(function() {
-						window.location.href="/Drift_wechat/jsp/community/QuestionPreview.jsp";
-					},1000)
-				}
-				else{
-					$.toptip('操作失败', 'error');
-				}
-			})
+			$.toptip('发布成功', 'success');
+			setTimeout(function() {
+				window.location.href="/Drift_wechat/jsp/Upload.jsp";
+			},1000)
 		}
 		//window.location.href="/Drift_wechat/jsp/community/QuestionPreview.jsp";
-	}
 </script>
 </html>
