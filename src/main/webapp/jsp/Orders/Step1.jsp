@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<%@include file="TopBar.html"%>
   	<!--文案 -->
 	<div style="height:100%;width:100%;margin-top:20%;">
-		<img width=100% height=100% src="/Drift_wechat/images/index.png" title="甲醛漂流仪"/>
+		<img width=100% height=100% src="/Drift_wechat/images/sky.jpg" title="甲醛漂流仪"/>
 	</div>
 	<!--按钮组 -->
 	<div class="weui-flex" style="bottom:10%;position:absolute;width:100%;">
@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set';">我要预约</button>
 	  </div>
 	  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
-	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:;">联系客服</button>
+	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/Contact';">联系客服</button>
 	  </div>
 	</div>
 	<!--BOTTOM -->

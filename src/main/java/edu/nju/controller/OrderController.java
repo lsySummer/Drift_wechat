@@ -60,7 +60,7 @@ public class OrderController {
 	@RequestMapping(value = "/set")
 	public ModelAndView ZMXY(HttpSession session) {
 		//测试入口
-		session.setAttribute("openid", "test");
+//		session.setAttribute("openid", "test");
 		ModelAndView modelAndView = new ModelAndView();
 		UserInfo user = userService.getUser((String)session.getAttribute("openid"));
 		if(user == null){
