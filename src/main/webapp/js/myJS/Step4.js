@@ -1,24 +1,17 @@
 /**
  * 
  */
-$.getJSON('/Drift_wechat/api/delivery/step2',function(json){
-	if(json.nickName != null){
-		console.log(json);
-		document.getElementById('previous').innerHTML = json.nickName;
-		document.getElementById('deliveryNum1').innerHTML = json.receive;
-		document.getElementById('deviceId1').innerHTML = json.deviceId;
+$.getJSON('/Drift_wechat/api/delivery/step4',function(json){
+	if(json.name != null){
+		document.getElementById('next').innerHTML = json.name;
+		document.getElementById('phontNum').innerHTML = json.phone;
+		document.getElementById('address').innerHTML = json.address;
+		if(json.send != "暂无物流信息"){
+			document.getElementById('deliveryNum2').innerHTML = json.send;
+		}
 	}
 });
 
-function confirm(){
-	if(document.getElementById('confirm').value == "true"){
-		$.get('/Drift_wechat/api/delivery/confirm');
-		$.toast("收货成功");
-		setTimeout("window.location.href='/Drift_wechat/jsp/Orders/Step3.jsp'", 1000);
-	}else{
-		$.toast("暂时无法收货", "forbidden");
-	}
-}
 function detail(){
 	if(document.getElementById('detail').value == "true"){
 		window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp';
@@ -34,7 +27,7 @@ function query(x){
   	}else{
   		delivery = document.getElementById("deliveryNum2").innerHTML;
   	}
-  	if(delivery == '暂无物流信息'){
+  	if(delivery == '下家已经等不及了～'){
   		$.toast("暂无信息，无法查询", "forbidden");
   	}else{
   		$.ajax({
