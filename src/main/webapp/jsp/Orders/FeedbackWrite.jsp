@@ -89,9 +89,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--预显示模块  -->
 	<div id="preview">
 	</div>
-	<div id="indextestdiv">
-		<input id='indextest' type='hidden'value="test">
-	</div>
 <!-- 	<div class="weui-form-preview">
 	  <div class="weui-form-preview__bd">
 	    <div class="weui-form-preview__item">
@@ -135,6 +132,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	});
 	
 	function addFeedback(){
+		$("#place").val("");
+		$("#area").val("");
+		$("#measure").val("");
 		$("#feedback").show();
 	}
 	
@@ -158,15 +158,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		jqList.forEach(function(jq){
 			amount++;		
 			html+="<div class='weui-form-preview'>";
-			html+="<input id='index' type='hidden'value="+amount+">";
+			//html+="<input id='index' type='hidden'value="+amount+">";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>甲醛数值</label>";
 			html+="<span class='weui-form-preview__value'>"+jq.measure+"</span></div></div>";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>位置</label>";
 			html+="<span class='weui-form-preview__value'>"+jq.place+"</span></div></div>";
 			html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>面积</label>";
 			html+="<span class='weui-form-preview__value'>"+jq.area+"</span></div></div>";
-			html+="<div class='weui-form-preview__ft'><button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary' id='edit'>修改</button>";
-			html+="<button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary' id='delete"+amount;
+			html+="<div class='weui-form-preview__ft'><button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary' id='edit"+amount;
+			html+="'onclick='editOneCase()'>修改</button><button type='submit' class='weui-form-preview__btn weui-form-preview__btn_primary' id='delete"+amount;
 			html+="'onclick='deleteOneCase()'>删除</button></div></div>";
 		})	
 		$("#preview").html(html);
@@ -177,16 +177,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var id = target.id
 	 	var index = id.substring(6);
 	 	jqList.splice(index-1,1);
-	 	alert(jqList.length);
 	 	initialPreview();
 	}
 	
-	$("#delete").click(function(){
-		
-	})
-	$("#edit").click(function(){
-		
-	})
+	function editOneCase(){
+		var target = event.target || event.srcElement;
+		var id = target.id
+	 	var index = id.substring(4);
+	 	$("#place").val(jqList[index-1]["place"]);
+		$("#area").val(jqList[index-1]["area"]);
+		$("#measure").val(jqList[index-1]["measure"]);
+	 	jqList.splice(index-1,1);
+	 	$("#feedback").show();
+	}
+	
 	
 	function changeIncon(){
 		$("#release").attr("src","/Drift_wechat/images/community/release.png")
