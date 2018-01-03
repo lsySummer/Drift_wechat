@@ -21,7 +21,7 @@ public class CommunityDaoImpl implements CommunityDao{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean addComment(String openid,List<MultipartFile> files,String comment,float num) {
+	public boolean addComment(String openid,List<MultipartFile> files,String comment) {
 		String hql = "from Order where openId =:openid";
 		List<Order> list = baseDao.getNewSession().createQuery(hql).setParameter("openid", openid).getResultList();
 		if(list.size()>0){
