@@ -25,19 +25,22 @@ import edu.nju.utils.Constants;
 public class MapController {
 	@Autowired
 	UserService service;
-	@Autowired
-	CommunityService cservice;
+	
 	@RequestMapping(value = "/map")
-	public String getMap1(String openid,HttpSession session) {
+	public String getMap1(String x,String y,HttpSession session,Model model) {
+		model.addAttribute("x",  Double.valueOf(x));
+		model.addAttribute("y", Double.valueOf(y));
+		System.out.println(x);
+		System.out.println(y);
 		return "jsp/BaiduMap";
 	}
 	
-	@RequestMapping(value = "/index")
+/*	@RequestMapping(value = "/index")
 	public String getMap1(Model model) {
 		model.addAttribute("allnum", cservice.getOrderNum());
 		model.addAttribute("todaynum", cservice.getTodayNum());
 		return "jsp/index2";
-	}
+	}*/
 	
 	@RequestMapping(value = "/getMap")
 	@ResponseBody  

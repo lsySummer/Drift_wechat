@@ -12,6 +12,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 <script src="/Drift_wechat/js/bootstrap.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2"></script>
 <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
     <title>果麦公益检测</title>
@@ -86,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	
 	<div style="top:2%;left:85%;position:relative;">
-		<a href="/Drift_wechat/api/map/map" ><img alt="" src="/Drift_wechat/images/tomap.png" id="countryMap" height="32px" width="32px"></a>
+		<a href="javascript:weChatMap()" ><img alt="" src="/Drift_wechat/images/tomap.png" id="countryMap" height="32px" width="32px"></a>
 		<br/><a href="javascript:ShowModel()"><img alt="" src="/Drift_wechat/images/yiqi2.png"  height="32px" width="32px"></a>
 	</div>
 	
@@ -130,12 +132,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 </body>
 <script type="text/javascript">
- $("#yiqi").click(function() {
-     $('#myModal').modal();
- });
-  
- function ShowModel(){
- 	$('#myModal').modal();
- }
+$("#yiqi").click(function() {
+    $('#myModal').modal();
+});
+ 
+function ShowModel(){
+	$('#myModal').modal();
+}
+function toMap(){
+	window.location.href="/Drift_wechat/api/map/map?x=111&y=30";
+	//$.get("/Drift_wechat/api/map/map?x=111&y=34",function(data){});
+	//$.get("/Drift_wechat/api/map/map?x=111&y=34",function(data){},"json");
+}
+function weChatMap(){
+	wx.config({
+       appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
+       timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
+       nonceStr: "<%=session.getAttribute("noncestr")%>", // 必填，生成签名的随机串
+       signature: "<%=session.getAttribute("signature")%>",// 必填，签名，见附录1
+        jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    
+    wx.ready(function(){
+    	//alert(location.href.split('#')[0]);
+    	 wx.getLocation({
+		        success: function (res) {
+		            var ggPoint = new BMap.Point(res.longitude,res.latitude);
+					var convertor = new BMap.Convertor();
+			        var pointArr = [];
+			        pointArr.push(ggPoint);
+			        convertor.translate(pointArr, 1, 5, translateCallback);
+		        },
+		        fail: function(error) {
+		            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
+		        }
+		    });
+    });
+ 
+    wx.error(function(res){
+    });
+    
+	//变换坐标函数
+	translateCallback = function (data){
+    if(data.status === 0) {
+	      //myLocation = {"x":data.points[0].lng,"y":data.points[0].lat};}
+	      window.location.href="/Drift_wechat/api/map/map?x="+data.points[0].lng+"&y="+data.points[0].lat";
+	    }
+    else{
+      		AlertUtil.error("无法获取您的位置！");
+    	}
+    }
+}
 </script>
 </html>

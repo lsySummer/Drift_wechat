@@ -12,8 +12,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.nju.service.CommunityService;
 import edu.nju.service.UserService;
 import edu.nju.utils.Utility;
 import edu.nju.utils.WechatConfig;
@@ -25,11 +27,14 @@ public class WeChatController {
 
 	@Autowired
 	UserService service;
-
+	
+	@Autowired
+	CommunityService cservice;
+	
 	private Logger log = Logger.getLogger(UserController.class);
 
 	@RequestMapping(value = "/center")
-	public String toCenter(HttpServletRequest request, String code,String state, HttpSession session)
+	public String toCenter(HttpServletRequest request, String code,String state, HttpSession session,Model model)
 			throws IOException {
 //		if(code==null||code.equals("")){
 //			code = (String) session.getAttribute("code");
@@ -41,6 +46,8 @@ public class WeChatController {
 //		session.setAttribute("code", code);
 //		session.setAttribute("state", state);
 		log.info("code "+code+" state"+state);
+		model.addAttribute("allnum", cservice.getOrderNum());
+		model.addAttribute("todaynum", cservice.getTodayNum());
 		return redir;
 	}
 	

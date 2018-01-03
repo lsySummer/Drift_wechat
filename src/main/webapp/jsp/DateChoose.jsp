@@ -70,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            closeText:"关闭",//关闭选择框的按钮名称  
 	            yearSuffix: '年', //年的后缀  
 	            showMonthAfterYear:true,//是否把月放在年的后面  
-	            defaultDate:startDateStr,//默认日期  
+	            //defaultDate:startDateStr,//默认日期  
 	            minDate:startDateStr,//最小日期  
 	            maxDate:endDateStr,//最大日期  
 	            monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],  

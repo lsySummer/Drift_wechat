@@ -120,7 +120,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
 </body>
 <script type="text/javascript">
-     
+    //初始化信息
+	var index = 0;
+	var allAddressVO = [];
+	//var myLocation = {"x":118.786078,"y":32.061531};
+	var myLocation = {};
+	var level = 18;
+	
+    var icon1 = new BMap.Icon("/Drift_wechat/images/map/blue.png", new BMap.Size(32,32));
+    var icon2 = new BMap.Icon("/Drift_wechat/images/map/red.png", new BMap.Size(32,32));  
+         
+    var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
+         new BMap.Size(23, 25), {  
+             offset: new BMap.Size(10, 25),  
+             imageOffset: new BMap.Size(0, -250)      
+         });
+    
+    //动态效果      
     var pbset;
 	$(".pb").click(function() {
       	$.closePopup();
@@ -178,29 +194,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},"json");
 		
 	}
-        
-	//初始化信息
-	var index = 0;
-	var allAddressVO = [];
-	var myLocation = {"x":118.786078,"y":32.061531};
-	var level = 18;
-	
-    var icon1 = new BMap.Icon("/Drift_wechat/images/map/blue.png", new BMap.Size(32,32));
-    var icon2 = new BMap.Icon("/Drift_wechat/images/map/red.png", new BMap.Size(32,32));  
-         
-    var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
-         new BMap.Size(23, 25), {  
-             offset: new BMap.Size(10, 25),  
-             imageOffset: new BMap.Size(0, -250)      
-         });
 	
 	//页面加载完成启动
 	$("document").ready(function(){
-		weChatMap();
-		//map_init();
+	    var x = <%=request.getAttribute("x")%>;
+	    var y = <%=request.getAttribute("y")%>;
+	    alert(x+","+y);
+		var myLocation = {"x":x,"y":y};
+		//weChatMap();
+		map_init();
 	});
 	
-	function weChatMap(){
+<%-- 	function weChatMap(){
 		wx.config({
 	        appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
 	        timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
@@ -238,7 +243,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      		AlertUtil.error("无法获取您的位置！");
 	    	}
 	    }
-	}
+	} --%>
 
 	
 	//获取用户userVO列表
