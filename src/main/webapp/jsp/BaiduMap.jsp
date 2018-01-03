@@ -196,8 +196,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	//页面加载完成启动
 	$("document").ready(function(){
-		//weChatMap();
-		map_init();
+		weChatMap();
+		//map_init();
 	});
 	
 	function weChatMap(){

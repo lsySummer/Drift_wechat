@@ -52,9 +52,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<br/>
 			<br/>
 			<br/>
-			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计漂流次数10000次</span></marquee>
+			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计漂流次数${allnum}次</span></marquee>
 			<br/>
-			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流次数10000次</span></marquee>
+			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流次数${todaynum}次</span></marquee>
 		</div>
 		
 		<div style="margin:10px;background:#FFFFFF;position:relative;">
