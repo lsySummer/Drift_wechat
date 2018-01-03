@@ -12,6 +12,7 @@ import edu.nju.dao.BaseDao;
 import edu.nju.dao.ReserveDao;
 import edu.nju.dao.ReserveGetDao;
 import edu.nju.dao.UserDao;
+import edu.nju.entities.CheckResult;
 import edu.nju.entities.DeliveryInfo;
 import edu.nju.entities.Device;
 import edu.nju.entities.DeviceArea;
@@ -108,7 +109,8 @@ public class ReserveDaoImpl implements ReserveDao{
 		String startStr = sdf.format(startDate);
 		List<String> dates = rgetDao.getByDeviceId(deviceId);
 		if(dates.contains(startStr)){
-			Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),"等待发货",0,type);
+			Date today = new Date();
+			Order o = new Order(openid,startDate,endDate,device.getId(),device.getNumber(),"等待发货",0,type,today);
 			baseDao.save(o);
 			return true;
 		}else{
@@ -153,8 +155,17 @@ public class ReserveDaoImpl implements ReserveDao{
 		return false;
 	}
 
-	
 
-
-	
+	@Override
+	public boolean saveList(List<CheckResult> list) {
+		try {
+			for(CheckResult result:list) {
+				baseDao.save(result);
+			}
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

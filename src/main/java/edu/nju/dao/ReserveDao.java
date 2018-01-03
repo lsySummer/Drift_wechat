@@ -3,6 +3,7 @@ package edu.nju.dao;
 import java.util.Date;
 import java.util.List;
 
+import edu.nju.entities.CheckResult;
 import edu.nju.entities.Device;
 
 public interface ReserveDao {
@@ -14,5 +15,7 @@ public interface ReserveDao {
 	boolean confirm(String openid);
 
 	public List<Device> reserveDevice(String openid,int type);
+
+	boolean saveList(List<CheckResult> list);
 
 }

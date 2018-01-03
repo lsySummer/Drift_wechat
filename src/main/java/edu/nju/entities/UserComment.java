@@ -20,7 +20,7 @@ public class UserComment {
 	private String orderid;
 	private String comment;
 	private String picURLS;//split by
-	private float num;
+//	private float num;
 	
 	@Id
 	@Column(length = 32)
@@ -56,12 +56,12 @@ public class UserComment {
 	public void setOrderid(String orderid) {
 		this.orderid = orderid;
 	}
-	public float getNum() {
-		return num;
-	}
-	public void setNum(float num) {
-		this.num = num;
-	}
+//	public float getNum() {
+//		return num;
+//	}
+//	public void setNum(float num) {
+//		this.num = num;
+//	}
 	@Override
 	public String toString() {
 		return "UserComment [id=" + id + ", openid=" + openid + ", orderid=" + orderid + ", comment=" + comment
