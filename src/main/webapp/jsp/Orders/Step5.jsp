@@ -59,19 +59,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </a>
 		</div>
 		
-		<div style="margin_top:10%;background:#FFFFFF;">
-			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-		      <div class="weui-media-box__hd">
-		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
-		      </div>
-		      <div class="weui-media-box__bd">
-		        <h4 class="weui-media-box__title">如何清除甲醛呢？</h4>
-		        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。
-		              由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。
-		        </p>
-		      </div>
-		    </a>
-		</div>
+	<!--按钮 -->
+	<a href="/Drift_wechat/jsp/TrackMap.jsp" class="weui-btn weui-btn_primary" style="bottom:10%;position:fixed;width:100%;">查看设备历史</a>
   	<!--BOTTOM -->
   	<%@include file="BottomBar.html"%>
 	<script>set(5);</script>
