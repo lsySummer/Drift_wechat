@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--按钮组 -->
 	<div class="weui-flex" style="bottom:10%;position:absolute;width:100%;">
 	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
-	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set'">我要预约</button>
+	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set';">我要预约</button>
 	  </div>
 	  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
 	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:;">联系客服</button>
