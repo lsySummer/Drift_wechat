@@ -28,4 +28,6 @@ public interface UserDao {
 
 	boolean setUserState(String openid, int state);
 
+	int getUserState(String openid);
+
 }

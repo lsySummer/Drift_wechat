@@ -160,4 +160,10 @@ public class UserDaoImpl implements UserDao{
 		baseDao.update(user);
 		return true;
 	}
+
+	@Override
+	public int getUserState(String openid) {
+		UserInfo user = getUser(openid);
+		return user.getState();
+	}
 }
