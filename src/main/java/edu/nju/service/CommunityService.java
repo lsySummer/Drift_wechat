@@ -34,4 +34,12 @@ public class CommunityService {
 		UserComment uc = dao.getComment(openid);
 		return uc;
 	}
+	
+	public Long getOrderNum() {
+		return dao.getOrdernum();
+	}
+	
+	public Long getTodayNum() {
+		return dao.getTodayNum();
+	}
 }

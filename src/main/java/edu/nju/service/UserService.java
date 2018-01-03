@@ -127,4 +127,8 @@ public class UserService {
 		return resultObj.toString();
 	}
 	
+	public boolean setUserState(String openid,int state) {
+		return dao.setUserState(openid,state);
+	}
+	
 }

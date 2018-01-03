@@ -21,6 +21,7 @@ public class UserInfo {
 	private String zmxyid; //芝麻信用id
 	private String transactionid;//芝麻信用的业务流水号id
 	private int score;//芝麻信用分
+	private int state;//1-5代表用户当前进行到哪一步了
 //	private double longtitute;
 //	private double latitute;
 	
@@ -100,6 +101,12 @@ public class UserInfo {
 		return "UserInfo [id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + ", openid="
 				+ openid + ", nickName=" + nickName + ", zmxyid=" + zmxyid + ", transactionid=" + transactionid
 				+ ", score=" + score + "]";
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
 	}
 	
 }

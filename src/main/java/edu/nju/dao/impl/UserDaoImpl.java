@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.nju.dao.BaseDao;
-import edu.nju.dao.CommunityDao;
 import edu.nju.dao.UserDao;
 import edu.nju.entities.Order;
-import edu.nju.entities.UserComment;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.UserVO;
 
@@ -25,8 +23,8 @@ public class UserDaoImpl implements UserDao{
 
 	 @Autowired
 	 private BaseDao baseDao;
-	 @Autowired
-	 private CommunityDao communityDao;
+//	 @Autowired
+//	 private CommunityDao communityDao;
 	
 	@Override
 	public boolean register(String openId, String nickName) {
@@ -34,6 +32,7 @@ public class UserDaoImpl implements UserDao{
 			UserInfo user = new UserInfo();
 			user.setOpenid(openId);
 			user.setNickName(nickName);
+			user.setState(1);
 			baseDao.save(user);
 			return true;
 		}catch(Exception e){
@@ -113,11 +112,12 @@ public class UserDaoImpl implements UserDao{
 			if(o.getState().equals("下家已收货")||o.getState().equals("已寄出")){
 				state = 1;
 			}
-			UserComment comment = communityDao.getComment(u.getOpenid());
+//			UserComment comment = communityDao.getComment(u.getOpenid());
 			float jqNum = -1;
-			if(comment!=null){
-				jqNum = comment.getNum();
-			}
+//			if(comment!=null){
+//				jqNum = comment.getNum();
+//			}
+			jqNum=0;
 			UserVO vo = new UserVO(u.getOpenid(),u.getNickName(),u.getAddress(),o.getStartDate(),
 			o.getDeviceNumber(),state,jqNum);
 			volist.add(vo);
@@ -147,21 +147,16 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public boolean setZMXY(String openid, String zmxyid) {
-//		List<UserInfo> list = getUserById(openid);
-//		if(list.size()==0){
-//			UserInfo user = new UserInfo();
-//			user.setZmxyid(zmxyid);
-//			user.setOpenid(openid);
-//			baseDao.save(user);
-//			return true;
-//		}else{
-//			UserInfo u = list.get(0);
-//			u.setZmxyid(zmxyid);
-//			baseDao.update(u);
-//			return true;
-//		}
 		UserInfo user = getUser(openid);
 		user.setZmxyid(zmxyid);
+		baseDao.update(user);
+		return true;
+	}
+
+	@Override
+	public boolean setUserState(String openid, int state) {
+		UserInfo user = getUser(openid);
+		user.setState(state);
 		baseDao.update(user);
 		return true;
 	}
