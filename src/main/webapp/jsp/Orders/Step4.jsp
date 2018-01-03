@@ -71,6 +71,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<button id="detail" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp';">填写快递信息</button>
   		  </div>
 	</div>
+	<!--按钮 -->
+	<a href="/Drift_wechat/jsp/TrackMap.jsp" class="weui-btn weui-btn_primary" style="bottom:10%;position:fixed;width:100%;">查看设备历史</a>
   	<!--BOTTOM -->
   	<%@include file="BottomBar.html"%>
 	<script>set(4);</script>
