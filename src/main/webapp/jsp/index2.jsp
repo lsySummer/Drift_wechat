@@ -51,6 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div style="height:50%;margin:10px;background:#00BFFF;position:relative;background-image:url(/Drift_wechat/images/sky.jpg);background-size:cover" align="center">
 			<br/>
 			<br/>
+			<br/>
 			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计漂流次数10000次</span></marquee>
 			<br/>
 			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流次数10000次</span></marquee>
@@ -84,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	</div>
 	
-	<div style="top:10%;left:80%;position:relative;">
+	<div style="top:2%;left:85%;position:relative;">
 		<a href="/Drift_wechat/api/map/map" ><img alt="" src="/Drift_wechat/images/tomap.png" id="countryMap" height="32px" width="32px"></a>
 		<br/><a href="javascript:ShowModel()"><img alt="" src="/Drift_wechat/images/yiqi2.png"  height="32px" width="32px"></a>
 	</div>

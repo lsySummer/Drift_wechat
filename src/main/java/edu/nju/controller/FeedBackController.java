@@ -39,7 +39,6 @@ public class FeedBackController {
 			String orderid ="";
 			if(userAll.length()>0){
 				JSONObject job = userAll.getJSONObject(0);
-				System.out.println(job);
 				orderid = job.getString("id");
 			}
 			for(CheckResult CR:list){
