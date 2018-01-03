@@ -52,14 +52,13 @@ weui.uploader('#uploaderCustom', {
         console.log('progress');
     },
     onSuccess: function (ret) {
-    	 var num = document.getElementById('methanal').value;
     	 if (ret.status == '200')
          {
              uploadSuccessCount++;
              if (uploadSuccessCount == uploadCount)
              {
             	 	var text = document.getElementById('txt_des').value;
-            		$.getJSON('/Drift_wechat/api/community/txt?txt='+text+'&num='+num,function(data){
+            		$.getJSON('/Drift_wechat/api/community/txt?txt='+text,function(data){
             			$.toast("上传成功！");
             			setTimeout("window.location.href='/Drift_wechat/jsp/Orders/Step4.jsp'", 1000);
             		});

@@ -19,14 +19,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
  <body>
- <div class="weui-cells__title">甲醛数值</div>
- 				<div class="weui-cells weui-cells_form">
-                    <div class="weui-cell">
-                        <div class="weui-cell__bd">
-                            <input id="methanal" name="methanal" class="weui-input" type="number" placeholder="毫克/立方米">
-                        </div>
-                    </div>
-                </div>
  <div class="weui-cells__title">使用心得</div>
                 <div class="weui-cells weui-cells_form">
                     <div class="weui-cell">

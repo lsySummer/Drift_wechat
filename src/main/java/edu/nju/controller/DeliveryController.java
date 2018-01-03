@@ -16,6 +16,7 @@ import edu.nju.entities.Device;
 import edu.nju.entities.UserInfo;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
+import edu.nju.service.UserService;
 
 @Controller
 @RequestMapping(value="/delivery")
@@ -26,6 +27,9 @@ public class DeliveryController {
 	
 	@Autowired
 	ReserveService service;
+	
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping(value = "/step2")
 	public void getStep2(HttpSession session, HttpServletResponse response){
@@ -83,13 +87,17 @@ public class DeliveryController {
 	
 	@RequestMapping(value = "/set")
 	public String setDelivery(String deliveryNum, HttpSession session, HttpServletResponse response) throws ParseException{
+		//设置订单状态为Step5
+		userService.setUserState((String)session.getAttribute("openid"), 5);
 		service.saveDelInfo((String) session.getAttribute("openid"),deliveryNum);
-		return "jsp/Orders/Step5.jsp";
+		return "jsp/Orders/Step5";
 	}
 	
 	@RequestMapping(value = "/confirm")
 	public String deliveryConfirm(HttpSession session, HttpServletResponse response){
 		service.confirm((String)session.getAttribute("openid"));
-		return "jsp/Orders/Step3.jsp";
+		//设置订单状态为Step3
+		userService.setUserState((String)session.getAttribute("openid"), 3);
+		return "jsp/Orders/Step3";
 	}
 }
