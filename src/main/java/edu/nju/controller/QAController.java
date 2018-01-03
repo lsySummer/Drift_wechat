@@ -24,8 +24,8 @@ public class QAController {
 	@RequestMapping("/publishQ")
 	@ResponseBody  
 	public String publishQuestion(HttpSession session,String title,String content){
-		//String openid = (String)session.getAttribute("openid");
-		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		String openid = (String)session.getAttribute("openid");
+		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
 		List<MultipartFile> files = new ArrayList<MultipartFile>();
 		String identify = "suijiString";
 		if(qaservice.publishQuestion(openid,files, title, content,identify)){
