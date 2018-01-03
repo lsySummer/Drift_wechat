@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary">授权芝麻信用</button>
    	 </div>
    </form>
-        <div class="weui-footer">
+        <div class="weui-footer weui-footer_fixed-bottom">
                 <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
         </div>
    <script type="text/javascript">
