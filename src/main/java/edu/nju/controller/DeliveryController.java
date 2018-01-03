@@ -33,7 +33,7 @@ public class DeliveryController {
 	
 	@RequestMapping(value = "/step2")
 	public void getStep2(HttpSession session, HttpServletResponse response){
-//		session.setAttribute("openid", "test");
+		session.setAttribute("openid", "test");
 		JSONObject result=new JSONObject();
 		Device device = getservice.getDeviceByOpenId((String)session.getAttribute("openid"));
 		UserInfo before = getservice.getBefore((String)session.getAttribute("openid"));

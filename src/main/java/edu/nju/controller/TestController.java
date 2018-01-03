@@ -46,7 +46,7 @@ public class TestController {
 //		System.out.println(service.reserveDevice("江苏", 1).getId());
 //		service.makeOrder("oRTgpweSZbOxfrg9H57JwuPwMJLo", 0, Utility.getSpecifiedDayAfter(new Date(), 6));
 //		service.makeOrder("45678", "江苏", 0, Utility.getSpecifiedDayAfter(new Date(), 8), Utility.getSpecifiedDayAfter(new Date(), 9));
-//		System.out.println(gservice.getBefore("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
+		System.out.println(gservice.getBefore("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
 //		System.out.println(gservice.getBefore("oRTgpweSZbOxfrg9H57JwuPwMJLo").getName());
 //		System.out.println(gservice.getAfter("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
 //		System.out.println(gservice.getAfter("oRTgpwQkDZKxGFvNnfKpJLWvxsyw").getName());
@@ -99,7 +99,7 @@ public class TestController {
 //		}
 //		System.out.println(cservice.getOrderNum());
 //		System.out.println(cservice.getTodayNum());
-		System.out.println(gservice.getOrder("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg"));
+//		System.out.println(gservice.getOrder("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg"));
 		return "jsp/NewFile";
 	}
 }

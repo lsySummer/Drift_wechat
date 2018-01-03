@@ -117,10 +117,10 @@ public class WeChatController {
 				session.setAttribute("nickname", nickname);
 				session.setAttribute("headimgurl", headimgurl);
 				String url="http://drift.gmair.net/Drift_wechat/api/wechat/center?code="+code+"&state="+state;
-				 getAddress(session,url,accessToken);
-				return "jsp/BaiduMap";
+				getAddress(session,url,accessToken);
+				return "jsp/index2";
 			} else {
-				return "jsp/BaiduMap";
+				return "jsp/index2";
 			}
 		} catch (JSONException e) {
 			log.info(e);
