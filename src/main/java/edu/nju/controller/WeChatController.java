@@ -51,6 +51,14 @@ public class WeChatController {
 		return redir;
 	}
 	
+	@RequestMapping(value = "/index")
+	public String toCenter(Model model)
+			throws IOException {
+		model.addAttribute("allnum", cservice.getOrderNum());
+		model.addAttribute("todaynum", cservice.getTodayNum());
+		return "jsp/index2";
+	}
+	
 //	@RequestMapping(value = "/getOrder")//管理员修改订单
 //	public String getOrder(HttpServletRequest request, String code,String state, HttpSession session)
 //			throws IOException {

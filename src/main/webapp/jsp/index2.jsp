@@ -54,9 +54,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<br/>
 			<br/>
 			<br/>
-			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计漂流次数${allnum}次</span></marquee>
+			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计漂流${allnum}次</span></marquee>
 			<br/>
-			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流次数${todaynum}次</span></marquee>
+			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流${todaynum}次</span></marquee>
 		</div>
 		
 		<div style="margin:10px;background:#FFFFFF;position:relative;">
@@ -92,6 +92,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<br/><a href="javascript:ShowModel()"><img alt="" src="/Drift_wechat/images/yiqi2.png"  height="32px" width="32px"></a>
 	</div>
 	
+	<div id="loadmore" class="weui-loadmore" style="top:25%;position: absolute;width:100%;display:none">
+	  <i class="weui-loading"></i>
+	  <span class="weui-loadmore__tips" style="color:#FFFFFF">正在加载</span>
+	</div>
 	
 	<!--主要功能  -->
 	<div class="weui-flex" style="top:82%;position: absolute;width:100%;">
@@ -132,6 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 </body>
 <script type="text/javascript">
+ 	var x=-1,y=-1;
 	$("#yiqi").click(function() {
 	    $('#myModal').modal();
 	});
@@ -140,19 +145,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#myModal').modal();
 	}
 	
+	
 	function toMap(){
-		window.location.href="/Drift_wechat/api/map/map?x=111&y=30";
-		//$.get("/Drift_wechat/api/map/map?x=111&y=34",function(data){});
-		//$.get("/Drift_wechat/api/map/map?x=111&y=34",function(data){},"json");
+		alert("进入地图");
+		$("#loadmore").show();
+		window.location.href="/Drift_wechat/api/map/map?x=118&y=30";
 	}
-
+		//页面加载完成启动
+/* 	$("document").ready(function(){
+	    weChatMap();
+	}); */
+	
 	function weChatMap(){
+		$("#loadmore").show();
 		wx.config({
 	       appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
 	       timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
 	       nonceStr: "<%=session.getAttribute("noncestr")%>", // 必填，生成签名的随机串
 	       signature: "<%=session.getAttribute("signature")%>",// 必填，签名，见附录1
-	        jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	       jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 	    });
 	    
 	    wx.ready(function(){
@@ -176,13 +187,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    
 		//变换坐标函数
 		translateCallback = function (data){
-	    if(data.status === 0) {
-		      //myLocation = {"x":data.points[0].lng,"y":data.points[0].lat};}
-		      window.location.href="/Drift_wechat/api/map/map?x="+data.points[0].lng+"&y="+data.points[0].lat;
-		    }
-	    else{
-	      		AlertUtil.error("无法获取您的位置！");
-	    	}
+		    if(data.status === 0) {
+			      //myLocation = {"x":data.points[0].lng,"y":data.points[0].lat};}
+			      x = data.points[0].lng;
+			      y = data.points[0].lat;
+			      window.location.href="/Drift_wechat/api/map/map?x="+data.points[0].lng+"&y="+data.points[0].lat;
+			    }
+		    else{
+		      		AlertUtil.error("无法获取您的位置！");
+		    	}
 	    }
 	}
 </script>

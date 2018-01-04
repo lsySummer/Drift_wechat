@@ -83,7 +83,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<div style="top:75%;left:80%;position:relative;">
 		<img alt="" src="/Drift_wechat/images/map/tolocal.png" id="originalMap" height="32px" width="32px">本地
-	</div>	
+	</div>
+	<!--返回键  -->	
+	<div class="weui-footer_fixed-bottom" style="margin-left:20%;margin-right:20%;">
+		<a href="javascript:backIndex();" class="weui-btn weui-btn_primary">返回</a>
+	</div>
 	
 	<div id="comment" class='weui-popup__container popup-bottom'>
       <div class="weui-popup__overlay"></div>
@@ -109,14 +113,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <a class="weui-grid js_grid pb" >
                 <img  id="img3" width=100px height=100px src="/Drift_wechat/images/product.png">
             </a>
-            
-            <div class="weui-article" id="commentDiv">
-	     	</div>
-	     	
+            <div class="weui-article" id="commentDiv"></div>
 	     	</div> 
          </div>
-        </div>
-	         
+        </div>    
       </div>
 </body>
 <script type="text/javascript">
@@ -155,6 +155,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $('#myModal').modal();
     });
     
+    //返回首页
+    function backIndex(){
+    	alert("返回首页");
+    	window.location.href="/Drift_wechat/api/wechat/index";
+    }
     //评论区初始化展示
 	function getComment(openid){
 		var ptUrls = [];
