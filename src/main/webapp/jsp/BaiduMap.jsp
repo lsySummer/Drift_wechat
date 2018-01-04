@@ -157,7 +157,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     //返回首页
     function backIndex(){
-    	alert("返回首页");
     	window.location.href="/Drift_wechat/api/wechat/index";
     }
     //评论区初始化展示
