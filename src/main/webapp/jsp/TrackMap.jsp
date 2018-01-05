@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body ontouchstart>
     <div style="height:100%; width: 100%;position:absolute;" id="map"></div>
-	<div class="weui-flex weui-footer weui-footer_fixed-bottom">
+	<div class="weui-flex weui-footer weui-footer_fixed-bottom" style="margin-left:20%;margin-right:20%;">
 		  <div class="weui-flex__item placeholder">
 		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/user/getState'">返回</button>
 		  </div>

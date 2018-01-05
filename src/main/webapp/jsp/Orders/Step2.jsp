@@ -91,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <span class="weui-form-preview__value" id="deliveryNum1">更新了会告诉你的～</span>
 		    </div>
 		    <div class="weui-form-preview__item">
-		      <label class="weui-form-preview__label">设备id</label>
+		      <label class="weui-form-preview__label">设备ID</label>
 		      <span class="weui-form-preview__value" id="deviceId1">可能有变动哦</span>
 		    </div>
 		  </div>
