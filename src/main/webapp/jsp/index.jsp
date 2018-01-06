@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div class="weui-grids">
       <a href="javascript:part1()" class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="/Drift_wechat/images/icon_nav_article.png" alt="">
+          <img src="/Drift_wechat/images/navi/icon_nav_article.png" alt="">
         </div>
         <p class="weui-grid__label">
           产品特点
@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </a>
       <a href="javascript:part2()" class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="/Drift_wechat/images/icon_nav_button.png" alt="">
+          <img src="/Drift_wechat/images/navi/icon_nav_button.png" alt="">
         </div>
         <p class="weui-grid__label">
           活动原因
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </a>
       <a href="javascript:part3()" class="weui-grid js_grid">
         <div class="weui-grid__icon">
-          <img src="/Drift_wechat/images/icon_nav_cell.png" alt="">
+          <img src="/Drift_wechat/images/navi/icon_nav_cell.png" alt="">
         </div>
         <p class="weui-grid__label">
           活动方式

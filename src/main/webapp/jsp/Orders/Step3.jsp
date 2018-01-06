@@ -13,31 +13,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="/Drift_wechat/js/myJS/stateJump.js"></script>
   <!-- set `maximum-scale` for some compatibility issues -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-  <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
-  <script>
-    if ('addEventListener' in document) {
-      document.addEventListener('DOMContentLoaded', function() {
-        FastClick.attach(document.body);
-      }, false);
-    }
-  </script>
   <title>使用须知</title>
 </head>
-<body>
+<body style="background-image:url(/Drift_wechat/images/sky.jpg)">
 	<!--步骤条 -->
 	<%@include file="TopBar.html"%>
   	<!--文案 -->
-	<div style="margin-top:6%;">
+	<!-- <div style="margin-top:6%;">
 		<img src="/Drift_wechat/images/sky.jpg" title="甲醛漂流仪"/>
-	</div>
+	</div> -->
 	<!--按钮 -->
 	<div class="weui-flex__item placeholder" style="bottom:10%;position:fixed;width:100%;">
 	   <button id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/Orders/FeedbackWrite.jsp';">填写使用信息</button>
 	</div>
   	<!--BOTTOM -->
   	<%@include file="BottomBar.html"%>
-	<script>set(3);</script>
+	<script>
+		set(3);
+		stateCheck(3);
+	</script>
 </body>
 </html>

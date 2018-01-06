@@ -13,16 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="/Drift_wechat/js/myJS/stateJump.js"></script>
   <!-- set `maximum-scale` for some compatibility issues -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-  <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
-  <script>
-    if ('addEventListener' in document) {
-      document.addEventListener('DOMContentLoaded', function() {
-        FastClick.attach(document.body);
-      }, false);
-    }
-  </script>
   <title>等待收货</title>
 </head>
 <body>
@@ -91,11 +84,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <span class="weui-form-preview__value" id="deliveryNum1">更新了会告诉你的～</span>
 		    </div>
 		    <div class="weui-form-preview__item">
-		      <label class="weui-form-preview__label">设备id</label>
+		      <label class="weui-form-preview__label">设备ID</label>
 		      <span class="weui-form-preview__value" id="deviceId1">可能有变动哦</span>
 		    </div>
 		  </div>
-		  <div class="weui-form-preview__ft" style="bottom:10%;position:fixed;width:100%;">
+		  <div class="weui-form-preview__ft" style="bottom:15%;position:fixed;width:100%;">
 		  	<a id="d1" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(1);">快递查询</a>
     		<button id="confirm" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascript:confirm();">确认收货</button>
   		  </div>
@@ -104,5 +97,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<%@include file="BottomBar.html"%>
 	<script type="text/javascript" src="/Drift_wechat/js/myJS/Step2.js"></script>
 	<script type="text/javascript" src="/Drift_wechat/js/myJS/Orders.js"></script>
+	<script>
+		set(2);
+		stateCheck(2);
+	</script>
 </body>
 </html>

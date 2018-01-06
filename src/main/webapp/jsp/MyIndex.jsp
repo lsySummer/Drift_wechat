@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <div class="weui-tab__bd" id="container" style="height:100%;width:100%;margin-top:20%;>
+    <div class="weui-tab__bd" id="container" style="height:100%;width:100%;margin-top:15%;>
     <div id="tab" class="weui-tab__bd-item weui-tab__bd-item--active">
     	<div style="text-align: center">
 			<img alt="" id="image" class="img-circle" src="/Drift_wechat/images/icon.jpg" style="margin: 0 auto;width: 100px; heigth: 100px;" />
