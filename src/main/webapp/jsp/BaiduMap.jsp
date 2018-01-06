@@ -203,7 +203,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$("document").ready(function(){
 	    var x = <%=session.getAttribute("locationX")%>;
 	    var y = <%=session.getAttribute("locationY")%>;
-	    alert(x+","+y);
 	    myLocation = {"x":parseFloat(x),"y":parseFloat(y)};
 		//weChatMap();
 		map_init();

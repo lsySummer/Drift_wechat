@@ -32,10 +32,6 @@ public class MapController {
 			session.setAttribute("locationX", Double.valueOf(x));
 			session.setAttribute("locationY", Double.valueOf(y));
 		}
-/*		model.addAttribute("x",  Double.valueOf(x));
-		model.addAttribute("y", Double.valueOf(y));
-		System.out.println(x);
-		System.out.println(y);*/
 		return "jsp/BaiduMap";
 	}
 	
