@@ -26,30 +26,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </style>  
 
 <body ontouchstart>
-	<!-- 模态框（Modal） -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header" align="center">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						甲醛检测仪
-					</h4>
-				</div>
-				<div class="modal-body" align="center">
-					 <img  width=80% height=70%  src="/Drift_wechat/images/info.jpg">
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
-	
-
-<!-- 	<div style="height:70%; width:100%;position:absolute;margin:0px;padding:0px">
-		<img width=100% height=100% src="/Drift_wechat/images/info.jpg" title="甲醛漂流仪"/>
-	</div> -->
-	
 	<div style="height:80%;width:100%;background:#D3D3D3;position:absolute;">
 	
 		<div style="height:50%;margin:10px;background:#00BFFF;position:relative;background-image:url(/Drift_wechat/images/sky.jpg);background-size:cover" align="center">
@@ -85,15 +61,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        </p>
 		      </div>
 		    </a>
-		</div>
-		
+		</div>	
 	</div>
 	
-	<div style="top:2%;left:80%;position:absolute;">
-		<a href="javascript:weChatMap()" ><img alt="" src="/Drift_wechat/images/tomap.png" id="countryMap" height="32px" width="32px"></a>
-		<br/><a href="javascript:ShowModel()"><img alt="" src="/Drift_wechat/images/yiqi2.png"  height="32px" width="32px"></a>
-	</div>
 	
+	<!--正在加载-->
 	<div id="loadmore" class="weui-loadmore" style="top:25%;position: absolute;width:100%;display:none">
 	  <i class="weui-loading"></i>
 	  <span class="weui-loadmore__tips" style="color:#FFFFFF">正在加载</span>
@@ -137,6 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </a>
 	</div>
 </body>
+
 <script type="text/javascript">
  	var x=-1,y=-1;
 	$("#yiqi").click(function() {

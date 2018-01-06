@@ -50,6 +50,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
 	  </div>
 	</div>
+	
+	<!--上传图片  -->
+	<div class="weui-cells weui-cells_form" id="uploaderCustom">
+         <div class="weui-cell">
+             <div class="weui-cell__bd">
+                 <div class="weui-uploader">
+                     <div class="weui-uploader__bd">
+                         <ul class="weui-uploader__files" id="uploaderCustomFiles"></ul>
+                         <div class="weui-uploader__input-box">
+                             <input id="uploaderCustomInput" name="photo" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+      </div>
+      
 </body>
 
 <script type="text/javascript">
