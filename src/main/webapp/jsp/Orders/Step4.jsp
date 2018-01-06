@@ -68,5 +68,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<!--BOTTOM -->
   	<%@include file="BottomBar.html"%>
 	<script type="text/javascript" src="/Drift_wechat/js/myJS/Step4.js"></script>
+	<script>
+		set(4);
+		stateCheck(4);
+	</script>
 </body>
 </html>

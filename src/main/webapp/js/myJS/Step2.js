@@ -64,5 +64,3 @@ function query(x){
   	}
 	}
 function close(){$.closePopup();}
-set(2);
-stateCheck(2);

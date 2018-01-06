@@ -129,7 +129,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/stateJump")
 	public String stateJump(HttpSession session, String jump){
-//		session.setAttribute("openid", "test");
+//		session.setAttribute("openid", "oRTgpwQkDZKxGFvNnfKpJLWvxsyw");
 		int jumpTo = Integer.parseInt(jump);
 		try{
 			int state = service.getUserState((String)session.getAttribute("openid"));
