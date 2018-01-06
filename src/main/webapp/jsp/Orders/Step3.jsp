@@ -13,16 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="/Drift_wechat/js/myJS/stateJump.js"></script>
   <!-- set `maximum-scale` for some compatibility issues -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-  <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
-  <script>
-    if ('addEventListener' in document) {
-      document.addEventListener('DOMContentLoaded', function() {
-        FastClick.attach(document.body);
-      }, false);
-    }
-  </script>
   <title>使用须知</title>
 </head>
 <body style="background-image:url(/Drift_wechat/images/sky.jpg)">
@@ -38,6 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
   	<!--BOTTOM -->
   	<%@include file="BottomBar.html"%>
-	<script>set(3);</script>
+	<script>
+		set(3);
+		stateCheck(3);
+	</script>
 </body>
 </html>

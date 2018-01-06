@@ -5,14 +5,10 @@
   <!-- set `maximum-scale` for some compatibility issues -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
   <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
-  <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
   <script>
-    if ('addEventListener' in document) {
-      document.addEventListener('DOMContentLoaded', function() {
-        FastClick.attach(document.body);
-      }, false);
-    }
+  	var state;
     function set(step){
+    	state = step;
     	switch(step){
     		case 1:
     			document.getElementById("img1").src = "/Drift_wechat/images/number/blue1.png";
@@ -57,16 +53,16 @@
   </style>
 </head>
 <body>
-  <div id="TopBar" style="padding-top:6%">
-  	<img src="/Drift_wechat/images/number/grey1.png" id="img1" alt="1" height="8%" width="8%"/>
+  <div id="TopBar" style="padding-top:5%">
+  	<img src="/Drift_wechat/images/number/grey1.png" id="img1" alt="1" height="8%" width="8%" onclick="window.location.href='/Drift_wechat/api/user/stateJump?jump=1';"/>
   	<span id="span1">&#8230;</span>
-  	<img src="/Drift_wechat/images/number/grey2.png" id="img2" alt="2" height="8%" width="8%"/>
+  	<img src="/Drift_wechat/images/number/grey2.png" id="img2" alt="2" height="8%" width="8%" onclick="window.location.href='/Drift_wechat/api/user/stateJump?jump=2';;"/>
   	<span id="span2">&#8230;</span>
-  	<img src="/Drift_wechat/images/number/grey3.png" id="img3" alt="3" height="8%" width="8%"/>
+  	<img src="/Drift_wechat/images/number/grey3.png" id="img3" alt="3" height="8%" width="8%" onclick="window.location.href='/Drift_wechat/api/user/stateJump?jump=3';"/>
   	<span id="span3">&#8230;</span>
-  	<img src="/Drift_wechat/images/number/grey4.png" id="img4" alt="4" height="8%" width="8%"/>
+  	<img src="/Drift_wechat/images/number/grey4.png" id="img4" alt="4" height="8%" width="8%" onclick="window.location.href='/Drift_wechat/api/user/stateJump?jump=4';"/>
   	<span id="span4">&#8230;</span>
-  	<img src="/Drift_wechat/images/number/grey5.png" id="img5" alt="5" height="8%" width="8%"/>
+  	<img src="/Drift_wechat/images/number/grey5.png" id="img5" alt="5" height="8%" width="8%" onclick="window.location.href='/Drift_wechat/api/user/stateJump?jump=5';"/>
   </div>
 </body>
 </html>

@@ -13,16 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="/Drift_wechat/js/myJS/stateJump.js"></script>
   <!-- set `maximum-scale` for some compatibility issues -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-  <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
-  <script>
-    if ('addEventListener' in document) {
-      document.addEventListener('DOMContentLoaded', function() {
-        FastClick.attach(document.body);
-      }, false);
-    }
-  </script>
   <title>开始预约</title>
 </head>
 <body>
@@ -33,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<img width=100% height=100% src="/Drift_wechat/images/sky.jpg" title="甲醛漂流仪"/>
 	</div>
 	<!--按钮组 -->
-	<div class="weui-flex" style="bottom:10%;position:absolute;width:100%;">
+	<div id="botton" class="weui-flex" style="bottom:10%;position:absolute;width:100%;">
 	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
 	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set';">我要预约</button>
 	  </div>
@@ -43,6 +36,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<!--BOTTOM -->
   	<%@include file="BottomBar.html"%>
-	<script>set(1);</script>
+	<script>
+		set(1);
+		stateCheck(1);
+	</script>
 </body>
 </html>
