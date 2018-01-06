@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	
 	<div style="top:2%;left:80%;position:absolute;">
-		<a href="javascript:weChatMap()" ><img alt="" src="/Drift_wechat/images/tomap.png" id="countryMap" height="32px" width="32px"></a>
+		<a href="javascript:toMap()" ><img alt="" src="/Drift_wechat/images/tomap.png" id="countryMap" height="32px" width="32px"></a>
 		<br/><a href="javascript:ShowModel()"><img alt="" src="/Drift_wechat/images/yiqi2.png"  height="32px" width="32px"></a>
 	</div>
 	
@@ -149,9 +149,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 	function toMap(){
-		alert("进入地图");
 		$("#loadmore").show();
-		window.location.href="/Drift_wechat/api/map/map?x=118&y=30";
+		if(<%=session.getAttribute("locationX")%>!=null){
+			window.location.href="/Drift_wechat/api/map/map?x=1&y=1";
+		}
+		else{
+			weChatMap();
+		}
 	}
 		//页面加载完成启动
 /* 	$("document").ready(function(){
@@ -159,7 +163,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}); */
 	
 	function weChatMap(){
-		$("#loadmore").show();
 		wx.config({
 	       appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
 	       timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳

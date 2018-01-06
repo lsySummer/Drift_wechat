@@ -28,10 +28,14 @@ public class MapController {
 	
 	@RequestMapping(value = "/map")
 	public String getMap1(String x,String y,HttpSession session,Model model) {
-		model.addAttribute("x",  Double.valueOf(x));
+		if(session.getAttribute("locationX")==null){
+			session.setAttribute("locationX", Double.valueOf(x));
+			session.setAttribute("locationY", Double.valueOf(y));
+		}
+/*		model.addAttribute("x",  Double.valueOf(x));
 		model.addAttribute("y", Double.valueOf(y));
 		System.out.println(x);
-		System.out.println(y);
+		System.out.println(y);*/
 		return "jsp/BaiduMap";
 	}
 	
