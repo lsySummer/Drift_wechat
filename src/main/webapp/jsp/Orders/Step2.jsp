@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 		</div>
   	<!--快递信息 -->
-    	<div class="weui-form-preview" id="item1" style="margin-top:5%;">
+    	<div class="weui-form-preview" id="item1" style="margin-top:2%;">
 		  <div class="weui-form-preview__hd">
 		    <label class="weui-form-preview__label">上家名称</label>
 		    <em class="weui-form-preview__value" id="previous">上家正在抽取中……</em>
@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <span class="weui-form-preview__value" id="deviceId1">可能有变动哦</span>
 		    </div>
 		  </div>
-		  <div class="weui-form-preview__ft" style="bottom:15%;position:fixed;width:100%;">
+		  <div class="weui-form-preview__ft" style="bottom:10%;position:fixed;width:100%;">
 		  	<a id="d1" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(1);">快递查询</a>
     		<button id="confirm" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascript:confirm();">确认收货</button>
   		  </div>
