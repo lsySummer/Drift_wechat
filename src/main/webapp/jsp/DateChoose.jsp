@@ -26,12 +26,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </header>
     <div class="container" id="container">
     		<div class="page__bd">
-		        <div class="weui-cells__title">预约使用</div>
+		        <div class="weui-cells__title">选择时间</div>
+		        
 		        <div class="weui-cells weui-cells_form">
+		        	<div class="weui-cell" id="selectDate" style="margin-left:20px;margin-top:20px;"></div>
 		            <div class="weui-cell">
-		                <div class="weui-cell__hd"><label for="" class="weui-label">选择时间</label></div>
+		                <div class="weui-cell__bd">您选择的时间:&nbsp;&nbsp;</div>
 		                <div class="weui-cell__bd">
-		                    <input id="selectDate" name="selectDate" class="weui-input" value="" required="" readonly="readonly"/>
+		                    <input id="alternate" class="weui-input" value="" required="" readonly="readonly"/>
 		                </div>
 		            </div>
 		        </div>
@@ -54,14 +56,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var d = new Date(td);
 		d.setDate(td.getDate() + 1);
 		var startDateStr = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
-		document.getElementById("selectDate").value = startDateStr;
+		//document.getElementById("selectDate").value = startDateStr;
 		var date2 = new Date(d);
 		date2.setDate(d.getDate() + 30);			
 		var endDateStr = date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate();
 		
 		$.getJSON('/Drift_wechat/api/order/getDate',function(json){
            	var disabledDays = json.dates;
-           	console.log(disabledDays);
+           	//disabledDays = ["2018-1-10"];
             $('#selectDate').datepicker({
 		      	showButtonPanel:true,//是否显示按钮面板
 		      	beforeShowDay: disableSpecificDays,
@@ -70,31 +72,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            closeText:"关闭",//关闭选择框的按钮名称  
 	            yearSuffix: '年', //年的后缀  
 	            showMonthAfterYear:true,//是否把月放在年的后面  
-	            //defaultDate:startDateStr,//默认日期  
+	            defaultDate:"",//默认日期  
 	            minDate:startDateStr,//最小日期  
 	            maxDate:endDateStr,//最大日期  
 	            monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],  
 	            dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],  
 	            dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],  
-	            dayNamesMin: ['日','一','二','三','四','五','六'],  
+	            dayNamesMin: ['日','一','二','三','四','五','六'],
+	            altField: "#alternate",
+      			altFormat: "yy-mm-dd"  
 		     });
+		     
 			function disableSpecificDays(date) {  
-			    var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();  
+			    var dateStr = date.pattern("yyyy-MM-dd");
 			    if (typeof(disabledDays) != "undefined") {  
 			        for (var i = 0; i < disabledDays.length; i++) {  
-			            if($.inArray(y + '-' + (m+1) + '-' +d ,disabledDays) != -1) {
+			            if($.inArray(dateStr,disabledDays) != -1) {
 			                    return [false];  
 			            }  
 			        }  
 			    }  
 			    return [true];  
-			}   
+			} 
+			$("#alternate").val("");  
         })   
 	});
         
 	$("#submit").click(function(){
-		if($("#selectDate").val().trim().length){
-			var startDate = document.getElementById("selectDate").value;
+		if($("#alternate").val().trim().length){
+			var startDate = document.getElementById("alternate").value;
+			alert(startDate);
 			$.ajax({url:"/Drift_wechat/api/order/date?startDate="+startDate, success: function(data){
 				if(data == "200"){
 					window.location.href='/Drift_wechat/jsp/Result.jsp';
@@ -108,5 +115,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return false;
 		}
 	});
+	
+	Date.prototype.pattern=function(fmt) {           
+	    var o = {           
+	    "M+" : this.getMonth()+1, //月份           
+	    "d+" : this.getDate(), //日           
+	    "h+" : this.getHours()%12 == 0 ? 12 : this.getHours()%12, //小时           
+	    "H+" : this.getHours(), //小时           
+	    "m+" : this.getMinutes(), //分           
+	    "s+" : this.getSeconds(), //秒           
+	    "q+" : Math.floor((this.getMonth()+3)/3), //季度           
+	    "S" : this.getMilliseconds() //毫秒           
+	    };           
+	    var week = {           
+	    "0" : "/u65e5",           
+	    "1" : "/u4e00",           
+	    "2" : "/u4e8c",           
+	    "3" : "/u4e09",           
+	    "4" : "/u56db",           
+	    "5" : "/u4e94",           
+	    "6" : "/u516d"          
+	    };           
+	    if(/(y+)/.test(fmt)){           
+	        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));           
+	    }           
+	    if(/(E+)/.test(fmt)){           
+	        fmt=fmt.replace(RegExp.$1, ((RegExp.$1.length>1) ? (RegExp.$1.length>2 ? "/u661f/u671f" : "/u5468") : "")+week[this.getDay()+""]);           
+	    }           
+	    for(var k in o){           
+	        if(new RegExp("("+ k +")").test(fmt)){           
+	            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));           
+	        }           
+	    }           
+	    return fmt;           
+	}         
+   
+   
   </script>
 </html>

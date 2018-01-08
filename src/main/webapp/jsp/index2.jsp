@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </style>  
 
 <body ontouchstart>
+	<%@include file="BottomBar.html"%>
 	<!-- 模态框（Modal） -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
 		<div class="modal-dialog">
@@ -110,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	
 	<!--导航栏  -->
-	<div class="weui-tabbar weui-footer_fixed-bottom" style="bottom:0">
+<!-- 	<div class="weui-tabbar weui-footer_fixed-bottom" style="bottom:0">
 	  <a href="/Drift_wechat/api/wechat/index" class="weui-tabbar__item weui-bar__item--on">
 	    <div class="weui-tabbar__icon">
 	      <img src="/Drift_wechat/images/navi/index.png" alt="">
@@ -135,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
 	    <p class="weui-tabbar__label">我的</p>
 	  </a>
-	</div>
+	</div> -->
 </body>
 <script type="text/javascript">
  	var x=-1,y=-1;
