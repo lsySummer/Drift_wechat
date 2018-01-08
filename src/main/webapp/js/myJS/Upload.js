@@ -15,23 +15,19 @@ weui.uploader('#uploaderCustom', {
     },
     onBeforeQueued: function(files) {
         if(["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0){
-        	$.alert('请上传图片');
+        	$.toptip('请上传图片', 'warning');
             return false;
         }
         if(this.size > 50 * 1024 * 1024){
-        	$.alert('请上传不超过50M的图片');
+        	$.toptip('请上传不超过50M的图片', 'warning');
             return false;
         }
         if (files.length > 5) { // 防止一下子选中过多文件
-        	$.alert('最多只能上传5张图片，请重新选择');
-            return false;
-        }
-        if (files.length <= 0) { // 防止传空
-        	$.alert('请选择至少一张图片');
+        	$.toptip('最多只能上传5张图片', 'warning');
             return false;
         }
         if (uploadCount + 1 > 5) {
-        	$.alert('最多只能上传5张图片');
+        	$.toptip('最多只能上传5张图片', 'warning');
             return false;
         }
 
@@ -72,9 +68,12 @@ weui.uploader('#uploaderCustom', {
 
 // 手动上传按钮
 document.getElementById("uploaderCustomBtn").addEventListener('click', function(){
-	uploadList.forEach(function(file){
-        file.upload();
-    });
+	if(uploadList.length == 0){$.toptip('请至少选择一张图片', 'warning');}
+	else{
+		uploadList.forEach(function(file){
+	        file.upload();
+	    });
+	}
 });
 
 // 缩略图预览
