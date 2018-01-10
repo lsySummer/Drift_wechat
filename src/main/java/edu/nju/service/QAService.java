@@ -1,5 +1,6 @@
 package edu.nju.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,30 +22,57 @@ public class QAService {
 	@Autowired
 	QADao dao;
 	
+	public boolean makeFolder(String path) {
+		return Utility.makeFolder(path);
+	}
+	
+	public boolean addPicture(String filePath,MultipartFile file) {
+		List<MultipartFile> list = new ArrayList<MultipartFile>();
+		list.add(file);
+		try {
+			Utility.saveFile(filePath, list);
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean delPicture(String filePath) {
+		return Utility.deleteFile(filePath);
+	}
+	/**
+	 * 把目录的名字由tmp改成img
+	 */
+	public boolean changenName(String path) {
+		return Utility.changenName(path);
+	}
+	
 	/**
 	 * 发布问题
 	 */
-	public boolean publishQuestion(String openid,List<MultipartFile> files,String title,String content,String identify) {
+	public boolean publishQuestion(String openid,String title,String content,String picSig) {
 		Question q = new Question();
 		Date date = new Date();
 		q.setOpenid(openid);
 		q.setTitle(title);
 		q.setContent(content);
 		q.setCreateTime(date);
-		Utility.saveFile("questions/"+identify+"/",files);
+		q.setPicSig(picSig);
 		return dao.publishQuestion(q);
 	}
 	
 	/**
 	 * 添加回答
 	 */
-	public boolean addAnswer(String openid,List<MultipartFile> files,String qid,String content) {
+	public boolean addAnswer(String openid,String qid,String content,String picSig) {
 		Answer a = new Answer();
 		a.setContent(content);
 		a.setCreateTime(new Date());
 		a.setOpenid(openid);
 		a.setQid(qid);
-		Utility.saveFile("answers/"+qid+"/"+openid+"/",files);
+		a.setPicSig(picSig);
+//		Utility.saveFile("answers/"+qid+"/"+openid+"/",files);
 		return dao.addAnswer(a);
 	}
 	
