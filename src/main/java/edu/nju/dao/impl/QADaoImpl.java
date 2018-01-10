@@ -155,4 +155,16 @@ public class QADaoImpl implements QADao{
 		Long num = (Long) baseDao.getNewSession().createQuery(hql).setParameter("answerid", answerid).getSingleResult();
 		return num;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Question getByQuestionId(String qid) {
+		String hql = "from Question where id = :qid";
+		List<Question> list = baseDao.getNewSession().createQuery(hql).setParameter("qid", qid)
+				.getResultList();
+		if(list.size()>0) {
+			return list.get(0);
+		}
+		return null;
+	}
 }

@@ -33,4 +33,6 @@ public interface QADao {
 
 	Long getLikeNum(String answerid);
 
+	Question getByQuestionId(String qid);
+
 }

@@ -109,6 +109,10 @@ public class QAService {
 		return dao.getByAnswerId(aid);
 	}
 	
+	public Question getByQuestionId(String qid) {
+		return dao.getByQuestionId(qid);
+	}
+	
 	/**
 	 * 获得某个答案的点赞数量
 	 */
