@@ -125,9 +125,34 @@ public class QADaoImpl implements QADao{
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean ifAnswer(String openid, String qid) {
-		// TODO Auto-generated method stub
+		String hql = "from Answer where qid = :qid and openid = :openid";
+		List<Answer> list = baseDao.getNewSession().createQuery(hql).setParameter("qid", qid)
+				.setParameter("openid", openid).getResultList();
+		if(list.size()>0) {
+			return true;
+		}
 		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Answer getByAnswerId(String aid) {
+		String hql = "from Answer where id = :aid";
+		List<Answer> list = baseDao.getNewSession().createQuery(hql).setParameter("aid", aid)
+				.getResultList();
+		if(list.size()>0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public Long getLikeNum(String answerid) {
+		String hql = "select count(*) from LikeInfo where answerid=:answerid";
+		Long num = (Long) baseDao.getNewSession().createQuery(hql).setParameter("answerid", answerid).getSingleResult();
+		return num;
 	}
 }

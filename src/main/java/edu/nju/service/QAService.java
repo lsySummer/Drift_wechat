@@ -70,12 +70,12 @@ public class QAService {
 	/**
 	 * 点赞
 	 */
-	public boolean addlike(String qid,String answerid,String authorid,String likeid) {
+	public boolean addlike(String answerid,String likeid) {
 		LikeInfo like = new LikeInfo();
 		like.setAnswerid(answerid);
-		like.setAuthorid(authorid);
+//		like.setAuthorid(authorid);
 		like.setLikeid(likeid);
-		like.setQid(qid);
+//		like.setQid(qid);
 		like.setCreateTime(new Date());
 		return dao.addlike(like);
 	}
@@ -100,6 +100,20 @@ public class QAService {
 	 */
 	public List<Answer> sortByDate(String qid){
 		return dao.sortByDate(qid);
+	}
+	
+	/**
+	 * 根据answerid获得answer
+	 */
+	public Answer getByAnswerId(String aid) {
+		return dao.getByAnswerId(aid);
+	}
+	
+	/**
+	 * 获得某个答案的点赞数量
+	 */
+	public Long getLikeNum(String answerid) {
+		return dao.getLikeNum(answerid);
 	}
 	
 }

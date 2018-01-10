@@ -22,6 +22,7 @@ public class UserInfo {
 	private String transactionid;//芝麻信用的业务流水号id
 	private int score;//芝麻信用分
 	private int state;//1-5代表用户当前进行到哪一步了
+	private String headimgUrl;
 //	private double longtitute;
 //	private double latitute;
 	
@@ -84,18 +85,12 @@ public class UserInfo {
 	public void setZmxyid(String zmxyid) {
 		this.zmxyid = zmxyid;
 	}
-//	public double getLongtitute() {
-//		return longtitute;
-//	}
-//	public void setLongtitute(double longtitute) {
-//		this.longtitute = longtitute;
-//	}
-//	public double getLatitute() {
-//		return latitute;
-//	}
-//	public void setLatitute(double latitute) {
-//		this.latitute = latitute;
-//	}
+	public String getHeadimgUrl() {
+		return headimgUrl;
+	}
+	public void setHeadimgUrl(String headimgUrl) {
+		this.headimgUrl = headimgUrl;
+	}
 	@Override
 	public String toString() {
 		return "UserInfo [id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + ", openid="
