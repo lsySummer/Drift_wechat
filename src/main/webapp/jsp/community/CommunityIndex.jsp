@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="weui-cell__hd" style="width:30px"><h3>${index.count}</h3></div>
 			      <div class="weui-media-box__bd">
 				      <p class="weui-media-box__title question">${Q.title}</p>
-			        <p class="weui-media-box__desc">${qnumList[index.count-1]}</p>
+			        <p class="weui-media-box__desc">${qnumList[index.count-1]}回答</p>
 			      </div>
 			      <div class="weui-media-box__hd">
 			        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">

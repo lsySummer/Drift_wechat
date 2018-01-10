@@ -9,8 +9,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
 <link rel="stylesheet" href="/Drift_wechat/css/demos.css">
+<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
 <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
+<script src="/Drift_wechat/js/bootstrap.min.js"></script>
 <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
     <title>果麦公益检测</title>
@@ -41,10 +43,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<div class="weui-cells weui-cells_form" style="margin-top:0px">
 		  <div class="weui-cell" style="font-weight:bold">
-		      <p>问题二?</p>
+		      <p>${question.title}</p>
 		  </div>
 		  <div style="margin:15px;font-size:15px">
-			   <p>标题二由各种物质组成的巨型球状天体，叫做星球。</p>
+			   <p>${question.content}</p>
 		  </div>
 		  
 <!-- 		  <div style="margin:15px;font-size:14px ">
@@ -52,17 +54,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div> -->
 		  
 		  <div  class="weui-cell weui-cells_form">
-		  	<div class="weui-cell__bd" align="center" >
+<!-- 		  	<div class="weui-cell__bd" align="center" >
 		  		<a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/invite.png">   邀请回答</a>
-		  	</div>
+		  	</div> -->
 		  	<div class="weui-cell__bd" align="center">
 		  		<a href="/Drift_wechat/jsp/community/Answer.jsp"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/add.png">   添加回答</a>
 		  	</div>
 		  </div>
 		  <hr class="style-one"/>
 		  <div class="weui-cell" style="background:#F5F5F5;padding:5px;font-size:15px;color:#A9A9A9">
-		      <div class="weui-cell__bd" align="center" >382个回答</div>
-		      <div class="weui-cell__bd" align="center" >按时间排序</div>
+		      <div class="weui-cell__bd" align="center" >${anum}个回答</div>
+		      <div class="weui-cell__bd" align="center">
+				<div class="dropdown">
+				<!-- 	<button type="button" class="btn dropdown-toggle" id="dropdownMenu1" 
+							data-toggle="dropdown">
+						主题
+						<span class="caret"></span>
+					</button> -->
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="#">按时间排序</a>
+						</li>
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="#">按质量排序</a>
+						</li>
+					</ul>
+				</div>
+			  </div>
 		  </div>
 		  
 		 <!--简略回答  -->
@@ -70,9 +88,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<c:forEach items="${aList}" var="A" varStatus="index">
 				<a href="/Drift_wechat/jsp/community/AnswerPreview.jsp" class="weui-media-box weui-media-box_appmsg">
 			      <div class="weui-media-box__bd">
-			      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">${A.openid}</div>
+			      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">${userList[index.count-1].nickName}</div>
 			        <p class="weui-media-box__desc" style="color:#000000">${A.content}</p>
-			        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">7k赞同 ${A.createTime}天前</div>
+			        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">${likeList[index.count-1]}赞同 &nbsp;&nbsp;${dateStrs[index.count-1]}</div>
 			      </div>
 			    </a>
 			</c:forEach>
