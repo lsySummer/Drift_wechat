@@ -29,4 +29,8 @@ public interface QADao {
 
 	boolean ifAnswer(String openid, String qid);
 
+	Answer getByAnswerId(String aid);
+
+	Long getLikeNum(String answerid);
+
 }

@@ -22,6 +22,7 @@ public class Question {
 	private String title;
 	private String content;
 	private Date createTime;
+	private int signal;//图片标志位，0代表没有图片，1代表有图片
 	@Id
 	@Column(length = 32)
 	@GeneratedValue(generator = "system-uuid")
@@ -55,6 +56,12 @@ public class Question {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public int getSignal() {
+		return signal;
+	}
+	public void setSignal(int signal) {
+		this.signal = signal;
 	}
 	
 }
