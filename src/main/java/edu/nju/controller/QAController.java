@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,14 +37,19 @@ public class QAController {
 		}
 	}
 	
-	@RequestMapping("/getQList")
-	@ResponseBody  
-	public Map<String, Object> getQList(HttpSession session){
+	@RequestMapping("/Index")
+	public String getQList(HttpSession session,Model model){
 		//String openid = (String)session.getAttribute("openid");
-		Map<String, Object> map = new HashMap<String, Object>();
-		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
 		List<Object> qlist = (List)qaservice.getAllQuestion(); 
-		map.put("qlist", qlist);
-		return map;
+		model.addAttribute("qList", qlist);
+		return "jsp/community/CommunityIndex";
+	}
+	
+	@RequestMapping("/Q2AList")
+	public String getQ2AList(String qid, HttpSession session,Model model){
+		//String openid = (String)session.getAttribute("openid");
+		List<Object> aList = (List)qaservice.getAnswers(qid); 
+		model.addAttribute("aList", aList);
+		return "jsp/community/QuestionAnswer";
 	}
 }

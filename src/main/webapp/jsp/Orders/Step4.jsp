@@ -13,16 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
+  <script type="text/javascript" src="/Drift_wechat/js/myJS/stateJump.js"></script>
   <!-- set `maximum-scale` for some compatibility issues -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-  <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
-  <script>
-    if ('addEventListener' in document) {
-      document.addEventListener('DOMContentLoaded', function() {
-        FastClick.attach(document.body);
-      }, false);
-    }
-  </script>
   <title>寄送下家</title>
 </head>
 <body>
@@ -68,13 +61,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		  <div class="weui-form-preview__ft" style="margin-top:15%;">
-		  	<a id="d2" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(2);">快递查询</a>
+		  	<a id="d2" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(2);" style="visibility:hidden">快递查询</a>
     		<button id="detail" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp';">填写快递信息</button>
   		  </div>
 	</div>
   	<!--BOTTOM -->
   	<%@include file="BottomBar.html"%>
-	<script>set(4);</script>
 	<script type="text/javascript" src="/Drift_wechat/js/myJS/Step4.js"></script>
+	<script>
+		set(4);
+		stateCheck(4);
+	</script>
 </body>
 </html>

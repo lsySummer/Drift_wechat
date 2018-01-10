@@ -127,4 +127,22 @@ public class UserController {
 			return "jsp/Orders/Step1";
 		}
 	}
+	
+	@RequestMapping(value = "/stateJump")
+	public String stateJump(HttpSession session, String jump){
+//		session.setAttribute("openid", "oRTgpwQkDZKxGFvNnfKpJLWvxsyw");
+		int jumpTo = Integer.parseInt(jump);
+		try{
+			int state = service.getUserState((String)session.getAttribute("openid"));
+			if(jumpTo < state){
+				return "redirect:/jsp/Orders/Step" + jumpTo + ".jsp?from=0";
+			}
+			if(state < 1 || state > 5){
+				return "redirect:/jsp/Orders/Step1.jsp";
+			}
+			return "redirect:/jsp/Orders/Step" + state + ".jsp";
+		}catch(Exception e){
+			return "redirect:/jsp/Orders/Step1.jsp";
+		}
+	}
 }

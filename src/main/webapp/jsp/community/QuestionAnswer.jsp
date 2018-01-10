@@ -1,5 +1,6 @@
   <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -66,37 +67,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  
 		 <!--简略回答  -->
 		<div class="weui-panel__bd">
-		    <a href="/Drift_wechat/jsp/community/AnswerPreview.jsp" class="weui-media-box weui-media-box_appmsg">
-		      <div class="weui-media-box__bd">
-		      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">   陈同学</div>
-		        <p class="weui-media-box__desc" style="color:#000000">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道</p>
-		        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">7k赞同 1天前</div>
-		      </div>
-		    </a>
-		    
-		    <a href="/Drift_wechat/jsp/community/AnswerPreview.jsp" class="weui-media-box weui-media-box_appmsg">
-		      <div class="weui-media-box__bd">
-		      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">   陈同学</div>
-		        <p class="weui-media-box__desc" style="color:#000000">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道</p>
-		        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">7k赞同 1天前</div>
-		      </div>
-		    </a>
-		    
-		    <a href="/Drift_wechat/jsp/community/AnswerPreview.jsp" class="weui-media-box weui-media-box_appmsg">
-		      <div class="weui-media-box__bd">
-		      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">   陈同学</div>
-		        <p class="weui-media-box__desc" style="color:#000000">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道</p>
-		        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">7k赞同 1天前</div>
-		      </div>
-		    </a>
-		    
-		    <a href="/Drift_wechat/jsp/community/AnswerPreview.jsp" class="weui-media-box weui-media-box_appmsg">
-		      <div class="weui-media-box__bd">
-		      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">   陈同学</div>
-		        <p class="weui-media-box__desc" style="color:#000000">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道</p>
-		        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">7k赞同 1天前</div>
-		      </div>
-		    </a>
+			<c:forEach items="${aList}" var="A" varStatus="index">
+				<a href="/Drift_wechat/jsp/community/AnswerPreview.jsp" class="weui-media-box weui-media-box_appmsg">
+			      <div class="weui-media-box__bd">
+			      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">${A.openid}</div>
+			        <p class="weui-media-box__desc" style="color:#000000">${A.openid}</p>
+			        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">7k赞同 ${A.createTime}天前</div>
+			      </div>
+			    </a>
+			</c:forEach>
 		</div>
 		
 	</div>

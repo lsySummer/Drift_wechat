@@ -17,17 +17,10 @@ $.getJSON('/Drift_wechat/api/delivery/step2',function(json){
 function confirm(){
 	if(document.getElementById('confirm').value == "true"){
 		$.get('/Drift_wechat/api/delivery/confirm');
-		$.toast("收货成功");
+		$.toptip('收货成功', 'success');
 		setTimeout("window.location.href='/Drift_wechat/jsp/Orders/Step3.jsp'", 1000);
 	}else{
-		$.toast("暂时无法收货", "forbidden");
-	}
-}
-function detail(){
-	if(document.getElementById('detail').value == "true"){
-		window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp';
-	}else{
-		$.toast("暂时无法填写", "forbidden");
+		$.toptip('暂时无法收货', 'error');
 	}
 }
 
@@ -39,7 +32,7 @@ function query(x){
   		delivery = document.getElementById("deliveryNum2").innerHTML;
   	}
   	if(delivery == '暂无物流信息'){
-  		$.toast("暂无信息，无法查询", "forbidden");
+  		$.toptip('暂无信息，无法查询', 'warning');
   	}else{
   		$.ajax({
 		  url:"http://jisukdcx.market.alicloudapi.com/express/query?number="+ delivery +"&type=auto",
@@ -71,4 +64,3 @@ function query(x){
   	}
 	}
 function close(){$.closePopup();}
-set(2);

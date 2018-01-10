@@ -83,7 +83,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<div style="top:75%;left:80%;position:relative;">
 		<img alt="" src="/Drift_wechat/images/map/tolocal.png" id="originalMap" height="32px" width="32px">本地
-	</div>	
+	</div>
+	<!--返回键  -->	
+	<div class="weui-footer_fixed-bottom" style="margin-left:20%;margin-right:20%;">
+		<a href="javascript:backIndex();" class="weui-btn weui-btn_primary">返回</a>
+	</div>
 	
 	<div id="comment" class='weui-popup__container popup-bottom'>
       <div class="weui-popup__overlay"></div>
@@ -109,18 +113,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <a class="weui-grid js_grid pb" >
                 <img  id="img3" width=100px height=100px src="/Drift_wechat/images/product.png">
             </a>
-            
-            <div class="weui-article" id="commentDiv">
-	     	</div>
-	     	
+            <div class="weui-article" id="commentDiv"></div>
 	     	</div> 
          </div>
-        </div>
-	         
+        </div>    
       </div>
 </body>
 <script type="text/javascript">
-     
+    //初始化信息
+	var index = 0;
+	var allAddressVO = [];
+	//var myLocation = {"x":118.786078,"y":32.061531};
+	var myLocation = {};
+	var level = 18;
+	
+    var icon1 = new BMap.Icon("/Drift_wechat/images/map/blue.png", new BMap.Size(32,32));
+    var icon2 = new BMap.Icon("/Drift_wechat/images/map/red.png", new BMap.Size(32,32));  
+         
+    var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
+         new BMap.Size(23, 25), {  
+             offset: new BMap.Size(10, 25),  
+             imageOffset: new BMap.Size(0, -250)      
+         });
+    
+    //动态效果      
     var pbset;
 	$(".pb").click(function() {
       	$.closePopup();
@@ -139,6 +155,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $('#myModal').modal();
     });
     
+    //返回首页
+    function backIndex(){
+    	window.location.href="/Drift_wechat/api/wechat/index";
+    }
     //评论区初始化展示
 	function getComment(openid){
 		var ptUrls = [];
@@ -178,29 +198,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},"json");
 		
 	}
-        
-	//初始化信息
-	var index = 0;
-	var allAddressVO = [];
-	var myLocation = {"x":118.786078,"y":32.061531};
-	var level = 18;
-	
-    var icon1 = new BMap.Icon("/Drift_wechat/images/map/blue.png", new BMap.Size(32,32));
-    var icon2 = new BMap.Icon("/Drift_wechat/images/map/red.png", new BMap.Size(32,32));  
-         
-    var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
-         new BMap.Size(23, 25), {  
-             offset: new BMap.Size(10, 25),  
-             imageOffset: new BMap.Size(0, -250)      
-         });
 	
 	//页面加载完成启动
 	$("document").ready(function(){
+	    var x = <%=session.getAttribute("locationX")%>;
+	    var y = <%=session.getAttribute("locationY")%>;
+	    myLocation = {"x":parseFloat(x),"y":parseFloat(y)};
 		//weChatMap();
 		map_init();
 	});
 	
-	function weChatMap(){
+<%-- 	function weChatMap(){
 		wx.config({
 	        appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
 	        timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
@@ -238,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      		AlertUtil.error("无法获取您的位置！");
 	    	}
 	    }
-	}
+	} --%>
 
 	
 	//获取用户userVO列表
