@@ -1,5 +1,6 @@
 package edu.nju.service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +30,11 @@ public class QAService {
 	public String addPicture(String filePath,MultipartFile file) {
 		List<MultipartFile> list = new ArrayList<MultipartFile>();
 		list.add(file);
-		return Utility.saveFile(filePath, list);
+		String absUrl = (new File("")).getAbsolutePath();
+		String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filePath;
+		String fileUrl = Utility.saveFile(filePath, list);
+		String result = baseUrl+fileUrl;
+		return result;
 	}
 	
 	public boolean delPicture(String filePath) {
