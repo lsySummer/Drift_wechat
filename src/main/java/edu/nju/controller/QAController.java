@@ -55,7 +55,8 @@ public class QAController {
 	@RequestMapping("/Q2AList")
 	public String getQ2AList(String qid, HttpSession session,Model model){
 		//String openid = (String)session.getAttribute("openid");
-		List<Object> aList = (List)qaservice.getAnswers(qid); 
+		System.out.println(qid);
+		List<Answer> aList = (List)qaservice.getAnswers(qid); 
 		model.addAttribute("aList", aList);
 		return "jsp/community/QuestionAnswer";
 	}
