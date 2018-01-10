@@ -32,7 +32,7 @@ public class TestController {
 	public String register(Model model) {
 //		System.out.println(service.reserveDevice("江苏", 1).getId());
 //		service.makeOrder("oRTgpweSZbOxfrg9H57JwuPwMJLo", 0, Utility.getSpecifiedDayAfter(new Date(), 6));
-		System.out.println(gservice.getBefore("oRTgpweSZbOxfrg9H57JwuPwMJLo").getName());
+//		System.out.println(gservice.getBefore("oRTgpweSZbOxfrg9H57JwuPwMJLo").getName());
 //		System.out.println(gservice.getAfter("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").getName());
 //		List<String> str = gservice.getUnavailableDates("oRTgpweSZbOxfrg9H57JwuPwMJLo",0);
 //		Device device = service.reserveDevice("oRTgpweSZbOxfrg9H57JwuPwMJLo",0);
@@ -75,6 +75,7 @@ public class TestController {
 //		System.out.println(cservice.getOrderNum());
 //		System.out.println(cservice.getTodayNum());
 //		System.out.println(gservice.getOrder("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg"));
+		qservice.getAllQuestion();
 		return "jsp/NewFile";
 	}
 }
