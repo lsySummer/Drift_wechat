@@ -26,16 +26,10 @@ public class QAService {
 		return Utility.makeFolder(path);
 	}
 	
-	public boolean addPicture(String filePath,MultipartFile file) {
+	public String addPicture(String filePath,MultipartFile file) {
 		List<MultipartFile> list = new ArrayList<MultipartFile>();
 		list.add(file);
-		try {
-			Utility.saveFile(filePath, list);
-			return true;
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return false;
+		return Utility.saveFile(filePath, list);
 	}
 	
 	public boolean delPicture(String filePath) {
