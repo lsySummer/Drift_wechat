@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<a href="/Drift_wechat/jsp/community/AnswerPreview.jsp" class="weui-media-box weui-media-box_appmsg">
 			      <div class="weui-media-box__bd">
 			      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">${A.openid}</div>
-			        <p class="weui-media-box__desc" style="color:#000000">${A.openid}</p>
+			        <p class="weui-media-box__desc" style="color:#000000">${A.content}</p>
 			        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">7k赞同 ${A.createTime}天前</div>
 			      </div>
 			    </a>

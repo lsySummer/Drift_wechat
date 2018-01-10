@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.nju.entities.Answer;
+import edu.nju.entities.Question;
 import edu.nju.service.QAService;
 
 @Controller
@@ -40,15 +42,21 @@ public class QAController {
 	@RequestMapping("/Index")
 	public String getQList(HttpSession session,Model model){
 		//String openid = (String)session.getAttribute("openid");
-		List<Object> qlist = (List)qaservice.getAllQuestion(); 
-		model.addAttribute("qList", qlist);
+		List<Question> qList = (List)qaservice.getAllQuestion();
+		List<Long> qnumList = new ArrayList();
+		for(Question question :qList){
+			qnumList.add(qaservice.getAnswerNum(question.getId()));
+		}
+		model.addAttribute("qList", qList);
+		model.addAttribute("qnumList", qnumList);
 		return "jsp/community/CommunityIndex";
 	}
 	
 	@RequestMapping("/Q2AList")
 	public String getQ2AList(String qid, HttpSession session,Model model){
 		//String openid = (String)session.getAttribute("openid");
-		List<Object> aList = (List)qaservice.getAnswers(qid); 
+		System.out.println(qid);
+		List<Answer> aList = (List)qaservice.getAnswers(qid); 
 		model.addAttribute("aList", aList);
 		return "jsp/community/QuestionAnswer";
 	}
