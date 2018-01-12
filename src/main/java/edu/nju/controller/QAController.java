@@ -62,10 +62,25 @@ public class QAController {
 		return "jsp/community/CommunityIndex";
 	}
 	
-	@RequestMapping("/Q2AList")
+	@RequestMapping("/dateSort")
 	public String getQ2AList(String qid, HttpSession session,Model model){
 		//String openid = (String)session.getAttribute("openid");
-		List<Answer> aList = (List)qaservice.getAnswers(qid);
+		List<Answer> aList = (List)qaservice.sortByDate(qid);
+		return packageData(aList,qid,model);
+	}
+	
+	@RequestMapping("/likeSort")
+	public String getQ2ALikeList(String qid,Model model){
+		//String openid = (String)session.getAttribute("openid");
+		List<Answer> aList = new ArrayList<Answer>();
+		Map<Answer,Integer> map = new HashMap<Answer,Integer>();  		  
+		for (Answer key : map.keySet()) {  
+			aList.add(key);  
+		}  
+		return packageData(aList,qid,model);
+	}
+	
+	public  String packageData(List<Answer> aList,String qid,Model model){
 		Question question =  qaservice.getByQuestionId(qid);
 		List<UserInfo> userList = new ArrayList<UserInfo>();
 		List<String> dateStrs = new ArrayList<String>();
@@ -77,6 +92,7 @@ public class QAController {
 		}
 		model.addAttribute("anum",qaservice.getAnswerNum(qid));
 		model.addAttribute("aList", aList);
+		System.out.println(aList.size());
 		model.addAttribute("question", question);
 		model.addAttribute("userList", userList);
 		model.addAttribute("dateStrs", dateStrs);

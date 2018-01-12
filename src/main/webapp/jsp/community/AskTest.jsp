@@ -31,66 +31,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 </style>
 <body>
-    <!-- 实例化编辑器 -->
-    <script type="text/javascript">
-	    var ue = UE.getEditor('container', {
-	        toolbars: [
-	            [ 'simpleupload']
-	        ],
-	        autoHeightEnabled: true,
-	        autoFloatEnabled: true
-	    });
-        ue.ready(function() {
-        	var content = ue.getContent();
-        	console.log(content);
-        });
-    </script>
-    
-  	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:10px ">
-  		<div class="weui-cell__ft"><a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="" src="/Drift_wechat/images/community/close.png"></a></div>
-	    <div class="weui-cell__bd" style="color:black">
-	      <h2>提问</h2>
-	    </div>
-	    <div class="weui-cell__ft"><a href="javascript:publishQ()"><img id="release" alt="" style="" src="/Drift_wechat/images/community/before.png"></a></div>
-	</div>
-	<hr class="style-four" />
-	<div class="weui-cells weui-cells_form">
-	  <div class="weui-cell">
-	    <div class="weui-cell__bd">
-	      <input class="weui-input" type="text" id="title" placeholder="请输入标题" onblur="changeIncon()" style="font-weight:bold">
-	    </div>
-	  </div>
-	  
-	  <div class="weui-cell">
-	    <div class="weui-cell__bd">
-	    	<!-- 加载编辑器的容器 -->
-		    <form action="">
-	            <h1>完整demo</h1>
-	            <script id="container" type="text/plain"></script>
-	            <button type="submit">提交</button>
-	        </form>	
-	      <!-- <textarea class="weui-textarea" id="content" placeholder="添加问题的补充说明..." rows="10"></textarea> -->
-	      <div class="weui-textarea-counter"><span>0</span>/200</div>
-	    </div>
-	  </div>
-	</div>
+<h1>外部调用UEditor的多图上传和附件上传示例</h1>
+
+<button type="button" id="j_upload_img_btn">多图上传</button>
+<ul id="upload_img_wrap"></ul>
+
+<button type="button" id="j_upload_file_btn">附件上传</button>
+<ul id="upload_file_wrap"></ul>
+
+<!-- 加载编辑器的容器 -->
+<textarea id="uploadEditor" style="display: none;"></textarea>
+
+<!-- 使用ue -->
+<script type="text/javascript">
+
+    // 实例化编辑器，这里注意配置项隐藏编辑器并禁用默认的基础功能。
+ var uploadEditor = UE.getEditor("uploadEditor", {
+        isShow: true,
+        focus: false,
+        enableAutoSave: false,
+        autoSyncData: false,
+        autoFloatEnabled:false,
+        wordCount: false,
+        sourceEditor: null,
+        scaleEnabled:true,
+        toolbars: [["insertimage", "attachment"]]
+    });
+
+    // todo::some code
+    document.getElementById('j_upload_img_btn').onclick = function () {
+	    var dialog = uploadEditor.getDialog("insertimage");
+	    dialog.title = '多图上传';
+	    dialog.render();
+	    dialog.open();
+	};
 	
-	<!--上传图片  -->
-<!-- 	<div class="weui-cells weui-cells_form" id="uploaderCustom">
-         <div class="weui-cell">
-             <div class="weui-cell__bd">
-                 <div class="weui-uploader">
-                     <div class="weui-uploader__bd">
-                         <ul class="weui-uploader__files" id="uploaderCustomFiles"></ul>
-                         <div class="weui-uploader__input-box">
-                             <input id="uploaderCustomInput" name="photo" class="weui-uploader__input" type="file" accept="image/*" multiple="">
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-      </div> -->
-      
+	function _beforeInsertImage(t, result) {
+		alert("上传之前");
+		console.log(result);
+	    var imageHtml = '';
+	    for(var i in result){
+	        imageHtml += '<li><img src="'+result[i].src+'" alt="'+result[i].alt+'" height="150"></li>';
+	    }
+	    document.getElementById('upload_img_wrap').innerHTML = imageHtml;
+	}
+
+</script>
 </body>
 
 <script type="text/javascript">

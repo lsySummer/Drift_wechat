@@ -65,37 +65,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <div class="weui-cell" style="background:#F5F5F5;padding:5px;font-size:15px;color:#A9A9A9">
 		      <div class="weui-cell__bd" align="center" >${anum}个回答</div>
 		      <div class="weui-cell__bd" align="center">
-				<div class="dropdown">
-				<!-- 	<button type="button" class="btn dropdown-toggle" id="dropdownMenu1" 
-							data-toggle="dropdown">
-						主题
-						<span class="caret"></span>
-					</button> -->
-					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="#">按时间排序</a>
-						</li>
-						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="#">按质量排序</a>
-						</li>
-					</ul>
-				</div>
+					<div class="dropdown">
+					    <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">排序
+					        <span class="caret"></span>
+					    </button>
+					    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+					        <li role="presentation">
+					            <a role="menuitem" tabindex="-1" href="/Drift_wechat/api/QA/likeSort?qid=${question.id}">按质量排序</a>
+					        </li>
+					        <li role="presentation">
+					            <a role="menuitem" tabindex="-1" href="/Drift_wechat/api/QA/dateSort?qid=${question.id}">按时间排序</a>
+					        </li>
+					    </ul>
+					</div>
 			  </div>
 		  </div>
 		  
-		 <!--简略回答  -->
-		<div class="weui-panel__bd">
-			<c:forEach items="${aList}" var="A" varStatus="index">
-				<a href="/Drift_wechat/jsp/community/AnswerPreview.jsp" class="weui-media-box weui-media-box_appmsg">
-			      <div class="weui-media-box__bd">
-			      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">${userList[index.count-1].nickName}</div>
-			        <p class="weui-media-box__desc" style="color:#000000">${A.content}</p>
-			        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">${likeList[index.count-1]}赞同 &nbsp;&nbsp;${dateStrs[index.count-1]}</div>
-			      </div>
-			    </a>
-			</c:forEach>
-		</div>
+	 <!--简略回答  -->
+	<div class="weui-panel__bd">
+		<c:forEach items="${aList}" var="A" varStatus="index">
+			<a href="/Drift_wechat/jsp/community/AnswerPreview.jsp" class="weui-media-box weui-media-box_appmsg">
+		      <div class="weui-media-box__bd">
+		      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">${userList[index.count-1].nickName}</div>
+		        <p class="weui-media-box__desc" style="color:#000000">${A.content}</p>
+		        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">${likeList[index.count-1]}赞同 &nbsp;&nbsp;${dateStrs[index.count-1]}</div>
+		      </div>
+		    </a>
+		</c:forEach>
+	</div>
 		
 	</div>
+	
+	<script type="text/javascript">
+		
+	</script>
 </body>
 </html>

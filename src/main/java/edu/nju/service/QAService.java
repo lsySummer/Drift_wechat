@@ -31,9 +31,9 @@ public class QAService {
 		List<MultipartFile> list = new ArrayList<MultipartFile>();
 		list.add(file);
 		String absUrl = (new File("")).getAbsolutePath();
-		String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filePath;
+		//String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filePath;
 		String fileUrl = Utility.saveFile(filePath, list);
-		String result = baseUrl+fileUrl;
+		String result = "/upload/"+fileUrl;
 		return result;
 	}
 	
