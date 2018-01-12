@@ -22,7 +22,7 @@ public class Question {
 	private String title;
 	private String content;
 	private Date createTime;
-	private int picSig;//图片标志位，0代表没有图片，1代表有图片
+	private String picSig;
 	@Id
 	@Column(length = 32)
 	@GeneratedValue(generator = "system-uuid")
@@ -57,10 +57,10 @@ public class Question {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public int getPicSig() {
+	public String getPicSig() {
 		return picSig;
 	}
-	public void setPicSig(int picSig) {
+	public void setPicSig(String picSig) {
 		this.picSig = picSig;
 	}
 	

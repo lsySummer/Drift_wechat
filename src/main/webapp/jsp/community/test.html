@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- set `maximum-scale` for some compatibility issues -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <title>Summernote</title>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+</head>
+<body>
+  <form action="/Drift_wechat/api/QA/ConfirmAsk" method="get" id="basic" style="margin:2% auto">
+    <div class="form-group">
+      <label for="input">标题</label>
+      <input type="text" class="form-input" id="input" value="Title" name="title">
+    </div>
+    <div class="form-group">
+      <label for="contents">内容</label>
+      <textarea name="summernote" class="summernote" id="summernote" title="Contents"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
+  </form>
+<script type="text/javascript">
+  $(document).ready(function() {  
+   $('#summernote').summernote({  
+      height: 300, /*指定高度*/  
+      lang: 'zh-CN',  
+      focus: true,
+      toolbar: [     
+        ['para', ['ul', 'ol', 'paragraph']],  
+        ['insert', ['picture', 'hr']]  
+      ],  
+      callbacks: {
+        onImageUpload: function(files, editor, welEditable) {
+            sendFile(files[0],editor,welEditable);
+        }
+      } 
+   });  
+  });  
+    
+  function sendFile(file,editor,welEditable) {
+    data = new FormData();
+    data.append("file", file);
+    console.log('image upload:', file, editor, welEditable);
+    $.ajax({
+        data: data,
+        type: "POST",
+        url: "/Drift_wechat/api/QA/Ask",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(url) {
+            console.log(url);
+            editor.insertImage(welEditable, url.index);
+        }
+    });
+  }
+
+  $('basic').on('submit', function (e) {
+      e.preventDefault();
+  });
+</script>  
+</body>  
+</html>  
+</body>
+</html>

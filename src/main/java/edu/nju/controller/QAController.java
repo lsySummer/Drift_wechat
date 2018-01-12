@@ -1,5 +1,7 @@
 package edu.nju.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,12 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,20 +35,19 @@ public class QAController {
 	@Autowired
 	UserService uservice;
 	
-	@RequestMapping("/publishQ")
-	@ResponseBody  
-	public String publishQuestion(HttpSession session,String title,String content){
-		String openid = (String)session.getAttribute("openid");
-		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
-		List<MultipartFile> files = new ArrayList<MultipartFile>();
-		String identify = "suijiString";
-		if(qaservice.publishQuestion(openid,files, title, content,identify)){
-			return "1";
-		}
-		else{
-			return "0";
-		}
-	}
+//	@RequestMapping("/publishQ")
+//	@ResponseBody  
+//	public String publishQuestion(HttpSession session,String title,String content){
+//		String openid = (String)session.getAttribute("openid");
+//		List<MultipartFile> files = new ArrayList<MultipartFile>();
+//		String identify = "suijiString";
+//		if(qaservice.publishQuestion(openid,files, title, content,identify)){
+//			return "1";
+//		}
+//		else{
+//			return "0";
+//		}
+//	}
 	
 	@RequestMapping("/Index")
 	public String getQList(HttpSession session,Model model){
@@ -105,5 +109,52 @@ public class QAController {
 			dateStr =s+"秒前";
 			return dateStr;
 		}
+	}
+	
+	@RequestMapping("/Ask")
+	public void ask(HttpSession session, @RequestParam(value = "file") MultipartFile file, HttpServletResponse response){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		String filePath = "";
+		if(session.getAttribute("photo") == null){
+			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
+//			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
+			qaservice.makeFolder(filePath);
+		}else{
+			filePath = (String)session.getAttribute("photo");
+		}
+		
+		JSONObject result = new JSONObject();
+		try {
+			result.put("index", qaservice.addPicture(filePath, file));
+			PrintWriter out = response.getWriter();
+			out.print(result);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			result.put("index", "null");
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/ConfirmAsk")
+	public void ConfirmAsk(HttpSession session, String title, String summernote, HttpServletResponse response){
+		String picSig = "";
+		if(session.getAttribute("photo") != null){
+			picSig = (String)session.getAttribute("photo");
+			qaservice.changenName(picSig);
+		}
+//		qaservice.publishQuestion("test", title, summernote, picSig);
+		qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
+	}
+	
+	@RequestMapping("/Answer")
+	public void Answer(HttpSession session, String question, @RequestParam(value = "file") MultipartFile photo, HttpServletResponse response){
+		JSONObject result = new JSONObject();
+	}
+	
+	@RequestMapping("/ConfirmAnswer")
+	public void ConfirmAnswer(HttpSession session, String summernote, HttpServletResponse response){
+		JSONObject result = new JSONObject();
 	}
 }

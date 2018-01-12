@@ -18,6 +18,7 @@ public class Answer {
 	private String openid;//回答者id
 	private String content;
 	private Date createTime;
+	private String picSig;
 	@Id
 	@Column(length = 32)
 	@GeneratedValue(generator = "system-uuid")
@@ -51,6 +52,12 @@ public class Answer {
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+	public String getPicSig() {
+		return picSig;
+	}
+	public void setPicSig(String picSig) {
+		this.picSig = picSig;
 	}
 	@Override
 	public String toString() {
