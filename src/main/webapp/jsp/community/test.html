@@ -3,12 +3,12 @@
 <head>
   <!-- set `maximum-scale` for some compatibility issues -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-  <title>Summernote</title>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+  <title>提问</title>
+  <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
+  <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
+  <script src="/Drift_wechat/js/bootstrap.min.js"></script> 
+  <link href="/Drift_wechat/css/summernote.css" rel="stylesheet">
+  <script src="/Drift_wechat/js/summernote.min.js"></script>
 </head>
 <body>
   <form action="/Drift_wechat/api/QA/ConfirmAsk" method="get" id="basic" style="margin:2% auto">
@@ -23,6 +23,7 @@
     <button type="submit" class="btn btn-primary">提交</button>
   </form>
 <script type="text/javascript">
+	var image_name = 0;
   $(document).ready(function() {  
    $('#summernote').summernote({  
       height: 300, /*指定高度*/  
@@ -33,17 +34,22 @@
         ['insert', ['picture', 'hr']]  
       ],  
       callbacks: {
-        onImageUpload: function(files, editor, welEditable) {
-            sendFile(files[0],editor,welEditable);
+        onImageUpload: function(files) {
+        	/* $('#summernote').summernote('insertNode', imgNode); */
+            sendFile(files[0]);
         }
       } 
    });  
   });  
     
-  function sendFile(file,editor,welEditable) {
+  function sendFile(file) {
     data = new FormData();
     data.append("file", file);
-    console.log('image upload:', file, editor, welEditable);
+    console.log('image upload:', file);
+    var fileData = URL.createObjectURL(file);
+    $('#summernote').summernote('insertImage', fileData, function ($image) {
+	  $image.attr('id', image_name);
+	});
     $.ajax({
         data: data,
         type: "POST",
@@ -53,7 +59,8 @@
         processData: false,
         success: function(url) {
             console.log(url);
-            editor.insertImage(welEditable, url.index);
+            $('#'+image_name).attr('src', url);
+            image_name ++;
         }
     });
   }
