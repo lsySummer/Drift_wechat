@@ -33,7 +33,7 @@ public class QAService {
 		String absUrl = (new File("")).getAbsolutePath();
 		//String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filePath;
 		String fileUrl = Utility.saveFile(filePath, list);
-		String result = "/upload/"+fileUrl;
+		String result = "/upload/"+filePath+fileUrl;
 		return result;
 	}
 	
