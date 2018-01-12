@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
@@ -14,6 +14,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="/Drift_wechat/js/jquery-ui.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
+<!-- 配置文件 -->
+<script type="text/javascript" src="/Drift_wechat/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/Drift_wechat/ueditor/ueditor.all.js"></script>
 
 <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
@@ -26,7 +30,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
 	}
 </style>
-<body>  
+<body>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+	    var ue = UE.getEditor('container', {
+	        toolbars: [
+	            [ 'simpleupload']
+	        ],
+	        autoHeightEnabled: true,
+	        autoFloatEnabled: true
+	    });
+        ue.ready(function() {
+        	var content = ue.getContent();
+        	console.log(content);
+        });
+    </script>
+    
   	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:10px ">
   		<div class="weui-cell__ft"><a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="" src="/Drift_wechat/images/community/close.png"></a></div>
 	    <div class="weui-cell__bd" style="color:black">
@@ -44,7 +63,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  
 	  <div class="weui-cell">
 	    <div class="weui-cell__bd">
-	      <textarea class="weui-textarea" id="content" placeholder="添加问题的补充说明..." rows="10"></textarea>
+	    	<!-- 加载编辑器的容器 -->
+		    <form action="">
+	            <h1>完整demo</h1>
+	            <script id="container" type="text/plain"></script>
+	            <button type="submit">提交</button>
+	        </form>	
+	      <!-- <textarea class="weui-textarea" id="content" placeholder="添加问题的补充说明..." rows="10"></textarea> -->
 	      <div class="weui-textarea-counter"><span>0</span>/200</div>
 	    </div>
 	  </div>

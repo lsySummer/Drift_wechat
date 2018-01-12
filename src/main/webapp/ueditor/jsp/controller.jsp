@@ -1,0 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	import="com.baidu.ueditor.ActionEnter"
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%
+
+    request.setCharacterEncoding( "utf-8" );
+	response.setHeader("Content-Type" , "text/html");
+	
+	String rootPath = application.getRealPath( "/" );
+	//String path = request.getContextPath();
+	//String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	out.write( new ActionEnter( request, rootPath ).exec() );
+	
+%>
