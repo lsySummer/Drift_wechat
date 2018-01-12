@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,7 @@ public class QAController {
 	@Autowired
 	UserService uservice;
 	
+	private Logger log = Logger.getLogger(UserController.class);
 //	@RequestMapping("/publishQ")
 //	@ResponseBody  
 //	public String publishQuestion(HttpSession session,String title,String content){
@@ -132,23 +134,20 @@ public class QAController {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String filePath = "";
 		if(session.getAttribute("photo") == null){
-			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
-//			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
+//			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
+			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 		}else{
 			filePath = (String)session.getAttribute("photo");
 		}
-		
-		JSONObject result = new JSONObject();
+		log.info("filepath" + filePath);
 		try {
-			result.put("index", qaservice.addPicture(filePath, file));
 			PrintWriter out = response.getWriter();
-			out.print(result);
+			out.print(qaservice.addPicture(filePath, file));
 			out.flush();
 			out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			result.put("index", "null");
 			e.printStackTrace();
 		}
 	}
@@ -160,8 +159,8 @@ public class QAController {
 			picSig = (String)session.getAttribute("photo");
 			qaservice.changenName(picSig);
 		}
-//		qaservice.publishQuestion("test", title, summernote, picSig);
-		qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
+		qaservice.publishQuestion("test", title, summernote, picSig);
+//		qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
 	}
 	
 	@RequestMapping("/Answer")
