@@ -11,7 +11,7 @@ public interface QADao {
 
 	String publishQuestion(Question q);
 
-	boolean addAnswer(Answer a);
+	String addAnswer(Answer a);
 
 	List<Question> getAllQuestion();
 
