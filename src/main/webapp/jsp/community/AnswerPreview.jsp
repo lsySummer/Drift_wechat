@@ -75,9 +75,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$.get("/Drift_wechat/api/QA/AddLike?aid="+aid,function(data){
 				if(data="1"){
 					$.toptip('点赞成功', 'success');
-					setTimeout(function() {
-						window.location.href="/Drift_wechat/jsp/community/QuestionPreview.jsp";
-					},1000)
 				}
 				else{
 					$.toptip('点赞失败', 'error');
@@ -92,9 +89,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$.get("/Drift_wechat/api/QA/RemoveLike?aid="+aid+"&qid="+qid,function(data){
 				if(data="1"){
 					$.toptip('取消成功', 'success');
-					setTimeout(function() {
-						window.location.href="/Drift_wechat/jsp/community/QuestionPreview.jsp";
-					},1000)
 				}
 				else{
 					$.toptip('取消失败', 'error');
