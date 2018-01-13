@@ -39,7 +39,6 @@ public class QAController {
 	
 	@RequestMapping("/Index")
 	public String getQList(HttpSession session,Model model){
-		//String openid = (String)session.getAttribute("openid");
 		List<Question> qList = (List)qaservice.getAllQuestion();
 		List<Long> qnumList = new ArrayList();
 		for(Question question :qList){
@@ -52,14 +51,12 @@ public class QAController {
 	
 	@RequestMapping("/dateSort")
 	public String getQ2AList(String qid, HttpSession session,Model model){
-		//String openid = (String)session.getAttribute("openid");
 		List<Answer> aList = (List)qaservice.sortByDate(qid);
 		return packageData(aList,qid,model);
 	}
 	
 	@RequestMapping("/likeSort")
 	public String getQ2ALikeList(String qid,Model model){
-		//String openid = (String)session.getAttribute("openid");
 		List<Answer> aList = new ArrayList<Answer>();
 		Map<Answer,Integer> map = new HashMap<Answer,Integer>();  		  
 		for (Answer key : map.keySet()) {  
@@ -83,8 +80,8 @@ public class QAController {
 	
 	@RequestMapping("/AddLike")
 	public String addLike(HttpSession session,String aid,Model model){
-		String openid = (String) session.getAttribute("openid");
-		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		//String openid = (String) session.getAttribute("openid");
+		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
 		if(qaservice.addlike(aid, openid))
 			return "1";
 		else
@@ -93,8 +90,8 @@ public class QAController {
 	
 	@RequestMapping("/RemoveLike")
 	public String cancellLike(HttpSession session,String aid,String qid,Model model){
-		String openid = (String) session.getAttribute("openid");
-		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		//String openid = (String) session.getAttribute("openid");
+		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
 		String authorid = qaservice.getByAnswerId(aid).getOpenid();
 		if(qaservice.revokeLike(qid, aid, authorid,openid))
 			return "1";
@@ -163,7 +160,8 @@ public class QAController {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String filePath = "";
 		if(session.getAttribute("ask") == null){
-			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
+			//filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
+			filePath = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg" + "_" + df.format(new Date()) + "/temp";
 //			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("ask", filePath);
@@ -192,7 +190,9 @@ public class QAController {
 			session.removeAttribute("ask");
 			session.removeAttribute("qfilename");
 		}
-		String questionid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
+		//String questionid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
+		String questionid = qaservice.publishQuestion("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", title, summernote, picSig);
+		
 		return "api/QA/QuestionPreview?qid=" + questionid;
 	}
 	
@@ -201,7 +201,8 @@ public class QAController {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String filePath = "";
 		if(session.getAttribute("answer") == null){
-			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
+			//filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
+			filePath = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg" + "_" + df.format(new Date()) + "/temp";
 //			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("answer", filePath);
@@ -230,7 +231,8 @@ public class QAController {
 			session.removeAttribute("answer");
 			session.removeAttribute("afilename");
 		}
-		String aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, picSig);
+		//String aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, picSig);
+		String aid = qaservice.addAnswer("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", qid, summernote, picSig);
 		return "api/QA/AnswerPreview?qid=" + qid + "&aid=" + aid;
 	}
 }

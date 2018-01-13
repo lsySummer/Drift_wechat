@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
 	    <p class="weui-tabbar__label">订单</p>
 	  </a>
-	  <a href="javascript:;" class="weui-tabbar__item weui-bar__item--on">
+	  <a href="/Drift_wechat/api/QA/Index" class="weui-tabbar__item weui-bar__item--on">
 	    <div class="weui-tabbar__icon">
 	      <img src="/Drift_wechat/images/navi/community.png" alt="">
 	    </div>
