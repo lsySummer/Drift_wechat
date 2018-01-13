@@ -179,7 +179,7 @@ public class QAController {
 		}else{
 			qid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, new ArrayList<MultipartFile>(), "");
 		}
-		return "api/QA/QuestionPreview?qid=" + qid;
+		return "redirect:QuestionPreview?qid=" + qid;
 	}
 	
 	@RequestMapping("/CancelQuestion")
