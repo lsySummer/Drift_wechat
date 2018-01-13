@@ -71,8 +71,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		function addLike(){
 			var aid = '${answer.id}';
+			var qid = '${question.id}';
 			console.log(aid);
-			$.get("/Drift_wechat/api/QA/AddLike?aid="+aid,function(data){
+			$.get("/Drift_wechat/api/QA/AddLike?aid="+aid+"&qid="+qid,function(data){
 				if(data="1"){
 					$.toptip('点赞成功', 'success');
 				}

@@ -71,10 +71,10 @@ public class QAController {
 	
 	@RequestMapping("/AddLike")
 	@ResponseBody
-	public String addLike(HttpSession session,String aid,Model model){
+	public String addLike(HttpSession session,String aid,String qid,Model model){
 		//String openid = (String) session.getAttribute("openid");
 		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
-		if(qaservice.addlike(aid, openid))
+		if(qaservice.addlike(aid, qaservice.getByAnswerId(aid).getOpenid(), openid, qid))
 			return "1";
 		else
 			return "0";
