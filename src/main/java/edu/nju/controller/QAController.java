@@ -19,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.nju.entities.Answer;
@@ -96,22 +95,14 @@ public class QAController {
 	}
 	
 	@RequestMapping("/Like")
-	public String answerPreview(HttpSession session,String aid,Model model){
+	public String addLike(HttpSession session,String aid,Model model){
 		//String openid = sesion.get 
 		return "jsp/community/AnswerPreview";
 	}
 	
 	@RequestMapping("/cancellLike")
-	public String answerPreview(String aid,String qid,Model model){
-		Question question = qaservice.getByQuestionId(qid);
-		Answer answer = qaservice.getByAnswerId(aid);
-		Long likeNum = qaservice.getLikeNum(aid);
-		UserInfo user = uservice.getUser(answer.getOpenid());
-		model.addAttribute("answer", answer);
-		model.addAttribute("likeNum", likeNum);
-		model.addAttribute("user", user);
-		model.addAttribute("title", question.getTitle());
-		return "jsp/community/AnswerPreview";
+	public String cancellLike(String aid,String qid,Model model){
+		return "haha";
 	}
 	
 	@RequestMapping("/QuestionPreview")
@@ -178,13 +169,15 @@ public class QAController {
 			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
 //			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
+			session.setAttribute("ask", filePath);
 		}else{
 			filePath = (String)session.getAttribute("ask");
 		}
-		log.info("filepath" + filePath);
 		try {
 			PrintWriter out = response.getWriter();
-			out.print(qaservice.addPicture(filePath, file));
+			String filename = qaservice.addPicture(filePath, file);
+			session.setAttribute("qfilename", filename);
+			out.print(filename);
 			out.flush();
 			out.close();
 		} catch (IOException e) {
@@ -197,22 +190,50 @@ public class QAController {
 	public String ConfirmAsk(HttpSession session, String title, String summernote, HttpServletResponse response){
 		String picSig = "";
 		if(session.getAttribute("ask") != null){
-			picSig = (String)session.getAttribute("ask");
+			picSig = (String)session.getAttribute("qfilename");
 			qaservice.changenName(picSig);
 			session.removeAttribute("ask");
+			session.removeAttribute("qfilename");
 		}
-//		qaservice.publishQuestion("test", title, summernote, picSig);
-		qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
-		return "api/QA/QuestionPreview?qid=";
+		String questionid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
+		return "api/QA/questionPreview?qid=" + questionid;
 	}
 	
 	@RequestMapping("/Answer")
-	public void Answer(HttpSession session, String question, @RequestParam(value = "file") MultipartFile photo, HttpServletResponse response){
-		JSONObject result = new JSONObject();
+	public void Answer(HttpSession session, @RequestParam(value = "file") MultipartFile file, HttpServletResponse response){
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		String filePath = "";
+		if(session.getAttribute("answer") == null){
+			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
+//			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
+			qaservice.makeFolder(filePath);
+			session.setAttribute("answer", filePath);
+		}else{
+			filePath = (String)session.getAttribute("answer");
+		}
+		try {
+			PrintWriter out = response.getWriter();
+			String filename = qaservice.addPicture(filePath, file);
+			session.setAttribute("afilename", filename);
+			out.print(filename);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping("/ConfirmAnswer")
-	public void ConfirmAnswer(HttpSession session, String summernote, HttpServletResponse response){
-		JSONObject result = new JSONObject();
+	public String ConfirmAnswer(HttpSession session, String qid, String summernote, HttpServletResponse response){
+		String picSig = "";
+		if(session.getAttribute("answer") != null){
+			picSig = (String)session.getAttribute("afilename");
+			qaservice.changenName(picSig);
+			session.removeAttribute("answer");
+			session.removeAttribute("afilename");
+		}
+		String aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, picSig);
+		return "api/QA/answerPreview?qid=" + qid + "&aid=" + aid;
 	}
 }
