@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	
   	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:10px ">
-  		<div class="weui-cell__ft"><a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="" src="/Drift_wechat/images/community/back.png"></a></div>
+  		<div class="weui-cell__ft"><a href="/Drift_wechat/api/QA/dateSort?qid=${question.id}"><img alt="" style="" src="/Drift_wechat/images/community/back.png"></a></div>
 	    <div class="weui-cell__bd" style="color:black">
 	      <h3>详细回答</h3>
 	    </div>
@@ -36,16 +36,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<div class="weui-cells weui-cells_form" style="margin-top:0px">
 		  <div class="weui-cell" style="font-weight:bold">
-		      <p>问题二?</p>
+		      <p>${question.title}</p>
 		  </div>
 		  <hr class="style-four" />
 		  <div class="weui-cell" style="font-weight:bold">
-		      <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">&nbsp;&nbsp;&nbsp;陈同学
+		      <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">&nbsp;&nbsp;&nbsp;${user.nickName}
 		  </div>
 		  <div style="margin:15px">
-			   <p>标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+			   ${answer.content}
 		  </div>
-		  
 		  <div  class="weui-cell weui-cells_form">
 		  	<div class="weui-cell__bd" align="center" >
 		  		<a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/invite.png">点赞</a>

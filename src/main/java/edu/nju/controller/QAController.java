@@ -90,7 +90,7 @@ public class QAController {
 		model.addAttribute("answer", answer);
 		model.addAttribute("likeNum", likeNum);
 		model.addAttribute("user", user);
-		model.addAttribute("title", question.getTitle());
+		model.addAttribute("question",question);
 		return "jsp/community/AnswerPreview";
 	}
 	
