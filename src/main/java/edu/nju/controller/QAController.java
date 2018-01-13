@@ -36,19 +36,6 @@ public class QAController {
 	UserService uservice;
 	
 	private Logger log = Logger.getLogger(UserController.class);
-//	@RequestMapping("/publishQ")
-//	@ResponseBody  
-//	public String publishQuestion(HttpSession session,String title,String content){
-//		String openid = (String)session.getAttribute("openid");
-//		List<MultipartFile> files = new ArrayList<MultipartFile>();
-//		String identify = "suijiString";
-//		if(qaservice.publishQuestion(openid,files, title, content,identify)){
-//			return "1";
-//		}
-//		else{
-//			return "0";
-//		}
-//	}
 	
 	@RequestMapping("/Index")
 	public String getQList(HttpSession session,Model model){
