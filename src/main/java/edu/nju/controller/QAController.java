@@ -91,7 +91,11 @@ public class QAController {
 	
 	@RequestMapping("/questionPreview")
 	public String questionPreview(String qid,Model model){
-		return "haha";
+		Question question  = qaservice.getByQuestionId(qid);
+		Long answernum = qaservice.getAnswerNum(qid);
+		model.addAttribute("question", question);
+		model.addAttribute("answernum", answernum);
+		return "jsp/community/QuestionPreview";
 	}
 	
 	public  String packageData(List<Answer> aList,String qid,Model model){
