@@ -36,14 +36,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<div class="weui-cells weui-cells_form">
 		  <div class="weui-cell" style="font-weight:bold">
-		      <p>问题二</p>
+		      <p>${question.title}</p>
 		  </div>
 		  <div style="margin:15px">
-			   <p>标题二由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+			   <p>${question.content}</p>
 		  </div>
 		  
 		  <div style="margin:15px;font-size:14px ">
-			   <span>0评论</span>
+			   <span>{answernum}</span>
 		  </div>
 		  
 		  <div  class="weui-cell weui-cells_form">

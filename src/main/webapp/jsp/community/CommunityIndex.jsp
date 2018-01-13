@@ -84,9 +84,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				      <p class="weui-media-box__title question">${Q.title}</p>
 			        <p class="weui-media-box__desc">${qnumList[index.count-1]}回答</p>
 			      </div>
-			      <div class="weui-media-box__hd">
-			        <img class="weui-media-box__thumb" src="/Drift_wechat/images/info.jpg">
-			      </div>
+			      <c:if test="${not empty Q.picSig}">
+					  <div class="weui-media-box__hd">
+				          <img class="weui-media-box__thumb" src="${Q.picSig}">
+				      </div>
+				  </c:if>
 		    </a>
 		</c:forEach>
 	  </div>

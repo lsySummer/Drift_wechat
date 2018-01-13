@@ -82,19 +82,44 @@ public class QAController {
 		return packageData(aList,qid,model);
 	}
 	
-	@RequestMapping("/answerPreview")
-	public String answerPreview(String aid,Model model){
+	@RequestMapping("/AnswerPreview")
+	public String answerPreview(String aid,String qid,Model model){
+		Question question = qaservice.getByQuestionId(qid);
 		Answer answer = qaservice.getByAnswerId(aid);
+		Long likeNum = qaservice.getLikeNum(aid);
+		UserInfo user = uservice.getUser(answer.getOpenid());
 		model.addAttribute("answer", answer);
-		return "jsp/community/answerAnswer";
+		model.addAttribute("likeNum", likeNum);
+		model.addAttribute("user", user);
+		model.addAttribute("title", question.getTitle());
+		return "jsp/community/AnswerPreview";
 	}
 	
-	@RequestMapping("/questionPreview")
+	@RequestMapping("/Like")
+	public String answerPreview(HttpSession session,String aid,Model model){
+		//String openid = sesion.get 
+		return "jsp/community/AnswerPreview";
+	}
+	
+	@RequestMapping("/cancellLike")
+	public String answerPreview(String aid,String qid,Model model){
+		Question question = qaservice.getByQuestionId(qid);
+		Answer answer = qaservice.getByAnswerId(aid);
+		Long likeNum = qaservice.getLikeNum(aid);
+		UserInfo user = uservice.getUser(answer.getOpenid());
+		model.addAttribute("answer", answer);
+		model.addAttribute("likeNum", likeNum);
+		model.addAttribute("user", user);
+		model.addAttribute("title", question.getTitle());
+		return "jsp/community/AnswerPreview";
+	}
+	
+	@RequestMapping("/QuestionPreview")
 	public String questionPreview(String qid,Model model){
 		Question question  = qaservice.getByQuestionId(qid);
-		Long answernum = qaservice.getAnswerNum(qid);
+		Long answerNum = qaservice.getAnswerNum(qid);
 		model.addAttribute("question", question);
-		model.addAttribute("answernum", answernum);
+		model.addAttribute("answerNum", answerNum);
 		return "jsp/community/QuestionPreview";
 	}
 	
@@ -178,7 +203,7 @@ public class QAController {
 		}
 //		qaservice.publishQuestion("test", title, summernote, picSig);
 		qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
-		return "api/QA/questionPreview?qid=";
+		return "api/QA/QuestionPreview?qid=";
 	}
 	
 	@RequestMapping("/Answer")
