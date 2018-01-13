@@ -92,7 +92,7 @@ public class QAController {
 	}
 	
 	@RequestMapping("/RemoveLike")
-	public String cancellLike(String aid,String qid,Model model){
+	public String cancellLike(HttpSession session,String aid,String qid,Model model){
 		String openid = (String) session.getAttribute("openid");
 		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
 		String authorid = qaservice.getByAnswerId(aid).getOpenid();

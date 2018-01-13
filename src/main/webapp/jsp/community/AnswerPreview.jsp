@@ -10,6 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="/Drift_wechat/css/demos.css">
 <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
+<script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
 <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
     <title>果麦公益检测</title>
@@ -46,10 +48,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   ${answer.content}
 		  </div>
 		  <div  class="weui-cell weui-cells_form">
-		  	<div class="weui-cell__bd" align="center" >
-		  		<a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/invite.png">点赞</a>
+		  	<div class="weui-cell__bd" align="center" > 
+		  		<a href="javascript:changeLike()"><img alt="" style="vertical-align:middle" id="like" src="/Drift_wechat/images/QA/liking.png"><h3 id="likeDes">点赞</h3></a>
 		  	</div>
 		  </div>
 	</div>
+	<script type="text/javascript">
+		function changeLike(){
+			var imgSrc = $("#like")[0].src;
+			var actImg = imgSrc.substring(imgSrc.lastIndexOf("/")+1);
+			if(actImg=="liking.png"){
+				addLike();
+				$("#like").attr('src',"/Drift_wechat/images/QA/liked.png");
+				$("#likeDes").html("取消");
+			}
+			else{
+				removeLike();
+				$("#like").attr('src',"/Drift_wechat/images/QA/liking.png");
+				$("#likeDes").html("点赞");
+			}
+		}
+		
+		function addLike(){
+			var aid = '${answer.id}';
+			console.log(aid);
+			$.get("/Drift_wechat/api/QA/AddLike?aid="+aid,function(data){
+				if(data="1"){
+					$.toptip('点赞成功', 'success');
+					setTimeout(function() {
+						window.location.href="/Drift_wechat/jsp/community/QuestionPreview.jsp";
+					},1000)
+				}
+				else{
+					$.toptip('点赞失败', 'error');
+				}
+			},"json");
+		}
+		
+		function removeLike(){
+			var aid = '${answer.id}';
+			var qid = '${question.id}';
+			console.log(aid+","+qid);
+			$.get("/Drift_wechat/api/QA/RemoveLike?aid="+aid+"&qid="+qid,function(data){
+				if(data="1"){
+					$.toptip('取消成功', 'success');
+					setTimeout(function() {
+						window.location.href="/Drift_wechat/jsp/community/QuestionPreview.jsp";
+					},1000)
+				}
+				else{
+					$.toptip('取消失败', 'error');
+				}
+			},"json");
+		}		
+	</script>
 </body>
 </html>
