@@ -22,7 +22,7 @@ public class Question {
 	private String title;
 	private String content;
 	private Date createTime;
-	private String picSig;
+	private String picSig;//"1"代表有,"0"代表无
 	@Id
 	@Column(length = 32)
 	@GeneratedValue(generator = "system-uuid")

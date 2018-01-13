@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	
   	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:8px ">
-  		<div class="weui-cell__ft"><a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="" src="/Drift_wechat/images/community/back.png"></a></div>
+  		<div class="weui-cell__ft"><a href="/Drift_wechat/api/QA/Index"><img alt="" style="" src="/Drift_wechat/images/community/back.png"></a></div>
 	    <div class="weui-cell__bd" style="color:black">
 	      <h3>回答浏览</h3>
 	    </div>

@@ -82,6 +82,18 @@ public class QAController {
 		return packageData(aList,qid,model);
 	}
 	
+	@RequestMapping("/answerPreview")
+	public String answerPreview(String aid,Model model){
+		Answer answer = qaservice.getByAnswerId(aid);
+		model.addAttribute("answer", answer);
+		return "jsp/community/answerAnswer";
+	}
+	
+	@RequestMapping("/questionPreview")
+	public String questionPreview(String qid,Model model){
+		return "haha";
+	}
+	
 	public  String packageData(List<Answer> aList,String qid,Model model){
 		Question question =  qaservice.getByQuestionId(qid);
 		List<UserInfo> userList = new ArrayList<UserInfo>();
