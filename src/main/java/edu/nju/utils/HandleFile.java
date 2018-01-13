@@ -96,6 +96,7 @@ public class HandleFile {
 		  link.attr("src", baseUrl+fileName);
 		}
 		result[0] = doc.html().replaceAll("\n", "");
+		System.out.println(result[0]);
 		result[1] = baseUrl + fileList.get(0).getOriginalFilename();
 		return result;
 	}

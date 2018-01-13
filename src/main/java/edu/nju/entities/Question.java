@@ -2,10 +2,13 @@ package edu.nju.entities;
 
 import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -45,6 +48,9 @@ public class Question {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	@Lob
+	@Basic(fetch=FetchType.LAZY)
+	@Column(columnDefinition="LONGTEXT",nullable=true)
 	public String getContent() {
 		return content;
 	}
