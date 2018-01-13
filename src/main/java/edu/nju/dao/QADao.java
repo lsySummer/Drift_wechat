@@ -35,4 +35,6 @@ public interface QADao {
 
 	Question getByQuestionId(String qid);
 
+	boolean checkIfLike(String qid, String answerid, String authorid, String likeid);
+
 }

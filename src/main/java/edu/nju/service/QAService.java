@@ -120,6 +120,13 @@ public class QAService {
 	}
 	
 	/**
+	 * 检查是否点赞
+	 */
+	public boolean checkIfLike(String qid,String answerid, String authorid,String likeid) {
+		return dao.checkIfLike(qid,answerid,authorid,likeid);
+	}
+	
+	/**
 	 * 根据点赞数排序
 	 */
 	public Map<Answer,Integer> sortByLikes(String qid){

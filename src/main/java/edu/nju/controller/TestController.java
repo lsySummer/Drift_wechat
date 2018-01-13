@@ -78,6 +78,7 @@ public class TestController {
 //		System.out.println(gservice.getOrder("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg"));
 //		qservice.getAllQuestion();
 //		System.out.println(qservice.publishQuestion("oRTgpwQ-wDOO3tGyhnqOM0829ubc", "id可以正常返回吗？", "可以吧", "1"));
+		System.out.println(qservice.checkIfLike("1", "2", "1", "1"));
 		return "jsp/NewFile";
 	}
 }

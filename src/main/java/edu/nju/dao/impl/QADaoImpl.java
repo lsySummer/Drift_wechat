@@ -166,4 +166,16 @@ public class QADaoImpl implements QADao{
 		}
 		return null;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean checkIfLike(String qid, String answerid, String authorid, String likeid) {
+		String hql = "from LikeInfo where qid=:qid and answerid=:answerid and authorid=:authorid and likeid=:likeid";
+		List<LikeInfo> list=baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).setParameter("answerid", answerid).
+				setParameter("authorid", authorid).setParameter("likeid", likeid).getResultList();
+		if(list.size()>0) {
+			return true;
+		}
+		return false;
+	}
 }
