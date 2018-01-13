@@ -84,8 +84,7 @@ public class HandleFile {
 			result[1] = "";
 			return result;
 		}
-		String absUrl = (new File("")).getAbsolutePath();
-		String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filepath;
+		String baseUrl = "/upload/"+filepath;
 		Document doc = Jsoup.parse(content);
 		Elements links = doc.select("img"); 
 		Utility.saveFile(filepath, fileList);
