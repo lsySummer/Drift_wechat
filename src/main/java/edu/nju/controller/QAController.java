@@ -185,7 +185,7 @@ public class QAController {
 			session.removeAttribute("question");
 			session.removeAttribute("qfile");
 		}
-		return "";
+		return "api/QA/Index";
 	}
 	
 	@RequestMapping("/QuestionPreview")
@@ -256,11 +256,11 @@ public class QAController {
 	}
 	
 	@RequestMapping("/CancelAnswer")
-	public String CancelAnswer(HttpSession session){
+	public String CancelAnswer(HttpSession session, String qid){
 		if(session.getAttribute("answer") != null){
 			session.removeAttribute("answer");
 			session.removeAttribute("afile");
 		}
-		return "";
+		return "/api/QA/DateSort?qid=" + qid;
 	}
 }
