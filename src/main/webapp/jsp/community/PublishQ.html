@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
 </head>
 <body>
-  <form class="weui-cells weui-cells_form" action="/Drift_wechat/api/QA/ConfirmAnswer" method="get" id="basic" style="margin-top:4%;">
+  <form class="weui-cells weui-cells_form" action="/Drift_wechat/api/QA/ConfirmAsk" method="get" id="basic" style="margin-top:4%;">
     <div class="weui-cells__title">标题</div>
 	<div class="weui-cells">
 	  <div class="weui-cell">
@@ -57,7 +57,7 @@
     $.ajax({
         data: data,
         type: "POST",
-        url: "/Drift_wechat/api/QA/Answer",
+        url: "/Drift_wechat/api/QA/Ask",
         cache: false,
         contentType: false,
         processData: false,
