@@ -71,10 +71,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    </button>
 					    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 					        <li role="presentation">
-					            <a role="menuitem" tabindex="-1" href="/Drift_wechat/api/QA/likeSort?qid=${question.id}">按质量排序</a>
+					            <a role="menuitem" tabindex="-1" href="/Drift_wechat/api/QA/LikeSort?qid=${question.id}">按质量排序</a>
 					        </li>
 					        <li role="presentation">
-					            <a role="menuitem" tabindex="-1" href="/Drift_wechat/api/QA/dateSort?qid=${question.id}">按时间排序</a>
+					            <a role="menuitem" tabindex="-1" href="/Drift_wechat/api/QA/DateSort?qid=${question.id}">按时间排序</a>
 					        </li>
 					    </ul>
 					</div>

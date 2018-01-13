@@ -49,13 +49,13 @@ public class QAController {
 		return "jsp/community/CommunityIndex";
 	}
 	
-	@RequestMapping("/dateSort")
+	@RequestMapping("/DateSort")
 	public String getQ2AList(String qid, HttpSession session,Model model){
 		List<Answer> aList = (List)qaservice.sortByDate(qid);
 		return packageData(aList,qid,model);
 	}
 	
-	@RequestMapping("/likeSort")
+	@RequestMapping("/LikeSort")
 	public String getQ2ALikeList(String qid,Model model){
 		List<Answer> aList = new ArrayList<Answer>();
 		Map<Answer,Integer> map = new HashMap<Answer,Integer>();  		  
@@ -65,18 +65,6 @@ public class QAController {
 		return packageData(aList,qid,model);
 	}
 	
-	@RequestMapping("/AnswerPreview")
-	public String answerPreview(String aid,String qid,Model model){
-		Question question = qaservice.getByQuestionId(qid);
-		Answer answer = qaservice.getByAnswerId(aid);
-		Long likeNum = qaservice.getLikeNum(aid);
-		UserInfo user = uservice.getUser(answer.getOpenid());
-		model.addAttribute("answer", answer);
-		model.addAttribute("likeNum", likeNum);
-		model.addAttribute("user", user);
-		model.addAttribute("question",question);
-		return "jsp/community/AnswerPreview";
-	}
 	
 	@RequestMapping("/AddLike")
 	public String addLike(HttpSession session,String aid,Model model){
@@ -99,15 +87,6 @@ public class QAController {
 			return "0";
 	}
 	
-	@RequestMapping("/QuestionPreview")
-	public String questionPreview(String qid,Model model){
-		Question question  = qaservice.getByQuestionId(qid);
-		Long answerNum = qaservice.getAnswerNum(qid);
-		model.addAttribute("question", question);
-		model.addAttribute("answerNum", answerNum);
-		return "jsp/community/QuestionPreview";
-	}
-	
 	public  String packageData(List<Answer> aList,String qid,Model model){
 		Question question =  qaservice.getByQuestionId(qid);
 		List<UserInfo> userList = new ArrayList<UserInfo>();
@@ -120,7 +99,6 @@ public class QAController {
 		}
 		model.addAttribute("anum",qaservice.getAnswerNum(qid));
 		model.addAttribute("aList", aList);
-		System.out.println(aList.size());
 		model.addAttribute("question", question);
 		model.addAttribute("userList", userList);
 		model.addAttribute("dateStrs", dateStrs);
@@ -155,18 +133,17 @@ public class QAController {
 		}
 	}
 	
-	@RequestMapping("/Ask")
+	@RequestMapping("/Question")
 	public void ask(HttpSession session, @RequestParam(value = "file") MultipartFile file, HttpServletResponse response){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String filePath = "";
-		if(session.getAttribute("ask") == null){
-			//filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
-			filePath = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg" + "_" + df.format(new Date()) + "/temp";
+		if(session.getAttribute("question") == null){
+			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
 //			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
-			session.setAttribute("ask", filePath);
+			session.setAttribute("question", filePath);
 		}else{
-			filePath = (String)session.getAttribute("ask");
+			filePath = (String)session.getAttribute("question");
 		}
 		try {
 			PrintWriter out = response.getWriter();
@@ -181,19 +158,29 @@ public class QAController {
 		}
 	}
 	
-	@RequestMapping("/ConfirmAsk")
+	@RequestMapping("/ConfirmQuestion")
 	public String ConfirmAsk(HttpSession session, String title, String summernote, HttpServletResponse response){
 		String picSig = "";
-		if(session.getAttribute("ask") != null){
+		if(session.getAttribute("question") != null){
 			picSig = (String)session.getAttribute("qfilename");
 			qaservice.changenName(picSig);
-			session.removeAttribute("ask");
+			session.removeAttribute("question");
 			session.removeAttribute("qfilename");
 		}
 		//String questionid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
 		String questionid = qaservice.publishQuestion("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", title, summernote, picSig);
 		
-		return "api/QA/QuestionPreview?qid=" + questionid;
+		return "redirect:QuestionPreview?qid=" + questionid;
+		//return questionPreview(questionid,model);
+	}
+	
+	@RequestMapping("/QuestionPreview")
+	public String questionPreview(String qid,Model model){
+		Question question  = qaservice.getByQuestionId(qid);
+		Long answerNum = qaservice.getAnswerNum(qid);
+		model.addAttribute("question", question);
+		model.addAttribute("answerNum", answerNum);
+		return "jsp/community/QuestionPreview";
 	}
 	
 	@RequestMapping("/Answer")
@@ -201,8 +188,7 @@ public class QAController {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String filePath = "";
 		if(session.getAttribute("answer") == null){
-			//filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
-			filePath = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg" + "_" + df.format(new Date()) + "/temp";
+			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
 //			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("answer", filePath);
@@ -223,7 +209,7 @@ public class QAController {
 	}
 	
 	@RequestMapping("/ConfirmAnswer")
-	public String ConfirmAnswer(HttpSession session, String qid, String summernote, HttpServletResponse response){
+	public String ConfirmAnswer(HttpSession session, String qid, String summernote,Model model){
 		String picSig = "";
 		if(session.getAttribute("answer") != null){
 			picSig = (String)session.getAttribute("afilename");
@@ -233,6 +219,20 @@ public class QAController {
 		}
 		//String aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, picSig);
 		String aid = qaservice.addAnswer("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", qid, summernote, picSig);
-		return "api/QA/AnswerPreview?qid=" + qid + "&aid=" + aid;
+		return "redirect:AnswerPreview?qid=" + qid + "&aid=" + aid;
+		//return toAnswerPreview(aid,qid,model);
+	}
+	
+	@RequestMapping("/AnswerPreview")
+	public String answerPreview(String aid,String qid,Model model){
+		Question question = qaservice.getByQuestionId(qid);
+		Answer answer = qaservice.getByAnswerId(aid);
+		Long likeNum = qaservice.getLikeNum(aid);
+		UserInfo user = uservice.getUser(answer.getOpenid());
+		model.addAttribute("answer", answer);
+		model.addAttribute("likeNum", likeNum);
+		model.addAttribute("user", user);
+		model.addAttribute("question",question);
+		return "jsp/community/AnswerPreview";
 	}
 }
