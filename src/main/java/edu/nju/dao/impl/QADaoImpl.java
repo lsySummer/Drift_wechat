@@ -20,25 +20,24 @@ public class QADaoImpl implements QADao{
 	BaseDao baseDao;
 
 	@Override
-	public boolean publishQuestion(Question q) {
+	public String publishQuestion(Question q) {
 		try {
 			baseDao.save(q);
-			return true;
+			return q.getId();
 		}catch(Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 
 	@Override
-	public boolean addAnswer(Answer a) {
+	public String addAnswer(Answer a) {
 		try {
 			baseDao.save(a);
-			System.out.println(a.getId());
-			return true;
+			return a.getId();
 		}catch(Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 

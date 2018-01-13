@@ -9,9 +9,9 @@ import edu.nju.entities.Question;
 
 public interface QADao {
 
-	boolean publishQuestion(Question q);
+	String publishQuestion(Question q);
 
-	boolean addAnswer(Answer a);
+	String addAnswer(Answer a);
 
 	List<Question> getAllQuestion();
 

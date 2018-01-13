@@ -30,7 +30,7 @@ public class QAService {
 	public String addPicture(String filePath,MultipartFile file) {
 		List<MultipartFile> list = new ArrayList<MultipartFile>();
 		list.add(file);
-		String absUrl = (new File("")).getAbsolutePath();
+//		String absUrl = (new File("")).getAbsolutePath();
 		//String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filePath;
 		String fileUrl = Utility.saveFile(filePath, list);
 		String result = "/upload/"+filePath+fileUrl;
@@ -50,7 +50,7 @@ public class QAService {
 	/**
 	 * 发布问题
 	 */
-	public boolean publishQuestion(String openid,String title,String content,String picSig) {
+	public String publishQuestion(String openid,String title,String content,String picSig) {
 		Question q = new Question();
 		Date date = new Date();
 		q.setOpenid(openid);
@@ -64,14 +64,13 @@ public class QAService {
 	/**
 	 * 添加回答
 	 */
-	public boolean addAnswer(String openid,String qid,String content,String picSig) {
+	public String addAnswer(String openid,String qid,String content,String picSig) {
 		Answer a = new Answer();
 		a.setContent(content);
 		a.setCreateTime(new Date());
 		a.setOpenid(openid);
 		a.setQid(qid);
 		a.setPicSig(picSig);
-//		Utility.saveFile("answers/"+qid+"/"+openid+"/",files);
 		return dao.addAnswer(a);
 	}
 	
