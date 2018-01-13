@@ -168,10 +168,11 @@ public class QAController {
 		if(session.getAttribute("question") != null){
 			List<MultipartFile> photoLists = (List<MultipartFile>)session.getAttribute("qfile");
 			String filepath = (String)session.getAttribute("question");
+			qid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, photoLists, filepath);
 			session.removeAttribute("question");
 			session.removeAttribute("qfile");
 		}else{
-			
+			qid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, new ArrayList<MultipartFile>(), "");
 		}
 		return "api/QA/QuestionPreview?qid=" + qid;
 	}
@@ -229,10 +230,11 @@ public class QAController {
 		if(session.getAttribute("answer") != null){
 			List<MultipartFile> photoLists = (List<MultipartFile>)session.getAttribute("afile");
 			String filepath = (String)session.getAttribute("answer");
+			aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, photoLists, filepath);
 			session.removeAttribute("answer");
 			session.removeAttribute("afile");
 		}else{
-			
+			aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, new ArrayList<MultipartFile>(), "");
 		}
 		return "redirect:AnswerPreview?qid=" + qid + "&aid=" + aid;
 		//return toAnswerPreview(aid,qid,model);
