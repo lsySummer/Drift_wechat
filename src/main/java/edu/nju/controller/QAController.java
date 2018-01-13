@@ -185,7 +185,7 @@ public class QAController {
 			session.removeAttribute("question");
 			session.removeAttribute("qfile");
 		}
-		return "api/QA/Index";
+		return "redirect:Index";
 	}
 	
 	@RequestMapping("/QuestionPreview")
@@ -261,6 +261,6 @@ public class QAController {
 			session.removeAttribute("answer");
 			session.removeAttribute("afile");
 		}
-		return "/api/QA/DateSort?qid=" + qid;
+		return "redirect:DateSort?qid=" + qid;
 	}
 }
