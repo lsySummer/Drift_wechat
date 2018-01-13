@@ -89,14 +89,14 @@ public class HandleFile {
 		Document doc = Jsoup.parse(content);
 		Elements links = doc.select("img"); 
 		Utility.saveFile(filepath, fileList);
-		result[0] = doc.html();
-		result[1] = baseUrl + fileList.get(0).getOriginalFilename();
 		for (int i=0;i<links.size();i++) { 
 		  Element link = links.get(i);
 		  MultipartFile mf = fileList.get(i);
 		  String fileName = mf.getOriginalFilename();
 		  link.attr("src", baseUrl+fileName);
 		}
+		result[0] = doc.html();
+		result[1] = baseUrl + fileList.get(0).getOriginalFilename();
 		return result;
 	}
 	
