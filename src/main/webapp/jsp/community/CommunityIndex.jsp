@@ -78,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  
 	  <div class="weui-panel__bd">
  		<c:forEach items="${qList}" var="Q" varStatus="index">
-			<a href="/Drift_wechat/api/QA/dateSort?qid=${Q.id}  " class="weui-media-box weui-media-box_appmsg">
+			<a href="/Drift_wechat/api/QA/DateSort?qid=${Q.id}  " class="weui-media-box weui-media-box_appmsg">
 				<div class="weui-cell__hd" style="width:30px"><h3>${index.count}</h3></div>
 			      <div class="weui-media-box__bd">
 				      <p class="weui-media-box__title question">${Q.title}</p>

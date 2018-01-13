@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	
   	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:10px ">
-  		<div class="weui-cell__ft"><a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="" src="/Drift_wechat/images/community/back.png"></a></div>
+  		<div class="weui-cell__ft"><a href="/Drift_wechat/api/QA/Index"><img alt="" style="" src="/Drift_wechat/images/community/back.png"></a></div>
 	    <div class="weui-cell__bd" style="color:black">
 	      <h2>问题预览</h2>
 	    </div>
@@ -47,11 +47,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 		  
 		  <div  class="weui-cell weui-cells_form">
-		  	<div class="weui-cell__bd" align="center" >
-		  		<a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/invite.png">   邀请回答</a>
-		  	</div>
 		  	<div class="weui-cell__bd" align="center">
-		  		<a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/add.png">   添加回答</a>
+		  		<a href="/Drift_wechat/jsp/community/PublishA.html?qid=${question.id}"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/add.png">   添加回答</a>
 		  	</div>
 		  </div>
 	</div>

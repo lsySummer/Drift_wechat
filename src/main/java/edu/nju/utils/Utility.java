@@ -141,11 +141,11 @@ public class Utility {
 			String fileName = mf.getOriginalFilename();
 			if (!"".equals(fileName)) {
 				// 获取后缀
-				String suffix = fileName.substring(fileName.indexOf("."),
-						fileName.length());
-				String newName=i+suffix;
-				String url = baseUrl + newName;
-				urllst = urllst+newName+";";
+//				String suffix = fileName.substring(fileName.indexOf("."),
+//						fileName.length());
+//				String newName=i+suffix;
+				String url = baseUrl + fileName;
+				urllst = urllst + fileName+";";
 				try {
 					mf.transferTo(new File(url));
 				}catch(Exception e){
@@ -157,59 +157,4 @@ public class Utility {
 		return urllst;
 	}
     
-    public static boolean deleteFile(String filepath) {
-    	String absUrl = (new File("")).getAbsolutePath();
-		String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filepath;
-		System.out.println(baseUrl);
-		log.info("删除图片地址"+baseUrl);
-		Path path = Paths.get(baseUrl);
-		if(Files.exists(path)){
-			try {
-				Files.delete(path);
-				return true;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return false;
-    }
-
-	public static boolean changenName(String path) {
-		String[] list = path.split("/");
-		String filePath = "";
-		for(int i=0;i<list.length-1;i++) {
-			filePath = filePath+list[i]+"/";
-		}
-		filePath = filePath + "img/";
- 		String absUrl = (new File("")).getAbsolutePath();
-		String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+path;
-		String newUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filePath;
-		System.out.println(baseUrl);
-		log.info("修改名字图片地址"+baseUrl);
-		File file = new File(baseUrl);
-		try {
-			file.renameTo(new File(newUrl));
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
-    }
-
-	public static boolean makeFolder(String filepath) {
-		String absUrl = (new File("")).getAbsolutePath();
-		String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filepath;
-		System.out.println(baseUrl);
-		log.info("创建文件夹地址"+baseUrl);
-		Path path = Paths.get(baseUrl);
-		if(Files.notExists(path)){
-			try {
-				Files.createDirectories(path);
-				return true;
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return false;
-	}
 }
