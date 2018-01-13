@@ -138,7 +138,7 @@ public class QAController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/Question")
 	public void ask(HttpSession session, @RequestParam(value = "file") MultipartFile file, HttpServletResponse response){
-		session.setAttribute("openid", "test");
+//		session.setAttribute("openid", "test");
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
 		String filePath = "";
 		if(session.getAttribute("question") == null){
