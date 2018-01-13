@@ -20,13 +20,13 @@ public class QADaoImpl implements QADao{
 	BaseDao baseDao;
 
 	@Override
-	public boolean publishQuestion(Question q) {
+	public String publishQuestion(Question q) {
 		try {
 			baseDao.save(q);
-			return true;
+			return q.getId();
 		}catch(Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 

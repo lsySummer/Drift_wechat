@@ -50,7 +50,7 @@ public class QAService {
 	/**
 	 * 发布问题
 	 */
-	public boolean publishQuestion(String openid,String title,String content,String picSig) {
+	public String publishQuestion(String openid,String title,String content,String picSig) {
 		Question q = new Question();
 		Date date = new Date();
 		q.setOpenid(openid);

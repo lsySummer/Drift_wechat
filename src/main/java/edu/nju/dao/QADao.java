@@ -9,7 +9,7 @@ import edu.nju.entities.Question;
 
 public interface QADao {
 
-	boolean publishQuestion(Question q);
+	String publishQuestion(Question q);
 
 	boolean addAnswer(Answer a);
 
