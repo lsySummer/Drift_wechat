@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- set `maximum-scale` for some compatibility issues -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <title>提问</title>
+  <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
+  <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
+  <script src="/Drift_wechat/js/bootstrap.min.js"></script> 
+  <link href="/Drift_wechat/css/summernote.css" rel="stylesheet">
+  <script src="/Drift_wechat/js/summernote.min.js"></script>
+  <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+</head>
+<body>
+  <form class="weui-cells weui-cells_form" action="/Drift_wechat/api/QA/ConfirmAsk" method="get" id="basic" style="margin:4% auto">
+	<div class="weui-cells__title">内容</div>
+      <textarea name="summernote" class="summernote" id="summernote" title="Contents" style="width:100%"></textarea>
+    <button type="submit" class="weui-btn weui-btn_primary">发布</button>
+    <input type="text" id="qid" name="qid" style="visibility:collapse"/>
+  </form>
+<script type="text/javascript">
+  var qid = getParmFormUrl("qid");
+  document.getElementById("qid").value = qid;
+  
+  var image_name = 0;
+  $(document).ready(function() {  
+   $('#summernote').summernote({  
+      height: 300, /*指定高度*/  
+      lang: 'zh-CN',  
+      focus: true,
+      toolbar: [     
+        ['para', ['ul', 'ol', 'paragraph']],  
+        ['insert', ['picture', 'hr']]  
+      ],  
+      callbacks: {
+        onImageUpload: function(files) {
+        	/* $('#summernote').summernote('insertNode', imgNode); */
+            sendFile(files[0]);
+        }
+      } 
+   });  
+  });  
+    
+  function sendFile(file) {
+    data = new FormData();
+    data.append("file", file);
+    var fileData = URL.createObjectURL(file);
+    $('#summernote').summernote('insertImage', fileData, function ($image) {
+      $image.css('width', document.body.clientWidth);
+	  $image.attr('id', image_name);
+	});
+    $.ajax({
+        data: data,
+        type: "POST",
+        url: "/Drift_wechat/api/QA/Ask",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(url) {
+            console.log(url);
+            $('#'+image_name).attr('src', url);
+            image_name ++;
+        }
+    });
+  }
+
+  $('basic').on('submit', function (e) {
+      e.preventDefault();
+  });
+  
+  function getParmFormUrl(name){
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null){return decodeURI(r[2]);}
+    return null;
+  }
+</script>  
+</body>  
+</html>  
+</body>
+</html>
