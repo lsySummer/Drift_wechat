@@ -15,7 +15,15 @@
   <form class="weui-cells weui-cells_form" action="/Drift_wechat/api/QA/ConfirmAnswer" method="get" id="basic" style="margin-top:4%;">
 	<div class="weui-cells__title">内容</div>
       <textarea name="summernote" class="summernote" id="summernote" title="Contents" style="width:100%"></textarea>
-    <button type="submit" class="weui-btn weui-btn_primary">发布</button>
+    <!--按钮组 -->
+	<div id="botton" class="weui-flex" style="width:100%;">
+	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
+	   <button id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:window.location.href='/Drift_wechat/api/QA/CancelAnswer';">取消</button>
+	  </div>
+	  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
+	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary">发布</button>
+	  </div>
+	</div>
     <input type="text" id="qid" name="qid" style="visibility:collapse"/>
   </form>
 <script type="text/javascript">
@@ -57,15 +65,14 @@
         contentType: false,
         processData: false,
         success: function(url) {
-            console.log(url);
-            $('#'+image_name).attr('src', url);
+            /* $('#'+image_name).attr('src', url); */
             image_name ++;
         }
     });
   }
 
-  $('basic').on('submit', function (e) {
-      e.preventDefault();
+  $('#basic').on('submit', function (e) {
+      $.toptip('收货成功', 'success');
   });
   
   function getParmFormUrl(name){

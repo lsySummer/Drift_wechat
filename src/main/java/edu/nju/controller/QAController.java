@@ -158,23 +158,26 @@ public class QAController {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/Question")
 	public void ask(HttpSession session, @RequestParam(value = "file") MultipartFile file, HttpServletResponse response){
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
 		String filePath = "";
 		if(session.getAttribute("question") == null){
 			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
 //			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("question", filePath);
+			List<MultipartFile> temp = new ArrayList<MultipartFile>();
+			session.setAttribute("qfile", temp);
 		}else{
 			filePath = (String)session.getAttribute("question");
 		}
+		List<MultipartFile> photoLists = (List<MultipartFile>) session.getAttribute("qfile");
+		photoLists.add(file);
 		try {
 			PrintWriter out = response.getWriter();
-			String filename = qaservice.addPicture(filePath, file);
-			session.setAttribute("qfilename", filename);
-			out.print(filename);
+			out.print("200");
 			out.flush();
 			out.close();
 		} catch (IOException e) {
@@ -183,36 +186,50 @@ public class QAController {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/ConfirmQuestion")
 	public String ConfirmAsk(HttpSession session, String title, String summernote, HttpServletResponse response){
-		String picSig = "";
+		String qid = "";
 		if(session.getAttribute("question") != null){
-			picSig = (String)session.getAttribute("qfilename");
-			qaservice.changenName(picSig);
+			List<MultipartFile> photoLists = (List<MultipartFile>)session.getAttribute("qfile");
+			String filepath = (String)session.getAttribute("question");
 			session.removeAttribute("question");
-			session.removeAttribute("qfilename");
+			session.removeAttribute("qfile");
+		}else{
+			
 		}
-		String questionid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
-		return "api/QA/QuestionPreview?qid=" + questionid;
+		return "api/QA/QuestionPreview?qid=" + qid;
 	}
 	
+	@RequestMapping("/CancelQuestion")
+	public String CancelQuestion(HttpSession session){
+		if(session.getAttribute("question") != null){
+			session.removeAttribute("question");
+			session.removeAttribute("qfile");
+		}
+		return "";
+	}
+	
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/Answer")
 	public void Answer(HttpSession session, @RequestParam(value = "file") MultipartFile file, HttpServletResponse response){
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
 		String filePath = "";
 		if(session.getAttribute("answer") == null){
 			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
 //			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("answer", filePath);
+			List<MultipartFile> temp = new ArrayList<MultipartFile>();
+			session.setAttribute("afile", temp);
 		}else{
 			filePath = (String)session.getAttribute("answer");
 		}
+		List<MultipartFile> photoLists = (List<MultipartFile>) session.getAttribute("afile");
+		photoLists.add(file);
 		try {
 			PrintWriter out = response.getWriter();
-			String filename = qaservice.addPicture(filePath, file);
-			session.setAttribute("afilename", filename);
-			out.print(filename);
+			out.print("200");
 			out.flush();
 			out.close();
 		} catch (IOException e) {
@@ -221,16 +238,27 @@ public class QAController {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/ConfirmAnswer")
 	public String ConfirmAnswer(HttpSession session, String qid, String summernote, HttpServletResponse response){
-		String picSig = "";
+		String aid = "";
 		if(session.getAttribute("answer") != null){
-			picSig = (String)session.getAttribute("afilename");
-			qaservice.changenName(picSig);
+			List<MultipartFile> photoLists = (List<MultipartFile>)session.getAttribute("afile");
+			String filepath = (String)session.getAttribute("answer");
 			session.removeAttribute("answer");
-			session.removeAttribute("afilename");
+			session.removeAttribute("afile");
+		}else{
+			
 		}
-		String aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, picSig);
 		return "api/QA/AnswerPreview?qid=" + qid + "&aid=" + aid;
+	}
+	
+	@RequestMapping("/CancelAnswer")
+	public String CancelAnswer(HttpSession session){
+		if(session.getAttribute("answer") != null){
+			session.removeAttribute("answer");
+			session.removeAttribute("afile");
+		}
+		return "";
 	}
 }

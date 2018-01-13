@@ -23,7 +23,15 @@
 	  <div class="weui-cells__title">内容</div>
       	<textarea name="summernote" class="summernote" id="summernote" title="Contents" style="width:100%;"></textarea>
 	</div>
-    <button type="submit" class="weui-btn weui-btn_primary">发布</button>
+    <!--按钮组 -->
+	<div id="botton" class="weui-flex" style="width:100%;">
+	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
+	   <button id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:window.location.href='/Drift_wechat/api/QA/CancelQuestion';">取消</button>
+	  </div>
+	  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
+	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary">发布</button>
+	  </div>
+	</div>
   </form>
 <script type="text/javascript">
 	var image_name = 0;
@@ -62,14 +70,14 @@
         contentType: false,
         processData: false,
         success: function(url) {
-            $('#'+image_name).attr('src', url);
+            /* $('#'+image_name).attr('src', url); */
             image_name ++;
         }
     });
   }
 
-  $('basic').on('submit', function (e) {
-      e.preventDefault();
+  $('#basic').on('submit', function (e) {
+      $.toptip('收货成功', 'success');
   });
 </script>  
 </body>  
