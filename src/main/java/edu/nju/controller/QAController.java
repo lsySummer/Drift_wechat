@@ -39,7 +39,6 @@ public class QAController {
 	
 	@RequestMapping("/Index")
 	public String getQList(HttpSession session,Model model){
-		//String openid = (String)session.getAttribute("openid");
 		List<Question> qList = (List)qaservice.getAllQuestion();
 		List<Long> qnumList = new ArrayList();
 		for(Question question :qList){
@@ -50,16 +49,14 @@ public class QAController {
 		return "jsp/community/CommunityIndex";
 	}
 	
-	@RequestMapping("/dateSort")
+	@RequestMapping("/DateSort")
 	public String getQ2AList(String qid, HttpSession session,Model model){
-		//String openid = (String)session.getAttribute("openid");
 		List<Answer> aList = (List)qaservice.sortByDate(qid);
 		return packageData(aList,qid,model);
 	}
 	
-	@RequestMapping("/likeSort")
+	@RequestMapping("/LikeSort")
 	public String getQ2ALikeList(String qid,Model model){
-		//String openid = (String)session.getAttribute("openid");
 		List<Answer> aList = new ArrayList<Answer>();
 		Map<Answer,Integer> map = new HashMap<Answer,Integer>();  		  
 		for (Answer key : map.keySet()) {  
@@ -68,23 +65,11 @@ public class QAController {
 		return packageData(aList,qid,model);
 	}
 	
-	@RequestMapping("/AnswerPreview")
-	public String answerPreview(String aid,String qid,Model model){
-		Question question = qaservice.getByQuestionId(qid);
-		Answer answer = qaservice.getByAnswerId(aid);
-		Long likeNum = qaservice.getLikeNum(aid);
-		UserInfo user = uservice.getUser(answer.getOpenid());
-		model.addAttribute("answer", answer);
-		model.addAttribute("likeNum", likeNum);
-		model.addAttribute("user", user);
-		model.addAttribute("question",question);
-		return "jsp/community/AnswerPreview";
-	}
 	
 	@RequestMapping("/AddLike")
 	public String addLike(HttpSession session,String aid,Model model){
-		String openid = (String) session.getAttribute("openid");
-		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		//String openid = (String) session.getAttribute("openid");
+		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
 		if(qaservice.addlike(aid, openid))
 			return "1";
 		else
@@ -93,22 +78,13 @@ public class QAController {
 	
 	@RequestMapping("/RemoveLike")
 	public String cancellLike(HttpSession session,String aid,String qid,Model model){
-		String openid = (String) session.getAttribute("openid");
-		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		//String openid = (String) session.getAttribute("openid");
+		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
 		String authorid = qaservice.getByAnswerId(aid).getOpenid();
 		if(qaservice.revokeLike(qid, aid, authorid,openid))
 			return "1";
 		else
 			return "0";
-	}
-	
-	@RequestMapping("/QuestionPreview")
-	public String questionPreview(String qid,Model model){
-		Question question  = qaservice.getByQuestionId(qid);
-		Long answerNum = qaservice.getAnswerNum(qid);
-		model.addAttribute("question", question);
-		model.addAttribute("answerNum", answerNum);
-		return "jsp/community/QuestionPreview";
 	}
 	
 	public  String packageData(List<Answer> aList,String qid,Model model){
@@ -123,7 +99,6 @@ public class QAController {
 		}
 		model.addAttribute("anum",qaservice.getAnswerNum(qid));
 		model.addAttribute("aList", aList);
-		System.out.println(aList.size());
 		model.addAttribute("question", question);
 		model.addAttribute("userList", userList);
 		model.addAttribute("dateStrs", dateStrs);
@@ -210,6 +185,15 @@ public class QAController {
 		return "";
 	}
 	
+	@RequestMapping("/QuestionPreview")
+	public String questionPreview(String qid,Model model){
+		Question question  = qaservice.getByQuestionId(qid);
+		Long answerNum = qaservice.getAnswerNum(qid);
+		model.addAttribute("question", question);
+		model.addAttribute("answerNum", answerNum);
+		return "jsp/community/QuestionPreview";
+	}
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/Answer")
 	public void Answer(HttpSession session, @RequestParam(value = "file") MultipartFile file, HttpServletResponse response){
@@ -250,7 +234,21 @@ public class QAController {
 		}else{
 			
 		}
-		return "api/QA/AnswerPreview?qid=" + qid + "&aid=" + aid;
+		return "redirect:AnswerPreview?qid=" + qid + "&aid=" + aid;
+		//return toAnswerPreview(aid,qid,model);
+	}
+	
+	@RequestMapping("/AnswerPreview")
+	public String answerPreview(String aid,String qid,Model model){
+		Question question = qaservice.getByQuestionId(qid);
+		Answer answer = qaservice.getByAnswerId(aid);
+		Long likeNum = qaservice.getLikeNum(aid);
+		UserInfo user = uservice.getUser(answer.getOpenid());
+		model.addAttribute("answer", answer);
+		model.addAttribute("likeNum", likeNum);
+		model.addAttribute("user", user);
+		model.addAttribute("question",question);
+		return "jsp/community/AnswerPreview";
 	}
 	
 	@RequestMapping("/CancelAnswer")
