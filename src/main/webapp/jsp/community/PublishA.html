@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
 </head>
 <body>
-  <form class="weui-cells weui-cells_form" action="/Drift_wechat/api/QA/ConfirmAsk" method="get" id="basic" style="margin-top:4%;">
+  <form class="weui-cells weui-cells_form" action="/Drift_wechat/api/QA/ConfirmAnswer" method="get" id="basic" style="margin-top:4%;">
 	<div class="weui-cells__title">内容</div>
       <textarea name="summernote" class="summernote" id="summernote" title="Contents" style="width:100%"></textarea>
     <button type="submit" class="weui-btn weui-btn_primary">发布</button>
@@ -52,7 +52,7 @@
     $.ajax({
         data: data,
         type: "POST",
-        url: "/Drift_wechat/api/QA/Ask",
+        url: "/Drift_wechat/api/QA/Answer",
         cache: false,
         contentType: false,
         processData: false,
