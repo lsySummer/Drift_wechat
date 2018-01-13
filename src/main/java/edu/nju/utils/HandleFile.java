@@ -79,7 +79,7 @@ public class HandleFile {
 	 */
 	public static String[] saveFile(String content,List<MultipartFile> fileList,String filepath) {
 		String[] result = new String[2];
-		if(fileList.size()>0) {
+		if(fileList.size()==0) {
 			result[0] = content;
 			result[1] = "";
 			return result;
@@ -95,7 +95,7 @@ public class HandleFile {
 		  String fileName = mf.getOriginalFilename();
 		  link.attr("src", baseUrl+fileName);
 		}
-		result[0] = doc.html();
+		result[0] = doc.html().replaceAll("\n", "");
 		result[1] = baseUrl + fileList.get(0).getOriginalFilename();
 		return result;
 	}

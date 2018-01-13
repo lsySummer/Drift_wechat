@@ -56,12 +56,12 @@ public class QAService {
 		q.setTitle(title);
 		String[] result = HandleFile.saveFile(content,fileList,filepath);
 		String realContent = result[0];
-		System.out.println(realContent);
 		String picSig = result[1];
 		q.setContent(realContent);
 		q.setCreateTime(date);
 		q.setPicSig(picSig);
-		return dao.publishQuestion(q);
+//		return dao.publishQuestion(q);
+		return "";
 	}
 	
 	/**
