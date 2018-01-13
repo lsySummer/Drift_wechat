@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	
   	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:10px ">
-  		<div class="weui-cell__ft"><a href="/Drift_wechat/api/QA/dateSort?qid=${question.id}"><img alt="" style="" src="/Drift_wechat/images/community/back.png"></a></div>
+  		<div class="weui-cell__ft"><a href="/Drift_wechat/api/QA/DateSort?qid=${question.id}"><img alt="" style="" src="/Drift_wechat/images/community/back.png"></a></div>
 	    <div class="weui-cell__bd" style="color:black">
 	      <h3>详细回答</h3>
 	    </div>
