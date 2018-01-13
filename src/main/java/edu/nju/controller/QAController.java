@@ -158,17 +158,17 @@ public class QAController {
 		}
 	}
 	
-	@RequestMapping("/Ask")
+	@RequestMapping("/Question")
 	public void ask(HttpSession session, @RequestParam(value = "file") MultipartFile file, HttpServletResponse response){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String filePath = "";
-		if(session.getAttribute("ask") == null){
-			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
+		if(session.getAttribute("question") == null){
+			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
 //			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
-			session.setAttribute("ask", filePath);
+			session.setAttribute("question", filePath);
 		}else{
-			filePath = (String)session.getAttribute("ask");
+			filePath = (String)session.getAttribute("question");
 		}
 		try {
 			PrintWriter out = response.getWriter();
@@ -183,13 +183,13 @@ public class QAController {
 		}
 	}
 	
-	@RequestMapping("/ConfirmAsk")
+	@RequestMapping("/ConfirmQuestion")
 	public String ConfirmAsk(HttpSession session, String title, String summernote, HttpServletResponse response){
 		String picSig = "";
-		if(session.getAttribute("ask") != null){
+		if(session.getAttribute("question") != null){
 			picSig = (String)session.getAttribute("qfilename");
 			qaservice.changenName(picSig);
-			session.removeAttribute("ask");
+			session.removeAttribute("question");
 			session.removeAttribute("qfilename");
 		}
 		String questionid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
@@ -201,7 +201,7 @@ public class QAController {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String filePath = "";
 		if(session.getAttribute("answer") == null){
-			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp";
+			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
 //			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("answer", filePath);
