@@ -136,11 +136,11 @@ public class QAController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/Question")
 	public void ask(HttpSession session, @RequestParam(value = "file") MultipartFile file, HttpServletResponse response){
+		session.setAttribute("openid", "test");
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
 		String filePath = "";
 		if(session.getAttribute("question") == null){
 			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
-//			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("question", filePath);
 			List<MultipartFile> temp = new ArrayList<MultipartFile>();

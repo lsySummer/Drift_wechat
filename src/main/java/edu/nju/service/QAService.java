@@ -56,6 +56,7 @@ public class QAService {
 		q.setTitle(title);
 		String[] result = HandleFile.saveFile(content,fileList,filepath);
 		String realContent = result[0];
+		System.out.println(realContent);
 		String picSig = result[1];
 		q.setContent(realContent);
 		q.setCreateTime(date);
