@@ -95,14 +95,18 @@ public class QAController {
 	}
 	
 	@RequestMapping("/Like")
-	public String addLike(HttpSession session,String aid,Model model){
-		//String openid = sesion.get 
-		return "jsp/community/AnswerPreview";
+	public boolean addLike(HttpSession session,String aid,Model model){
+		//String openid = (String) session.getAttribute("openid");
+		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		return qaservice.addlike(aid, openid);
 	}
 	
-	@RequestMapping("/cancellLike")
-	public String cancellLike(String aid,String qid,Model model){
-		return "haha";
+	@RequestMapping("/removeLike")
+	public boolean cancellLike(String aid,String qid,Model model){
+		//String openid = (String) session.getAttribute("openid");
+		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		String authorid = qaservice.getByAnswerId(aid).getOpenid();
+		return qaservice.revokeLike(qid, aid, authorid,openid);
 	}
 	
 	@RequestMapping("/QuestionPreview")
@@ -196,7 +200,7 @@ public class QAController {
 			session.removeAttribute("qfilename");
 		}
 		String questionid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, picSig);
-		return "api/QA/questionPreview?qid=" + questionid;
+		return "api/QA/QuestionPreview?qid=" + questionid;
 	}
 	
 	@RequestMapping("/Answer")

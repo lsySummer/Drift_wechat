@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  		<a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/invite.png">   邀请回答</a>
 		  	</div> -->
 		  	<div class="weui-cell__bd" align="center">
-		  		<a href="/Drift_wechat/jsp/community/Answer.jsp"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/add.png">   添加回答</a>
+		  		<a href="/Drift_wechat/api/QA/Answer"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/add.png">   添加回答</a>
 		  	</div>
 		  </div>
 		  <hr class="style-one"/>
@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 <!--简略回答  -->
 	<div class="weui-panel__bd">
 		<c:forEach items="${aList}" var="A" varStatus="index">
-			<a href="/Drift_wechat/api/QA/answerPreview?qid=${A.id}" class="weui-media-box weui-media-box_appmsg">
+			<a href="/Drift_wechat/api/QA/AnswerPreview?aid=${A.id}&qid=${question.id}" class="weui-media-box weui-media-box_appmsg">
 		      <div class="weui-media-box__bd">
 		      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">${userList[index.count-1].nickName}</div>
 		        <p class="weui-media-box__desc" style="color:#000000">${A.content}</p>
