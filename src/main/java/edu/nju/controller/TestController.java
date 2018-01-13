@@ -11,6 +11,7 @@ import edu.nju.service.QAService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.service.UserService;
+import edu.nju.utils.HandleFile;
 
 @Controller
 @RequestMapping(value="/test")
@@ -76,7 +77,7 @@ public class TestController {
 //		System.out.println(cservice.getTodayNum());
 //		System.out.println(gservice.getOrder("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg"));
 //		qservice.getAllQuestion();
-		System.out.println(qservice.publishQuestion("oRTgpwQ-wDOO3tGyhnqOM0829ubc", "id可以正常返回吗？", "可以吧", "1"));
+//		System.out.println(qservice.publishQuestion("oRTgpwQ-wDOO3tGyhnqOM0829ubc", "id可以正常返回吗？", "可以吧", "1"));
 		return "jsp/NewFile";
 	}
 }

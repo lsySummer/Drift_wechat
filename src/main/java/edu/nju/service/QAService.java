@@ -1,7 +1,5 @@
 package edu.nju.service;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +13,7 @@ import edu.nju.dao.QADao;
 import edu.nju.entities.Answer;
 import edu.nju.entities.LikeInfo;
 import edu.nju.entities.Question;
-import edu.nju.utils.Utility;
+import edu.nju.utils.HandleFile;
 
 @Transactional
 @Service
@@ -24,38 +22,42 @@ public class QAService {
 	QADao dao;
 	
 	public boolean makeFolder(String path) {
-		return Utility.makeFolder(path);
+		return HandleFile.makeFolder(path);
 	}
 	
-	public String addPicture(String filePath,MultipartFile file) {
-		List<MultipartFile> list = new ArrayList<MultipartFile>();
-		list.add(file);
-//		String absUrl = (new File("")).getAbsolutePath();
-		//String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filePath;
-		String fileUrl = Utility.saveFile(filePath, list);
-		String result = "/upload/"+filePath+fileUrl;
-		return result;
-	}
-	
-	public boolean delPicture(String filePath) {
-		return Utility.deleteFile(filePath);
-	}
-	/**
-	 * 把目录的名字由tmp改成img
-	 */
-	public boolean changenName(String path) {
-		return Utility.changenName(path);
-	}
-	
+//	public String addPicture(String filePath,MultipartFile file) {
+//		List<MultipartFile> list = new ArrayList<MultipartFile>();
+//		list.add(file);
+////		String absUrl = (new File("")).getAbsolutePath();
+//		//String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filePath;
+//		String fileUrl = Utility.saveFile(filePath, list);
+//		String result = "/upload/"+filePath+fileUrl;
+//		return result;
+//	}
+//	
+//	public boolean delPicture(String filePath) {
+//		return Utility.deleteFile(filePath);
+//	}
+//	/**
+//	 * 把目录的名字由tmp改成img
+//	 */
+//	public boolean changenName(String path) {
+//		return Utility.changenName(path);
+//	}
+//	
 	/**
 	 * 发布问题
 	 */
-	public String publishQuestion(String openid,String title,String content,String picSig) {
+	public String publishQuestion(String openid,String title,String content,
+			List<MultipartFile> fileList,String filepath) {
 		Question q = new Question();
 		Date date = new Date();
 		q.setOpenid(openid);
 		q.setTitle(title);
-		q.setContent(content);
+		String[] result = HandleFile.saveFile(content,fileList,filepath);
+		String realContent = result[0];
+		String picSig = result[1];
+		q.setContent(realContent);
 		q.setCreateTime(date);
 		q.setPicSig(picSig);
 		return dao.publishQuestion(q);
@@ -64,13 +66,16 @@ public class QAService {
 	/**
 	 * 添加回答
 	 */
-	public String addAnswer(String openid,String qid,String content,String picSig) {
+	public String addAnswer(String openid,String qid,String content,List<MultipartFile> fileList,String filepath) {
 		Answer a = new Answer();
-		a.setContent(content);
 		a.setCreateTime(new Date());
 		a.setOpenid(openid);
 		a.setQid(qid);
+		String[] result = HandleFile.saveFile(content,fileList,filepath);
+		String realContent = result[0];
+		String picSig = result[1];
 		a.setPicSig(picSig);
+		a.setContent(realContent);
 		return dao.addAnswer(a);
 	}
 	
