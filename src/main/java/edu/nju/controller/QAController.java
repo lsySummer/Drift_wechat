@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.nju.entities.Answer;
@@ -69,16 +70,18 @@ public class QAController {
 	
 	
 	@RequestMapping("/AddLike")
-	public String addLike(HttpSession session,String aid,Model model){
+	@ResponseBody
+	public String addLike(HttpSession session,String aid,String qid,Model model){
 		//String openid = (String) session.getAttribute("openid");
 		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
-		if(qaservice.addlike(aid, openid))
+		if(qaservice.addlike(aid, qaservice.getByAnswerId(aid).getOpenid(), openid, qid))
 			return "1";
 		else
 			return "0";
 	}
 	
 	@RequestMapping("/RemoveLike")
+	@ResponseBody
 	public String cancellLike(HttpSession session,String aid,String qid,Model model){
 		//String openid = (String) session.getAttribute("openid");
 		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";

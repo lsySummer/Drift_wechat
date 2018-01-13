@@ -102,12 +102,12 @@ public class QAService {
 	/**
 	 * 点赞
 	 */
-	public boolean addlike(String answerid,String likeid) {
+	public boolean addlike(String answerid,String authorid,String likeid,String qid) {
 		LikeInfo like = new LikeInfo();
 		like.setAnswerid(answerid);
-//		like.setAuthorid(authorid);
+		like.setAuthorid(authorid);
 		like.setLikeid(likeid);
-//		like.setQid(qid);
+		like.setQid(qid);
 		like.setCreateTime(new Date());
 		return dao.addlike(like);
 	}
