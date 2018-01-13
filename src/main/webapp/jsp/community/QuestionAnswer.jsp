@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  		<a href="/Drift_wechat/jsp/community/CommunityIndex.jsp"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/invite.png">   邀请回答</a>
 		  	</div> -->
 		  	<div class="weui-cell__bd" align="center">
-		  		<a href="/Drift_wechat/jsp/community/PublishA.html"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/add.png">   添加回答</a>
+		  		<a href="/Drift_wechat/jsp/community/PublishA.html?qid=${question.id}"><img alt="" style="vertical-align:middle" src="/Drift_wechat/images/community/add.png">   添加回答</a>
 		  	</div>
 		  </div>
 		  <hr class="style-one"/>

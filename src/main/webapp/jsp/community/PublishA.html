@@ -27,11 +27,10 @@
     <input type="text" id="qid" name="qid" style="visibility:collapse"/>
   </form>
 <script type="text/javascript">
-  var qid = getParmFormUrl("qid");
-  document.getElementById("qid").value = qid;
-  
   var image_name = 0;
-  $(document).ready(function() {  
+  $(document).ready(function() {
+    var qid = getParmFormUrl("qid");
+ 	document.getElementById("qid").value = qid;  
    $('#summernote').summernote({  
       height: 450, /*指定高度*/  
       lang: 'zh-CN',  

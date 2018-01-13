@@ -58,10 +58,12 @@ public class QAController {
 	@RequestMapping("/LikeSort")
 	public String getQ2ALikeList(String qid,Model model){
 		List<Answer> aList = new ArrayList<Answer>();
-		Map<Answer,Integer> map = new HashMap<Answer,Integer>();  		  
+		Map<Answer,Integer> map = qaservice.sortByLikes(qid);
+		System.out.println(map);
 		for (Answer key : map.keySet()) {  
-			aList.add(key);  
-		}  
+			aList.add(key);
+		}
+		System.out.println(aList.size());
 		return packageData(aList,qid,model);
 	}
 	
