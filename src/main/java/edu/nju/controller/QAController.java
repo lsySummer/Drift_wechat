@@ -94,19 +94,25 @@ public class QAController {
 		return "jsp/community/AnswerPreview";
 	}
 	
-	@RequestMapping("/Like")
-	public boolean addLike(HttpSession session,String aid,Model model){
-		//String openid = (String) session.getAttribute("openid");
-		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
-		return qaservice.addlike(aid, openid);
+	@RequestMapping("/AddLike")
+	public String addLike(HttpSession session,String aid,Model model){
+		String openid = (String) session.getAttribute("openid");
+		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		if(qaservice.addlike(aid, openid))
+			return "1";
+		else
+			return "0";
 	}
 	
-	@RequestMapping("/removeLike")
-	public boolean cancellLike(String aid,String qid,Model model){
-		//String openid = (String) session.getAttribute("openid");
-		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+	@RequestMapping("/RemoveLike")
+	public String cancellLike(String aid,String qid,Model model){
+		String openid = (String) session.getAttribute("openid");
+		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
 		String authorid = qaservice.getByAnswerId(aid).getOpenid();
-		return qaservice.revokeLike(qid, aid, authorid,openid);
+		if(qaservice.revokeLike(qid, aid, authorid,openid))
+			return "1";
+		else
+			return "0";
 	}
 	
 	@RequestMapping("/QuestionPreview")
