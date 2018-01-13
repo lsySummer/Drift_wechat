@@ -60,8 +60,8 @@ public class QAService {
 		q.setContent(realContent);
 		q.setCreateTime(date);
 		q.setPicSig(picSig);
-//		return dao.publishQuestion(q);
-		return "";
+		return dao.publishQuestion(q);
+//		return "";
 	}
 	
 	/**
