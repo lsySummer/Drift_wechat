@@ -238,6 +238,6 @@ public class QAController {
 			session.removeAttribute("afilename");
 		}
 		String aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, picSig);
-		return "api/QA/answerPreview?qid=" + qid + "&aid=" + aid;
+		return "api/QA/AnswerPreview?qid=" + qid + "&aid=" + aid;
 	}
 }
