@@ -10,6 +10,7 @@
   <link href="/Drift_wechat/css/summernote.css" rel="stylesheet">
   <script src="/Drift_wechat/js/summernote.min.js"></script>
   <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+  <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 </head>
 <body>
   <form class="weui-cells weui-cells_form" action="/Drift_wechat/api/QA/ConfirmAnswer" method="get" id="basic" style="margin-top:4%;">
@@ -18,7 +19,7 @@
     <!--按钮组 -->
 	<div id="botton" class="weui-flex" style="width:100%;">
 	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
-	   <button id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:window.location.href='/Drift_wechat/api/QA/CancelAnswer';">取消</button>
+	   <button id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:cancel();">取消</button>
 	  </div>
 	  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
 	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary">发布</button>
@@ -28,9 +29,9 @@
   </form>
 <script type="text/javascript">
   var image_name = 0;
+  var qid = getParmFormUrl("qid");
+  document.getElementById("qid").value = qid; 
   $(document).ready(function() {
-    var qid = getParmFormUrl("qid");
- 	document.getElementById("qid").value = qid;  
    $('#summernote').summernote({  
       height: 450, /*指定高度*/  
       lang: 'zh-CN',  
@@ -79,6 +80,10 @@
     var r = window.location.search.substr(1).match(reg);
     if (r != null){return decodeURI(r[2]);}
     return null;
+  }
+  
+  function cancel(){
+  	window.location.href='/Drift_wechat/api/QA/CancelAnswer?qid=' + qid;
   }
 </script>  
 </body>  
