@@ -173,4 +173,24 @@ public class ManageService {
 	public Map<String,List<RouteVO>> getAllRoute(){
 		return manageDao.getAllRoute();
 	}
+	
+	/**
+	 * @return
+	 * 设置推荐的问题
+	 */
+	public boolean setRecommend(String qid) {
+		return manageDao.setRecommend(qid);
+	}
+	
+	public boolean removeRec(String qid) {
+		return manageDao.removeRec(qid);
+	}
+	
+	/**
+	 * @return
+	 * 获得推荐的问题
+	 */
+	public List<String> getRecommend() {
+		return manageDao.getRecommend();
+	}
 }
