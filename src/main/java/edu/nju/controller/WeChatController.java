@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.nju.service.CommunityService;
+import edu.nju.service.ManageService;
 import edu.nju.service.UserService;
 import edu.nju.utils.Utility;
 import edu.nju.utils.WechatConfig;
@@ -30,6 +31,9 @@ public class WeChatController {
 	
 	@Autowired
 	CommunityService cservice;
+	
+	@Autowired
+	ManageService mservice;
 	
 	private Logger log = Logger.getLogger(UserController.class);
 
