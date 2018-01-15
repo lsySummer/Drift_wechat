@@ -12,10 +12,21 @@
   <script src="/Drift_wechat/js/bootstrap.min.js"></script> 
   <script src="/Drift_wechat/js/summernote.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
+  <style type="text/css">
+	.note-group-image-url {
+	    display:none;
+	}
+	.note-image-btn {
+	    display:none;
+	}
+	.note-form-label{
+		display:none;
+	}
+  </style>
 </head>
 <body>
-  <form class="weui-cells weui-cells_form" action="/Drift_wechat/api/QA/ConfirmAnswer" method="get" id="basic" style="margin-top:4%;">
-	<div class="weui-cells__title">内容</div>
+  <!-- <form class="weui-cells weui-cells_form" id="basic" style="margin-top:4%;"> -->
+	<div class="weui-cells__title" style="margin-top:4%;">内容</div>
       <textarea name="summernote" class="summernote" id="summernote" title="Contents" style="width:100%"></textarea>
     <!--按钮组 -->
 	<div id="botton" class="weui-flex" style="width:100%;">
@@ -23,41 +34,38 @@
 	   <button id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:cancel();">取消</button>
 	  </div>
 	  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
-	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary">发布</button>
+	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:confirm();">发布</button>
 	  </div>
 	</div>
     <input type="text" id="qid" name="qid" style="visibility:collapse"/>
-  </form>
+  <!-- </form> -->
 <script type="text/javascript">
   var image_name = 0;
   var qid = getParmFormUrl("qid");
   document.getElementById("qid").value = qid; 
   $(document).ready(function() {
    $('#summernote').summernote({  
+      placeholder: '快说点啥...', 
       height: 450, /*指定高度*/  
       lang: 'zh-CN',  
       focus: true,
       toolbar: [     
-        ['para', ['ul', 'ol', 'paragraph']],  
+        ['fontsize', ['fontsize']],  
         ['insert', ['picture', 'hr']]  
       ],  
       callbacks: {
         onImageUpload: function(files) {
         	/* $('#summernote').summernote('insertNode', imgNode); */
-            sendFile(files[0]);
+            sendFile(files[0],editor,$editable);
         }
       } 
    });  
   });  
     
-  function sendFile(file) {
+  function sendFile(file,editor,$editable) {
     data = new FormData();
     data.append("file", file);
     var fileData = URL.createObjectURL(file);
-    $('#summernote').summernote('insertImage', fileData, function ($image) {
-      $image.css('width', document.body.clientWidth);
-	  $image.attr('id', image_name);
-	});
     $.ajax({
         data: data,
         type: "POST",
@@ -67,14 +75,22 @@
         processData: false,
         success: function(url) {
             /* $('#'+image_name).attr('src', url); */
+            $('#summernote').summernote('insertImage', fileData, function ($image) {
+		      $image.css('width', document.body.clientWidth);
+			  $image.attr('id', image_name);
+			});
             image_name ++;
         }
     });
   }
 
-  $('#basic').on('submit', function (e) {
-      $.toptip('收货成功', 'success');
-  });
+  function confirm(){
+  	if ($('#summernote').summernote('isEmpty')){
+  	  alert('总要说点啥吧');
+  	}else{
+  	  window.location.href="/Drift_wechat/api/QA/ConfirmAnswer?summernote="+$('#summernote').summernote('code');
+  	}
+  }
   
   function getParmFormUrl(name){
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
