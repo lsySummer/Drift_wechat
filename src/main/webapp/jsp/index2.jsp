@@ -61,6 +61,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<br/>
 			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流${todaynum}次</span></marquee>
 		</div>
+		<!--推荐的热门话题 -->
+		<c:forEach items="${qList}" var="Q" varStatus="index">
+			<a href="/Drift_wechat/api/QA/DateSort?qid=${Q.id}  " class="weui-media-box weui-media-box_appmsg">
+			      <div class="weui-media-box__bd">
+				      <p class="weui-media-box__title question">${Q.title}</p>
+			        <p class="weui-media-box__desc">${qnumList[index.count-1]}回答</p>
+			      </div>
+			      <c:if test="${not empty Q.picSig}">
+					  <div class="weui-media-box__hd">
+				          <img class="weui-media-box__thumb" src="${Q.picSig}">
+				      </div>
+				  </c:if>
+		    </a>
+		</c:forEach>
 		
 		<div style="margin:10px;background:#FFFFFF;position:relative;">
 			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">

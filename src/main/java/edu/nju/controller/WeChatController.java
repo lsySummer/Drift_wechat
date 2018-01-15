@@ -2,6 +2,8 @@ package edu.nju.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.nju.entities.Question;
 import edu.nju.service.CommunityService;
 import edu.nju.service.ManageService;
+import edu.nju.service.QAService;
 import edu.nju.service.UserService;
 import edu.nju.utils.Utility;
 import edu.nju.utils.WechatConfig;
@@ -34,6 +38,7 @@ public class WeChatController {
 	
 	@Autowired
 	ManageService mservice;
+	
 	
 	private Logger log = Logger.getLogger(UserController.class);
 
@@ -58,8 +63,10 @@ public class WeChatController {
 	@RequestMapping(value = "/index")
 	public String toCenter(Model model)
 			throws IOException {
+		List<String> recommendList= mservice.getRecommend();
+		List<Question> qList = new ArrayList<Question>(); 
 		model.addAttribute("allnum", cservice.getOrderNum());
-		model.addAttribute("todaynum", cservice.getTodayNum());
+		model.addAttribute("todaynum", cservice.getTodayNum()); 
 		return "jsp/index2";
 	}
 	
