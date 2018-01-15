@@ -1,8 +1,7 @@
 package edu.nju.dao.impl;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -90,8 +89,9 @@ public class QADaoImpl implements QADao{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<Answer,Integer> sortByLikes(String qid) {
-		Map<Answer,Integer> map = new HashMap<Answer,Integer>();
+	public List<Answer> sortByLikes(String qid) {
+		List<Answer> result = new ArrayList<Answer>();
+		List<String> sortIds = new ArrayList<String>();//有点赞的答案id集合
 		String hql = "select authorid,count(*) as cnt " + 
 				"from LikeInfo where qid = :qid " + 
 				"group by authorid " + 
@@ -100,9 +100,20 @@ public class QADaoImpl implements QADao{
 		for(int i=0;i<list.size();i++) {
 			String authorid = list.get(i)[0].toString();//authorid
 			Answer a = getAnswer(qid,authorid);
-			map.put(a, Integer.parseInt(list.get(i)[1].toString()));
+			result.add(a);
+			sortIds.add(a.getId());
 		}
-		return map;
+		String hql1 = "select id from Answer where qid =:qid";
+		List<String> answers = baseDao.getNewSession().createQuery(hql1).setParameter("qid", qid).getResultList();//全部答案id
+		for(int i=0;i<answers.size();i++) {
+			if(!sortIds.contains(answers.get(i))) {
+				result.add(getByAnswerId(answers.get(i)));
+			}
+		}
+		for(int i=0;i<result.size();i++) {
+			System.out.println(result.get(i));
+		}
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

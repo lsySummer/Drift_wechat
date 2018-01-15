@@ -55,7 +55,7 @@ public class TestController {
 //		myThread1.start();
 //		myThread2.start();
 //		service.confirm("oRTgpwQkDZKxGFvNnfKpJLWvxsyw");
-//		System.out.println(qservice.sortByLikes("1").toString());
+		qservice.sortByLikes("4028e3ef60f878570160f87ab7f90001");
 //		System.out.println(qservice.sortByDate("1").get(0).toString()+qservice.sortByDate("1").get(1));
 //		qservice.publishQuestion("123", "publish测试", "hahaha");
 //		qservice.addAnswer("123", "1", "测试addAnswer");
@@ -78,7 +78,7 @@ public class TestController {
 //		System.out.println(gservice.getOrder("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg"));
 //		qservice.getAllQuestion();
 //		System.out.println(qservice.publishQuestion("oRTgpwQ-wDOO3tGyhnqOM0829ubc", "id可以正常返回吗？", "可以吧", "1"));
-		System.out.println(qservice.checkIfLike("1", "2", "1", "1"));
+//		System.out.println(qservice.checkIfLike("1", "2", "1", "1"));
 		return "jsp/NewFile";
 	}
 }

@@ -2,7 +2,6 @@ package edu.nju.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -129,8 +128,8 @@ public class QAService {
 	/**
 	 * 根据点赞数排序
 	 */
-	public Map<Answer,Integer> sortByLikes(String qid){
-		Map<Answer,Integer> list = dao.sortByLikes(qid);
+	public List<Answer> sortByLikes(String qid){
+		List<Answer> list = dao.sortByLikes(qid);
 		return list;
 	}
 	
