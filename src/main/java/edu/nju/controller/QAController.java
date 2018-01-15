@@ -27,6 +27,7 @@ import edu.nju.entities.Question;
 import edu.nju.entities.UserInfo;
 import edu.nju.service.QAService;
 import edu.nju.service.UserService;
+import edu.nju.utils.HandleFile;
 
 @Controller
 @RequestMapping("/QA")
@@ -92,6 +93,7 @@ public class QAController {
 		List<String> dateStrs = new ArrayList<String>();
 		List<Long> likeList = new ArrayList<Long>();
 		for(Answer answer :aList){
+			answer.setContent(HandleFile.deleteImg(answer.getContent()));
 			userList.add(uservice.getUser(answer.getOpenid()));
 			dateStrs.add(convertDate(answer.getCreateTime()));
 			//dateStrs.add(answer.getCreateTime().toString());
