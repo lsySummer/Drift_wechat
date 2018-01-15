@@ -86,7 +86,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<c:forEach items="${aList}" var="A" varStatus="index">
 			<a href="/Drift_wechat/api/QA/AnswerPreview?aid=${A.id}&qid=${question.id}" class="weui-media-box weui-media-box_appmsg">
 		      <div class="weui-media-box__bd">
-		      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">${userList[index.count-1].nickName}</div>
+		      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> 
+		      		<img src="${userList[index.count-1].headimgUrl}" style="height: 20px;width:20px;vertical-align:middle">${userList[index.count-1].nickName}
+		      	</div>
 		        <div class="weui-media-box__desc" style="color:#000000"><img src="/Drift_wechat/images/icon.jpg" style="vertical-align:middle">按质量排序按质量排序按质量排序按质量排序按质量排序按质量排序按质量排序按质量排序按质量排序按质量排序</div>
 		        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">${likeList[index.count-1]}赞同 &nbsp;&nbsp;${dateStrs[index.count-1]}</div>
 		      </div>

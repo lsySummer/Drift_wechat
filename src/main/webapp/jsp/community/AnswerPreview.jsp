@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 		  <hr class="style-four" />
 		  <div class="weui-cell" style="font-weight:bold">
-		      <img src="/Drift_wechat/images/icon.jpg" style="height: 20px;width:20px;vertical-align:middle">&nbsp;&nbsp;&nbsp;${user.nickName}
+		      <img src="${user.headimgUrl}" style="height: 20px;width:20px;vertical-align:middle">&nbsp;&nbsp;&nbsp;${user.nickName}
 		  </div>
 		  <div style="margin:15px">
 			   ${answer.content}
