@@ -100,4 +100,10 @@ public class HandleFile {
 		return result;
 	}
 	
+	public static String deleteImg(String content) {
+		Document doc = Jsoup.parse(content);
+		Elements links = doc.select("img"); 
+		links.remove();
+		return doc.toString();
+	}
 }

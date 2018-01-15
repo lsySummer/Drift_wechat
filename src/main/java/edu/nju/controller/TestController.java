@@ -55,7 +55,7 @@ public class TestController {
 //		myThread1.start();
 //		myThread2.start();
 //		service.confirm("oRTgpwQkDZKxGFvNnfKpJLWvxsyw");
-		qservice.sortByLikes("4028e3ef60f878570160f87ab7f90001");
+//		qservice.sortByLikes("4028e3ef60f878570160f87ab7f90001");
 //		System.out.println(qservice.sortByDate("1").get(0).toString()+qservice.sortByDate("1").get(1));
 //		qservice.publishQuestion("123", "publish测试", "hahaha");
 //		qservice.addAnswer("123", "1", "测试addAnswer");
