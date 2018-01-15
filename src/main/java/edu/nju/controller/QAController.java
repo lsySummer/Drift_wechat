@@ -100,6 +100,7 @@ public class QAController {
 		for(Answer answer :aList){
 			userList.add(uservice.getUser(answer.getOpenid()));
 			dateStrs.add(convertDate(answer.getCreateTime()));
+			//dateStrs.add(answer.getCreateTime().toString());
 			likeList.add(qaservice.getLikeNum(answer.getId()));
 		}
 		model.addAttribute("anum",qaservice.getAnswerNum(qid));
@@ -128,7 +129,7 @@ public class QAController {
 			dateStr =hour+"小时前";
 			return dateStr;
 		}
-		else if(min==0){
+		else if(min!=0){
 			dateStr =min+"分钟前";
 			return dateStr;
 		}
@@ -145,7 +146,8 @@ public class QAController {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
 		String filePath = "";
 		if(session.getAttribute("question") == null){
-			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
+			//filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
+			filePath = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg"+ "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("question", filePath);
 			List<MultipartFile> temp = new ArrayList<MultipartFile>();
@@ -173,11 +175,13 @@ public class QAController {
 		if(session.getAttribute("question") != null){
 			List<MultipartFile> photoLists = (List<MultipartFile>)session.getAttribute("qfile");
 			String filepath = (String)session.getAttribute("question");
-			qid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, photoLists, filepath);
+			//qid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, photoLists, filepath);
+			qid = qaservice.publishQuestion("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", title, summernote, photoLists, filepath);
 			session.removeAttribute("question");
 			session.removeAttribute("qfile");
 		}else{
-			qid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, new ArrayList<MultipartFile>(), "");
+			//qid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, new ArrayList<MultipartFile>(), "");
+			qid = qaservice.publishQuestion("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", title, summernote, new ArrayList<MultipartFile>(), "");
 		}
 		return "redirect:QuestionPreview?qid=" + qid;
 	}
@@ -206,7 +210,8 @@ public class QAController {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
 		String filePath = "";
 		if(session.getAttribute("answer") == null){
-			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
+			//filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
+			filePath = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg"+ "_" + df.format(new Date()) + "/temp/";
 //			filePath = "test" + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("answer", filePath);
@@ -235,26 +240,36 @@ public class QAController {
 		if(session.getAttribute("answer") != null){
 			List<MultipartFile> photoLists = (List<MultipartFile>)session.getAttribute("afile");
 			String filepath = (String)session.getAttribute("answer");
-			aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, photoLists, filepath);
+			//aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, photoLists, filepath);
+			aid = qaservice.addAnswer("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", qid, summernote, photoLists, filepath);
 			session.removeAttribute("answer");
 			session.removeAttribute("afile");
 		}else{
-			aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, new ArrayList<MultipartFile>(), "");
+			//aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, new ArrayList<MultipartFile>(), "");
+			aid = qaservice.addAnswer("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", qid, summernote, new ArrayList<MultipartFile>(), "");
 		}
 		return "redirect:AnswerPreview?qid=" + qid + "&aid=" + aid;
 		//return toAnswerPreview(aid,qid,model);
 	}
 	
 	@RequestMapping("/AnswerPreview")
-	public String answerPreview(String aid,String qid,Model model){
+	public String answerPreview(HttpSession session,String aid,String qid,Model model){
 		Question question = qaservice.getByQuestionId(qid);
 		Answer answer = qaservice.getByAnswerId(aid);
 		Long likeNum = qaservice.getLikeNum(aid);
 		UserInfo user = uservice.getUser(answer.getOpenid());
+		//String openid = (String)session.getAttribute("openid");
+		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
 		model.addAttribute("answer", answer);
 		model.addAttribute("likeNum", likeNum);
 		model.addAttribute("user", user);
 		model.addAttribute("question",question);
+		if(qaservice.checkIfLike(qid, aid, answer.getOpenid(), openid)){
+			model.addAttribute("flag", "1");
+		}
+		else{
+			model.addAttribute("flag", "0");
+		}
 		return "jsp/community/AnswerPreview";
 	}
 	

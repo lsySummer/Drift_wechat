@@ -48,12 +48,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   ${answer.content}
 		  </div>
 		  <div  class="weui-cell weui-cells_form">
-		  	<div class="weui-cell__bd" align="center" > 
+		  	<div class="weui-cell__bd" align="center" >
 		  		<a href="javascript:changeLike()"><img alt="" style="vertical-align:middle" id="like" src="/Drift_wechat/images/QA/liking.png"><h3 id="likeDes">点赞</h3></a>
 		  	</div>
 		  </div>
 	</div>
 	<script type="text/javascript">
+		
+		$("document").ready(function(){
+		    var flag = '${flag}';
+		    if(flag=="1"){
+		    	$("#like").attr('src',"/Drift_wechat/images/QA/liked.png");
+				$("#likeDes").html("取消");
+		    }
+		});
+	
 		function changeLike(){
 			var imgSrc = $("#like")[0].src;
 			var actImg = imgSrc.substring(imgSrc.lastIndexOf("/")+1);

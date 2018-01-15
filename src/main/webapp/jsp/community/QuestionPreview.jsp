@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <div class="weui-cell" style="font-weight:bold">
 		      <p>${question.title}</p>
 		  </div>
-		  <div style="margin:15px">
+		  <div>
 			   <p>${question.content}</p>
 		  </div>
 		  
