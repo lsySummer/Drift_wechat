@@ -28,4 +28,10 @@ public interface ManageDao {
 	List<RouteVO> getRoute(String deviceid);
 	
 	public Map<String,List<RouteVO>> getAllRoute();
+
+	boolean setRecommend(String qid);
+
+	List<String> getRecommend();
+
+	boolean removeRec(String qid);
 }
