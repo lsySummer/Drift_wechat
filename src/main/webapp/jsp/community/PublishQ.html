@@ -46,8 +46,8 @@
 	</div>
   <!-- </form> -->
 <script type="text/javascript">
-	var image_name = 0;
-  $(document).ready(function() {  
+  var image_name = 0;
+  $(document).ready(function() { 
    $('#summernote').summernote({
    	  placeholder: '快说点啥...',  
       height: 450, /*指定高度*/  
@@ -89,10 +89,10 @@
   }
 
   function confirm(){
-	if ($('#summernote').summernote('isEmpty') || $('#title').value == null) {
+	if ($('#summernote').summernote('isEmpty') || document.getElementById("title").value == null) {
 	  alert('总要说点啥吧');
 	}else{
-	  window.location.href='/Drift_wechat/api/QA/ConfirmQuestion?summernote='+$('#summernote').summernote('code')+"&title="+$('#title').value;
+	  window.location.href='/Drift_wechat/api/QA/ConfirmQuestion?summernote='+$('#summernote').summernote('code')+"&title="+document.getElementById("title").value;
 	}
   }
   
@@ -100,9 +100,9 @@
   	window.location.href='/Drift_wechat/api/QA/CancelQuestion';
   }
   
-  $('.note-icon-picture').click(function(){
+  function test(){
   	$('.modal-title').innerHTML = '插入图片';
-  });
+  }
 </script>
 <script src="/Drift_wechat/js/summernote.min.js"></script>  
 </body>  
