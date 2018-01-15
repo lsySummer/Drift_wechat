@@ -15,5 +15,6 @@ import com.pingplusplus.model.Charge;
 public class Test {
 	public static void main(String[] args) throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException, ChannelException, RateLimitException {
 //		HandleFile.testParse("<p><img src=\"blob:http://drift.gmair.net/3ba24568-5df8-4ccc-bb65-a1dd2f8e44fb\" id=\"0\" style=\"width: 375px;\">打Call！</p><p><br></p>");
+		System.out.println(HandleFile.deleteImg("<html> <head></head> <body>  <p>因为老……</p>  <p><img src=\"/upload/oRTgpwQkDZKxGFvNnfKpJLWvxsyw_2018-01-13_17:52/temp/5CDAE05E-3ABA-4132-B752-85016DAD8418.jpeg\" id=\"0\" style=\"width: 375px;\"><br></p> </body></html>"));
 	}
 }
