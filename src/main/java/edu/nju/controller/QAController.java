@@ -52,19 +52,13 @@ public class QAController {
 	
 	@RequestMapping("/DateSort")
 	public String getQ2AList(String qid, HttpSession session,Model model){
-		List<Answer> aList = (List)qaservice.sortByDate(qid);
+		List<Answer> aList = qaservice.sortByDate(qid);
 		return packageData(aList,qid,model);
 	}
 	
 	@RequestMapping("/LikeSort")
 	public String getQ2ALikeList(String qid,Model model){
-		List<Answer> aList = new ArrayList<Answer>();
-		Map<Answer,Integer> map = qaservice.sortByLikes(qid);
-		System.out.println(map);
-		for (Answer key : map.keySet()) {  
-			aList.add(key);
-		}
-		System.out.println(aList.size());
+		List<Answer> aList = qaservice.sortByLikes(qid);
 		return packageData(aList,qid,model);
 	}
 	
