@@ -10,10 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import edu.nju.dao.BaseDao;
 import edu.nju.dao.ManageDao;
+import edu.nju.dao.QADao;
 import edu.nju.dao.UserDao;
 import edu.nju.entities.Device;
 import edu.nju.entities.DeviceArea;
 import edu.nju.entities.Order;
+import edu.nju.entities.Question;
 import edu.nju.entities.RecommendQ;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.DeviceVO;
@@ -29,6 +31,8 @@ public class ManageDaoImpl implements ManageDao{
 	 private UserDao userDao;
 //	 @Autowired
 //	 private CommunityDao cDao;
+	 @Autowired
+	 private QADao qdao;
 	 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -185,12 +189,13 @@ public class ManageDaoImpl implements ManageDao{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<String> getRecommend() {
+	public List<Question> getRecommend() {
 		String hql = "from RecommendQ";
 		List<RecommendQ> list = baseDao.getNewSession().createQuery(hql).getResultList();
-		List<String> result = new ArrayList<String>();
+		List<Question> result = new ArrayList<Question>();
 		for(int i=0;i<list.size();i++) {
-			result.add(list.get(i).getQid());
+			String qid = list.get(i).getQid();
+			result.add(qdao.getByQuestionId(qid));
 		}
 		return result;
 	}

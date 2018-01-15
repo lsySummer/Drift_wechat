@@ -16,6 +16,7 @@ import edu.nju.dao.ReserveGetDao;
 import edu.nju.dao.UserDao;
 import edu.nju.entities.Device;
 import edu.nju.entities.Order;
+import edu.nju.entities.Question;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
@@ -190,7 +191,7 @@ public class ManageService {
 	 * @return
 	 * 获得推荐的问题
 	 */
-	public List<String> getRecommend() {
+	public List<Question> getRecommend() {
 		return manageDao.getRecommend();
 	}
 }

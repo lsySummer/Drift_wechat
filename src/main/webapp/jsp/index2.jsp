@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -61,20 +62,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<br/>
 			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流${todaynum}次</span></marquee>
 		</div>
+		<!--推荐的热门话题 -->
+		<c:forEach items="${qList}" var="Q" varStatus="index">
+			<div style="margin:10px;background:#FFFFFF;position:relative;">
+				<a href="/Drift_wechat/api/QA/DateSort?qid=${Q.id}  " class="weui-media-box weui-media-box_appmsg">
+				      <div class="weui-media-box__bd">
+					      <p class="weui-media-box__title question">${Q.title}</p>
+				          <p class="weui-media-box__desc">${qnumList[index.count-1]}回答</p>
+				      </div>
+					<c:choose>  
+					   <c:when test="${not empty Q.picSig}">
+					   		<div class="weui-media-box__hd">
+					          <img class="weui-media-box__thumb" src="${Q.picSig}">
+					        </div>
+					   </c:when>  				     
+					   <c:otherwise> 
+					   		<div class="weui-media-box__hd">
+					          <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
+					        </div>
+					   </c:otherwise>  
+					</c:choose>  
+			    </a>
+		    </div>
+		</c:forEach>
 		
-		<div style="margin:10px;background:#FFFFFF;position:relative;">
-			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-		      <div class="weui-media-box__hd">
-		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
-		      </div>
-		      <div class="weui-media-box__bd">
-		        <h4 class="weui-media-box__title">你家的甲醛含量超标么？</h4>
-		        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体。</p>
-		      </div>
-		    </a>
-		</div>
-		
-		<div style="margin:10px;background:#FFFFFF;position:relative;">
+<!-- 		<div style="margin:10px;background:#FFFFFF;position:relative;">
 			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
 		      <div class="weui-media-box__hd">
 		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
@@ -86,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        </p>
 		      </div>
 		    </a>
-		</div>
+		</div> -->
 		
 	</div>
 	

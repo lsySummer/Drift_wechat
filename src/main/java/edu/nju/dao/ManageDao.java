@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.nju.entities.Device;
+import edu.nju.entities.Question;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
@@ -31,7 +32,7 @@ public interface ManageDao {
 
 	boolean setRecommend(String qid);
 
-	List<String> getRecommend();
+	List<Question> getRecommend();
 
 	boolean removeRec(String qid);
 }
