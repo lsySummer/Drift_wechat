@@ -11,7 +11,6 @@ import edu.nju.service.QAService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.service.UserService;
-import edu.nju.utils.HandleFile;
 
 @Controller
 @RequestMapping(value="/test")
@@ -80,7 +79,8 @@ public class TestController {
 //		System.out.println(qservice.publishQuestion("oRTgpwQ-wDOO3tGyhnqOM0829ubc", "id可以正常返回吗？", "可以吧", "1"));
 //		System.out.println(qservice.checkIfLike("1", "2", "1", "1"));
 //		mservice.setRecommend("4028e3ef60f878570160f87ab7f90001");
-		mservice.removeRec("4028e3ef60f878570160f87ab7f90001");
+//		mservice.removeRec("4028e3ef60f878570160f87ab7f90001");
+		System.out.println(mservice.getRecommend().size());
 		return "jsp/NewFile";
 	}
 }
