@@ -39,6 +39,8 @@ public class WeChatController {
 	@Autowired
 	ManageService mservice;
 	
+	@Autowired
+	QAService qaservice;
 	
 	private Logger log = Logger.getLogger(UserController.class);
 
@@ -55,18 +57,30 @@ public class WeChatController {
 //		session.setAttribute("code", code);
 //		session.setAttribute("state", state);
 		log.info("code "+code+" state"+state);
+		List<Question> qList = mservice.getRecommend();
+		List<Long> qnumList = new ArrayList();
+		for(Question q:qList){
+			qnumList.add(qaservice.getAnswerNum(q.getId()));
+		}
 		model.addAttribute("allnum", cservice.getOrderNum());
 		model.addAttribute("todaynum", cservice.getTodayNum());
+		model.addAttribute("qList", qList);
+		model.addAttribute("qnumList", qnumList);
 		return redir;
 	}
 	
 	@RequestMapping(value = "/index")
 	public String toCenter(Model model)
 			throws IOException {
-		List<String> recommendList= mservice.getRecommend();
-		List<Question> qList = new ArrayList<Question>(); 
+		List<Question> qList = mservice.getRecommend();
+		List<Long> qnumList = new ArrayList();
+		for(Question q:qList){
+			qnumList.add(qaservice.getAnswerNum(q.getId()));
+		}
 		model.addAttribute("allnum", cservice.getOrderNum());
-		model.addAttribute("todaynum", cservice.getTodayNum()); 
+		model.addAttribute("todaynum", cservice.getTodayNum());
+		model.addAttribute("qList", qList);
+		model.addAttribute("qnumList", qnumList);
 		return "jsp/index2";
 	}
 	
