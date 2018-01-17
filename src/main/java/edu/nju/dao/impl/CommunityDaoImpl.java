@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.nju.dao.BaseDao;
 import edu.nju.dao.CommunityDao;
+import edu.nju.dao.ReserveGetDao;
+import edu.nju.entities.CheckResult;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserComment;
 import edu.nju.utils.Utility;
@@ -18,6 +20,8 @@ public class CommunityDaoImpl implements CommunityDao{
 //	private static final Logger log = Logger.getLogger(CommunityDaoImpl.class);
 	 @Autowired
 	 private BaseDao baseDao;
+	 @Autowired
+	 private ReserveGetDao rgDao;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -68,6 +72,22 @@ public class CommunityDaoImpl implements CommunityDao{
 		String hql = "select count(*) from Order where createDate > :today";
 		Long num = (Long) baseDao.getNewSession().createQuery(hql).setParameter("today", Utility.getSpecifiedDayAfter(date, -1)).getSingleResult();
 		return num;
+	}
+
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CheckResult> getCheckResult(String openid) {
+		List<Order> olist = rgDao.getOrderById(openid);
+		String orderid="";
+		if(olist.size()>0) {
+			orderid = olist.get(olist.size()-1).getId();
+			String hql = "from CheckResult where orderid =:orderid";
+			List<CheckResult> list = baseDao.getNewSession().createQuery(hql).setParameter("orderid", orderid).getResultList();
+			return list;
+		}
+		return null;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.nju.entities.CheckResult;
 import edu.nju.entities.UserComment;
 
 public interface CommunityDao {
@@ -15,4 +16,6 @@ public interface CommunityDao {
 	public Long getOrdernum();
 
 	public Long getTodayNum();
+
+	public List<CheckResult> getCheckResult(String openid);
 }

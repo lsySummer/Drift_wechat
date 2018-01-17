@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.nju.dao.CommunityDao;
+import edu.nju.entities.CheckResult;
 import edu.nju.entities.UserComment;
 
 /**
@@ -41,5 +42,9 @@ public class CommunityService {
 	
 	public Long getTodayNum() {
 		return dao.getTodayNum();
+	}
+	
+	public List<CheckResult> getCheckResult(String openid){
+		return dao.getCheckResult(openid);
 	}
 }

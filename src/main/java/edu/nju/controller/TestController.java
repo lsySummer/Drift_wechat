@@ -29,7 +29,7 @@ public class TestController {
 	QAService qservice;
 	
 	@RequestMapping(value = "/insert")
-	public String register(Model model) {
+	public String register() {
 //		System.out.println(service.reserveDevice("江苏", 1).getId());
 //		service.makeOrder("oRTgpweSZbOxfrg9H57JwuPwMJLo", 0, Utility.getSpecifiedDayAfter(new Date(), 6));
 //		System.out.println(gservice.getBefore("oRTgpweSZbOxfrg9H57JwuPwMJLo").getName());
@@ -80,7 +80,8 @@ public class TestController {
 //		System.out.println(qservice.checkIfLike("1", "2", "1", "1"));
 //		mservice.setRecommend("4028e3ef60f878570160f87ab7f90001");
 //		mservice.removeRec("4028e3ef60f878570160f87ab7f90001");
-		System.out.println(mservice.getRecommend().size());
+//		System.out.println(mservice.getRecommend().size());
+		System.out.println(cservice.getCheckResult("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").size());
 		return "jsp/NewFile";
 	}
 }
