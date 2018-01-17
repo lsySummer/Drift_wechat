@@ -35,6 +35,7 @@
 	  <div class="weui-cells__title">内容</div>
       <textarea name="summernote" class="summernote" id="summernote" title="Contents" style="width:100%;margin-top:2%;"></textarea>
 	</div>
+	<div class="weui-loadmore" id="waiting"></div>
     <!--按钮组 -->
 	<div id="botton" class="weui-flex" style="width:100%;">
 	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
@@ -60,6 +61,7 @@
       callbacks: {
         onImageUpload: function(files,editor,$editable) {
         	/* $('#summernote').summernote('insertNode', imgNode); */
+            document.getElementById("waiting").innerHTML = '<i class="weui-loading"></i><span class="weui-loadmore__tips">正在加载图片</span>';
             sendFile(files[0],editor,$editable);
         }
       } 
@@ -83,6 +85,7 @@
 		      $image.css('width', document.body.clientWidth);
 			  $image.attr('id', image_name);
 			});
+			document.getElementById("waiting").innerHTML = '';
             image_name ++;
         }
     });
