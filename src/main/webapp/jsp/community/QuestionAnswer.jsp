@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <div class="weui-cell__bd" style="color:black">
 	      <h3>回答浏览</h3>
 	    </div>
-	    <div class="weui-cell__ft"><a href="/Drift_wechat/jsp/community/Ask.jsp"><img id="release" alt="" style="" src="/Drift_wechat/images/community/omit.png"></a></div>
+	    <div class="weui-cell__ft"><a href=""><img id="release" alt="" style="" src="/Drift_wechat/images/community/omit.png"></a></div>
 	</div>
 	<hr class="style-four" />
 	
@@ -48,10 +48,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <div style="margin:15px;font-size:15px">
 			   <p>${question.content}</p>
 		  </div>
-		  
-<!-- 		  <div style="margin:15px;font-size:14px ">
-			   <span>382个回答</span>
-		  </div> -->
 		  
 		  <div  class="weui-cell weui-cells_form">
 <!-- 		  	<div class="weui-cell__bd" align="center" >

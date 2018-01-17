@@ -37,9 +37,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 </style>  
 
-<body>
+<body>	
 	<!--导航栏  -->
-	<div class="weui-tabbar weui-footer_fixed-bottom" id="navi" style="bottom:0">
+	<div class="weui-tabbar weui-footer_fixed-bottom" style="bottom:0">
 	  <a href="/Drift_wechat/api/wechat/index" class="weui-tabbar__item">
 	    <div class="weui-tabbar__icon">
 	      <img src="/Drift_wechat/images/navi/index.png" alt="">
