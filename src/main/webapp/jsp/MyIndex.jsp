@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    <div class="weui-tabbar__icon">
 		      <img src="/Drift_wechat/images/navi/index.png" alt="">
 		    </div>
-		    <p class="weui-tabbar__label">首页</p>
+		    <p class="weui-tabbar__label">首页</p>  
 		  </a>
 		  <a href="/Drift_wechat/api/user/getState" class="weui-tabbar__item">
 		    <div class="weui-tabbar__icon">
