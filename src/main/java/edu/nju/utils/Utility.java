@@ -144,8 +144,9 @@ public class Utility {
 //				String suffix = fileName.substring(fileName.indexOf("."),
 //						fileName.length());
 //				String newName=i+suffix;
+				//identify:"comment/"+openid+"/"
 				String url = baseUrl + fileName;
-				urllst = urllst + fileName+";";
+				urllst = urllst + "/upload/"+identify+fileName+";";
 				try {
 					mf.transferTo(new File(url));
 				}catch(Exception e){
