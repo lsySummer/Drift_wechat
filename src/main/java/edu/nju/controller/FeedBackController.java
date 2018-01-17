@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.nju.entities.CheckResult;
 import edu.nju.entities.Order;
+import edu.nju.entities.UserComment;
+import edu.nju.service.CommunityService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.utils.Constants;
@@ -27,6 +29,9 @@ public class FeedBackController {
 	ReserveService service;
 	@Autowired
 	ReserveGetService getService;
+	@Autowired
+	CommunityService cservice;
+	
 	@RequestMapping(value = "/save")
 	@ResponseBody
 	public String addFB(HttpSession session,@RequestBody List<CheckResult> list,Model model) {
@@ -50,5 +55,19 @@ public class FeedBackController {
 			}
 		}
 		return "0"; 
+	}
+	
+	@RequestMapping(value = "/get")
+	@ResponseBody
+	public String getCheckResult(HttpSession session,@RequestBody List<CheckResult> list,Model model) {
+		String openid = (String)session.getAttribute("openid");
+		UserComment userComment = cservice.getComment(openid);
+		String ptUrls[] = userComment.getPicURLS().split(";");
+		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		List<CheckResult> crList = service.getCheckResult(openid);
+		model.addAttribute("crList", crList);
+		model.addAttribute("PtUrls", ptUrls);
+		model.addAttribute("userComment", userComment);
+		return "FeedbackPreview";
 	}
 }

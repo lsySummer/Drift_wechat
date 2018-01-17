@@ -46,11 +46,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div><!-- /.modal -->
 	</div>
 	
-
-<!-- 	<div style="height:70%; width:100%;position:absolute;margin:0px;padding:0px">
-		<img width=100% height=100% src="/Drift_wechat/images/info.jpg" title="甲醛漂流仪"/>
-	</div> -->
-	
 	<div style="height:80%;width:100%;background:#D3D3D3;position:absolute;">
 	
 		<div style="height:50%;margin:10px;background:#00BFFF;position:relative;background-image:url(/Drift_wechat/images/sky.jpg);background-size:cover" align="center">
@@ -152,10 +147,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 <script type="text/javascript">
  	var x=-1,y=-1;
-/* 	$("#yiqi").click(function() {
-	    $('#myModal').modal();
-	}); */
- 
 	function ShowModel(){
 		$('#myModal').modal();
 	}
