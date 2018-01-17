@@ -75,19 +75,4 @@ public class CommunityDaoImpl implements CommunityDao{
 	}
 
 
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<CheckResult> getCheckResult(String openid) {
-		List<Order> olist = rgDao.getOrderById(openid);
-		String orderid="";
-		if(olist.size()>0) {
-			orderid = olist.get(olist.size()-1).getId();
-			String hql = "from CheckResult where orderid =:orderid";
-			List<CheckResult> list = baseDao.getNewSession().createQuery(hql).setParameter("orderid", orderid).getResultList();
-			return list;
-		}
-		return null;
-	}
-
 }

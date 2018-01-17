@@ -17,5 +17,4 @@ public interface CommunityDao {
 
 	public Long getTodayNum();
 
-	public List<CheckResult> getCheckResult(String openid);
 }

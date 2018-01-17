@@ -81,7 +81,7 @@ public class TestController {
 //		mservice.setRecommend("4028e3ef60f878570160f87ab7f90001");
 //		mservice.removeRec("4028e3ef60f878570160f87ab7f90001");
 //		System.out.println(mservice.getRecommend().size());
-		System.out.println(cservice.getCheckResult("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").size());
+//		System.out.println(cservice.getCheckResult("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").size());
 		return "jsp/NewFile";
 	}
 }

@@ -208,4 +208,9 @@ public class ReserveService {
 	public boolean addCheckResult(List<CheckResult> list) {
 		return dao.saveList(list);
 	}
+	
+
+	public List<CheckResult> getCheckResult(String openid){
+		return dao.getCheckResult(openid);
+	}
 }

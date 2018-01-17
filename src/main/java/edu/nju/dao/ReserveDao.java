@@ -18,4 +18,6 @@ public interface ReserveDao {
 
 	boolean saveList(List<CheckResult> list);
 
+	public List<CheckResult> getCheckResult(String openid);
+
 }
