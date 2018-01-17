@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,15 +9,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  	<link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
-	<link rel="stylesheet" href="/Drift_wechat/css/demos.css"> 
-	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
-	<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
+  	<link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+	<link rel="stylesheet" href="/Drift_wechat/css/demos.css">
+	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
 	<script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="/Drift_wechat/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
-	<script src="/Drift_wechat/js/bootstrap.min.js"></script>
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
+	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2"></script>
     <title>果麦公益检测</title>
 </head>
@@ -26,7 +27,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </style>  
 
 <body ontouchstart>
-	<%@include file="BottomBar.html"%>
 	<!-- 模态框（Modal） -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
 		<div class="modal-dialog">
@@ -61,20 +61,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<br/>
 			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流${todaynum}次</span></marquee>
 		</div>
+		<!--推荐的热门话题 -->
+		<c:forEach items="${qList}" var="Q" varStatus="index">
+			<div style="margin:10px;background:#FFFFFF;position:relative;">
+				<a href="/Drift_wechat/api/QA/DateSort?qid=${Q.id}  " class="weui-media-box weui-media-box_appmsg">
+				      <div class="weui-media-box__bd">
+					      <p class="weui-media-box__title question">${Q.title}</p>
+				          <p class="weui-media-box__desc">${qnumList[index.count-1]}回答</p>
+				      </div>
+					<c:choose>  
+					   <c:when test="${not empty Q.picSig}">
+					   		<div class="weui-media-box__hd">
+					          <img class="weui-media-box__thumb" src="${Q.picSig}">
+					        </div>
+					   </c:when>  				     
+					   <c:otherwise> 
+					   		<div class="weui-media-box__hd">
+					          <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
+					        </div>
+					   </c:otherwise>  
+					</c:choose>  
+			    </a>
+		    </div>
+		</c:forEach>
 		
-		<div style="margin:10px;background:#FFFFFF;position:relative;">
-			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-		      <div class="weui-media-box__hd">
-		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
-		      </div>
-		      <div class="weui-media-box__bd">
-		        <h4 class="weui-media-box__title">你家的甲醛含量超标么？</h4>
-		        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体。</p>
-		      </div>
-		    </a>
-		</div>
-		
-		<div style="margin:10px;background:#FFFFFF;position:relative;">
+<!-- 		<div style="margin:10px;background:#FFFFFF;position:relative;">
 			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
 		      <div class="weui-media-box__hd">
 		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
@@ -86,10 +97,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        </p>
 		      </div>
 		    </a>
-		</div>
+		</div> -->
 		
 	</div>
 	
+	<!--辅助功能  -->
 	<div style="top:2%;left:80%;position:absolute;">
 		<a href="javascript:toMap()" ><img alt="" src="/Drift_wechat/images/tomap.png" id="countryMap" height="32px" width="32px"></a>
 		<br/><a href="javascript:ShowModel()"><img alt="" src="/Drift_wechat/images/yiqi2.png"  height="32px" width="32px"></a>
@@ -110,8 +122,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </div>
 	</div>
 	
-	<!--导航栏  -->
-<!-- 	<div class="weui-tabbar weui-footer_fixed-bottom" style="bottom:0">
+<!--导航栏  -->
+	<div class="weui-tabbar weui-footer_fixed-bottom" style="bottom:0">
 	  <a href="/Drift_wechat/api/wechat/index" class="weui-tabbar__item weui-bar__item--on">
 	    <div class="weui-tabbar__icon">
 	      <img src="/Drift_wechat/images/navi/index.png" alt="">
@@ -124,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
 	    <p class="weui-tabbar__label">订单</p>
 	  </a>
-	  <a href="/Drift_wechat/jsp/community/CommunityIndex.jsp" class="weui-tabbar__item">
+	  <a href="/Drift_wechat/api/QA/Index" class="weui-tabbar__item">
 	    <div class="weui-tabbar__icon">
 	      <img src="/Drift_wechat/images/navi/community.png" alt="">
 	    </div>
@@ -136,13 +148,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
 	    <p class="weui-tabbar__label">我的</p>
 	  </a>
-	</div> -->
+	</div>
 </body>
 <script type="text/javascript">
  	var x=-1,y=-1;
-	$("#yiqi").click(function() {
+/* 	$("#yiqi").click(function() {
 	    $('#myModal').modal();
-	});
+	}); */
  
 	function ShowModel(){
 		$('#myModal').modal();

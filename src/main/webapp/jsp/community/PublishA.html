@@ -27,7 +27,8 @@
 <body>
   <!-- <form class="weui-cells weui-cells_form" id="basic" style="margin-top:4%;"> -->
 	<div class="weui-cells__title" style="margin-top:4%;">内容</div>
-      <textarea name="summernote" class="summernote" id="summernote" title="Contents" style="width:100%"></textarea>
+    <textarea name="summernote" class="summernote" id="summernote" title="Contents" style="width:100%"></textarea>
+    <div class="weui-loadmore" id="waiting"></div>
     <!--按钮组 -->
 	<div id="botton" class="weui-flex" style="width:100%;">
 	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
@@ -56,13 +57,14 @@
       callbacks: {
         onImageUpload: function(files) {
         	/* $('#summernote').summernote('insertNode', imgNode); */
-            sendFile(files[0],editor,$editable);
+        	document.getElementById("waiting").innerHTML = '<i class="weui-loading"></i><span class="weui-loadmore__tips">正在加载图片</span>';
+            sendFile(files[0]);
         }
       } 
    });  
   });  
     
-  function sendFile(file,editor,$editable) {
+  function sendFile(file) {
     data = new FormData();
     data.append("file", file);
     var fileData = URL.createObjectURL(file);
@@ -79,6 +81,7 @@
 		      $image.css('width', document.body.clientWidth);
 			  $image.attr('id', image_name);
 			});
+			document.getElementById("waiting").innerHTML = '';
             image_name ++;
         }
     });
@@ -88,7 +91,7 @@
   	if ($('#summernote').summernote('isEmpty')){
   	  alert('总要说点啥吧');
   	}else{
-  	  window.location.href="/Drift_wechat/api/QA/ConfirmAnswer?summernote="+$('#summernote').summernote('code');
+  	  window.location.href="/Drift_wechat/api/QA/ConfirmAnswer?summernote="+$('#summernote').summernote('code')+'&qid=' + qid;
   	}
   }
   
