@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,8 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.nju.dao.impl.UserDaoImpl;
 import edu.nju.entities.Device;
+import edu.nju.entities.Question;
 import edu.nju.entities.UserInfo;
 import edu.nju.service.ManageService;
+import edu.nju.service.QAService;
 import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.service.UserService;
@@ -42,6 +45,9 @@ public class OrderController {
 	
 	@Autowired
 	ManageService manageService;
+	
+	@Autowired
+	QAService qaservice;
 	
 	@RequestMapping(value = "/get")
 	public void getDetail(HttpSession session, HttpServletResponse response){
@@ -145,6 +151,27 @@ public class OrderController {
 		try {
 			PrintWriter out = response.getWriter();
 			result.put("tracks", manageService.getAllRoute());
+			out.print(result);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/step5")
+	public void toCenter(HttpServletResponse response) throws IOException {
+		List<Question> qList = manageService.getRecommend();
+		List<Long> qnumList = new ArrayList<Long>();
+		for(Question q:qList){
+			qnumList.add(qaservice.getAnswerNum(q.getId()));
+		}
+		JSONObject result=new JSONObject();
+		try {
+			PrintWriter out = response.getWriter();
+			result.put("qList", qList);
+			result.put("qnumList", qnumList);
 			out.print(result);
 			out.flush();
 			out.close();
