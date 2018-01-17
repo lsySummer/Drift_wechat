@@ -77,12 +77,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          <button type="submit"class="weui-btn weui-btn_primary" id="submit" style="text-align:center">保存个人信息</button>
 	        </div>
     	</form>
-<<<<<<< HEAD
-    	<!--导航栏  -->
-=======
     	
 	    <!--导航栏  -->
->>>>>>> 6b4b5a84afbc4d7a30c3bfe58a6b33c91f2dcda4
 		<div class="weui-tabbar weui-footer_fixed-bottom" style="bottom:0">
 		  <a href="/Drift_wechat/api/wechat/index" class="weui-tabbar__item">
 		    <div class="weui-tabbar__icon">
@@ -108,13 +104,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		    <p class="weui-tabbar__label">我的</p>
 		  </a>
-<<<<<<< HEAD
-		</div>
-  	</div>
-=======
 			</div>
 	  	</div>
->>>>>>> 6b4b5a84afbc4d7a30c3bfe58a6b33c91f2dcda4
   </body>
   	<script type="text/javascript" src="/Drift_wechat/js/myJS/MyIndex.js"></script>
 </html>
