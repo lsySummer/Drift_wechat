@@ -15,13 +15,18 @@ function stateCheck(y){
 				document.getElementById('botton').style.visibility="hidden";
 				break;
 			case 2:
-				document.getElementById('confirm').style.visibility="hidden";
+				var node = document.getElementById('confirm');
+				node.parentNode.removeChild(node);
 				break;
 			case 3:
 				document.getElementById('auth').style.visibility="hidden";
+				$('#other').load('/Drift_wechat/jsp/Orders/FeedbackPreview.jsp'); 
+//					'<jsp:include page="/Drift_wechat/jsp/Orders/FeedbackPreview.jsp" flush="true"/>';
+//				document.getElementById('other').innerHTML = '<%@include file="/Drift_wechat/jsp/Orders/FeedbackPreview.jsp"%>';
 				break;
 			case 4:
-				document.getElementById('detail').style.visibility="hidden";
+				var node = document.getElementById('detail');
+				node.parentNode.removeChild(node);
 				document.getElementById('d2').style.visibility="visible";
 				break;
 		}
