@@ -12,6 +12,7 @@ import edu.nju.dao.BaseDao;
 import edu.nju.dao.ManageDao;
 import edu.nju.dao.QADao;
 import edu.nju.dao.UserDao;
+import edu.nju.entities.Admin;
 import edu.nju.entities.Device;
 import edu.nju.entities.DeviceArea;
 import edu.nju.entities.Order;
@@ -36,9 +37,9 @@ public class ManageDaoImpl implements ManageDao{
 	 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<DeviceVO> getDevices() {
+	public List<DeviceVO> getDevices(int start,int page) {
 		String hql = "from Device";
-		List<Device> list = baseDao.getNewSession().createQuery(hql).getResultList();
+		List<Device> list = baseDao.getNewSession().createQuery(hql).setFirstResult(start).setMaxResults(page).getResultList();
 		List<DeviceVO> volist = new ArrayList<DeviceVO>();
 		for(int i=0;i<list.size();i++){
 			Device d = list.get(i);
@@ -77,9 +78,9 @@ public class ManageDaoImpl implements ManageDao{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<OrderVO> getOrders() {
+	public List<OrderVO> getOrders(int start,int page) {
 		String hql = "from Order";
-		List<Order> list = baseDao.getNewSession().createQuery(hql).getResultList();
+		List<Order> list = baseDao.getNewSession().createQuery(hql).setFirstResult(start).setMaxResults(page).getResultList();
 		List<OrderVO> volist = new ArrayList<OrderVO>();
 		for(int i=0;i<list.size();i++){
 			Order o = list.get(i);
@@ -207,6 +208,18 @@ public class ManageDaoImpl implements ManageDao{
 		List<RecommendQ> list=baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).getResultList();
 		if(list.size()>0) {
 			baseDao.delete(list.get(0));
+			return true;
+		}
+		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean login(String username, String password) {
+		String hql = "from Admin where username=:username and password=:password";
+		List<Admin> list=baseDao.getNewSession().createQuery(hql).setParameter("username", username)
+				.setParameter("password", password).getResultList();
+		if(list.size()>0) {
 			return true;
 		}
 		return false;

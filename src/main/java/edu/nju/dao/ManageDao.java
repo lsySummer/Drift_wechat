@@ -12,13 +12,13 @@ import edu.nju.model.RouteVO;
 
 public interface ManageDao {
 
-	List<DeviceVO> getDevices();
+	List<DeviceVO> getDevices(int start, int page);
 
 	List<UserInfo> getUsers();
 
 	Device addDevice(Device d);
 
-	List<OrderVO> getOrders();
+	List<OrderVO> getOrders(int start, int page);
 
 	boolean confirm(String deviceId);
 
@@ -35,4 +35,6 @@ public interface ManageDao {
 	List<Question> getRecommend();
 
 	boolean removeRec(String qid);
+
+	boolean login(String username, String password);
 }

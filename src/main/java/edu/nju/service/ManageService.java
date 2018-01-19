@@ -40,8 +40,8 @@ public class ManageService {
 	UserDao userDao;
 	
 	//获得所有设备状态信息
-	public List<DeviceVO> getDevices(){
-		List<DeviceVO> dlist = manageDao.getDevices();
+	public List<DeviceVO> getDevices(int start,int page){
+		List<DeviceVO> dlist = manageDao.getDevices(start,page);
 		return dlist;
 	};
 
@@ -79,7 +79,7 @@ public class ManageService {
 			String area = ulist.get(0).getAddress().split(" ")[0];
 			String deviceId = order.getDeviceId();
 			//获得所有的Device
-			List<DeviceVO> devices = manageDao.getDevices();
+			List<DeviceVO> devices = manageDao.getDevices(0,100);
 			for(DeviceVO deviceVO:devices){
 				String id = deviceVO.getId();
 				//排除掉现在使用的device
@@ -145,8 +145,8 @@ public class ManageService {
 		}
 	}
 	
-	public List<OrderVO> getOrders(){
-		List<OrderVO> olist = manageDao.getOrders();
+	public List<OrderVO> getOrders(int start,int page){
+		List<OrderVO> olist = manageDao.getOrders(start,page);
 		return olist;
 	}
 	
@@ -193,5 +193,9 @@ public class ManageService {
 	 */
 	public List<Question> getRecommend() {
 		return manageDao.getRecommend();
+	}
+	
+	public boolean login(String username,String password) {
+		return manageDao.login(username,password);
 	}
 }
