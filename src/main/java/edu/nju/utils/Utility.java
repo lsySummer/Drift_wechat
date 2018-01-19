@@ -141,12 +141,10 @@ public class Utility {
 			String fileName = mf.getOriginalFilename();
 			if (!"".equals(fileName)) {
 				// 获取后缀
-//				String suffix = fileName.substring(fileName.indexOf("."),
-//						fileName.length());
-//				String newName=i+suffix;
 				//identify:"comment/"+openid+"/"
 				String url = baseUrl + fileName;
 				urllst = urllst + "/upload/"+identify+fileName+";";
+				log.info("urllst"+urllst);
 				try {
 					mf.transferTo(new File(url));
 				}catch(Exception e){

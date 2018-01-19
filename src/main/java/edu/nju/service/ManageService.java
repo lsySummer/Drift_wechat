@@ -40,8 +40,8 @@ public class ManageService {
 	UserDao userDao;
 	
 	//获得所有设备状态信息
-	public List<DeviceVO> getDevices(int start,int page){
-		List<DeviceVO> dlist = manageDao.getDevices(start,page);
+	public List<DeviceVO> getDevices(int start,int num){
+		List<DeviceVO> dlist = manageDao.getDevices(start,num);
 		return dlist;
 	};
 
@@ -145,8 +145,8 @@ public class ManageService {
 		}
 	}
 	
-	public List<OrderVO> getOrders(int start,int page){
-		List<OrderVO> olist = manageDao.getOrders(start,page);
+	public List<OrderVO> getOrders(int start,int num){
+		List<OrderVO> olist = manageDao.getOrders(start,num);
 		return olist;
 	}
 	
