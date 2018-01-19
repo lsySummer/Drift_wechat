@@ -50,21 +50,21 @@ public class ManageController {
 	
 	@RequestMapping(value = "/index")
 	public String getIndex(HttpSession session,Model model) {
-		List<DeviceVO> deviceList = manageService.getDevices();
+		List<DeviceVO> deviceList = manageService.getDevices(0,10);
 		model.addAttribute("deviceList", deviceList);
 		return "jsp/Manage/DeviceList";
 	}
 	
 	@RequestMapping(value = "/deviceList")
 	public String getDeviceList(HttpSession session,Model model) {
-		List<DeviceVO> deviceList = manageService.getDevices();
+		List<DeviceVO> deviceList = manageService.getDevices(0,10);
 		model.addAttribute("deviceList", deviceList);
 		return "jsp/Manage/DeviceList";
 	}
 	
 	@RequestMapping(value = "/orderList")
 	public String getOrderList(HttpSession session,Model model) {
-		List<OrderVO> orderList = manageService.getOrders();
+		List<OrderVO> orderList = manageService.getOrders(0,10);
 		model.addAttribute("orderList", orderList);
 		return "jsp/Manage/OrderList";
 	}
