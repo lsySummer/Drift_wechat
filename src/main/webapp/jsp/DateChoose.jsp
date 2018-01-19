@@ -101,7 +101,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$("#submit").click(function(){
 		if($("#alternate").val().trim().length){
 			var startDate = document.getElementById("alternate").value;
-			alert(startDate);
 			$.ajax({url:"/Drift_wechat/api/order/date?startDate="+startDate, success: function(data){
 				if(data == "200"){
 					window.location.href='/Drift_wechat/jsp/Result.jsp';

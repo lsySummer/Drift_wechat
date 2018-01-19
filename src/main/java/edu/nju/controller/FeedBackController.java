@@ -1,8 +1,11 @@
 package edu.nju.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
@@ -57,17 +60,31 @@ public class FeedBackController {
 		return "0"; 
 	}
 	
-	@RequestMapping(value = "/get")
+	@RequestMapping(value = "/getFB")
 	@ResponseBody
-	public String getCheckResult(HttpSession session,@RequestBody List<CheckResult> list,Model model) {
-		String openid = (String)session.getAttribute("openid");
+	public void getCheckResult(HttpSession session,HttpServletResponse response) {
+		//String openid = (String)session.getAttribute("openid");
+		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
 		UserComment userComment = cservice.getComment(openid);
+		System.out.println(userComment.getComment());
+		System.out.println(userComment.getPicURLS());
 		String ptUrls[] = userComment.getPicURLS().split(";");
-		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
 		List<CheckResult> crList = service.getCheckResult(openid);
-		model.addAttribute("crList", crList);
-		model.addAttribute("PtUrls", ptUrls);
-		model.addAttribute("userComment", userComment);
-		return "FeedbackPreview";
+		JSONObject result=new JSONObject();
+		JSONObject ucJson=new JSONObject();
+		ucJson.put("comment", userComment.getComment());
+		ucJson.put("picURLS", userComment.getPicURLS());
+		try {
+			PrintWriter out = response.getWriter();
+			result.put("crList", crList);
+			//result.put("ptUrl", ptUrls[0]);
+			result.put("userComment", ucJson);
+			out.print(result);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
