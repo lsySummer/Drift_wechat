@@ -42,9 +42,11 @@ public class QADaoImpl implements QADao{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Question> getAllQuestion() {
-		String hql = "from Question";
-		List<Question> list = baseDao.getNewSession().createQuery(hql).getResultList();
+	public List<Question> getAllQuestion(int start,int page) {
+		String hql = "from Question order by createTime desc";
+//		query0.setFirstResult(start); // 开始记录
+//		query0.setMaxResults(10); // 查询多少条
+		List<Question> list = baseDao.getNewSession().createQuery(hql).setFirstResult(start).setMaxResults(page).getResultList();
 		return list;
 	}
 

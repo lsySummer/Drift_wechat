@@ -69,5 +69,10 @@ public class Question {
 	public void setPicSig(String picSig) {
 		this.picSig = picSig;
 	}
+	@Override
+	public String toString() {
+		return "Question [id=" + id + ", openid=" + openid + ", title=" + title + ", content=" + content
+				+ ", createTime=" + createTime + ", picSig=" + picSig + "]";
+	}
 	
 }

@@ -1,10 +1,13 @@
 package edu.nju.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.nju.entities.Question;
 import edu.nju.service.CommunityService;
 import edu.nju.service.ManageService;
 import edu.nju.service.QAService;
@@ -82,6 +85,10 @@ public class TestController {
 //		mservice.removeRec("4028e3ef60f878570160f87ab7f90001");
 //		System.out.println(mservice.getRecommend().size());
 //		System.out.println(cservice.getCheckResult("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg").size());
+//		List<Question> list = qservice.getAllQuestion(2, 5);
+//		for(Question q:list) {
+//			System.out.println(q.toString());
+//		}
 		return "jsp/NewFile";
 	}
 }

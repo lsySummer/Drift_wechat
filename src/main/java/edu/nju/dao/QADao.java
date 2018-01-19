@@ -12,7 +12,7 @@ public interface QADao {
 
 	String addAnswer(Answer a);
 
-	List<Question> getAllQuestion();
+	List<Question> getAllQuestion(int start, int page);
 
 	List<Answer> getAnswers(String qid);
 

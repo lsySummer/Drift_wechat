@@ -79,8 +79,8 @@ public class QAService {
 		return dao.addAnswer(a);
 	}
 	
-	public List<Question> getAllQuestion(){
-		List<Question> list = dao.getAllQuestion();
+	public List<Question> getAllQuestion(int start,int page){
+		List<Question> list = dao.getAllQuestion(start,page);
 		return list;
 	}
 	

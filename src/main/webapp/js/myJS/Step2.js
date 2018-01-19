@@ -7,7 +7,6 @@ $.getJSON('/Drift_wechat/api/delivery/step2',function(json){
 		document.getElementById('confirm').value="false";
 	}
 	if(json.nickName != null){
-		console.log(json);
 		document.getElementById('previous').innerHTML = json.nickName;
 		document.getElementById('deliveryNum1').innerHTML = json.receive;
 		document.getElementById('deviceId1').innerHTML = json.deviceId;
