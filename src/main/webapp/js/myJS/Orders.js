@@ -8,8 +8,8 @@ $.getJSON('/Drift_wechat/api/order/get',function(json){
 		document.getElementById("container").innerHTML="暂无订单";
 	}else{
 		document.getElementById('orderId').innerHTML=data[data.length-1].id.slice(-12);
-		document.getElementById('startDate').innerHTML=data[data.length-1].startDate;
-		document.getElementById('endDate').innerHTML=data[data.length-1].endDate;
+		document.getElementById('startDate').innerHTML=data[data.length-1].startDate.split(' ').shift();
+		document.getElementById('endDate').innerHTML=data[data.length-1].endDate.split(' ').shift();
 		document.getElementById('state').innerHTML=data[data.length-1].state;
 		document.getElementById('address').innerHTML=data[data.length-1].address;
 		document.getElementById('userName').innerHTML=data[data.length-1].name;

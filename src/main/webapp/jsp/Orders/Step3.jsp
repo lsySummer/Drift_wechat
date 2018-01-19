@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- <div style="margin-top:6%;">
 		<img src="/Drift_wechat/images/sky.jpg" title="甲醛漂流仪"/>
 	</div> -->
+	<div id="other"></div>
 	<!--按钮 -->
 	<div class="weui-flex__item placeholder" style="bottom:10%;position:fixed;width:100%;">
 	   <button id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/Orders/FeedbackWrite.jsp';">填写使用信息</button>
