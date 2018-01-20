@@ -164,8 +164,10 @@ public class OrderController {
 	public void toCenter(HttpServletResponse response) throws IOException {
 		List<Question> qList = manageService.getRecommend();
 		List<Long> qnumList = new ArrayList<Long>();
-		for(Question q:qList){
-			qnumList.add(qaservice.getAnswerNum(q.getId()));
+		if(qList!=null){
+			for(Question q:qList){
+				qnumList.add(qaservice.getAnswerNum(q.getId()));
+			}
 		}
 		JSONObject result=new JSONObject();
 		try {
