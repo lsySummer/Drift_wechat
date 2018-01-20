@@ -142,7 +142,8 @@ public class QAController {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
 		String filePath = "";
 		if(session.getAttribute("question") == null){
-			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
+			String openid = session.getAttribute("openid").toString();
+			filePath = openid.substring(openid.length() - 10) + "_" + df.format(new Date()) + "/temp/";
 			//filePath = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg"+ "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("question", filePath);
@@ -207,7 +208,8 @@ public class QAController {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
 		String filePath = "";
 		if(session.getAttribute("answer") == null){
-			filePath = (String)session.getAttribute("openid") + "_" + df.format(new Date()) + "/temp/";
+			String openid = session.getAttribute("openid").toString();
+			filePath = openid.substring(openid.length() - 10) + "_" + df.format(new Date()) + "/temp/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("answer", filePath);
 			List<MultipartFile> temp = new ArrayList<MultipartFile>();
