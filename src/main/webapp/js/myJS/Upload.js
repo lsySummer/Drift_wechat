@@ -62,6 +62,7 @@ weui.uploader('#uploaderCustom', {
          }
     },
     onError: function(err){
+    	$.toptip(err, 'error');
         console.log(this, err);
     }
 });
@@ -75,6 +76,17 @@ document.getElementById("uploaderCustomBtn").addEventListener('click', function(
 	    });
 	}
 });
+
+//手动上传按钮
+//function upload(){
+//	alert('test');
+//	if(uploadList.length == 0){$.toptip('请至少选择一张图片', 'warning');}
+//	else{
+//		uploadList.forEach(function(file){
+//	        file.upload();
+//	    });
+//	}
+//};
 
 // 缩略图预览
 document.querySelector('#uploaderCustomFiles').addEventListener('click', function(e){

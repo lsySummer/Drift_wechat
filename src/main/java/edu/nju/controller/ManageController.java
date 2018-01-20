@@ -50,21 +50,21 @@ public class ManageController {
 	
 	@RequestMapping(value = "/index")
 	public String getIndex(HttpSession session,Model model) {
-		List<DeviceVO> deviceList = manageService.getDevices();
+		List<DeviceVO> deviceList = manageService.getDevices(0,10);
 		model.addAttribute("deviceList", deviceList);
 		return "jsp/Manage/DeviceList";
 	}
 	
 	@RequestMapping(value = "/deviceList")
 	public String getDeviceList(HttpSession session,Model model) {
-		List<DeviceVO> deviceList = manageService.getDevices();
+		List<DeviceVO> deviceList = manageService.getDevices(0,10);
 		model.addAttribute("deviceList", deviceList);
 		return "jsp/Manage/DeviceList";
 	}
 	
 	@RequestMapping(value = "/orderList")
 	public String getOrderList(HttpSession session,Model model) {
-		List<OrderVO> orderList = manageService.getOrders();
+		List<OrderVO> orderList = manageService.getOrders(0,10);
 		model.addAttribute("orderList", orderList);
 		return "jsp/Manage/OrderList";
 	}
@@ -172,7 +172,25 @@ public class ManageController {
 		return "success";
 	}
 	
-	
+	@RequestMapping(value = "/login")
+	public void Login(String username, String password, HttpServletResponse response){
+		boolean result = manageService.login(username, password);
+		JSONObject status = new JSONObject();
+		if(result){
+			status.put("status", "200");
+		}else{
+			status.put("status", "400");
+		}
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(status);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public static List<String> readFile()
 	{   
