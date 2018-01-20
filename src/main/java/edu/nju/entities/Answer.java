@@ -59,6 +59,9 @@ public class Answer {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+	@Lob
+	@Basic(fetch=FetchType.LAZY)
+	@Column(columnDefinition="LONGTEXT",nullable=true)
 	public String getPicSig() {
 		return picSig;
 	}
