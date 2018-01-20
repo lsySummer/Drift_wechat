@@ -31,50 +31,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 </style>
 <body>
-	<!--用户评论展示  -->
-	<div class="weui-cells__title"><h2>评论</h2></div>
-    <div style="margin:10px;background:#FFFFFF;position:relative;">
-		<a href="" class="weui-media-box weui-media-box_appmsg">
-			<div class="weui-media-box__bd">
-			    <p class="weui-media-box__title" id=comment></p>
-			</div>
-	   		<div class="weui-media-box__hd">
-	          <img class="weui-media-box__thumb" id="img" src="">
-	        </div>
-	    </a>
-	</div>
-	<hr class="style-one" />
-    <!--填写信息展示-->
-    <div class="weui-cells__title"><h2>甲醛信息</h2></div>
-		<div class="weui-form-preview" id="jiaquan">
-<%-- 		  <div class="weui-form-preview__hd">
-		    <label class="weui-form-preview__label">甲醛</label>
-		    <em class="weui-form-preview__value">${CR.num}</em>
-		  </div>
-		  <div class="weui-form-preview__bd">
-		    <div class="weui-form-preview__item">
-		      <label class="weui-form-preview__label">位置</label>
-		      <span class="weui-form-preview__value">${CR.location}</span>
-		    </div>
-		    <div class="weui-form-preview__item">
-		      <label class="weui-form-preview__label">面积</label>
-		      <span class="weui-form-preview__value">${CR.location}m2</span>
-		    </div>
-		  </div>
-		  <div class="weui-form-preview__ft">
-		    <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">辅助操作</a>
-		    <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">操作</button>
-		  </div> --%>
+	<div id="mainInfo">
 		</div>
+		<!--用户评论展示  -->
+		<div class="weui-cells__title"><h4>评论</h4></div>
+	    <div style="margin:10px;background:#FFFFFF;position:relative;">
+			<a href="" class="weui-media-box weui-media-box_appmsg">
+				<div class="weui-media-box__bd" align="left">
+				    <p class="weui-media-box__title" id=comment></p>
+				</div>
+		   		<div class="weui-media-box__hd">
+		          <img class="weui-media-box__thumb" id="img" src=""><a class="pb" ><p>查看大图</p></a>
+		        </div>
+		    </a>
+		</div>
+		<hr class="style-one" />
+	    <!--填写信息展示-->
+	    <div class="weui-cells__title"><h4>甲醛信息</h4></div>
+		<div class="weui-form-preview" id="jiaquan">
+		</div>
+	</div>
 </body>
 
 <script type="text/javascript">
 	var pbset;
 	var pts = [];
-	$("#img").click(function() {
-		alert("进入图片预览");
-		console.log(pts);
+	$(".pb").click(function() {
 		pbset.open();
+		//$("#mainInfo").hide();
 	});
 	
 	//页面加载完成启动
@@ -125,9 +109,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					html += '<span class="weui-form-preview__value">'+CR.location+'m2</span></div></div>'; */
 					html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>甲醛数值</label>";
 					html+="<span class='weui-form-preview__value'>"+CR.num+"</span></div></div>";
-					html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>位置</label>";
-					html+="<span class='weui-form-preview__value'>"+CR.area+"</span></div></div>";
 					html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>面积</label>";
+					html+="<span class='weui-form-preview__value'>"+CR.area+"</span></div></div>";
+					html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>位置</label>";
 					html+="<span class='weui-form-preview__value'>"+CR.location+"</span></div></div>";
 					html+="<div class='weui-form-preview__ft'></div>";
 				});	
