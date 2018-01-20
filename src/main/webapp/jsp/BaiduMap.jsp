@@ -175,7 +175,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var pts = uc.map.picURLS.split(";");
 				pts.pop();
 				for(var i=0;i<(pts.length>3?3:pts.length);i++){
-					var temp = baseUrl+pts[i];
+					var temp = pts[i];
 					var tempImage = {"image":temp};
 					itemsArray.push(tempImage);
 					ptUrls.push(temp);
@@ -191,7 +191,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 				pbset = $.photoBrowser({
 			        items: itemsArray,
-			        initIndex: 1
+			        initIndex: 0
 			    });	    
 			    $("#comment").popup();
 			}				
@@ -207,47 +207,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//weChatMap();
 		map_init();
 	});
-	
-<%-- 	function weChatMap(){
-		wx.config({
-	        appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
-	        timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
-	        nonceStr: "<%=session.getAttribute("noncestr")%>", // 必填，生成签名的随机串
-	        signature: "<%=session.getAttribute("signature")%>",// 必填，签名，见附录1
-	        jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-	    });
-	    
-	    wx.ready(function(){
-	    	//alert(location.href.split('#')[0]);
-	    	 wx.getLocation({
-			        success: function (res) {
-			            var ggPoint = new BMap.Point(res.longitude,res.latitude);
-						var convertor = new BMap.Convertor();
-				        var pointArr = [];
-				        pointArr.push(ggPoint);
-				        convertor.translate(pointArr, 1, 5, translateCallback);
-			        },
-			        fail: function(error) {
-			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
-			        }
-			    });
-	    });
-	 
-	    wx.error(function(res){
-	    });
-	    
-		//变换坐标函数
-		translateCallback = function (data){
-	    if(data.status === 0) {
-		      myLocation = {"x":data.points[0].lng,"y":data.points[0].lat};
-				map_init();
-		      }
-	    else{
-	      		AlertUtil.error("无法获取您的位置！");
-	    	}
-	    }
-	} --%>
-
 	
 	//获取用户userVO列表
 	function getMap(){

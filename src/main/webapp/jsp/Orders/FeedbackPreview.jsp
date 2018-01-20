@@ -31,59 +31,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 </style>
 <body>
-	<!--用户评论展示  -->
-	<div class="weui-cells__title"><h2>评论</h2></div>
-    <div style="margin:10px;background:#FFFFFF;position:relative;">
-		<a href="" class="weui-media-box weui-media-box_appmsg">
-			<div class="weui-media-box__bd">
-			    <p class="weui-media-box__title" id=comment></p>
-			</div>
-	   		<div class="weui-media-box__hd">
-	          <img class="weui-media-box__thumb" id="img" src="">
-	        </div>
-	    </a>
-	</div>
-	<hr class="style-one" />
-    <!--填写信息展示-->
-    <div class="weui-cells__title"><h2>甲醛信息</h2></div>
-		<div class="weui-form-preview" id="jiaquan">
-<%-- 		  <div class="weui-form-preview__hd">
-		    <label class="weui-form-preview__label">甲醛</label>
-		    <em class="weui-form-preview__value">${CR.num}</em>
-		  </div>
-		  <div class="weui-form-preview__bd">
-		    <div class="weui-form-preview__item">
-		      <label class="weui-form-preview__label">位置</label>
-		      <span class="weui-form-preview__value">${CR.location}</span>
-		    </div>
-		    <div class="weui-form-preview__item">
-		      <label class="weui-form-preview__label">面积</label>
-		      <span class="weui-form-preview__value">${CR.location}m2</span>
-		    </div>
-		  </div>
-		  <div class="weui-form-preview__ft">
-		    <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">辅助操作</a>
-		    <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">操作</button>
-		  </div> --%>
+	<div id="mainInfo">
 		</div>
+		<!--用户评论展示  -->
+		<div class="weui-cells__title"><h4>评论</h4></div>
+	    <div style="margin:10px;background:#FFFFFF;position:relative;">
+			<a href="" class="weui-media-box weui-media-box_appmsg">
+				<div class="weui-media-box__bd" align="left">
+				    <p class="weui-media-box__title" id=comment></p>
+				</div>
+		   		<div class="weui-media-box__hd">
+		          <img class="weui-media-box__thumb" id="img" src=""><a class="pb" ><p>查看大图</p></a>
+		        </div>
+		    </a>
+		</div>
+		<hr class="style-one" />
+	    <!--填写信息展示-->
+	    <div class="weui-cells__title"><h4>甲醛信息</h4></div>
+		<div class="weui-form-preview" id="jiaquan">
+		</div>
+	</div>
 </body>
 
 <script type="text/javascript">
 	var pbset;
-	var ptUrls;
-	$("#img").click(function() {
-		alert("进入图片预览");
-		console.log(ptUrls);
-		pbset = $.photoBrowser({
-	        items: ["/upload/comment/oRTgpwQkDZKxGFvNnfKpJLWvxsyw/CA2AB6DD-5F52-42A8-9B1E-9901BEC68AC6.jpeg",
-	        	"/upload/comment/oRTgpwQkDZKxGFvNnfKpJLWvxsyw/3CFF9A0F-8094-4C9E-AFBD-8CA38038B148.jpeg"],
-	        initIndex: 1
-	    });
+	var pts = [];
+	$(".pb").click(function() {
 		pbset.open();
+		//$("#mainInfo").hide();
 	});
-
+	
 	//页面加载完成启动
 	$("document").ready(function(){
+		feedbackPreview();
+	});
+	
+	//获取数据
+	function feedbackPreview(){
 		$.get("/Drift_wechat/api/FB/getFB",function(json){
 			console.log(json);
 			var crList = json.crList;
@@ -92,18 +76,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(typeof(userComment.comment)   !=   "undefined"){
 				$("#comment").html(userComment.comment);
 			}
-/* 			else{
+			else{
 				$("#comment").html("您尚未填写任何评论哦亲");
-			} */
+			}
 			
 			if(typeof(userComment.picURLS)   !=   "undefined"){
 				ptUrls = userComment.picURLS.split(";");
 				ptUrls.pop();
-/* 				pbset = $.photoBrowser({
-			        items: ["/upload/comment/oRTgpwQkDZKxGFvNnfKpJLWvxsyw/CA2AB6DD-5F52-42A8-9B1E-9901BEC68AC6.jpeg",
-			        	"/upload/comment/oRTgpwQkDZKxGFvNnfKpJLWvxsyw/3CFF9A0F-8094-4C9E-AFBD-8CA38038B148.jpeg"],
-			        initIndex: 1
-			    }); */
+				ptUrls.forEach(function(ptUrl){
+					var temp = {image:ptUrl};
+					pts.push(temp);
+				})
+				pbset = $.photoBrowser({
+			        items: pts,
+			        initIndex: 0
+			    });
 				console.log(ptUrls[0]);
 				$("#img").attr('src',ptUrls[0]); 
 			}
@@ -122,15 +109,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					html += '<span class="weui-form-preview__value">'+CR.location+'m2</span></div></div>'; */
 					html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>甲醛数值</label>";
 					html+="<span class='weui-form-preview__value'>"+CR.num+"</span></div></div>";
-					html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>位置</label>";
-					html+="<span class='weui-form-preview__value'>"+CR.area+"</span></div></div>";
 					html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>面积</label>";
+					html+="<span class='weui-form-preview__value'>"+CR.area+"</span></div></div>";
+					html+="<div class='weui-form-preview__bd'><div class='weui-form-preview__item'><label class='weui-form-preview__label'>位置</label>";
 					html+="<span class='weui-form-preview__value'>"+CR.location+"</span></div></div>";
 					html+="<div class='weui-form-preview__ft'></div>";
 				});	
 				$("#jiaquan").html(html);
 			}
 		},"json");    
-	});
+	}
 </script>
 </html>
