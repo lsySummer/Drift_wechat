@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
             <div class="weui-btn-area">
-                <a id="uploaderCustomBtn" href="javascript:" class="weui-btn weui-btn_primary">上传</a>
+                <a id="uploaderCustomBtn" class="weui-btn weui-btn_primary">上传</a>
             </div>
   <script type="text/javascript" src="/Drift_wechat/js/myJS/Upload.js"></script>
 </body>

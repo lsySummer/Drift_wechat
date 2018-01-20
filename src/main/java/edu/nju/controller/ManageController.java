@@ -172,7 +172,25 @@ public class ManageController {
 		return "success";
 	}
 	
-	
+	@RequestMapping(value = "/login")
+	public void Login(String username, String password, HttpServletResponse response){
+		boolean result = manageService.login(username, password);
+		JSONObject status = new JSONObject();
+		if(result){
+			status.put("status", "200");
+		}else{
+			status.put("status", "400");
+		}
+		try {
+			PrintWriter out = response.getWriter();
+			out.print(status);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public static List<String> readFile()
 	{   
