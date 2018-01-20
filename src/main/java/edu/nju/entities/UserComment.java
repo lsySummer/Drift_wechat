@@ -1,9 +1,12 @@
 package edu.nju.entities;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -44,6 +47,9 @@ public class UserComment {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	@Lob
+	@Basic(fetch=FetchType.LAZY)
+	@Column(columnDefinition="LONGTEXT",nullable=true)
 	public String getPicURLS() {
 		return picURLS;
 	}
