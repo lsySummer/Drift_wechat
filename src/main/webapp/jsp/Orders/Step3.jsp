@@ -18,13 +18,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
   <title>使用须知</title>
 </head>
-<body style="background-image:url(/Drift_wechat/images/sky.jpg)">
+<body id="body">
 	<!--步骤条 -->
 	<%@include file="TopBar.html"%>
   	<!--文案 -->
-	<!-- <div style="margin-top:6%;">
-		<img src="/Drift_wechat/images/sky.jpg" title="甲醛漂流仪"/>
-	</div> -->
+	<div style="margin-top:5%;" id="imagebox">
+		<img src="/Drift_wechat/images/step3.jpg" title="甲醛漂流仪" id="image" style="width:100%"/>
+	</div>
 	<div id="other"></div>
 	<!--按钮 -->
 	<div class="weui-flex__item placeholder" style="bottom:10%;position:fixed;width:100%;">
