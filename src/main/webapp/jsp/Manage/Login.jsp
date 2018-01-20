@@ -11,7 +11,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>甲醛检测后台系统</title>
 	<meta http-equiv="description" content="This is a login page">
 	<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
-	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
 	<script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="/Drift_wechat/js/bootstrap.min.js"></script>
   </head>
