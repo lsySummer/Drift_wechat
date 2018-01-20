@@ -191,7 +191,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 				pbset = $.photoBrowser({
 			        items: itemsArray,
-			        initIndex: 1
+			        initIndex: 0
 			    });	    
 			    $("#comment").popup();
 			}				

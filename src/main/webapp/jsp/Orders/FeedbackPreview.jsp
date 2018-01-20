@@ -70,20 +70,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script type="text/javascript">
 	var pbset;
-	var ptUrls;
+	var pts = [];
 	$("#img").click(function() {
 		alert("进入图片预览");
-		console.log(ptUrls);
-		pbset = $.photoBrowser({
-	        items: ["/upload/comment/oRTgpwQkDZKxGFvNnfKpJLWvxsyw/CA2AB6DD-5F52-42A8-9B1E-9901BEC68AC6.jpeg",
-	        	"/upload/comment/oRTgpwQkDZKxGFvNnfKpJLWvxsyw/3CFF9A0F-8094-4C9E-AFBD-8CA38038B148.jpeg"],
-	        initIndex: 1
-	    });
+		console.log(pts);
 		pbset.open();
 	});
-
+	
 	//页面加载完成启动
 	$("document").ready(function(){
+		feedbackPreview();
+	});
+	
+	//获取数据
+	function feedbackPreview(){
 		$.get("/Drift_wechat/api/FB/getFB",function(json){
 			console.log(json);
 			var crList = json.crList;
@@ -92,18 +92,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(typeof(userComment.comment)   !=   "undefined"){
 				$("#comment").html(userComment.comment);
 			}
-/* 			else{
+			else{
 				$("#comment").html("您尚未填写任何评论哦亲");
-			} */
+			}
 			
 			if(typeof(userComment.picURLS)   !=   "undefined"){
 				ptUrls = userComment.picURLS.split(";");
 				ptUrls.pop();
-/* 				pbset = $.photoBrowser({
-			        items: ["/upload/comment/oRTgpwQkDZKxGFvNnfKpJLWvxsyw/CA2AB6DD-5F52-42A8-9B1E-9901BEC68AC6.jpeg",
-			        	"/upload/comment/oRTgpwQkDZKxGFvNnfKpJLWvxsyw/3CFF9A0F-8094-4C9E-AFBD-8CA38038B148.jpeg"],
-			        initIndex: 1
-			    }); */
+				ptUrls.forEach(function(ptUrl){
+					var temp = {image:ptUrl};
+					pts.push(temp);
+				})
+				pbset = $.photoBrowser({
+			        items: pts,
+			        initIndex: 0
+			    });
 				console.log(ptUrls[0]);
 				$("#img").attr('src',ptUrls[0]); 
 			}
@@ -131,6 +134,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$("#jiaquan").html(html);
 			}
 		},"json");    
-	});
+	}
 </script>
 </html>
