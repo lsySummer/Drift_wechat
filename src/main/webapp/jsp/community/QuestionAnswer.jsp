@@ -9,8 +9,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
 <link rel="stylesheet" href="/Drift_wechat/css/demos.css">
-<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
 <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
+<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 <script src="/Drift_wechat/js/bootstrap.min.js"></script>
 <head>
@@ -29,23 +29,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		background: #333;	
 		background-image: linear-gradient(to right, #ccc, #333, #ccc);	
 	}
+	p{font-size:15px} 
 </style> 	
 <body>
-	
-  	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:8px ">
+
+	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:10px ">
   		<div class="weui-cell__ft"><a href="/Drift_wechat/api/QA/Index"><img alt="" style="" src="/Drift_wechat/images/community/back.png"></a></div>
-	    <div class="weui-cell__bd" style="color:black">
-	      <h3>回答浏览</h3>
+	    <div class="weui-cell__bd" style="font-weight:bold;">
+	      <h4>回答浏览</h4>
 	    </div>
-	    <div class="weui-cell__ft"><a href=""><img id="release" alt="" style="" src="/Drift_wechat/images/community/omit.png"></a></div>
+	    <div class="weui-cell__ft"><a href=><img id="release" alt="" style="" src="/Drift_wechat/images/community/omit.png"></a></div>
 	</div>
 	<hr class="style-four" />
 	
 	<div class="weui-cells weui-cells_form" style="margin-top:0px">
-		  <div class="weui-cell" style="font-weight:bold">
+		  <div class="weui-cell" style="font-weight:bold;font-size:16px">
 		      <p>${question.title}</p>
 		  </div>
-		  <div style="margin:15px;font-size:15px">
+		  <div style="margin:10px;">
 			   <p>${question.content}</p>
 		  </div>
 		  
@@ -82,11 +83,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<c:forEach items="${aList}" var="A" varStatus="index">
 			<a href="/Drift_wechat/api/QA/AnswerPreview?aid=${A.id}&qid=${question.id}" class="weui-media-box weui-media-box_appmsg">
 		      <div class="weui-media-box__bd">
-		      	<div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-bottom:10px"> 
-		      		<img src="${userList[index.count-1].headimgUrl}" style="height: 20px;width:20px;vertical-align:middle">${userList[index.count-1].nickName}
+		      	<div class="weui-media-box__title" style="font-size:15px;color:#A9A9A9;padding-bottom:10px"> 
+		      		<img src="${userList[index.count-1].headimgUrl}" style="height: 30px;width:30px;vertical-align:middle">${userList[index.count-1].nickName}
 		      	</div>
 		        <div class="weui-media-box__desc" style="color:#000000">${A.content}</div>
-		        <div class="weui-media-box__title" style="font-size:12px;color:#A9A9A9;padding-top:10px">${likeList[index.count-1]}赞同 &nbsp;&nbsp;${dateStrs[index.count-1]}</div>
+		        <div class="weui-media-box__title" style="font-size:15px;color:#A9A9A9;padding-top:10px">${likeList[index.count-1]}赞同 &nbsp;&nbsp;${dateStrs[index.count-1]}</div>
 		      </div>
 		    </a>
 		</c:forEach>
