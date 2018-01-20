@@ -19,10 +19,9 @@ function stateCheck(y){
 				node.parentNode.removeChild(node);
 				break;
 			case 3:
+				document.getElementById('imagebox').removeChild(document.getElementById('image'));
 				document.getElementById('auth').style.visibility="hidden";
 				$('#other').load('/Drift_wechat/jsp/Orders/FeedbackPreview.jsp'); 
-//					'<jsp:include page="/Drift_wechat/jsp/Orders/FeedbackPreview.jsp" flush="true"/>';
-//				document.getElementById('other').innerHTML = '<%@include file="/Drift_wechat/jsp/Orders/FeedbackPreview.jsp"%>';
 				break;
 			case 4:
 				var node = document.getElementById('detail');

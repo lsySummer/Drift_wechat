@@ -41,7 +41,8 @@ public class ManageController {
 	
 	@RequestMapping(value = "/addDevice")
 	public String toAddDevice(HttpSession session,Model model) {
-		//String filePath = ManageController.class.getClassLoader().getResource("../province.txt").getPath();
+		String check = checkStatus(session);
+		if(check != "true"){return check;}
 		List<String> provinces = new ArrayList<String>();
 		provinces = readFile();
 		model.addAttribute("provinces", provinces);
@@ -50,6 +51,8 @@ public class ManageController {
 	
 	@RequestMapping(value = "/index")
 	public String getIndex(HttpSession session,Model model) {
+		String check = checkStatus(session);
+		if(check != "true"){return check;}
 		List<DeviceVO> deviceList = manageService.getDevices(0,10);
 		model.addAttribute("deviceList", deviceList);
 		return "jsp/Manage/DeviceList";
@@ -57,6 +60,8 @@ public class ManageController {
 	
 	@RequestMapping(value = "/deviceList")
 	public String getDeviceList(HttpSession session,Model model) {
+		String check = checkStatus(session);
+		if(check != "true"){return check;}
 		List<DeviceVO> deviceList = manageService.getDevices(0,10);
 		model.addAttribute("deviceList", deviceList);
 		return "jsp/Manage/DeviceList";
@@ -64,6 +69,8 @@ public class ManageController {
 	
 	@RequestMapping(value = "/orderList")
 	public String getOrderList(HttpSession session,Model model) {
+		String check = checkStatus(session);
+		if(check != "true"){return check;}
 		List<OrderVO> orderList = manageService.getOrders(0,10);
 		model.addAttribute("orderList", orderList);
 		return "jsp/Manage/OrderList";
@@ -71,6 +78,8 @@ public class ManageController {
 	
 	@RequestMapping(value = "/companySend")
 	public String companySend(HttpSession session,Model model) {
+		String check = checkStatus(session);
+		if(check != "true"){return check;}
 		List<OrderVO> orderList = reserveService.getCompanySend();
 		model.addAttribute("orderList", orderList);
 		return "jsp/Manage/companySend";
@@ -92,6 +101,8 @@ public class ManageController {
 	
 	@RequestMapping(value = "/companyReceive")
 	public String companyRevice(String orderId, HttpSession session,Model model) {
+		String check = checkStatus(session);
+		if(check != "true"){return check;}
 		List<OrderVO> orderList = reserveService.getCompanyReceive();
 		model.addAttribute("orderList", orderList);
 		return "jsp/Manage/companyReceive";
@@ -173,11 +184,12 @@ public class ManageController {
 	}
 	
 	@RequestMapping(value = "/login")
-	public void Login(String username, String password, HttpServletResponse response){
+	public void Login(String username, String password, HttpServletResponse response, HttpSession session){
 		boolean result = manageService.login(username, password);
 		JSONObject status = new JSONObject();
 		if(result){
 			status.put("status", "200");
+			session.setAttribute("manage", username);
 		}else{
 			status.put("status", "400");
 		}
@@ -189,6 +201,14 @@ public class ManageController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public static String checkStatus(HttpSession session){
+		if(session.getAttribute("manage") == null){
+			return "jsp/Manage/Login";
+		}else{
+			return "true";
 		}
 	}
 	
