@@ -175,7 +175,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var pts = uc.map.picURLS.split(";");
 				pts.pop();
 				for(var i=0;i<(pts.length>3?3:pts.length);i++){
-					var temp = baseUrl+pts[i];
+					var temp = pts[i];
 					var tempImage = {"image":temp};
 					itemsArray.push(tempImage);
 					ptUrls.push(temp);
