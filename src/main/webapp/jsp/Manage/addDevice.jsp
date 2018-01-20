@@ -42,8 +42,8 @@
 			    <label for="name" class="col-sm-2 control-label">设备类型:</label>
 			    <div class="col-sm-8">
 				    <select class="form-control" id="type" name="type">
-				      <option value=0>流动设备</option>
-				      <option value=1>备用设备</option>
+				      <option value=1>流动设备</option>
+				      <option value=0>备用设备</option>
 				    </select>
 			    </div>
 			  </div>

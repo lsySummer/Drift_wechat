@@ -64,7 +64,8 @@ public class FeedBackController {
 	@ResponseBody
 	public void getCheckResult(HttpSession session,HttpServletResponse response) {
 		//String openid = (String)session.getAttribute("openid");
-		String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		//String openid = "oRTgpwYGzwzbmz3DSAS-Z5WM37Yg";
+		String openid = "oRTgpwQkDZKxGFvNnfKpJLWvxsyw";
 		UserComment userComment = cservice.getComment(openid);
 		System.out.println(userComment.getComment());
 		System.out.println(userComment.getPicURLS());

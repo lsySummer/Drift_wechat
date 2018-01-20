@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="/Drift_wechat/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
 	<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
-	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> -->
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2"></script>
     <title>果麦公益检测</title>
 </head>
