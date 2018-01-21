@@ -169,16 +169,18 @@ public class QAController {
 	@RequestMapping("/ConfirmQuestion")
 	public String ConfirmAsk(HttpSession session, String title, String summernote, HttpServletResponse response){
 		String qid = "";
-		if(session.getAttribute("question") != null){
-			List<MultipartFile> photoLists = (List<MultipartFile>)session.getAttribute("qfile");
-			String filepath = (String)session.getAttribute("question");
-			qid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, photoLists, filepath);
-			//qid = qaservice.publishQuestion("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", title, summernote, photoLists, filepath);
-			session.removeAttribute("question");
-			session.removeAttribute("qfile");
-		}else{
-			qid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, new ArrayList<MultipartFile>(), "");
-			//qid = qaservice.publishQuestion("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", title, summernote, new ArrayList<MultipartFile>(), "");
+		if(session.getAttribute("openid") != null){
+			if(session.getAttribute("question") != null){
+				List<MultipartFile> photoLists = (List<MultipartFile>)session.getAttribute("qfile");
+				String filepath = (String)session.getAttribute("question");
+				qid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, photoLists, filepath);
+				//qid = qaservice.publishQuestion("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", title, summernote, photoLists, filepath);
+				session.removeAttribute("question");
+				session.removeAttribute("qfile");
+			}else{
+				qid = qaservice.publishQuestion((String)session.getAttribute("openid"), title, summernote, new ArrayList<MultipartFile>(), "");
+				//qid = qaservice.publishQuestion("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", title, summernote, new ArrayList<MultipartFile>(), "");
+			}
 		}
 		return "redirect:QuestionPreview?qid=" + qid;
 	}
@@ -234,16 +236,18 @@ public class QAController {
 	@RequestMapping("/ConfirmAnswer")
 	public String ConfirmAnswer(HttpSession session, String qid, String summernote, HttpServletResponse response){
 		String aid = "";
-		if(session.getAttribute("answer") != null){
-			List<MultipartFile> photoLists = (List<MultipartFile>)session.getAttribute("afile");
-			String filepath = (String)session.getAttribute("answer");
-			aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, photoLists, filepath);
-			//aid = qaservice.addAnswer("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", qid, summernote, photoLists, filepath);
-			session.removeAttribute("answer");
-			session.removeAttribute("afile");
-		}else{
-			aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, new ArrayList<MultipartFile>(), "");
-			//aid = qaservice.addAnswer("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", qid, summernote, new ArrayList<MultipartFile>(), "");
+		if(session.getAttribute("openid") != null){
+			if(session.getAttribute("answer") != null){
+				List<MultipartFile> photoLists = (List<MultipartFile>)session.getAttribute("afile");
+				String filepath = (String)session.getAttribute("answer");
+				aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, photoLists, filepath);
+				//aid = qaservice.addAnswer("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", qid, summernote, photoLists, filepath);
+				session.removeAttribute("answer");
+				session.removeAttribute("afile");
+			}else{
+				aid = qaservice.addAnswer((String)session.getAttribute("openid"), qid, summernote, new ArrayList<MultipartFile>(), "");
+				//aid = qaservice.addAnswer("oRTgpwYGzwzbmz3DSAS-Z5WM37Yg", qid, summernote, new ArrayList<MultipartFile>(), "");
+			}
 		}
 		return "redirect:AnswerPreview?qid=" + qid + "&aid=" + aid;
 		//return toAnswerPreview(aid,qid,model);
