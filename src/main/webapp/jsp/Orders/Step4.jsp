@@ -61,7 +61,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		  <div class="weui-form-preview__ft" style="margin-top:15%;">
-		  	<a id="d2" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(2);" style="visibility:hidden">快递查询</a>
     		<button id="detail" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/DeliveryWrite.jsp';">填写快递信息</button>
   		  </div>
 	</div>

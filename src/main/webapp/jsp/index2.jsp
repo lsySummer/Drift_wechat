@@ -146,11 +146,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 </body>
 <script type="text/javascript">
+	wx.config({
+	       appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
+	       timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
+	       nonceStr: "<%=session.getAttribute("noncestr")%>", // 必填，生成签名的随机串
+	       signature: "<%=session.getAttribute("signature")%>",// 必填，签名，见附录1
+	       jsApiList: ['getLocation','hideAllNonBaseMenuItem'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	});
+	wx.ready(function(){
+		wx.hideAllNonBaseMenuItem({
+		   success: function () {
+		   }
+		});
+	})
+	
+	wx.error(function(res){
+		
+		wx.hideAllNonBaseMenuItem({
+		   success: function () {
+		   }
+		});
+	});
  	var x=-1,y=-1;
 	function ShowModel(){
 		$('#myModal').modal();
 	}
-	
 	
 	function toMap(){
 		$("#loadmore").show();
@@ -162,21 +182,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	}
 		//页面加载完成启动
-/* 	$("document").ready(function(){
-	    weChatMap();
-	}); */
+ 	/* $("document").ready(function(){
+	    
+	}); */ 
 	
 	function weChatMap(){
-		wx.config({
-	       appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
-	       timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
-	       nonceStr: "<%=session.getAttribute("noncestr")%>", // 必填，生成签名的随机串
-	       signature: "<%=session.getAttribute("signature")%>",// 必填，签名，见附录1
-	       jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-	    });
-	    
 	    wx.ready(function(){
-	    	//alert(location.href.split('#')[0]);
 	    	 wx.getLocation({
 			        success: function (res) {
 			            var ggPoint = new BMap.Point(res.longitude,res.latitude);
@@ -188,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        fail: function(error) {
 			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
 			        }
-			    });
+			  });
 	    });
 	 
 	    wx.error(function(res){
