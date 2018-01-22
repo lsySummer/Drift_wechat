@@ -89,10 +89,15 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 					if(i==list.size()-1){
 						return userDao.getUser("thisiscomponyinfomation");
 					}else{
+						//如果是寄回给公司了
 						if(Utility.getDaysBetween(o.getStartDate(),o.getEndDate())==Constants.USER_DATE){
 							return userDao.getUser("thisiscomponyinfomation");
 						}
 						Order afterOrder = list.get(i+1);
+						//如果和下家之间的时间间隔超过2天，就寄回给公司
+						if(Utility.getDaysBetween(afterOrder.getStartDate(),o.getEndDate())>2) {
+							return userDao.getUser("thisiscomponyinfomation");
+						}
 						UserInfo afterUser = userDao.getUser(afterOrder.getOpenId());
 						return afterUser;
 					}

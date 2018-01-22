@@ -102,7 +102,6 @@ public class ReserveDaoImpl implements ReserveDao{
 		UserInfo user = userDao.getUser(openid);
 		Device device = rgetDao.getDeviceById(deviceId).get(0);
 		device.setQueueNum(device.getQueueNum()+1);//排队人数+1
-		baseDao.update(device);
 		endDate = Utility.getSpecifiedDayAfter(startDate,Constants.USER_DATE-1);
 		device.setLoc(user.getAddress());
 		baseDao.update(device);
@@ -148,6 +147,8 @@ public class ReserveDaoImpl implements ReserveDao{
 			if(beforeList.size()>0){
 				Order beforeOrder = beforeList.get(beforeList.size()-1);
 				beforeOrder.setState("下家已收货");
+				beforeUser.setState(1);
+				baseDao.update(beforeUser);
 				baseDao.update(beforeOrder);
 			}
 			return true;

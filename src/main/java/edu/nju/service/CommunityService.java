@@ -21,10 +21,6 @@ public class CommunityService {
 	@Autowired
 	CommunityDao dao;
 	
-	/**
-	 * @param num 甲醛含量
-	 * @return
-	 */
 	public boolean addComment(String openid,List<MultipartFile> files,String comment){
 		boolean b = dao.addComment(openid,files,comment);
 		return b;
