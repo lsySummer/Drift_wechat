@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edu.nju.entities.Answer;
+import edu.nju.entities.Question;
 import edu.nju.service.CommunityService;
 import edu.nju.service.ManageService;
 import edu.nju.service.QAService;
@@ -94,8 +94,12 @@ public class TestController {
 //		mservice.setRecommend("00000000611cbb3d01611cc3fe0c0002");
 //		mservice.setRecommend("00000000611cbb3d01611cddcd9f0005");
 //		System.out.println(mservice.getRecommend().size());
-		mservice.removeRec("00000000611cbb3d01611cddcd9f0005");
-		System.out.println(mservice.getRecommend().size());
+//		mservice.removeRec("00000000611cbb3d01611cddcd9f0005");
+//		System.out.println(mservice.getRecommend().size());
+		List<Question> list = qservice.getQuestionByNum(0,5);
+		for(Question q:list) {
+			System.out.println(q.toString());
+		}
 		return "jsp/NewFile";
 	}
 }

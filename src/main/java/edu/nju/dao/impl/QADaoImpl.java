@@ -195,4 +195,34 @@ public class QADaoImpl implements QADao{
 		Long num = (Long) baseDao.getNewSession().createQuery(hql).getSingleResult();
 		return num;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Question> getQuestionByNum(int start, int num) {
+		List<Question> result = new ArrayList<Question>();
+		List<String> sortIds = new ArrayList<String>();//有点赞的答案id集合
+		String hql = "select qid,count(*) as cnt " + 
+				"from Answer " + 
+				"group by qid " + 
+				"order by cnt desc";
+		List<Object[]> list= baseDao.getNewSession().createQuery(hql).getResultList();
+		for(int i=0;i<list.size();i++) {
+			String qid = list.get(i)[0].toString();
+			Question q = getByQuestionId(qid);
+			if(q!=null) {
+				result.add(q);
+				sortIds.add(q.getId());
+			}
+		}
+		String hql1 = "select id from Question";
+		List<String> questions = baseDao.getNewSession().createQuery(hql1).getResultList();//全部答案id
+		for(int i=0;i<questions.size();i++) {
+			String tmpId = questions.get(i);
+			if(!sortIds.contains(tmpId)) {
+				result.add(getByQuestionId(tmpId));
+			}
+		}
+		result = result.subList(start, start+num);
+		return result;
+	}
 }
