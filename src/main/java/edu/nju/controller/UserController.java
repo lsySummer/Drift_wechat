@@ -97,7 +97,9 @@ public class UserController {
 		user.setAddress(address + " " + address_detail);
 		user.setPhone(phone);
 		user.setName(deliveryPerson);
-		service.saveOrUpdate(user);
+		if(session.getAttribute("openid") != null){
+			service.saveOrUpdate(user);
+		}
 		if(redict.equals("true")){
 			return "jsp/MyIndex";
 		}else{

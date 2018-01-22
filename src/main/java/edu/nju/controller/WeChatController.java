@@ -59,8 +59,10 @@ public class WeChatController {
 		log.info("code "+code+" state"+state);
 		List<Question> qList = mservice.getRecommend();
 		List<Long> qnumList = new ArrayList();
-		for(Question q:qList){
-			qnumList.add(qaservice.getAnswerNum(q.getId()));
+		if(qList!=null){
+			for(Question q:qList){
+				qnumList.add(qaservice.getAnswerNum(q.getId()));
+			}
 		}
 		model.addAttribute("allnum", cservice.getOrderNum());
 		model.addAttribute("todaynum", cservice.getTodayNum());
@@ -74,8 +76,10 @@ public class WeChatController {
 			throws IOException {
 		List<Question> qList = mservice.getRecommend();
 		List<Long> qnumList = new ArrayList();
-		for(Question q:qList){
-			qnumList.add(qaservice.getAnswerNum(q.getId()));
+		if(qList!=null){
+			for(Question q:qList){
+				qnumList.add(qaservice.getAnswerNum(q.getId()));
+			}
 		}
 		model.addAttribute("allnum", cservice.getOrderNum());
 		model.addAttribute("todaynum", cservice.getTodayNum());
