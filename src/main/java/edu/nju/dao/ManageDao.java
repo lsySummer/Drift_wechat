@@ -37,4 +37,6 @@ public interface ManageDao {
 	boolean removeRec(String qid);
 
 	boolean login(String username, String password);
+
+	Long getDevicenum();
 }

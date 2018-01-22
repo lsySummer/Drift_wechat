@@ -225,4 +225,11 @@ public class ManageDaoImpl implements ManageDao{
 		return false;
 	}
 
+	@Override
+	public Long getDevicenum() {
+		String hql = "select count(*) from Device";
+		Long num = (Long) baseDao.getNewSession().createQuery(hql).getSingleResult();
+		return num;
+	}
+
 }

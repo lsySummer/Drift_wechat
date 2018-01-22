@@ -94,14 +94,14 @@ public class QADaoImpl implements QADao{
 	public List<Answer> sortByLikes(String qid) {
 		List<Answer> result = new ArrayList<Answer>();
 		List<String> sortIds = new ArrayList<String>();//有点赞的答案id集合
-		String hql = "select authorid,count(*) as cnt " + 
+		String hql = "select answerid,count(*) as cnt " + 
 				"from LikeInfo where qid = :qid " + 
-				"group by authorid " + 
+				"group by answerid " + 
 				"order by cnt desc";
 		List<Object[]> list= baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).getResultList();
 		for(int i=0;i<list.size();i++) {
-			String authorid = list.get(i)[0].toString();//authorid
-			Answer a = getAnswer(qid,authorid);
+			String answerid = list.get(i)[0].toString();//authorid
+			Answer a = getByAnswerId(answerid);
 			result.add(a);
 			sortIds.add(a.getId());
 		}
@@ -111,9 +111,6 @@ public class QADaoImpl implements QADao{
 			if(!sortIds.contains(answers.get(i))) {
 				result.add(getByAnswerId(answers.get(i)));
 			}
-		}
-		for(int i=0;i<result.size();i++) {
-			System.out.println(result.get(i));
 		}
 		return result;
 	}
@@ -190,5 +187,12 @@ public class QADaoImpl implements QADao{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Long getQuestionNum() {
+		String hql = "select count(*) from Question";
+		Long num = (Long) baseDao.getNewSession().createQuery(hql).getSingleResult();
+		return num;
 	}
 }

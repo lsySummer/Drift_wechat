@@ -167,6 +167,15 @@ public class ManageService {
 		return manageDao.getRoute(deviceid);
 	}
 	
+
+	/**
+	 * 获得所有设备的数量
+	 */
+	public Long getDevicenum() {
+		Long num = manageDao.getDevicenum();
+		return num;
+	}
+	
 	/**
 	 * @return
 	 * 获得所有设备流转路线

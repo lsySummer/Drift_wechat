@@ -36,4 +36,6 @@ public interface QADao {
 
 	boolean checkIfLike(String qid, String answerid, String authorid, String likeid);
 
+	Long getQuestionNum();
+
 }

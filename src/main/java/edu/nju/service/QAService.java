@@ -97,6 +97,13 @@ public class QAService {
 		return num;
 	}
 	
+	/**
+	 * 获得所有问题的数量
+	 */
+	public Long getQuestionNum() {
+		Long num = dao.getQuestionNum();
+		return num;
+	}
 	
 	/**
 	 * 点赞
