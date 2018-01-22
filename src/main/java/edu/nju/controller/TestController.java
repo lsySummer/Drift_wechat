@@ -60,7 +60,6 @@ public class TestController {
 //		for(int i=0;i<list.size();i++) {
 //			System.out.println(list.get(i).toString());
 //		}
-		System.out.println(qservice.getQuestionNum());
 //		System.out.println(qservice.sortByDate("1").get(0).toString()+qservice.sortByDate("1").get(1));
 //		qservice.publishQuestion("123", "publish测试", "hahaha");
 //		qservice.addAnswer("123", "1", "测试addAnswer");
@@ -92,6 +91,11 @@ public class TestController {
 //		for(Question q:list) {
 //			System.out.println(q.toString());
 //		}
+//		mservice.setRecommend("00000000611cbb3d01611cc3fe0c0002");
+//		mservice.setRecommend("00000000611cbb3d01611cddcd9f0005");
+//		System.out.println(mservice.getRecommend().size());
+		mservice.removeRec("00000000611cbb3d01611cddcd9f0005");
+		System.out.println(mservice.getRecommend().size());
 		return "jsp/NewFile";
 	}
 }

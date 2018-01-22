@@ -17,7 +17,6 @@ import edu.nju.entities.Device;
 import edu.nju.entities.DeviceArea;
 import edu.nju.entities.Order;
 import edu.nju.entities.Question;
-import edu.nju.entities.RecommendQ;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
@@ -182,32 +181,29 @@ public class ManageDaoImpl implements ManageDao{
 
 	@Override
 	public boolean setRecommend(String qid) {
-		RecommendQ rq = new RecommendQ();
-		rq.setQid(qid);
-		baseDao.save(rq);
+		Question q = qdao.getByQuestionId(qid);
+		q.setQstate(1);
+		baseDao.update(q);
 		return true;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Question> getRecommend() {
-		String hql = "from RecommendQ";
-		List<RecommendQ> list = baseDao.getNewSession().createQuery(hql).getResultList();
-		List<Question> result = new ArrayList<Question>();
-		for(int i=0;i<list.size();i++) {
-			String qid = list.get(i).getQid();
-			result.add(qdao.getByQuestionId(qid));
-		}
-		return result;
+		String hql = "from Question where qstate=1";
+		List<Question> list = baseDao.getNewSession().createQuery(hql).getResultList();
+		return list;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean removeRec(String qid) {
-		String hql = "from RecommendQ where qid=:qid";
-		List<RecommendQ> list=baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).getResultList();
+		String hql = "from Question where id=:qid and qstate=1";
+		List<Question> list=baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).getResultList();
 		if(list.size()>0) {
-			baseDao.delete(list.get(0));
+			Question q = list.get(0);
+			q.setQstate(0);
+			baseDao.update(q);
 			return true;
 		}
 		return false;

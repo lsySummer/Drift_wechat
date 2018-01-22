@@ -26,6 +26,7 @@ public class Question {
 	private String content;
 	private Date createTime;
 	private String picSig;//某一张图片
+	private int qstate;//标志位，0代表正常帖子，1代表推荐的帖子，2代表置顶的帖子
 	@Id
 	@Column(length = 32)
 	@GeneratedValue(generator = "system-uuid")
@@ -71,6 +72,12 @@ public class Question {
 	}
 	public void setPicSig(String picSig) {
 		this.picSig = picSig;
+	}
+	public int getQstate() {
+		return qstate;
+	}
+	public void setQstate(int qstate) {
+		this.qstate = qstate;
 	}
 	@Override
 	public String toString() {

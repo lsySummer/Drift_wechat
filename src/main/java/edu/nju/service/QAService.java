@@ -59,6 +59,7 @@ public class QAService {
 		q.setContent(realContent);
 		q.setCreateTime(date);
 		q.setPicSig(picSig);
+		q.setQstate(0);
 		return dao.publishQuestion(q);
 //		return "";
 	}
