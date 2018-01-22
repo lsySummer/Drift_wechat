@@ -70,9 +70,24 @@ public class ManageQAController {
 		return "jsp/Manage/QuestionList";
 	}
 	
-	@RequestMapping(value = "/setRecommend")
-	public String setRecommend(String qid,HttpSession session,Model model) {
-		return "jsp/Manage/QuestionList";
+	@RequestMapping(value = "/setRec")
+	public String setRecommend(String qid,HttpSession session) {
+		if(mservice.setRecommend(qid)){
+			return "1";
+		}
+		else{
+			return "0";
+		}
+	}
+	
+	@RequestMapping(value = "/removeRec")
+	public String removeRecommend(String qid,HttpSession session) {
+		if(mservice.removeRec(qid)){
+			return "1";
+		}
+		else{
+			return "0";
+		}
 	}
 	
 	public static String checkStatus(HttpSession session){

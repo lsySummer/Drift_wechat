@@ -41,6 +41,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <body>
     <c:import url="manageNavi.jsp"/>
     
+   	<div id="myAlert" class="alert alert-success" style="display:none;text-align:center">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
+			<strong id="alertContent"></strong>
+	</div>
+	
+<!-- 	<div id="warnAlert" class="alert alert-warning" style="display:none;text-align:center">
+	    <a href="#" class="close" data-dismiss="alert">
+	        &times;
+	    </a>
+	    <strong>保存失败,输入数据不全!</strong>
+	</div> -->
+		
     <!-- 模态框显示问题的具体内容 -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
 		<div class="modal-dialog">
@@ -81,17 +93,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td >${index.count} </td>
 						<td>${userList[index.count-1].nickName}</td>
 						<td>${question.title}</td>
-						<td><a href="javascript:ShowModel('${question.content}')">查看内容</a></td>
+						<td><a href="javascript:showModel('${question.content}')">查看内容</a></td>
 						<td>${question.createTime}</td>
 						<c:if test="${flagList[index.count-1]=='1'}">
 							<td><p>是</p></td>
 							<td><button type="button" class="btn btn-default btn-lg" disabled="disabled">设置</button></td>
-							<td><button type="button" class="btn btn-danger" onclick="javascript:window.location.href='';"/>取消</td>
+							<td><button type="button" class="btn btn-danger" onclick="javascript:removeRec('${question.id}');"/>取消</td>
 					   </c:if> 				     
 					   <c:if test="${flagList[index.count-1]=='0'}">
 					   		<td><p>否</p></td>
-							<td><button type="button" class="btn btn-primary btn-lg">设置</button></td>
-							<td><button type="button" class="btn btn-default btn-lg" disabled="disabled" onclick="javascript:window.location.href='';"/>取消</td>
+							<td><button type="button" class="btn btn-primary btn-lg" onclick="javascript:setRec('${question.id}');">设置</button></td>
+							<td><button type="button" class="btn btn-default btn-lg" disabled="disabled" 
+							onclick="javascript:removeRec('${question.id}');"/>取消</td>
 					   </c:if>
 					</tr>
 				</c:forEach> 
@@ -116,11 +129,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     
     <script type="text/javascript">
-   		function ShowModel(content){
+    	/*显示模态框  */
+   		function showModel(content){
    			alert("显示模态框");
    			console.log(content);
    			$('#myModal').modal();
    			$('#modelContent').html(content);
+   		}
+   		/*设置推荐*/
+   		function setRec(qid){
+   			if(qid!='undefined'){
+	  			$.ajax({
+					type:"GET",
+					url:"/Drift_wechat/api/manage/QA/setRec",
+					data:"qid="+qid,
+					success:function(data){
+						if(data=="1"){
+							$("#alertContent").html("设置成功");
+							$("#myAlert").show();
+						}
+						else{
+							$("#alertContent").html("设置失败");
+							$("#myAlert").show();
+						}
+					}
+				});
+   			}
+   			else{
+   				$("#alertContent").html("设置失败，传递空qid");
+				$("#myAlert").show();
+   			}
+   		}
+   		/*取消推荐 */
+   		function removeRec(qid){
+   			if(qid!='undefined'){
+	  			$.ajax({
+					type:"GET",
+					url:"/Drift_wechat/api/manage/QA/removeRec",
+					data:"qid="+qid,
+					success:function(data){
+						if(data=="1"){
+							$("#alertContent").html("取消成功");
+							$("#myAlert").show();
+						}
+						else{
+							$("#alertContent").html("取消失败");
+							$("#myAlert").show();
+						}
+					}
+				});
+   			}
+   			else{
+   				$("#alertContent").html("设置失败，传递空qid");
+				$("#myAlert").show();
+   			}
    		}
     </script>                   
 </body>
