@@ -41,7 +41,7 @@ public class QAController {
 	
 	@RequestMapping("/Index")
 	public String getQList(HttpSession session,Model model){
-		List<Question> qList = (List)qaservice.getAllQuestion(0,10);
+		List<Question> qList = (List)qaservice.getAllQuestion(0,qaservice.getQuestionNum().intValue());
 		List<Long> qnumList = new ArrayList();
 		for(Question question :qList){
 			qnumList.add(qaservice.getAnswerNum(question.getId()));

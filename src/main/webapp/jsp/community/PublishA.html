@@ -65,9 +65,10 @@
   });  
     
   function sendFile(file) {
+  	var fileData = URL.createObjectURL(file);
+  	/* file_modify = dataURItoBlob(fileData); */
     data = new FormData();
     data.append("file", file);
-    var fileData = URL.createObjectURL(file);
     $.ajax({
         data: data,
         type: "POST",
@@ -105,6 +106,17 @@
   function cancel(){
   	window.location.href='/Drift_wechat/api/QA/CancelAnswer?qid=' + qid;
   }
+  
+  function dataURItoBlob(dataUrl) {
+        var byteString = atob(dataUrl.split(',')[1]);
+
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+            return new Blob([ab], { type: 'image/jpeg' });
+   }
 </script>  
 </body>  
 </html>  

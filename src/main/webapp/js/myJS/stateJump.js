@@ -25,8 +25,10 @@ function stateCheck(y){
 				break;
 			case 4:
 				var node = document.getElementById('detail');
-				node.parentNode.removeChild(node);
-				document.getElementById('d2').style.visibility="visible";
+				node.setAttribute('class', 'weui-form-preview__btn weui-form-preview__btn_default');
+				node.setAttribute('id', 'd2');
+				node.setAttribute('onclick', 'javascript:query(2);');
+				node.innerHTML = '快递查询';
 				break;
 		}
 	}

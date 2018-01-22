@@ -30,6 +30,7 @@
 		    </a>
 		    <strong>保存失败,输入数据不全!</strong>
 		</div>
+		
 		<form action="" method="post" class="form-horizontal" role="form">
 			  <div class="form-group">
 			    <label  class="col-sm-2 control-label">设备编号:</label>

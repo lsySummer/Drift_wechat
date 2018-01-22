@@ -69,9 +69,10 @@
   });  
     
   function sendFile(file,editor,$editable) {
+    var fileData = URL.createObjectURL(file);
+  	/* file_modify = dataURItoBlob(file); */
     data = new FormData();
     data.append("file", file);
-    var fileData = URL.createObjectURL(file);
     $.ajax({
         data: data,
         type: "POST",
@@ -106,6 +107,16 @@
   function test(){
   	$('.modal-title').innerHTML = '插入图片';
   }
+  
+  function dataURItoBlob(file) {
+  		var mime_type = "image/jpeg";
+        var cvs = document.createElement('canvas');
+        var ctx = cvs.getContext("2d").drawImage(file, 0, 0, 200, 300);
+		var newImageData = cvs.toDataURL(mime_type, quality/100);
+		var result_image_obj = new Image();
+		result_image_obj.src = newImageData;
+        return result_image_obj;
+   }
 </script>
 <script src="/Drift_wechat/js/summernote.min.js"></script>  
 </body>  

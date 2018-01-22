@@ -8,8 +8,8 @@ public class PageUtil implements Serializable {
 	private static final long serialVersionUID = -8315239776914139304L;
 	private int currentPage=1;//当前页，默认第一页
 	private int pageSize=CommonVariable.PAGESIZE;//页大小
-	private int ignore;//忽略多少条数据
-	private int counts;//数据库总记录数
+	private int start;//开始位置
+	private Long counts;//数据库总记录数
 	private int totalPage;//由counts计算最大页数
 	private int previous;//上一页页码
 	private int next;//下一页页码
@@ -19,11 +19,11 @@ public class PageUtil implements Serializable {
 	 * @param currentPage 当前页
 	 * @param counts 数据库总记录数
 	 */
-	public PageUtil(int currentPage,int counts){
+	public PageUtil(int currentPage,Long counts){
 		this.currentPage=currentPage;
 		this.counts = counts;
-		this.totalPage=(counts+pageSize-1)/pageSize;
-		this.ignore=pageSize*(currentPage-1);
+		this.totalPage=(int) ((counts+pageSize-1)/pageSize);
+		this.start=pageSize*(currentPage-1);
 		
 		if (currentPage==1) {
 			this.previous = 1;
@@ -43,12 +43,12 @@ public class PageUtil implements Serializable {
 	 * @param counts 数据库总记录数
 	 * @param pageSize 页大小
 	 */
-	public PageUtil(int currentPage,int counts,int pageSize){
+	public PageUtil(int currentPage,Long counts,int pageSize){
 		this.currentPage=currentPage;
 		this.counts = counts;
 		this.pageSize = pageSize;
-		this.totalPage=(counts+pageSize-1)/pageSize;
-		this.ignore=pageSize*(currentPage-1);
+		this.totalPage=(int) ((counts+pageSize-1)/pageSize);
+		this.start=pageSize*(currentPage-1);
 		if (currentPage==1) {
 			this.previous = 1;
 		} else {
@@ -68,11 +68,11 @@ public class PageUtil implements Serializable {
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
-	public int getIgnore() {
-		return ignore;
+	public int getStart() {
+		return start;
 	}
-	public void setIgnore(int ignore) {
-		this.ignore = ignore;
+	public void setStart(int start) {
+		this.start = start;
 	}
 	public int getCurrentPage() {
 		return currentPage;
@@ -87,11 +87,11 @@ public class PageUtil implements Serializable {
 		this.pageSize = pageSize;
 	}
 
-	public int getCounts() {
+	public Long getCounts() {
 		return counts;
 	}
 
-	public void setCounts(int counts) {
+	public void setCounts(Long counts) {
 		this.counts = counts;
 	}
 
