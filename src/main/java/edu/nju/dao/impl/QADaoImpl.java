@@ -52,9 +52,9 @@ public class QADaoImpl implements QADao{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Answer> getAnswers(String qid) {
+	public List<Answer> getAnswers(String qid,int start,int num) {
 		String hql = "from Answer where qid =:qid";
-		List<Answer> list = baseDao.getNewSession().createQuery(hql).setParameter("qid", qid).getResultList();
+		List<Answer> list = baseDao.getNewSession().createQuery(hql).setFirstResult(start).setMaxResults(num).setParameter("qid", qid).getResultList();
 		return list;
 	}
 

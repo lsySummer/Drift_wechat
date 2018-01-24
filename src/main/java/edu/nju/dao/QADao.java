@@ -14,7 +14,7 @@ public interface QADao {
 
 	List<Question> getAllQuestion(int start, int page);
 
-	List<Answer> getAnswers(String qid);
+	List<Answer> getAnswers(String qid,int start,int num);
 
 	Long getAnswerNum(String qid);
 

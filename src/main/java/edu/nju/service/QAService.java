@@ -96,8 +96,8 @@ public class QAService {
 		return list;
 	}
 	
-	public List<Answer> getAnswers(String qid){
-		List<Answer> list = dao.getAnswers(qid);
+	public List<Answer> getAnswers(String qid,int start,int num){
+		List<Answer> list = dao.getAnswers(qid,start,num);
 		return list;
 	}
 	
