@@ -80,8 +80,19 @@ public class QAService {
 		return dao.addAnswer(a);
 	}
 	
+	/**
+	 * 根据时间倒叙排序
+	 */
 	public List<Question> getAllQuestion(int start,int num){
 		List<Question> list = dao.getAllQuestion(start,num);
+		return list;
+	}
+	
+	/**
+	 * 根据问题的回答数量排序
+	 */
+	public List<Question> getQuestionByNum(int start,int num){
+		List<Question> list = dao.getQuestionByNum(start,num);
 		return list;
 	}
 	
