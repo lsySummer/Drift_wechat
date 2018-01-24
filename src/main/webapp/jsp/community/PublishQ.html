@@ -70,9 +70,9 @@
     
   function sendFile(file,editor,$editable) {
     var fileData = URL.createObjectURL(file);
-  	/* file_modify = dataURItoBlob(file); */
+  	file_modify = compress(fileData);
     data = new FormData();
-    data.append("file", file);
+    data.append("file", file_modify);
     $.ajax({
         data: data,
         type: "POST",
@@ -83,7 +83,7 @@
         success: function(url) {
             /* $('#'+image_name).attr('src', url); */
             $('#summernote').summernote('insertImage', fileData, function ($image) {
-		      $image.css('width', document.body.clientWidth);
+		      $image.css('width', document.body.clientWidth*0.8);
 			  $image.attr('id', image_name);
 			});
 			document.getElementById("waiting").innerHTML = '';
@@ -108,14 +108,26 @@
   	$('.modal-title').innerHTML = '插入图片';
   }
   
-  function dataURItoBlob(file) {
+  function compress(filepath){
+  		var img = new Image();
+  		img.src = filepath;
+  		var quality = 0.7;
+  		var width = img.width;
+  		var height = img.height;
   		var mime_type = "image/jpeg";
         var cvs = document.createElement('canvas');
-        var ctx = cvs.getContext("2d").drawImage(file, 0, 0, 200, 300);
-		var newImageData = cvs.toDataURL(mime_type, quality/100);
-		var result_image_obj = new Image();
-		result_image_obj.src = newImageData;
-        return result_image_obj;
+        var ctx = cvs.getContext("2d").drawImage(img, 0, 0, width, height);
+		var newImageData = cvs.toDataURL(mime_type, quality);
+        return dataURItoBlob(newImageData);
+  }
+  
+  function dataURItoBlob(dataurl) {
+  		var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+	        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+	    while(n--){
+	        u8arr[n] = bstr.charCodeAt(n);
+	    }
+	    return new Blob([u8arr], {type:mime});
    }
 </script>
 <script src="/Drift_wechat/js/summernote.min.js"></script>  

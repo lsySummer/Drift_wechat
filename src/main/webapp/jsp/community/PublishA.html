@@ -66,9 +66,9 @@
     
   function sendFile(file) {
   	var fileData = URL.createObjectURL(file);
-  	/* file_modify = dataURItoBlob(fileData); */
+  	file_modify = compress(fileData);
     data = new FormData();
-    data.append("file", file);
+    data.append("file", file_modify);
     $.ajax({
         data: data,
         type: "POST",
@@ -107,15 +107,26 @@
   	window.location.href='/Drift_wechat/api/QA/CancelAnswer?qid=' + qid;
   }
   
-  function dataURItoBlob(dataUrl) {
-        var byteString = atob(dataUrl.split(',')[1]);
-
-        var ab = new ArrayBuffer(byteString.length);
-        var ia = new Uint8Array(ab);
-        for (var i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
-        }
-            return new Blob([ab], { type: 'image/jpeg' });
+  function compress(filepath){
+  		var img = new Image();
+  		img.src = filepath;
+  		var quality = 0.7;
+  		var width = img.width;
+  		var height = img.height;
+  		var mime_type = "image/jpeg";
+        var cvs = document.createElement('canvas');
+        var ctx = cvs.getContext("2d").drawImage(img, 0, 0, width, height);
+		var newImageData = cvs.toDataURL(mime_type, quality);
+        return dataURItoBlob(newImageData);
+  }
+  
+  function dataURItoBlob(dataurl) {
+  		var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+	        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+	    while(n--){
+	        u8arr[n] = bstr.charCodeAt(n);
+	    }
+	    return new Blob([u8arr], {type:mime});
    }
 </script>  
 </body>  
