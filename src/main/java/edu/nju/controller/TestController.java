@@ -96,10 +96,11 @@ public class TestController {
 //		System.out.println(mservice.getRecommend().size());
 //		mservice.removeRec("00000000611cbb3d01611cddcd9f0005");
 //		System.out.println(mservice.getRecommend().size());
-		List<Question> list = qservice.getQuestionByNum(0,5);
-		for(Question q:list) {
-			System.out.println(q.toString());
-		}
+//		List<Question> list = qservice.getQuestionByNum(0,5);
+//		for(Question q:list) {
+//			System.out.println(q.toString());
+//		}
+		userService.getUserVO();
 		return "jsp/NewFile";
 	}
 }

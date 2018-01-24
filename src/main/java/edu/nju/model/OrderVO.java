@@ -1,6 +1,9 @@
 package edu.nju.model;
 
 import java.util.Date;
+import java.util.List;
+
+import edu.nju.entities.CheckResult;
 
 public class OrderVO {
 	private String id;
@@ -11,10 +14,10 @@ public class OrderVO {
 	private String phone;
 	private String address;
 	private String state;
-	private float jqNum;//室内甲醛含量
+	private List<CheckResult> jqNum;//室内甲醛含量
 	
 	public OrderVO(String id, Date startDate, Date endDate, String deviceNumber, String name, String phone,
-			String address,String state,float jqNum) {
+			String address,String state,List<CheckResult> jqNum) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -74,10 +77,10 @@ public class OrderVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public float getJqNum() {
+	public List<CheckResult> getJqNum() {
 		return jqNum;
 	}
-	public void setJqNum(float jqNum) {
+	public void setJqNum(List<CheckResult> jqNum) {
 		this.jqNum = jqNum;
 	}
 	@Override

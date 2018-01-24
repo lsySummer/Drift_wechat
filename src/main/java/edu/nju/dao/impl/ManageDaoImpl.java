@@ -1,6 +1,7 @@
 package edu.nju.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +12,10 @@ import org.springframework.stereotype.Repository;
 import edu.nju.dao.BaseDao;
 import edu.nju.dao.ManageDao;
 import edu.nju.dao.QADao;
+import edu.nju.dao.ReserveDao;
 import edu.nju.dao.UserDao;
 import edu.nju.entities.Admin;
+import edu.nju.entities.CheckResult;
 import edu.nju.entities.Device;
 import edu.nju.entities.DeviceArea;
 import edu.nju.entities.Order;
@@ -29,8 +32,8 @@ public class ManageDaoImpl implements ManageDao{
 	 private BaseDao baseDao;
 	 @Autowired
 	 private UserDao userDao;
-//	 @Autowired
-//	 private CommunityDao cDao;
+	 @Autowired
+	 private ReserveDao rdao;
 	 @Autowired
 	 private QADao qdao;
 	 
@@ -86,14 +89,9 @@ public class ManageDaoImpl implements ManageDao{
 			String openid = o.getOpenId();
 			UserInfo u = userDao.getUser(openid);
 			if(u!=null){
-//				UserComment comment = cDao.getComment(openid);
-				float jqNum = -1;
-//				if(comment != null){
-//					jqNum = comment.getNum();
-//				}
-				jqNum=0;
+				List<CheckResult> checkList = rdao.getCheckResult(u.getOpenid());
 				OrderVO vo = new OrderVO(o.getId(), o.getStartDate(),o.getEndDate(), o.getDeviceNumber(), u.getName(), u.getPhone(),
-						u.getAddress(),o.getState(),jqNum);
+						u.getAddress(),o.getState(),checkList);
 				volist.add(vo);
 			}
 			
