@@ -9,6 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
 <link rel="stylesheet" href="/Drift_wechat/css/demos.css">
 <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
+<script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  

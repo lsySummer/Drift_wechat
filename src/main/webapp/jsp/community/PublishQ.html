@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
   <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
   <link href="/Drift_wechat/css/summernote.css" rel="stylesheet">
+  <script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
   <script src="/Drift_wechat/js/bootstrap.min.js"></script> 
   <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
@@ -111,12 +112,12 @@
   function compress(filepath){
   		var img = new Image();
   		img.src = filepath;
-  		var quality = 0.7;
+  		var quality = 0.6;
   		var width = img.width;
   		var height = img.height;
   		var mime_type = "image/jpeg";
         var cvs = document.createElement('canvas');
-        var ctx = cvs.getContext("2d").drawImage(img, 0, 0, width, height);
+        cvs.getContext("2d").drawImage(img, 0, 0, width, height);
 		var newImageData = cvs.toDataURL(mime_type, quality);
         return dataURItoBlob(newImageData);
   }
