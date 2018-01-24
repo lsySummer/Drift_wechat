@@ -143,7 +143,7 @@ public class QAController {
 		String filePath = "";
 		if(session.getAttribute("question") == null){
 			String openid = session.getAttribute("openid").toString();
-			filePath = openid.substring(openid.length() - 10) + "_" + df.format(new Date()) + "/temp/";
+			filePath = openid.substring(openid.length() - 10) + "_" + df.format(new Date()) + "/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("question", filePath);
 			List<MultipartFile> temp = new ArrayList<MultipartFile>();
@@ -210,7 +210,7 @@ public class QAController {
 		String filePath = "";
 		if(session.getAttribute("answer") == null){
 			String openid = session.getAttribute("openid").toString();
-			filePath = openid.substring(openid.length() - 10) + "_" + df.format(new Date()) + "/temp/";
+			filePath = openid.substring(openid.length() - 10) + "_" + df.format(new Date()) + "/";
 			qaservice.makeFolder(filePath);
 			session.setAttribute("answer", filePath);
 			List<MultipartFile> temp = new ArrayList<MultipartFile>();
