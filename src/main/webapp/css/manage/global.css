@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+	/*表格样式  */
+	.table th{
+		font-size:15px
+	}
+	.table td{
+		font-size:12px
+	}
+	/*分页样式  */
+	#pages a
+	{
+	    color: #000;
+	}
+	#pages a:hover
+	{
+	    background: #cddde4;
+	    border: #97b9c9 solid 1px;
+	    color: #067db5;
+	}
+	#pages a.current_page
+	{
+	    background: #FFF;
+	    border: #89bdd8 solid 1px;
+	    color: #067db5;
+	}

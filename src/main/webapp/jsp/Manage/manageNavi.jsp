@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li class="divider"></li>
                     <li><a href="#">回答</a></li>
                     <li class="divider"></li>
-                    <li><a href="/Drift_wechat/jsp/Manage/Community.jsp">置顶</a></li>
+                    <li><a href="/Drift_wechat/api/manage/QA/questionList?page=1">管理</a></li>
                 </ul>
             </li>
         </ul>

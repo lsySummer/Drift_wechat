@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.nju.entities.Answer;
 import edu.nju.entities.Question;
 import edu.nju.entities.UserInfo;
 import edu.nju.service.ManageService;
@@ -29,9 +31,8 @@ public class ManageQAController {
 	ManageService mservice;
 	@RequestMapping(value = "/questionList")
 	public String toAddDevice(Integer page,HttpSession session,Model model) {
-		//String check = checkStatus(session);
-		//if(check != "true"){return check;}
-		System.out.println("获取问题列表");
+		String check = checkStatus(session);
+		if(check != "true"){return check;}
 		List<Question> qList = new ArrayList<Question>();
 		List<UserInfo> userList = new ArrayList<UserInfo>();
 		List<String> flagList = new ArrayList<String>();
@@ -42,13 +43,11 @@ public class ManageQAController {
 		
 		if(qList!=null){
 			for(Question question :qList){
-				//question.setContent(HandleFile.deleteImg(question.getContent()));
 				userList.add(uservice.getUser(question.getOpenid()));
 				boolean flag = false;
 				for(Question questionRecommend :recommendList){
 					if(questionRecommend.getId().equals(question.getId())){
 						flag = true;
-						System.out.println("有推荐热帖");
 					}
 				}
 				if(flag){
@@ -60,9 +59,6 @@ public class ManageQAController {
 			}
 		}
 		
-		for(String flag :flagList){
-			System.out.println(flag);
-		}
 		model.addAttribute("page", pageUtil);
 		model.addAttribute("qList", qList);
 		model.addAttribute("userList", userList);
@@ -71,6 +67,7 @@ public class ManageQAController {
 	}
 	
 	@RequestMapping(value = "/setRec")
+	@ResponseBody
 	public String setRecommend(String qid,HttpSession session) {
 		if(mservice.setRecommend(qid)){
 			return "1";
@@ -80,13 +77,61 @@ public class ManageQAController {
 		}
 	}
 	
+	@RequestMapping(value = "/getQContent")
+	@ResponseBody
+	public String getQContent(String qid,HttpSession session) {
+		Question question = qaService.getByQuestionId(qid);
+		if(question.getContent()!=""){
+			return question.getContent();
+		}
+		else{
+			return "此提问作者未添加任何内容";
+		}
+	}
+	
 	@RequestMapping(value = "/removeRec")
+	@ResponseBody
 	public String removeRecommend(String qid,HttpSession session) {
 		if(mservice.removeRec(qid)){
 			return "1";
 		}
 		else{
 			return "0";
+		}
+	}
+	
+	@RequestMapping(value = "/answerList")
+	public String answerList(String qid,String page,HttpSession session,Model model){
+		String check = checkStatus(session);
+		if(check != "true"){return check;}
+		List<Answer> aList = new ArrayList<Answer>();
+		List<Long> likeList= new ArrayList<Long>();
+		List<UserInfo> userList= new ArrayList<UserInfo>();
+ 		PageUtil pageUtil = new PageUtil(Integer.parseInt(page),qaService.getAnswerNum(qid));
+		aList  = qaService.getAnswers(qid, pageUtil.getStart(), pageUtil.getPageSize());
+		if(aList!=null){
+			for(Answer answer :aList){
+				userList.add(uservice.getUser(answer.getOpenid()));
+				likeList.add(qaService.getLikeNum(answer.getId()));
+			}
+		}
+		model.addAttribute("aList", aList);
+		model.addAttribute("likeList", likeList);
+		model.addAttribute("userList", userList);
+		model.addAttribute("page", pageUtil);
+		System.out.println("返回前");
+		return "jsp/Manage/AnswerList";
+	}
+	
+	@RequestMapping(value = "/getAContent")
+	@ResponseBody
+	public String getAContent(String aid,HttpSession session) {
+		Answer answer = qaService.getByAnswerId(aid);
+		if(answer.getContent()!=""){
+			return answer.getContent();
+		}
+		else{
+			return "此提问作者未添加任何内容";
 		}
 	}
 	
