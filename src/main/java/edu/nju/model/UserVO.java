@@ -6,29 +6,25 @@ public class UserVO {
 	private String openId;
 	private String nickname;
 	private String address;
-//	private double longtitute;
-//	private double latitute;
 	private Date startDate;
 	private String deviceNumber;
 	private int deviceState;
-	private float jqNum;
+	private double jqNum;
 	public UserVO(String openId, String nickname, String address,  Date startDate,
-			String deviceNumber,int deviceState,float jqNum) {
+			String deviceNumber,int deviceState,double jqNum) {
 		super();
 		this.openId = openId;
 		this.nickname = nickname;
 		this.address = address;
-//		this.longtitute = longtitute;
-//		this.latitute = latitute;
 		this.startDate = startDate;
 		this.deviceNumber = deviceNumber;
 		this.deviceState = deviceState;
 		this.jqNum = jqNum;
 	}
-	public float getJqNum() {
+	public double getJqNum() {
 		return jqNum;
 	}
-	public void setJqNum(float jqNum) {
+	public void setJqNum(double jqNum) {
 		this.jqNum = jqNum;
 	}
 	public String getOpenId() {
@@ -49,18 +45,6 @@ public class UserVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-//	public double getLongtitute() {
-//		return longtitute;
-//	}
-//	public void setLongtitute(double longtitute) {
-//		this.longtitute = longtitute;
-//	}
-//	public double getLatitute() {
-//		return latitute;
-//	}
-//	public void setLatitute(double latitute) {
-//		this.latitute = latitute;
-//	}
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -78,6 +62,12 @@ public class UserVO {
 	}
 	public void setDeviceState(int deviceState) {
 		this.deviceState = deviceState;
+	}
+	@Override
+	public String toString() {
+		return "UserVO [openId=" + openId + ", nickname=" + nickname + ", address=" + address + ", startDate="
+				+ startDate + ", deviceNumber=" + deviceNumber + ", deviceState=" + deviceState + ", jqNum=" + jqNum
+				+ "]";
 	}
 	
 }

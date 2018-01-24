@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.nju.dao.BaseDao;
+import edu.nju.dao.ReserveDao;
 import edu.nju.dao.ReserveGetDao;
 import edu.nju.dao.UserDao;
+import edu.nju.entities.CheckResult;
 import edu.nju.entities.DeliveryInfo;
 import edu.nju.entities.Device;
 import edu.nju.entities.DeviceArea;
@@ -26,6 +28,8 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 	 private BaseDao baseDao;
 	 @Autowired
 	 private UserDao userDao;
+	 @Autowired
+	 private ReserveDao rdao;
 	
 	
 	@SuppressWarnings("unchecked")
@@ -39,8 +43,9 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 			String openid = o.getOpenId();
 			UserInfo u = userDao.getUser(openid);
 			if(u!=null){
+				List<CheckResult> checkList = rdao.getCheckResult(u.getOpenid());
 				OrderVO vo = new OrderVO(o.getId(), o.getStartDate(),o.getEndDate(), o.getDeviceNumber(), u.getName(), u.getPhone(),
-						u.getAddress(),o.getState(),-1);
+						u.getAddress(),o.getState(),checkList);
 				volist.add(vo);
 			}
 			

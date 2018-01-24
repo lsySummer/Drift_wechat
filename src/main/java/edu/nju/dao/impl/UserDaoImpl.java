@@ -1,6 +1,7 @@
 package edu.nju.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.nju.dao.BaseDao;
+import edu.nju.dao.ReserveDao;
 import edu.nju.dao.UserDao;
+import edu.nju.entities.CheckResult;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserInfo;
 import edu.nju.model.UserVO;
@@ -25,6 +28,8 @@ public class UserDaoImpl implements UserDao{
 	 private BaseDao baseDao;
 //	 @Autowired
 //	 private CommunityDao communityDao;
+	 @Autowired
+	 private ReserveDao rdao;
 	
 	@Override
 	public boolean register(String openId, String nickName) {
@@ -112,16 +117,22 @@ public class UserDaoImpl implements UserDao{
 			if(o.getState().equals("下家已收货")||o.getState().equals("已寄出")){
 				state = 1;
 			}
-//			UserComment comment = communityDao.getComment(u.getOpenid());
-			float jqNum = -1;
-//			if(comment!=null){
-//				jqNum = comment.getNum();
-//			}
-			jqNum=0;
+			List<CheckResult> checkList = rdao.getCheckResult(u.getOpenid());
+			Double jqNum = 0.0;
+			if(checkList.size()>0) {
+				List<Double> resultList = new ArrayList<Double>();
+				for(int j=0;j<checkList.size();j++) {
+					resultList.add(checkList.get(j).getNum());
+				}
+				jqNum = Collections.max(resultList);
+			}
 			UserVO vo = new UserVO(u.getOpenid(),u.getNickName(),u.getAddress(),o.getStartDate(),
 			o.getDeviceNumber(),state,jqNum);
 			volist.add(vo);
 			}
+		}
+		for(int i=0;i<volist.size();i++) {
+			System.out.println(volist.get(i).toString());
 		}
 		return volist;
 	}
