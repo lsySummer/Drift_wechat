@@ -25,17 +25,47 @@
     });
     $("#countryMap").click(function(){
     	level = 4;
-    	map_init();
+    	map_init(myLocation);
     })
     $("#originalMap").click(function(){
     	level = 18;
-    	map_init();
+    	map_init(myLocation);
     })
     
     $("#yiqi").click(function() {
         $('#myModal').modal();
     });
     
+	//初始化地图
+    function map_init(location) {
+    	    myLocation = location;
+            map = new BMap.Map("map");  
+            //第1步：设置地图中心点，当前城市  
+            var point = new BMap.Point(myLocation.x,myLocation.y);
+            //第2步：初始化地图,设置中心点坐标和地图级别。  
+            map.centerAndZoom(point, level);  
+            //第3步：启用滚轮放大缩小  
+            map.enableScrollWheelZoom(true);  
+            //第4步：向地图中添加缩放控件  
+            var ctrlNav = new window.BMap.NavigationControl({  
+                anchor: BMAP_ANCHOR_TOP_LEFT,  
+                type: BMAP_NAVIGATION_CONTROL_LARGE  
+            });  
+            map.addControl(ctrlNav);
+            //第5步：向地图中添加缩略图控件  
+            var ctrlOve = new window.BMap.OverviewMapControl({  
+                anchor: BMAP_ANCHOR_BOTTOM_RIGHT,  
+                isOpen: 1  
+            });  
+            map.addControl(ctrlOve);  
+
+            //第6步：向地图中添加比例尺控件  
+            var ctrlSca = new window.BMap.ScaleControl({  
+                anchor: BMAP_ANCHOR_BOTTOM_LEFT  
+            });  
+            map.addControl(ctrlSca);  
+            getMap();     
+    }
     //返回首页
     function backIndex(){
     	window.location.href="/Drift_wechat/api/wechat/index";
@@ -96,8 +126,7 @@
 				temp["airBoolean"] = 0;
 				allAddressVO.push(temp);
 			}
-			getAir();
-			//map_init();				
+			getAir();			
 		},"json");
 	}
 	
@@ -121,41 +150,10 @@
 				else{
 					alert("获取净化器地址失败！")
 				}
-				//map_init();
 				addData();
 		},"json");
 	}
-	
-	//初始化地图
-    function map_init() {  
-            map = new BMap.Map("map");  
-            //第1步：设置地图中心点，当前城市  
-            var point = new BMap.Point(myLocation.x,myLocation.y);
-            //第2步：初始化地图,设置中心点坐标和地图级别。  
-            map.centerAndZoom(point, level);  
-            //第3步：启用滚轮放大缩小  
-            map.enableScrollWheelZoom(true);  
-            //第4步：向地图中添加缩放控件  
-            var ctrlNav = new window.BMap.NavigationControl({  
-                anchor: BMAP_ANCHOR_TOP_LEFT,  
-                type: BMAP_NAVIGATION_CONTROL_LARGE  
-            });  
-            map.addControl(ctrlNav);
-            //第5步：向地图中添加缩略图控件  
-            var ctrlOve = new window.BMap.OverviewMapControl({  
-                anchor: BMAP_ANCHOR_BOTTOM_RIGHT,  
-                isOpen: 1  
-            });  
-            map.addControl(ctrlOve);  
-
-            //第6步：向地图中添加比例尺控件  
-            var ctrlSca = new window.BMap.ScaleControl({  
-                anchor: BMAP_ANCHOR_BOTTOM_LEFT  
-            });  
-            map.addControl(ctrlSca);  
-            getMap();     
-    }
-    
+	    
     function addData(){
    	    //添加我的位置信息
 		var myPoint = new BMap.Point(myLocation.x,myLocation.y);
@@ -245,13 +243,13 @@
    //处理位置显示信息
    function cutAddress(address){
 	   if(address.indexOf("区")!=-1){
-		   return address.substring(0,address.indexOf("区"));
+		   return address.substring(0,address.indexOf("区")+1);
 	   }
 	   else if(address.indexOf("市")!=-1){
-		   return address.substring(0,address.indexOf("市"));
+		   return address.substring(0,address.indexOf("市")+1);
 	   }
 	   else{
-		   return address.substring(0,address.indexOf("省"));
+		   return address.substring(0,address.indexOf("省")+1);
 	   }   
    }
 	// 添加我的位置信息窗口  

@@ -101,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    var y = <%=session.getAttribute("locationY")%>;
 	    myLocation = {"x":parseFloat(x),"y":parseFloat(y)};
 		//weChatMap();
-		map_init();
+		map_init(myLocation);
 	});
 </script> 
 </html>
