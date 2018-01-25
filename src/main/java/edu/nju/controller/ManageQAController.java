@@ -148,6 +148,29 @@ public class ManageQAController {
 		}
 	}
 	
+	@RequestMapping(value = "/deleteQuestion")
+	@ResponseBody
+	public String deleteQuestion(String qid,HttpSession session) {
+		if(mservice.deleteQuestion(qid)){
+			return "1";
+		}
+		else{
+			return "0";
+		}
+	}
+	
+	@RequestMapping(value = "/deleteAnswer")
+	@ResponseBody
+	public String deleteAnswer(String aid,HttpSession session) {
+		System.out.println(aid);
+		if(mservice.deleteAnswer(aid)){
+			return "1";
+		}
+		else{
+			return "0";
+		}
+	}
+	
 	@RequestMapping(value = "/answerList")
 	public String answerList(String qid,String page,HttpSession session,Model model){
 		String check = checkStatus(session);
@@ -155,6 +178,8 @@ public class ManageQAController {
 		List<Answer> aList = new ArrayList<Answer>();
 		List<Long> likeList= new ArrayList<Long>();
 		List<UserInfo> userList= new ArrayList<UserInfo>();
+		System.out.println(page);
+		System.out.println(qaService.getAnswerNum(qid));
  		PageUtil pageUtil = new PageUtil(Integer.parseInt(page),qaService.getAnswerNum(qid));
 		aList  = qaService.getAnswers(qid, pageUtil.getStart(), pageUtil.getPageSize());
 		String flag = "0";
@@ -170,6 +195,7 @@ public class ManageQAController {
 		model.addAttribute("userList", userList);
 		model.addAttribute("page", pageUtil);
 		model.addAttribute("flag", flag);
+		model.addAttribute("qid", qid);
 		return "jsp/Manage/AnswerList";
 	}
 	

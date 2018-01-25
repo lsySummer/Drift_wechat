@@ -43,8 +43,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <th>回答</th>
 			      <th>回答数</th>
 			      <th>创建时间</th>
-			      <th>设置推荐</th>
-			      <th>取消推荐</th>
+		      	  <c:if test="${flag=='1'}">
+						<th>取消推荐</th>
+				  </c:if>
+				  <c:if test="${flag=='0'}">
+						<th>设置推荐</th>
+				  </c:if>  
+			      <th>删除</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -58,13 +63,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>${numList[index.count-1]}</td>
 						<td>${question.createTime}</td>
 						<c:if test="${flag=='1'}">
-							<td><button type="button" class="btn btn-default  btn-sm" disabled="disabled">设置</button></td>
 							<td><button type="button" class="btn btn-danger  btn-sm" onclick="removeRec('${question.id}');">取消</button></td>
 					   </c:if> 				     
 					   <c:if test="${flag=='0'}">
 							<td><button type="button" class="btn btn-primary  btn-sm" onclick="setRec('${question.id}');">设置</button></td>
-							<td><button type="button" class="btn btn-default  btn-sm" disabled="disabled">取消 </button></td>
+							<!-- <td><button type="button" class="btn btn-default  btn-sm" disabled="disabled">取消 </button></td> -->
 					   </c:if>
+					   <td><button type="button" class="btn btn-danger  btn-sm" onclick="confrimDelete('${question.id}');">删除</button></td>
 					</tr>
 				</c:forEach> 
 			  </tbody>
@@ -102,6 +107,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
+	<!-- 信息删除确认 -->  
+	<div class="modal fade" id="delcfmModel">  
+	  <div class="modal-dialog">  
+	    <div class="modal-content message_align">  
+	      <div class="modal-header">  
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+	        <h4 class="modal-title">提示信息</h4>  
+	      </div>  
+	      <div class="modal-body">  
+	        <p>您确认要删除吗？</p>  
+	      </div>  
+	      <div class="modal-footer">  
+	         <input type="hidden" id="url"/>  
+	         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+	         <a  onclick="deleteQuestion()" class="btn btn-success" data-dismiss="modal">确定</a>  
+	      </div>  
+	    </div><!-- /.modal-content -->  
+	  </div><!-- /.modal-dialog -->  
+	</div><!-- /.modal -->  
     <script type="text/javascript">
     	/*显示模态框  */
    		function showModel(qid){
@@ -116,7 +140,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
    		}
    		/*设置推荐*/
-   		function setRec(qid){
+   		function setRec(){
+		    var url=$.trim($("#url").val());//获取会话中的隐藏属性URL  
+		    window.location.href=url;  
    			if(qid!='undefined'){
 	  			$.ajax({
 					type:"GET",
@@ -164,7 +190,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    				$("#warnContent").html("设置失败，传递空qid");
 				$("#warnAlert").show();
    			}
-   		}	
+   		}
+    	/*确认删除  */
+		function confrimDelete(qid) {  
+	        $('#url').val(qid);//给会话中的隐藏属性URL赋值  
+	        $('#delcfmModel').modal();  
+		}  
+   		/*删除问题*/
+   		function deleteQuestion(){
+   			var qid =$.trim($("#url").val());//获取会话中的隐藏属性URL 
+   			if(qid!='undefined'){
+	  			$.ajax({
+					type:"GET",
+					url:"/Drift_wechat/api/manage/QA/deleteQuestion",
+					data:"qid="+qid,
+					success:function(data){
+						if(data=="1"){
+							$("#successContent").html("删除成功");
+							$("#successAlert").show();
+							refeshCurrentPage();
+						}
+						else{
+							$("#warnContent").html("删除失败");
+							$("#warnAlert").show();
+						}
+					}
+				});
+   			}
+   			else{
+   				$("#warnContent").html("删除失败，传递空qid");
+				$("#warnAlert").show();
+   			}
+   		}
+   		
+   		/*刷新本页面  */
    		function refeshCurrentPage(){
    			if(${flag}=="1"){
    				setTimeout(function() {
@@ -173,7 +232,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			}
    			else{
    				setTimeout(function() {
-   					window.location.href="/Drift_wechat/api/manage/QA/questionList?page="+${page.currentPage};
+   					window.location.href="/Drift_wechat/api/manage/QA/questionList?page="+'${page.currentPage}';
    				},1000);
    			}
    		}

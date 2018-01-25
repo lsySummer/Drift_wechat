@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td><a href="javascript:showModel('${answer.id}')">查看内容</a></td>
 						<td>${answer.createTime}</td>
 						<td>${likeList[index.count-1]}</td>
-						<td><button type="button" class="btn btn-danger  btn-sm" onclick="javascript:removeRec('${question.id}');"/>删除</td>
+						<td><button type="button" class="btn btn-danger  btn-sm" onclick="confrimDelete('${answer.id}');"/>删除</td>
 					</tr>
 				</c:forEach> 
 			  </tbody>
@@ -93,6 +93,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
+	
+	<!-- 信息删除确认 -->  
+	<div class="modal fade" id="delcfmModel">  
+	  <div class="modal-dialog">  
+	    <div class="modal-content message_align">  
+	      <div class="modal-header">  
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+	        <h4 class="modal-title">提示信息</h4>  
+	      </div>  
+	      <div class="modal-body">  
+	        <p>您确认要删除吗？</p>  
+	      </div>  
+	      <div class="modal-footer">  
+	         <input type="hidden" id="url"/>  
+	         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+	         <a  onclick="deleteAnswer()" class="btn btn-success" data-dismiss="modal">确定</a>  
+	      </div>  
+	    </div><!-- /.modal-content -->  
+	  </div><!-- /.modal-dialog -->  
+	</div><!-- /.modal -->  
     <script type="text/javascript">
     	/*显示模态框  */
    		function showModel(aid){
@@ -123,6 +143,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				window.location.href="/Drift_wechat/api/manage/QA/answerList?page="+goPage;
 			}
 		});
+    	
+		/*确认删除  */
+		function confrimDelete(aid) {  
+	        $('#url').val(aid);//给会话中的隐藏属性URL赋值  
+	        $('#delcfmModel').modal();  
+		}
+		
+   		/*删除问题*/
+   		function deleteAnswer(){
+   			var aid =$.trim($("#url").val());//获取会话中的隐藏属性URL 
+   			if(aid!='undefined'){
+	  			$.ajax({
+					type:"GET",
+					url:"/Drift_wechat/api/manage/QA/deleteAnswer",
+					data:"aid="+aid,
+					success:function(data){
+						if(data=="1"){
+							$("#successContent").html("删除成功");
+							$("#successAlert").show();
+							refeshCurrentPage();
+						}
+						else{
+							$("#warnContent").html("删除失败");
+							$("#warnAlert").show();
+						}
+					}
+				});
+   			}
+   			else{
+   				$("#warnContent").html("删除失败，传递空aid");
+				$("#warnAlert").show();
+   			}
+   		}
+   		/*刷新本页面  */
+   		function refeshCurrentPage(){
+   			var qid = '${qid}';
+   			var page = '${page.currentPage}';
+			setTimeout(function() {
+				window.location.href="/Drift_wechat/api/manage/QA/answerList?qid="+qid+"&page="+page;
+			},1000);
+   		}
     </script>                   
 </body>
 </html>
