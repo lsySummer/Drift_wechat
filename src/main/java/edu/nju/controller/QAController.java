@@ -51,6 +51,18 @@ public class QAController {
 		return "jsp/community/CommunityIndex";
 	}
 	
+	@RequestMapping("/IndexSortByNum")
+	public String getQListByNum(HttpSession session,Model model){
+		List<Question> qList = qaservice.getQuestionByNum(0,qaservice.getQuestionNum().intValue());
+		List<Long> qnumList = new ArrayList();
+		for(Question question :qList){
+			qnumList.add(qaservice.getAnswerNum(question.getId()));
+		}
+		model.addAttribute("qList", qList);
+		model.addAttribute("qnumList", qnumList);
+		return "jsp/community/CommunityIndex";
+	}
+	
 	@RequestMapping("/DateSort")
 	public String getQ2AList(String qid, HttpSession session,Model model){
 		List<Answer> aList = qaservice.sortByDate(qid);

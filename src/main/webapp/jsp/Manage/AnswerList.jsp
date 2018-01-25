@@ -28,24 +28,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </a>
 	    <strong id="warnContent"></strong>
 	</div>
-		
-    <!-- 模态框显示问题的具体内容 -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header" align="center">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						问题详情
-					</h4>
-				</div>
-				<div class="modal-body" align="center" id="modelContent"></div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
-	
+	<c:if test="${flag=='0'}">
+	<h2>此提问暂无回答</h2>
+	</c:if>
 	<!--主要区域开始-->
      <div class="row">
      	<div class="col-sm-2"></div>
@@ -92,6 +77,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     
+    <!-- 模态框显示问题的具体内容 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" align="center">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						回答详情
+					</h4>
+				</div>
+				<div class="modal-body" align="center" id="modelContent"></div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
     <script type="text/javascript">
     	/*显示模态框  */
    		function showModel(aid){

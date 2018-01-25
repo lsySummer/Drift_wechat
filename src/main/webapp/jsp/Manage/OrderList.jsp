@@ -21,7 +21,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		font-size:15px
 	}
 	.table td{
-		font-size:12px
+		font-size:12px;
+		text-align:center;
+		valign:center;
 	}
 	</style>   
   </head>
@@ -42,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <th>电话</th>
 			      <th>地址</th>
 			      <th>订单状态</th>
-			      <th>甲醛数值</th>
+			      <th>甲醛检测（位置-面积-数值）</th>
 			      <th>修改设备</th>
 			    </tr>
 			  </thead>
@@ -57,7 +59,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td >${order.phone} </td>
 						<td >${order.address} </td>
 						<td >${order.state}</td>
-						<td >${order.jqNum}</td>
+						<td >
+							<table class="table table-hover">
+							  <tbody>
+							  	  <c:forEach items="${order.jqNum}" var="jq" varStatus="index">
+									<tr>
+									<td >${jq.location}</td>
+									<td >${jq.area}</td>
+									<td >${jq.num}</td>
+									</tr>
+								  </c:forEach> 
+							  </tbody>
+							</table>
+						</td>
 						<td ><button type="button" id="${order.id}" onclick="javascript:modify(this);">修改</button></td>
 					</tr>
 				</c:forEach> 

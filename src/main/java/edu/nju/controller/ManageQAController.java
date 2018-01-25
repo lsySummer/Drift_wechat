@@ -29,8 +29,8 @@ public class ManageQAController {
 	UserService uservice;
 	@Autowired
 	ManageService mservice;
-	@RequestMapping(value = "/questionList")
-	public String toAddDevice(Integer page,HttpSession session,Model model) {
+	@RequestMapping(value = "/allQuestionList")
+	public String getAllQuestion(Integer page,HttpSession session,Model model) {
 		String check = checkStatus(session);
 		if(check != "true"){return check;}
 		List<Question> qList = new ArrayList<Question>();
@@ -66,6 +66,54 @@ public class ManageQAController {
 		return "jsp/Manage/QuestionList";
 	}
 	
+	@RequestMapping(value = "/recQuestionList")
+	public String getRecQuestion(HttpSession session,Model model) {
+		String check = checkStatus(session);
+		if(check != "true"){return check;}
+		String flag = "1";
+		List<UserInfo> userList = new ArrayList<UserInfo>();
+		List<Question> recommendList = new ArrayList<Question>();
+		List<Long> numList =  new ArrayList<Long>();
+		PageUtil pageUtil = new PageUtil(1,(long) 10);
+		recommendList = mservice.getRecommend();
+		if(recommendList!=null){
+			for(Question question :recommendList){
+				userList.add(uservice.getUser(question.getOpenid()));
+				numList.add(qaService.getAnswerNum(question.getId()));
+			}
+		}
+		
+		model.addAttribute("qList", recommendList);
+		model.addAttribute("userList", userList);
+		model.addAttribute("numList", numList);
+		model.addAttribute("flag", flag);
+		model.addAttribute("page", pageUtil);
+		return "jsp/Manage/QuestionList";
+	}
+	
+	@RequestMapping(value = "/questionList")
+	public String getQuestion(Integer page,HttpSession session,Model model) {
+		String check = checkStatus(session);
+		if(check != "true"){return check;}
+		String flag = "0";
+		List<Question> qList = new ArrayList<Question>();
+		List<UserInfo> userList = new ArrayList<UserInfo>();
+		List<Long> numList =  new ArrayList<Long>();
+		PageUtil pageUtil = new PageUtil(page,qaService.getQuestionNum());
+		qList = mservice.getNotRecommend(pageUtil.getStart(),pageUtil.getPageSize());
+		if(qList!=null){
+			for(Question question :qList){
+				userList.add(uservice.getUser(question.getOpenid()));
+				numList.add(qaService.getAnswerNum(question.getId()));
+			}
+		}
+		model.addAttribute("page", pageUtil);
+		model.addAttribute("qList", qList);
+		model.addAttribute("userList", userList);
+		model.addAttribute("numList", numList);
+		model.addAttribute("flag", flag);
+		return "jsp/Manage/QuestionList";
+	}
 	@RequestMapping(value = "/setRec")
 	@ResponseBody
 	public String setRecommend(String qid,HttpSession session) {
@@ -109,7 +157,9 @@ public class ManageQAController {
 		List<UserInfo> userList= new ArrayList<UserInfo>();
  		PageUtil pageUtil = new PageUtil(Integer.parseInt(page),qaService.getAnswerNum(qid));
 		aList  = qaService.getAnswers(qid, pageUtil.getStart(), pageUtil.getPageSize());
+		String flag = "0";
 		if(aList!=null){
+			flag = "1";
 			for(Answer answer :aList){
 				userList.add(uservice.getUser(answer.getOpenid()));
 				likeList.add(qaService.getLikeNum(answer.getId()));
@@ -119,7 +169,7 @@ public class ManageQAController {
 		model.addAttribute("likeList", likeList);
 		model.addAttribute("userList", userList);
 		model.addAttribute("page", pageUtil);
-		System.out.println("返回前");
+		model.addAttribute("flag", flag);
 		return "jsp/Manage/AnswerList";
 	}
 	

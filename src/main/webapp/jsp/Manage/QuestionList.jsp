@@ -28,7 +28,64 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </a>
 	    <strong id="warnContent">保存失败,输入数据不全!</strong>
 	</div>
-		
+	
+	<!--主要区域开始-->
+     <div class="row">
+     	<div class="col-sm-2"></div>
+        <div id="main"  class="col-sm-8">
+			<table class="table table-hover">
+			  <thead>
+			    <tr>
+			      <th>编号</th>
+			      <th>提问者</th>
+			      <th>标题</th>
+			      <th>内容</th>
+			      <th>回答</th>
+			      <th>回答数</th>
+			      <th>创建时间</th>
+			      <th>设置推荐</th>
+			      <th>取消推荐</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+		  		<c:forEach items="${qList}" var="question" varStatus="index">
+					<tr> 
+						<td >${index.count} </td>
+						<td>${userList[index.count-1].nickName}</td>
+						<td>${question.title}</td>
+						<td><a href=javascript:showModel('${question.id}')>查看内容</a></td>
+						<td><a href="javascript:toAnswerList('${question.id}')">查看回答</a></td>
+						<td>${numList[index.count-1]}</td>
+						<td>${question.createTime}</td>
+						<c:if test="${flag=='1'}">
+							<td><button type="button" class="btn btn-default  btn-sm" disabled="disabled">设置</button></td>
+							<td><button type="button" class="btn btn-danger  btn-sm" onclick="removeRec('${question.id}');">取消</button></td>
+					   </c:if> 				     
+					   <c:if test="${flag=='0'}">
+							<td><button type="button" class="btn btn-primary  btn-sm" onclick="setRec('${question.id}');">设置</button></td>
+							<td><button type="button" class="btn btn-default  btn-sm" disabled="disabled">取消 </button></td>
+					   </c:if>
+					</tr>
+				</c:forEach> 
+			  </tbody>
+			</table>
+		</div> 
+	</div>
+	<!--分页-->
+	<div class="row">
+     	<div class="col-sm-2"></div>
+        <div id="pages"  class="col-sm-8" align="center">
+        	<c:if test="${page.counts!=null && page.totalPage>1 &&flag=='0'}">
+				<a href="/Drift_wechat/api/manage/QA/questionList?page=1">首页</a>
+				<a href="/Drift_wechat/api/manage/QA/questionList?page=${page.previous}">上一页</a>
+				<span class="current_page">${page.currentPage}</span>/<span id="totalPage" class="current_page">${page.totalPage}</span>
+				<a href="/Drift_wechat/api/manage/QA/questionList?page=${page.next}">下一页</a>
+				<a href="/Drift_wechat/api/manage/QA/questionList?page=${page.totalPage}">末页</a>
+				<input type="text" id="skip" name="page" class="width50">
+				<input type="button" id="goBtn" class="btn btn-primary  btn-sm" value="GO">
+			</c:if>
+        </div>
+    </div>
     <!-- 模态框显示问题的具体内容 -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
 		<div class="modal-dialog">
@@ -45,67 +102,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
-	
-	<!--主要区域开始-->
-     <div class="row">
-     	<div class="col-sm-2"></div>
-        <div id="main"  class="col-sm-8">
-			<table class="table table-hover">
-			  <thead>
-			    <tr>
-			      <th>编号</th>
-			      <th>提问者</th>
-			      <th>标题</th>
-			      <th>内容</th>
-			      <th>回答</th>
-			      <th>创建时间</th>
-			      <th>热帖</th>
-			      <th>设置推荐</th>
-			      <th>取消推荐</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-		  		<c:forEach items="${qList}" var="question" varStatus="index">
-					<tr> 
-						<td >${index.count} </td>
-						<td>${userList[index.count-1].nickName}</td>
-						<td>${question.title}</td>
-						<td><a href=javascript:showModel('${question.id}')>查看内容</a></td>
-						<td><a href="javascript:toAnswerList('${question.id}')">查看回答</a></td>
-						<td>${question.createTime}</td>
-						<c:if test="${flagList[index.count-1]=='1'}">
-							<td><p>是</p></td>
-							<td><button type="button" class="btn btn-default  btn-sm" disabled="disabled">设置</button></td>
-							<td><button type="button" class="btn btn-danger  btn-sm" onclick="javascript:removeRec('${question.id}');"/>取消</td>
-					   </c:if> 				     
-					   <c:if test="${flagList[index.count-1]=='0'}">
-					   		<td><p>否</p></td>
-							<td><button type="button" class="btn btn-primary  btn-sm" onclick="javascript:setRec('${question.id}');">设置</button></td>
-							<td><button type="button" class="btn btn-default  btn-sm" disabled="disabled" 
-							onclick="javascript:removeRec('${question.id}');"/>取消</td>
-					   </c:if>
-					</tr>
-				</c:forEach> 
-			  </tbody>
-			</table>
-		</div> 
-	</div>
-	<!--分页-->
-	<div class="row">
-     	<div class="col-sm-2"></div>
-        <div id="pages"  class="col-sm-8" align="center">
-        	<c:if test="${page.counts!=null && page.totalPage>1}">
-				<a href="/Drift_wechat/api/manage/QA/questionList?page=1">首页</a>
-				<a href="/Drift_wechat/api/manage/QA/questionList?page=${page.previous}">上一页</a>
-				<span class="current_page">${page.currentPage}</span>/<span id="totalPage" class="current_page">${page.totalPage}</span>
-				<a href="/Drift_wechat/api/manage/QA/questionList?page=${page.next}">下一页</a>
-				<a href="/Drift_wechat/api/manage/QA/questionList?page=${page.totalPage}">末页</a>
-				<input type="text" id="skip" name="page" class="width50">
-				<input type="button" id="goBtn" class="btn btn-primary  btn-sm" value="GO">
-			</c:if>
-        </div>
-    </div>
-    
     <script type="text/javascript">
     	/*显示模态框  */
    		function showModel(qid){
@@ -168,12 +164,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    				$("#warnContent").html("设置失败，传递空qid");
 				$("#warnAlert").show();
    			}
-   		}
-   		/*操作成功刷新当前页面*/
+   		}	
    		function refeshCurrentPage(){
-			setTimeout(function() {
-				window.location.href="/Drift_wechat/api/manage/QA/questionList?page="+${page.currentPage};
-			},1000)
+   			if(${flag}=="1"){
+   				setTimeout(function() {
+   					window.location.href="/Drift_wechat/api/manage/QA/recQuestionList";
+   				},1000)	;
+   			}
+   			else{
+   				setTimeout(function() {
+   					window.location.href="/Drift_wechat/api/manage/QA/questionList?page="+${page.currentPage};
+   				},1000);
+   			}
    		}
    		
    		function toAnswerList(qid){

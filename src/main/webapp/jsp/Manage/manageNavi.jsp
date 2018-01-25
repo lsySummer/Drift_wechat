@@ -43,7 +43,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li class="divider"></li>
                     <li><a href="#">回答</a></li>
                     <li class="divider"></li>
-                    <li><a href="/Drift_wechat/api/manage/QA/questionList?page=1">管理</a></li>
+                    <li><a href="/Drift_wechat/api/manage/QA/recQuestionList">管理热帖</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/Drift_wechat/api/manage/QA/questionList?page=1">管理普通贴</a></li>
                 </ul>
             </li>
         </ul>
