@@ -225,4 +225,13 @@ public class QADaoImpl implements QADao{
 		result = result.subList(start, start+num);
 		return result;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<LikeInfo> getLike(String answerid) {
+		String hql = "from LikeInfo where answerid = :answerid";
+		List<LikeInfo> list = baseDao.getNewSession().createQuery(hql).setParameter("answerid", answerid)
+				.getResultList();
+		return list;
+	}
 }

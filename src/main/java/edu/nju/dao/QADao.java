@@ -39,5 +39,7 @@ public interface QADao {
 	Long getQuestionNum();
 
 	List<Question> getQuestionByNum(int start, int num);
+	
+	List<LikeInfo> getLike(String answerid);
 
 }

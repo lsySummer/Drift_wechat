@@ -18,6 +18,7 @@ import edu.nju.entities.Answer;
 import edu.nju.entities.CheckResult;
 import edu.nju.entities.Device;
 import edu.nju.entities.DeviceArea;
+import edu.nju.entities.LikeInfo;
 import edu.nju.entities.Order;
 import edu.nju.entities.Question;
 import edu.nju.entities.UserInfo;
@@ -253,6 +254,10 @@ public class ManageDaoImpl implements ManageDao{
 		Answer a = qdao.getByAnswerId(aid);
 		if(a!=null) {
 			baseDao.delete(a);
+			List<LikeInfo> list = qdao.getLike(aid);
+			for(int i=0;i<list.size();i++) {
+				baseDao.delete(list.get(i));
+			}
 			return true;
 		}
 		return false;
