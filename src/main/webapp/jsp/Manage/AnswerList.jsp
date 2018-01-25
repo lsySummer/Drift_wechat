@@ -28,9 +28,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </a>
 	    <strong id="warnContent"></strong>
 	</div>
-	<c:if test="${flag=='0'}">
-	<h2>此提问暂无回答</h2>
-	</c:if>
 	<!--主要区域开始-->
      <div class="row">
      	<div class="col-sm-2"></div>
@@ -46,6 +43,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <th>删除</th>
 			    </tr>
 			  </thead>
+				<c:if test="${flag=='0'}">
+					<h2>此问题暂无回答</h2>
+				</c:if>
 			  <tbody>
 		  		<c:forEach items="${aList}" var="answer" varStatus="index">
 					<tr> 

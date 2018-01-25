@@ -140,9 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
    		}
    		/*设置推荐*/
-   		function setRec(){
-		    var url=$.trim($("#url").val());//获取会话中的隐藏属性URL  
-		    window.location.href=url;  
+   		function setRec(qid){
    			if(qid!='undefined'){
 	  			$.ajax({
 					type:"GET",
