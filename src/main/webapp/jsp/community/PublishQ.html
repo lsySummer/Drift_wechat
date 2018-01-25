@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
   <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
   <link href="/Drift_wechat/css/summernote.css" rel="stylesheet">
-  <script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
+  
   <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
   <script src="/Drift_wechat/js/bootstrap.min.js"></script> 
   <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
@@ -24,7 +24,7 @@
 	}
   </style>
 </head>
-<body>
+<body id="body">
   <!-- <form class="weui-cells weui-cells_form" action="" id="basic" style="margin-top:4%;"> -->
     <div class="weui-cells__title" style="margin-top:5%;">标题</div>
 	<div class="weui-cells">
@@ -71,26 +71,31 @@
     
   function sendFile(file,editor,$editable) {
     var fileData = URL.createObjectURL(file);
-  	file_modify = compress(fileData);
-    data = new FormData();
-    data.append("file", file_modify);
-    $.ajax({
-        data: data,
-        type: "POST",
-        url: "/Drift_wechat/api/QA/Question",
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(url) {
-            /* $('#'+image_name).attr('src', url); */
-            $('#summernote').summernote('insertImage', fileData, function ($image) {
-		      $image.css('width', document.body.clientWidth*0.8);
-			  $image.attr('id', image_name);
-			});
-			document.getElementById("waiting").innerHTML = '';
-            image_name ++;
-        }
-    });
+    var img = new Image();
+  	img.src = fileData;
+  	img.onload = function(){
+  		var file_modify = compress(img, img.naturalWidth, img.naturalHeight);
+  		var data = new FormData();
+	    data.append("file", file_modify, image_name+'.png');
+	    var fileTest = URL.createObjectURL(file_modify);
+	    $.ajax({
+	        data: data,
+	        type: "POST",
+	        url: "/Drift_wechat/api/QA/Question",
+	        cache: false,
+	        contentType: false,
+	        processData: false,
+	        success: function(url) {
+	            /* $('#'+image_name).attr('src', url); */
+	            $('#summernote').summernote('insertImage', fileTest, function ($image) {
+			      $image.css('width', document.body.clientWidth*0.9);
+				  $image.attr('id', image_name);
+				});
+				document.getElementById("waiting").innerHTML = '';
+	            image_name ++;
+	        }
+	    });
+  	}
   }
 
   function confirm(){
@@ -109,17 +114,15 @@
   	$('.modal-title').innerHTML = '插入图片';
   }
   
-  function compress(filepath){
-  		var img = new Image();
-  		img.src = filepath;
+  function compress(img, width, height){
   		var quality = 0.6;
-  		var width = img.width;
-  		var height = img.height;
-  		var mime_type = "image/jpeg";
-        var cvs = document.createElement('canvas');
-        cvs.getContext("2d").drawImage(img, 0, 0, width, height);
+  		var mime_type = "image/png";
+	    var cvs = document.createElement('canvas');
+	    cvs.width = width; 
+	    cvs.height = height;
+	    cvs.getContext("2d").drawImage(img, 0, 0, width, height);
 		var newImageData = cvs.toDataURL(mime_type, quality);
-        return dataURItoBlob(newImageData);
+	    return dataURItoBlob(newImageData);
   }
   
   function dataURItoBlob(dataurl) {

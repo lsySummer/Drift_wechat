@@ -9,49 +9,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
 	<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
+	<link rel="stylesheet" href="/Drift_wechat/css/manage/global.css">
 	<script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 	<script src="/Drift_wechat/js/bootstrap.min.js"></script>
-	<style type="text/css">
-	/*表格样式  */
-	.table th{
-		font-size:15px
-	}
-	.table td{
-		font-size:12px
-	}
-	/*分页样式  */
-	#pages a
-	{
-	    color: #000;
-	}
-	#pages a:hover
-	{
-	    background: #cddde4;
-	    border: #97b9c9 solid 1px;
-	    color: #067db5;
-	}
-	#pages a.current_page
-	{
-	    background: #FFF;
-	    border: #89bdd8 solid 1px;
-	    color: #067db5;
-	}
-	</style>    
   </head>
  <body>
     <c:import url="manageNavi.jsp"/>
     
-   	<div id="myAlert" class="alert alert-success" style="display:none;text-align:center">
-			<a href="#" class="close" data-dismiss="alert">&times;</a>
-			<strong id="alertContent"></strong>
+    <!--操作提示框-->
+   	<div id="successAlert" class="alert alert-success" style="display:none;text-align:center">
+		<a href="#" class="close" data-dismiss="alert">&times;</a>
+		<strong id="successContent"></strong>
 	</div>
 	
-<!-- 	<div id="warnAlert" class="alert alert-warning" style="display:none;text-align:center">
+	<div id="warnAlert" class="alert alert-warning" style="display:none;text-align:center">
 	    <a href="#" class="close" data-dismiss="alert">
 	        &times;
 	    </a>
-	    <strong>保存失败,输入数据不全!</strong>
-	</div> -->
+	    <strong id="warnContent">保存失败,输入数据不全!</strong>
+	</div>
 		
     <!-- 模态框显示问题的具体内容 -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
@@ -81,6 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <th>提问者</th>
 			      <th>标题</th>
 			      <th>内容</th>
+			      <th>回答</th>
 			      <th>创建时间</th>
 			      <th>热帖</th>
 			      <th>设置推荐</th>
@@ -93,17 +70,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td >${index.count} </td>
 						<td>${userList[index.count-1].nickName}</td>
 						<td>${question.title}</td>
-						<td><a href="javascript:showModel('${question.content}')">查看内容</a></td>
+						<td><a href=javascript:showModel('${question.id}')>查看内容</a></td>
+						<td><a href="javascript:toAnswerList('${question.id}')">查看回答</a></td>
 						<td>${question.createTime}</td>
 						<c:if test="${flagList[index.count-1]=='1'}">
 							<td><p>是</p></td>
-							<td><button type="button" class="btn btn-default btn-lg" disabled="disabled">设置</button></td>
-							<td><button type="button" class="btn btn-danger" onclick="javascript:removeRec('${question.id}');"/>取消</td>
+							<td><button type="button" class="btn btn-default  btn-sm" disabled="disabled">设置</button></td>
+							<td><button type="button" class="btn btn-danger  btn-sm" onclick="javascript:removeRec('${question.id}');"/>取消</td>
 					   </c:if> 				     
 					   <c:if test="${flagList[index.count-1]=='0'}">
 					   		<td><p>否</p></td>
-							<td><button type="button" class="btn btn-primary btn-lg" onclick="javascript:setRec('${question.id}');">设置</button></td>
-							<td><button type="button" class="btn btn-default btn-lg" disabled="disabled" 
+							<td><button type="button" class="btn btn-primary  btn-sm" onclick="javascript:setRec('${question.id}');">设置</button></td>
+							<td><button type="button" class="btn btn-default  btn-sm" disabled="disabled" 
 							onclick="javascript:removeRec('${question.id}');"/>取消</td>
 					   </c:if>
 					</tr>
@@ -123,18 +101,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<a href="/Drift_wechat/api/manage/QA/questionList?page=${page.next}">下一页</a>
 				<a href="/Drift_wechat/api/manage/QA/questionList?page=${page.totalPage}">末页</a>
 				<input type="text" id="skip" name="page" class="width50">
-				<input type="button" id="goBtn" class="width50" value="GO">
+				<input type="button" id="goBtn" class="btn btn-primary  btn-sm" value="GO">
 			</c:if>
         </div>
     </div>
     
     <script type="text/javascript">
     	/*显示模态框  */
-   		function showModel(content){
-   			alert("显示模态框");
-   			console.log(content);
-   			$('#myModal').modal();
-   			$('#modelContent').html(content);
+   		function showModel(qid){
+   			$.ajax({
+				type:"GET",
+				url:"/Drift_wechat/api/manage/QA/getQContent",
+				data:"qid="+qid,
+				success:function(content){
+					$('#modelContent').html(content);
+					$('#myModal').modal();
+				}
+			});
    		}
    		/*设置推荐*/
    		function setRec(qid){
@@ -145,19 +128,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					data:"qid="+qid,
 					success:function(data){
 						if(data=="1"){
-							$("#alertContent").html("设置成功");
-							$("#myAlert").show();
+							$("#successContent").html("设置成功");
+							$("#successAlert").show();
+							refeshCurrentPage();
 						}
 						else{
-							$("#alertContent").html("设置失败");
-							$("#myAlert").show();
+							$("#warnContent").html("设置失败");
+							$("#warnAlert").show();
 						}
 					}
 				});
    			}
    			else{
-   				$("#alertContent").html("设置失败，传递空qid");
-				$("#myAlert").show();
+   				$("#warnContent").html("设置失败，传递空qid");
+				$("#warnAlert").show();
    			}
    		}
    		/*取消推荐 */
@@ -169,21 +153,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					data:"qid="+qid,
 					success:function(data){
 						if(data=="1"){
-							$("#alertContent").html("取消成功");
-							$("#myAlert").show();
+							$("#successContent").html("取消成功");
+							$("#successAlert").show();
+							refeshCurrentPage();
 						}
 						else{
-							$("#alertContent").html("取消失败");
-							$("#myAlert").show();
+							$("#warnContent").html("取消失败");
+							$("#warnAlert").show();
 						}
 					}
 				});
    			}
    			else{
-   				$("#alertContent").html("设置失败，传递空qid");
-				$("#myAlert").show();
+   				$("#warnContent").html("设置失败，传递空qid");
+				$("#warnAlert").show();
    			}
    		}
+   		/*操作成功刷新当前页面*/
+   		function refeshCurrentPage(){
+			setTimeout(function() {
+				window.location.href="/Drift_wechat/api/manage/QA/questionList?page="+${page.currentPage};
+			},3000)
+   		}
+   		
+   		function toAnswerList(qid){
+   			if(qid!='undefined'){
+   				window.location.href = "/Drift_wechat/api/manage/QA/answerList?page=1&qid="+qid;
+   			}
+   			else{
+   				$("#warnContent").html("设置失败，传递空qid");
+				$("#warnAlert").show();
+   			}
+   		}
+   		
+		$("#goBtn").click(function(){
+    		if(!(/^[\d]*$/.test($("#skip").val())))
+			{
+    			alert("页码填写格式错误");
+				return;
+			}
+			var goPage = parseInt($("#skip").val());
+			var totalPage = parseInt($("#totalPage").html());
+			if(goPage>totalPage||goPage<1){
+				alert("页码有误");
+				return;
+			}
+			else{
+				window.location.href="/Drift_wechat/api/manage/QA/questionList?page="+goPage;
+			}
+		});
     </script>                   
 </body>
 </html>

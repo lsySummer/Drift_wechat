@@ -66,28 +66,33 @@
   });  
     
   function sendFile(file) {
-  	var fileData = URL.createObjectURL(file);
-  	file_modify = compress(fileData);
-    data = new FormData();
-    data.append("file", file_modify);
-    $.ajax({
-        data: data,
-        type: "POST",
-        url: "/Drift_wechat/api/QA/Answer",
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function(url) {
-            /* $('#'+image_name).attr('src', url); */
-            $('#summernote').summernote('insertImage', fileData, function ($image) {
-		      $image.css('width', document.body.clientWidth);
-			  $image.attr('id', image_name);
-			});
-			document.getElementById("waiting").innerHTML = '';
-            image_name ++;
-        }
-    });
-  }
+    var fileData = URL.createObjectURL(file);
+    var img = new Image();
+  	img.src = fileData;
+  	img.onload = function(){
+  		var file_modify = compress(img, img.naturalWidth, img.naturalHeight);
+  		var data = new FormData();
+	    data.append("file", file_modify, image_name+'.png');
+	    var fileTest = URL.createObjectURL(file_modify);
+	    $.ajax({
+	        data: data,
+	        type: "POST",
+	        url: "/Drift_wechat/api/QA/Answer",
+	        cache: false,
+	        contentType: false,
+	        processData: false,
+	        success: function(url) {
+	            /* $('#'+image_name).attr('src', url); */
+	            $('#summernote').summernote('insertImage', fileTest, function ($image) {
+			      $image.css('width', document.body.clientWidth*0.9);
+				  $image.attr('id', image_name);
+				});
+				document.getElementById("waiting").innerHTML = '';
+	            image_name ++;
+	        }
+	    });
+	  }
+  	}
 
   function confirm(){
   	if ($('#summernote').summernote('isEmpty')){
@@ -108,17 +113,15 @@
   	window.location.href='/Drift_wechat/api/QA/CancelAnswer?qid=' + qid;
   }
   
-  function compress(filepath){
-  		var img = new Image();
-  		img.src = filepath;
+  function compress(img, width, height){
   		var quality = 0.6;
-  		var width = img.width;
-  		var height = img.height;
-  		var mime_type = "image/jpeg";
-        var cvs = document.createElement('canvas');
-        cvs.getContext("2d").drawImage(img, 0, 0, width, height);
+  		var mime_type = "image/png";
+	    var cvs = document.createElement('canvas');
+	    cvs.width = width; 
+	    cvs.height = height;
+	    cvs.getContext("2d").drawImage(img, 0, 0, width, height);
 		var newImageData = cvs.toDataURL(mime_type, quality);
-        return dataURItoBlob(newImageData);
+	    return dataURItoBlob(newImageData);
   }
   
   function dataURItoBlob(dataurl) {
