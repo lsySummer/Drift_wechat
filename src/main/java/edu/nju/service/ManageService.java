@@ -204,6 +204,13 @@ public class ManageService {
 		return manageDao.getRecommend();
 	}
 	
+	/**
+	 * 获得不是推荐的问题
+	 */
+	public List<Question> getNotRecommend(int start,int num){
+		return manageDao.getNotRecommend(start,num);
+	}
+	
 	public boolean login(String username,String password) {
 		return manageDao.login(username,password);
 	}

@@ -226,4 +226,12 @@ public class ManageDaoImpl implements ManageDao{
 		return num;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Question> getNotRecommend(int start,int num) {
+		String hql = "from Question where qstate=0";
+		List<Question> list = baseDao.getNewSession().createQuery(hql).setFirstResult(start).setMaxResults(num).getResultList();
+		return list;
+	}
+
 }
