@@ -125,8 +125,6 @@ public class ManageController {
 	@RequestMapping(value = "/modify")
 	public void modifyOrder(String order, HttpServletResponse response) {
 		List<JSONObject> data = new ArrayList<JSONObject>();
-//		result.put("test1", "2017-11-14");
-//		result.put("test2", "2017-11-13");
 		//调用service
 		for(Map.Entry<DeviceVO, Date> entry : manageService.getAvailableDevice(order).entrySet()){
 			JSONObject result=new JSONObject();

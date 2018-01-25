@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <th>电话</th>
 			      <th>地址</th>
 			      <th>订单状态</th>
-			      <th>甲醛检测（位置-面积-数值）</th>
+			      <th>甲醛（位置-面积-数值）</th>
 			      <th>修改设备</th>
 			    </tr>
 			  </thead>
@@ -122,21 +122,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function modify(obj){
 			$.getJSON('/Drift_wechat/api/manage/modify?order='+obj.id,function(json){
 				result = json;
-				orderId = obj.id;
-				var insert = "";
-				for(var key in json){
-					insert += '<option value="'+ json[key].id +'">'+ json[key].number +'</option>';
+				if(json.length == 0){
+					alert('该地区暂无可更换设备！');
+				}else{
+					orderId = obj.id;
+					var insert = "";
+					for(var key in json){
+						insert += '<option value="'+ json[key].id +'">'+ json[key].number +'</option>';
+					}
+					document.getElementById("deviceNum").innerHTML = insert;
+					var insert2 = '';
+					var temp = new Date(getDate(document.getElementById("deviceNum").value));
+					var start = temp.getFullYear() + '-' + getFormatDate(temp.getMonth()+1)+'-'+getFormatDate(temp.getDate());
+					for(var i = 0; i < 7; i ++){
+						insert2 += '<option value="'+ start +'">'+ start +'</option>';
+						start = getNextDay(start);
+					}
+					document.getElementById("times").innerHTML = insert2;
+					$('#myModal').modal('show');
 				}
-				document.getElementById("deviceNum").innerHTML = insert;
-				var insert2 = '';
-				var temp = new Date(getDate(document.getElementById("deviceNum").value));
-				var start = temp.getFullYear() + '-' + getFormatDate(temp.getMonth()+1)+'-'+getFormatDate(temp.getDate());
-				for(var i = 0; i < 7; i ++){
-					insert2 += '<option value="'+ start +'">'+ start +'</option>';
-					start = getNextDay(start);
-				}
-				document.getElementById("times").innerHTML = insert2;
-				$('#myModal').modal('show');
 			});
 		}
 		function confirm(){
