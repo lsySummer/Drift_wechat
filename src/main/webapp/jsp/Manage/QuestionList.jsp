@@ -173,7 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		function refeshCurrentPage(){
 			setTimeout(function() {
 				window.location.href="/Drift_wechat/api/manage/QA/questionList?page="+${page.currentPage};
-			},3000)
+			},1000)
    		}
    		
    		function toAnswerList(qid){

@@ -28,27 +28,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </style>  
 
 <body ontouchstart>
-	<!-- 模态框（Modal） -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header" align="center">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						甲醛检测仪
-					</h4>
-				</div>
-				<div class="modal-body" align="center">
-					 <img  width=80% height=70%  src="/Drift_wechat/images/info.jpg">
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
-	
-	<div style="height:80%;width:100%;background:#D3D3D3;position:absolute;">
-	
+	<!--主体块  -->
+	<div style="height:auto;width:100%;background:#D3D3D3;position:absolute;">
+		<!--BGM  -->
 		<div style="height:50%;margin:10px;background:#00BFFF;position:relative;background-image:url(/Drift_wechat/images/sky.jpg);background-size:cover" align="center">
 			<br/>
 			<br/>
@@ -80,21 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    </a>
 		    </div>
 		</c:forEach>
-		
-<!-- 		<div style="margin:10px;background:#FFFFFF;position:relative;">
-			<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-		      <div class="weui-media-box__hd">
-		        <img class="weui-media-box__thumb" src="/Drift_wechat/images/icon.jpg">
-		      </div>
-		      <div class="weui-media-box__bd">
-		        <h4 class="weui-media-box__title">如何清除甲醛呢？</h4>
-		        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。
-		              由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。
-		        </p>
-		      </div>
-		    </a>
-		</div> -->
-		
+		<div style="height:120px;position:relative;"></div>
 	</div>
 	
 	<!--辅助功能  -->
@@ -108,42 +76,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <span class="weui-loadmore__tips" style="color:#FFFFFF">正在加载</span>
 	</div>
 	
-	<!--主要功能  -->
-	<div class="weui-flex" style="top:82%;position:absolute;width:100%;">
-	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
-	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set'">我要预约</button>
-	  </div>
-	  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
-	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/Contact.jsp';">联系客服</button>
-	  </div>
+	<!--底部块-->
+	<div class="weui-footer_fixed-bottom">
+		<!--主要功能  -->
+		<div class="weui-flex">
+		  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
+		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set'">我要预约</button>
+		  </div>
+		  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
+		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/Contact.jsp';">联系客服</button>
+		  </div>
+		</div>
+	  <div style="height:70px"></div>
+	  <!--导航区域  -->
+	  <div class="weui-tabbar">
+		  <a href="/Drift_wechat/api/wechat/index" class="weui-tabbar__item weui-bar__item--on">
+		    <div class="weui-tabbar__icon">
+		      <img src="/Drift_wechat/images/navi/index.png" alt="">
+		    </div>
+		    <p class="weui-tabbar__label">首页</p>
+		  </a>
+		  <a href="/Drift_wechat/api/user/getState" class="weui-tabbar__item">
+		    <div class="weui-tabbar__icon">
+		      <img src="/Drift_wechat/images/navi/order.png" alt="">
+		    </div>
+		    <p class="weui-tabbar__label">订单</p>
+		  </a>
+		  <a href="/Drift_wechat/api/QA/Index" class="weui-tabbar__item">
+		    <div class="weui-tabbar__icon">
+		      <img src="/Drift_wechat/images/navi/community.png" alt="">
+		    </div>
+		    <p class="weui-tabbar__label">社区</p>
+		  </a>
+		  <a href="/Drift_wechat/jsp/MyIndex.jsp" class="weui-tabbar__item">
+		    <div class="weui-tabbar__icon">
+		      <img src="/Drift_wechat/images/navi/my.png" alt="">
+		    </div>
+		    <p class="weui-tabbar__label">我的</p>
+		  </a>
 	</div>
-	
-<!--导航栏  -->
-	<div class="weui-tabbar weui-footer_fixed-bottom" style="bottom:0">
-	  <a href="/Drift_wechat/api/wechat/index" class="weui-tabbar__item weui-bar__item--on">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/index.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">首页</p>
-	  </a>
-	  <a href="/Drift_wechat/api/user/getState" class="weui-tabbar__item">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/order.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">订单</p>
-	  </a>
-	  <a href="/Drift_wechat/api/QA/Index" class="weui-tabbar__item">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/community.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">社区</p>
-	  </a>
-	  <a href="/Drift_wechat/jsp/MyIndex.jsp" class="weui-tabbar__item">
-	    <div class="weui-tabbar__icon">
-	      <img src="/Drift_wechat/images/navi/my.png" alt="">
-	    </div>
-	    <p class="weui-tabbar__label">我的</p>
-	  </a>
+	</div>
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" align="center">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						甲醛检测仪
+					</h4>
+				</div>
+				<div class="modal-body" align="center">
+					 <img  width=80% height=70%  src="/Drift_wechat/images/info.jpg">
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
 	</div>
 </body>
 <script type="text/javascript">
