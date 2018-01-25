@@ -39,4 +39,6 @@ public interface ManageDao {
 	boolean login(String username, String password);
 
 	Long getDevicenum();
+
+	List<Question> getNotRecommend(int start,int num);
 }
