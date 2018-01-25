@@ -143,6 +143,7 @@ public class UserDaoImpl implements UserDao{
 		log.info("saveorupdate"+user.getOpenid());
 		if(list.size()==0){
 			if(!user.getOpenid().equals("")){
+				user.setState(1);
 				baseDao.save(user);
 			}
 		}else{
@@ -151,7 +152,6 @@ public class UserDaoImpl implements UserDao{
 			user.setScore(u.getScore());
 			user.setTransactionid(u.getTransactionid());
 			user.setZmxyid(u.getZmxyid());
-			user.setState(0);
 			baseDao.update(user);
 		}
 		return true;
