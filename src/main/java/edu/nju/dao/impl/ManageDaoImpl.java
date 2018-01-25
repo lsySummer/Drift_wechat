@@ -1,7 +1,6 @@
 package edu.nju.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +14,7 @@ import edu.nju.dao.QADao;
 import edu.nju.dao.ReserveDao;
 import edu.nju.dao.UserDao;
 import edu.nju.entities.Admin;
+import edu.nju.entities.Answer;
 import edu.nju.entities.CheckResult;
 import edu.nju.entities.Device;
 import edu.nju.entities.DeviceArea;
@@ -232,6 +232,30 @@ public class ManageDaoImpl implements ManageDao{
 		String hql = "from Question where qstate=0";
 		List<Question> list = baseDao.getNewSession().createQuery(hql).setFirstResult(start).setMaxResults(num).getResultList();
 		return list;
+	}
+
+	@Override
+	public boolean deleteQuestion(String qid) {
+		Question q = qdao.getByQuestionId(qid);
+		if(q!=null) {
+			baseDao.delete(q);
+			List<Answer> list = qdao.getAnswers(qid, 0, 1000);
+			for(int i=0;i<list.size();i++) {
+				baseDao.delete(list.get(i));
+			}
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteAnswer(String aid) {
+		Answer a = qdao.getByAnswerId(aid);
+		if(a!=null) {
+			baseDao.delete(a);
+			return true;
+		}
+		return false;
 	}
 
 }

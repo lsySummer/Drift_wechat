@@ -9,8 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import edu.nju.dao.BaseDao;
 import edu.nju.dao.CommunityDao;
-import edu.nju.dao.ReserveGetDao;
-import edu.nju.entities.CheckResult;
 import edu.nju.entities.Order;
 import edu.nju.entities.UserComment;
 import edu.nju.utils.Utility;
@@ -20,8 +18,6 @@ public class CommunityDaoImpl implements CommunityDao{
 //	private static final Logger log = Logger.getLogger(CommunityDaoImpl.class);
 	 @Autowired
 	 private BaseDao baseDao;
-	 @Autowired
-	 private ReserveGetDao rgDao;
 
 	@SuppressWarnings("unchecked")
 	@Override

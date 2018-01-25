@@ -23,27 +23,6 @@ public class QAService {
 	public boolean makeFolder(String path) {
 		return HandleFile.makeFolder(path);
 	}
-	
-//	public String addPicture(String filePath,MultipartFile file) {
-//		List<MultipartFile> list = new ArrayList<MultipartFile>();
-//		list.add(file);
-////		String absUrl = (new File("")).getAbsolutePath();
-//		//String baseUrl = absUrl.substring(0,absUrl.length()-3)+"/webapps/upload/"+filePath;
-//		String fileUrl = Utility.saveFile(filePath, list);
-//		String result = "/upload/"+filePath+fileUrl;
-//		return result;
-//	}
-//	
-//	public boolean delPicture(String filePath) {
-//		return Utility.deleteFile(filePath);
-//	}
-//	/**
-//	 * 把目录的名字由tmp改成img
-//	 */
-//	public boolean changenName(String path) {
-//		return Utility.changenName(path);
-//	}
-//	
 	/**
 	 * 发布问题
 	 */
@@ -176,5 +155,4 @@ public class QAService {
 	public Long getLikeNum(String answerid) {
 		return dao.getLikeNum(answerid);
 	}
-	
 }

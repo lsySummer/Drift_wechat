@@ -214,4 +214,12 @@ public class ManageService {
 	public boolean login(String username,String password) {
 		return manageDao.login(username,password);
 	}
+	
+	public boolean deleteQuestion(String qid) {
+		return manageDao.deleteQuestion(qid);
+	}
+	
+	public boolean deleteAnswer(String aid) {
+		return manageDao.deleteAnswer(aid);
+	}
 }

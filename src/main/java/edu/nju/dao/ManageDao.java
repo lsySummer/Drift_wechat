@@ -41,4 +41,8 @@ public interface ManageDao {
 	Long getDevicenum();
 
 	List<Question> getNotRecommend(int start,int num);
+
+	boolean deleteQuestion(String qid);
+
+	boolean deleteAnswer(String aid);
 }

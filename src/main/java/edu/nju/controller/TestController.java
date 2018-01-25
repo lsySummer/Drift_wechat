@@ -100,7 +100,8 @@ public class TestController {
 //		for(Question q:list) {
 //			System.out.println(q.toString());
 //		}
-		userService.getUserVO();
+//		userService.getUserVO();
+		mservice.deleteQuestion("0000000061279ac401612be93bf80005");
 		return "jsp/NewFile";
 	}
 }
