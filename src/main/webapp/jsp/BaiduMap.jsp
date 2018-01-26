@@ -7,8 +7,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html>
 <html>  
 <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.css">
 <link rel="stylesheet" href="/Drift_wechat/css/demos.css">
-<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
 <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
 <script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
 <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
@@ -68,10 +68,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="weui-popup__overlay"></div>
       <div class="weui-popup__modal">
       
-        <div class="toolbar">
+        <div class="toolbar" style="height:50px">
           <div class="toolbar-inner">
-            <a href="javascript:;" class="picker-button close-popup">关闭</a>
-            <p class="title">评论区</p>
+            <a href="javascript:;" class="picker-button close-popup"><h4>关闭</h4></a>
+            <h4 class="title">评论区</h4>
           </div>
         </div>
         
@@ -91,6 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="weui-article" id="commentDiv"></div>
 	     	</div> 
          </div>
+         
         </div>    
       </div>
 </body>

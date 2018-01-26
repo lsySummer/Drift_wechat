@@ -68,31 +68,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </a>
 	</div>
 	
-	<!--问题列表-->
-	<div id="questionList" class="weui-panel weui-panel_access">
-		<div class="weui-cell" style="background:#F5F5F5;margin:10px " align="center" >
-			 <div class="weui-cell__ft">
-		    		<div class="dropdown" style="margin:0px;padding:0px">
-					    <button type="button" tyle="background:#F5F5F5" class="btn dropdown-toggle btn-sm" id="dropdownMenu1" data-toggle="dropdown">排序
-					        <span class="caret"></span>
-					    </button>
-					    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-					        <li role="presentation">
-					            <a role="menuitem" tabindex="-1" href="/Drift_wechat/api/QA/Index">按时间排序</a>
-					        </li>
-					        <li role="presentation">
-					            <a role="menuitem" tabindex="-1" href="/Drift_wechat/api/QA/IndexSortByNum">按热度排序</a>
-					        </li>
-					    </ul>
-					</div>
-		    </div>
-		    <div class="weui-cell__bd" style="color:black">
-		      <h3>热门话题</h3>
-		    </div>
-		    <div class="weui-cell__ft"><a href="/Drift_wechat/jsp/community/PublishQ.html"><img alt="" style="" src="/Drift_wechat/images/community/ask.png">&nbsp;&nbsp;&nbsp;提问</a></div>
-		</div>
-		<hr class="style-four" />
-			  
+	<!--页面抬头-->
+	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:10px ">
+  		<div class="weui-cell__ft">
+			<div class="dropdown" style="margin:0px;padding:0px">
+			    <button type="button" tyle="background:#F5F5F5" class="btn dropdown-toggle btn-sm" id="dropdownMenu1" data-toggle="dropdown">排序
+			        <span class="caret"></span>
+			    </button>
+			    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+			        <li role="presentation">
+			            <a role="menuitem" tabindex="-1" href="/Drift_wechat/api/QA/Index">按时间排序</a>
+			        </li>
+			        <li role="presentation">
+			            <a role="menuitem" tabindex="-1" href="/Drift_wechat/api/QA/IndexSortByNum">按热度排序</a>
+			        </li>
+			    </ul>
+			</div>
+  		</div>
+	    <div class="weui-cell__bd" style="font-weight:bold;">
+	      <h4>热门话题</h4>
+	    </div>
+	    <div class="weui-cell__ft"><a href=><a href="/Drift_wechat/jsp/community/PublishQ.html"><img alt="" style="" src="/Drift_wechat/images/community/ask.png">&nbsp;&nbsp;&nbsp;提问</a></div>
+	</div>
+	<hr class="style-four" />	
+	  
+	  <!--问题列表  -->		  
 	  <div class="weui-panel__bd">
  		<c:forEach items="${qList}" var="Q" varStatus="index">
 			<a href="/Drift_wechat/api/QA/DateSort?qid=${Q.id}  " class="weui-media-box weui-media-box_appmsg">
