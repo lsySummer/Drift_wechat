@@ -88,7 +88,7 @@
 	        success: function(url) {
 	            /* $('#'+image_name).attr('src', url); */
 	            $('#summernote').summernote('insertImage', fileTest, function ($image) {
-			      $image.css('width', document.body.clientWidth*0.9);
+			      $image.css('width', document.body.clientWidth*0.95);
 				  $image.attr('id', image_name);
 				});
 				document.getElementById("waiting").innerHTML = '';
@@ -99,7 +99,7 @@
   }
 
   function confirm(){
-	if ($('#summernote').summernote('isEmpty') || document.getElementById("title").value == null) {
+	if ($('#summernote').summernote('isEmpty') || document.getElementById("title").value.trim(' ') == '') {
 	  alert('总要说点啥吧');
 	}else{
 	  window.location.href='/Drift_wechat/api/QA/ConfirmQuestion?summernote='+$('#summernote').summernote('code')+"&title="+document.getElementById("title").value;

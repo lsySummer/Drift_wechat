@@ -84,7 +84,7 @@
 	        success: function(url) {
 	            /* $('#'+image_name).attr('src', url); */
 	            $('#summernote').summernote('insertImage', fileTest, function ($image) {
-			      $image.css('width', document.body.clientWidth*0.9);
+			      $image.css('width', document.body.clientWidth*0.95);
 				  $image.attr('id', image_name);
 				});
 				document.getElementById("waiting").innerHTML = '';
