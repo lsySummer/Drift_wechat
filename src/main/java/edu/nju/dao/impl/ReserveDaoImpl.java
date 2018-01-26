@@ -157,9 +157,20 @@ public class ReserveDaoImpl implements ReserveDao{
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean saveList(List<CheckResult> list) {
 		try {
+			if(list.size()>0) {
+				String orderid = list.get(0).getOrderid();
+				String hql = "from CheckResult where orderid =:orderid";
+				List<CheckResult> oldList = baseDao.getNewSession().createQuery(hql).setParameter("orderid", orderid).getResultList();
+				if(oldList.size()>0) {
+					for(CheckResult check:oldList) {
+						baseDao.delete(check);
+					}
+				}
+			}
 			for(CheckResult result:list) {
 				baseDao.save(result);
 			}
