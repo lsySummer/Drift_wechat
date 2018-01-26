@@ -60,6 +60,9 @@ public class CommunityController {
 		JSONObject result = new JSONObject();
 		List<MultipartFile> photoLists = (List<MultipartFile>) session.getAttribute("photo");
 //		service.addComment("oRTgpwQkDZKxGFvNnfKpJLWvxsyw", photoLists, txt, Float.parseFloat(methanal));
+		if(userService.getUserState((String)session.getAttribute("openid")) >= 4){
+			return;
+		}
 		service.addComment((String)session.getAttribute("openid"), photoLists, txt);
 		result.put("status", "200");
 		try {

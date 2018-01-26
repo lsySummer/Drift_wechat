@@ -107,6 +107,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </a>
 			</div>
 	  	</div>
+	  	<div class="weui-msg__extra-area" >
+            <div class="weui-footer weui-footer_fixed-bottom">
+                <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
+            </div>
+    	</div>
   </body>
   	<script type="text/javascript" src="/Drift_wechat/js/myJS/MyIndex.js"></script>
 </html>
