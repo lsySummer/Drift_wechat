@@ -203,11 +203,13 @@
    		var commonInfo;
    		var titleStr;
    		if(addPoint.airBoolean==1){
+   			var name = addPoint.nickname;
+   			name = name.substring(0,1)+"XX";
    			if(addPoint.hasOwnProperty("pm25")){
-   				commonInfo = "用户："+addPoint.nickname+"<br>"+"pm2.5:"+addPoint.pm25+"<br>"+"检测时间:"+addPoint.update_time+"<br>";
+   				commonInfo = "用户："+name+"<br>"+"pm2.5:"+addPoint.pm25+"<br>"+"检测时间:"+addPoint.update_time+"<br>";
    			}
    			else{
-   				commonInfo = "用户："+addPoint.nickname+"<br>";
+   				commonInfo = "用户："+name+"<br>";
    			}
    			titleStr = "果麦新风净化<br>"+commonInfo;
    		}
