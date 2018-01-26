@@ -86,6 +86,10 @@ public class ReserveDaoImpl implements ReserveDao{
 
 	@Override
 	synchronized public boolean makeOrder(String openid,int type,Date startDate,Date endDate) {
+		UserInfo u = userDao.getUser(openid);
+		if(u.getState()>1) {
+			return false;
+		}
 		List<Device> devices = reserveDevice(openid, type);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String deviceId = "";
