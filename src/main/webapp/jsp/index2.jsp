@@ -41,9 +41,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<br/>
 			<br/>
 			<br/>
-			<marquee scrollamount="80" scrolldelay="120"><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计漂流${allnum}次</span></marquee>
+			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计漂流${allnum}次</br>今日漂流${todaynum}次</span></marquee>
 			<br/>
-			<marquee scrolldelay="120"><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流${todaynum}次</span></marquee>
+			<%-- <marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流${todaynum}次</span></marquee> --%>
 		</div>
 		<!--推荐的热门话题 -->
 		<c:forEach items="${qList}" var="Q" varStatus="index">
