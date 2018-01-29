@@ -3,62 +3,69 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
   <head>
     <title>发帖</title>
-    <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
-  	<link href="/Drift_wechat/css/summernote.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.min.css">
   	<link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
-  	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
-  	<script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
   	<script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
-  	<script src="/Drift_wechat/js/bootstrap.min.js"></script> 
-  	<script src="/Drift_wechat/js/summernote.min.js"></script>
-  	<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
+  	<script type="text/javascript" src="/Drift_wechat/js/bootstrap.min.js"></script> 
   </head>
   
   <body>
-    <div class="weui-cells__title" style="margin-top:4%;">内容</div>
-    <textarea name="summernote" class="summernote" id="summernote" title="Contents" style="width:100%"></textarea>
-    <div class="weui-loadmore" id="waiting"></div>
+  	<c:import url="manageNavi.jsp"/>
+    <div class="weui-cells__title">标题</div>
+	<div class="weui-cells">
+	  <div class="weui-cell">
+	    <div class="weui-cell__bd" style="width:50%">
+	      <input class="weui-input" type="text" placeholder="请输入题目" id="title" name="title"/>
+	    </div>
+	  </div>
+	  <div class="weui-cells__title">内容</div>
+	  <textarea name="summernote" class="summernote" id="summernote" title="Contents" style="margin-left:5%;margin-right:5%;max-width:1000px;"></textarea>
+	</div>
+	<div class="weui-loadmore" id="waiting"></div>
     <!--按钮组 -->
-	<div id="botton" class="weui-flex" style="width:100%;">
-	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
+	<div id="botton" class="weui-flex" style="margin:0 auto;width:24%">
+	  <div class="weui-flex__item placeholder" style="padding-right:5%;">
 	   <button id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:cancel();">取消</button>
 	  </div>
-	  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
+	  <div class="weui-flex__item placeholder" style="padding-left:5%;">
 	   <button id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:confirm();">发布</button>
 	  </div>
 	</div>
-    <input type="text" id="qid" name="qid" style="visibility:collapse"/>
   </body>
 <script type="text/javascript">
   var image_name = 0;
-  var qid = getParmFormUrl("qid");
-  document.getElementById("qid").value = qid; 
-  $(document).ready(function() {
-   $('#summernote').summernote({  
-      placeholder: '快说点啥...', 
-      height: 450, /*指定高度*/  
+  $(document).ready(function() { 
+   $('#summernote').summernote({ 
+      height: 400, /*指定高度*/  
       lang: 'zh-CN',  
       focus: true,
       toolbar: [     
-        ['fontsize', ['fontsize']],  
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+	    ['font', ['strikethrough', 'superscript', 'subscript']],
+	    ['fontsize', ['fontsize']],
+	    ['color', ['color']],
+	    ['height', ['height']], 
         ['insert', ['picture', 'hr']]  
       ],  
       callbacks: {
-        onImageUpload: function(files) {
+        onImageUpload: function(files,editor,$editable) {
         	/* $('#summernote').summernote('insertNode', imgNode); */
-        	document.getElementById("waiting").innerHTML = '<i class="weui-loading"></i><span class="weui-loadmore__tips">正在加载图片</span>';
-            sendFile(files[0]);
-        }
+            document.getElementById("waiting").innerHTML = '<i class="weui-loading"></i><span class="weui-loadmore__tips">正在加载图片</span>';
+            sendFile(files[0],editor,$editable);
+        },
+        onEnter: function() {
+	      $('#summernote').summernote('bold');  
+	    }
       } 
-   });  
+   });
   });  
     
-  function sendFile(file) {
+  function sendFile(file,editor,$editable) {
     var fileData = URL.createObjectURL(file);
     var img = new Image();
   	img.src = fileData;
@@ -70,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    $.ajax({
 	        data: data,
 	        type: "POST",
-	        url: "/Drift_wechat/api/QA/Answer",
+	        url: "/Drift_wechat/api/manage/QA/Question",
 	        cache: false,
 	        contentType: false,
 	        processData: false,
@@ -84,26 +91,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            image_name ++;
 	        }
 	    });
-	  }
-  	}
-
-  function confirm(){
-  	if ($('#summernote').summernote('isEmpty')){
-  	  alert('总要说点啥吧');
-  	}else{
-  	  window.location.href="/Drift_wechat/api/QA/ConfirmAnswer?summernote="+$('#summernote').summernote('code')+'&qid=' + qid;
   	}
   }
-  
-  function getParmFormUrl(name){
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null){return decodeURI(r[2]);}
-    return null;
+
+  function confirm(){
+	if ($('#summernote').summernote('isEmpty') || document.getElementById("title").value.trim(' ') == '') {
+	  alert('总要说点啥吧');
+	}else{
+	  window.location.href='/Drift_wechat/api/manage/QA/ConfirmQuestion?summernote='+$('#summernote').summernote('code')+"&title="+document.getElementById("title").value;
+	}
   }
   
   function cancel(){
-  	window.location.href='/Drift_wechat/api/QA/CancelAnswer?qid=' + qid;
+  	window.location.href='/Drift_wechat/api/manage/QA/CancelQuestion';
+  }
+  
+  function test(){
+  	$('.modal-title').innerHTML = '插入图片';
   }
   
   function compress(img, width, height){
@@ -126,4 +130,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    return new Blob([u8arr], {type:mime});
    }
 </script>
+<link href="/Drift_wechat/css/summernote.css" rel="stylesheet">
+<script src="/Drift_wechat/js/summernote.js"></script>
 </html>

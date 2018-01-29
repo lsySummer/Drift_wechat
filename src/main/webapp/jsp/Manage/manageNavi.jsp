@@ -39,9 +39,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	社区管理<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <!-- <li><a href="#">提问</a></li>
+                    <li><a href="/Drift_wechat/jsp/Manage/AddPost.jsp">官方发帖</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">回答</a></li>
+                    <!-- <li><a href="#">回答</a></li>
                     <li class="divider"></li> -->
                     <li><a href="/Drift_wechat/api/manage/QA/recQuestionList">管理热帖</a></li>
                     <li class="divider"></li>
