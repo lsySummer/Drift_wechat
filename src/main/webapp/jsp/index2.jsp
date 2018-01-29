@@ -9,15 +9,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-	<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
-  	<link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+	<link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/demos.css">
-	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
-	<script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
-	<script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
-	<script type="text/javascript" src="/Drift_wechat/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
-	<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
+	<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
+	<!-- <script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script> -->
+	<script src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
+	<script src="/Drift_wechat/js/jquery-weui.js"></script>
+	<script src="/Drift_wechat/js/bootstrap.min.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FGnoI8RVLDdSe5qWVvKv5XjGphYGNRZ2"></script>
     <title>果麦公益检测</title>
@@ -29,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  width: 100%;
 	  height:auto;
 	  background:url("/Drift_wechat/images/sky.jpg") no-repeat;
-	  background-size: 100%;
+	  background-size: cover;
 	}
 </style>  
 
@@ -42,9 +41,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<br/>
 			<br/>
 			<br/>
-			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计漂流${allnum}次</span></marquee>
+			<marquee scrollamount="80" scrolldelay="120"><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计漂流${allnum}次</span></marquee>
 			<br/>
-			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流${todaynum}次</span></marquee>
+			<marquee scrolldelay="120"><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流${todaynum}次</span></marquee>
 		</div>
 		<!--推荐的热门话题 -->
 		<c:forEach items="${qList}" var="Q" varStatus="index">
@@ -73,19 +72,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	
 	<!--辅助功能  -->
-	<div style="top:2%;left:80%;position:absolute;">
+	<div style="top:2%;left:10%;position:absolute;">
 		<a href="javascript:toMap()" ><img alt="" src="/Drift_wechat/images/tomap.png" id="countryMap" height="32px" width="32px"></a>
-		<br/><a href="javascript:ShowModel()"><img alt="" src="/Drift_wechat/images/yiqi2.png"  height="32px" width="32px"></a>
+	</div>
+	<div style="top:2%;left:80%;position:absolute;">
+		<a href="javascript:ShowModel()"><img alt="" src="/Drift_wechat/images/yiqi2.png"  height="32px" width="32px"></a>
 	</div>
 	
 	<div id="loadmore" class="weui-loadmore" style="top:25%;position: absolute;width:100%;display:none">
 	  <i class="weui-loading"></i>
 	  <span class="weui-loadmore__tips" style="color:#FFFFFF">正在加载</span>
 	</div>
-	
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" align="center">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						甲醛检测仪
+					</h4>
+				</div>
+				<div class="modal-body" align="center">
+					 <img  width=80% height=70%  src="/Drift_wechat/images/info.jpg">
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
 	<!--底部块-->
-	<div class="weui-footer_fixed-bottom">
-		<!--主要功能  -->
+	<div class="weui-footer_fixed-bottom" style="bottom:0">
+		
 		<div class="weui-flex">
 		  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
 		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set'">我要预约</button>
@@ -95,8 +113,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </div>
 		</div>
 		  <div style="height:70px"></div>
-		  <!--导航区域  -->
-		  <div class="weui-tabbar">
+		  
+		  <div class="weui-tabbar" style="bottom:0">
 			  <a href="/Drift_wechat/api/wechat/index" class="weui-tabbar__item weui-bar__item--on">
 			    <div class="weui-tabbar__icon">
 			      <img src="/Drift_wechat/images/navi/index.png" alt="">
@@ -122,24 +140,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <p class="weui-tabbar__label">我的</p>
 			  </a>
 		</div>
-	</div>
-	<!-- 模态框（Modal） -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header" align="center">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						甲醛检测仪
-					</h4>
-				</div>
-				<div class="modal-body" align="center">
-					 <img  width=80% height=70%  src="/Drift_wechat/images/info.jpg">
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
 	</div>
 </body>
 <script type="text/javascript">
@@ -194,6 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        convertor.translate(pointArr, 1, 5, translateCallback);
 			        },
 			        fail: function(error) {
+			        	alert("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
 			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
 			        }
 			  });
