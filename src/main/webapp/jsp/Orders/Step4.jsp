@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  <tbody id="lists">
 			  </tbody>
 			</table>
-	    <a href="javascript:close();" class="weui-btn weui-btn_primary">关闭</a>
+	    <a id="close" href="javascript:close();" class="weui-btn weui-btn_primary" style="position:fiexd;bottom:10%;z-index:10">关闭</a>
 	  </div>
 	</div>
 	<!--步骤条 -->

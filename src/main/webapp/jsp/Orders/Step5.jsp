@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div style="margin_top:20%;background:#FFFFFF;" id="recommend"></div>
 		
 	<!--按钮 -->
-	<a href="/Drift_wechat/jsp/TrackMap.jsp" class="weui-btn weui-btn_primary" style="bottom:12%;position:fixed;width:100%;">查看设备历史</a>
+	<a href="/Drift_wechat/jsp/TrackMap.jsp" class="weui-btn weui-btn_primary" style="bottom:11%;left:5%;right:5%;position:fixed;">查看设备历史</a>
   	<!--BOTTOM -->
   	<%@include file="BottomBar.html"%>
 	<script>set(5);</script>
