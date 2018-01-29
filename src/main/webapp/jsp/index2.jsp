@@ -25,13 +25,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <style type="text/css">
 	a{color:#696969} 
 	a:hover{color:#00BFFF}
+	body{
+	  width: 100%;
+	  height:auto;
+	  background:url("/Drift_wechat/images/sky.jpg") no-repeat;
+	  background-size: 100%;
+	}
 </style>  
 
-<body ontouchstart>
+<body ontouchstart style="">
 	<!--主体块  -->
-	<div style="height:auto;width:100%;background:#D3D3D3;position:absolute;">
+	<!-- <div style="height:auto;width:100%;background:#D3D3D3;position:absolute;background-image:url(/Drift_wechat/images/sky.jpg);background-size:cover"> -->
+	<div style="height:auto;width:100%;position:absolute;">
 		<!--BGM  -->
-		<div style="height:50%;margin:10px;background:#00BFFF;position:relative;background-image:url(/Drift_wechat/images/sky.jpg);background-size:cover" align="center">
+		<div style="height:50%;margin:10px;position:relative; align="center">
 			<br/>
 			<br/>
 			<br/>
@@ -87,34 +94,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_warn" onclick="javascrtpt:window.location.href='/Drift_wechat/jsp/Contact.jsp';">联系客服</button>
 		  </div>
 		</div>
-	  <div style="height:70px"></div>
-	  <!--导航区域  -->
-	  <div class="weui-tabbar">
-		  <a href="/Drift_wechat/api/wechat/index" class="weui-tabbar__item weui-bar__item--on">
-		    <div class="weui-tabbar__icon">
-		      <img src="/Drift_wechat/images/navi/index.png" alt="">
-		    </div>
-		    <p class="weui-tabbar__label">首页</p>
-		  </a>
-		  <a href="/Drift_wechat/api/user/getState" class="weui-tabbar__item">
-		    <div class="weui-tabbar__icon">
-		      <img src="/Drift_wechat/images/navi/order.png" alt="">
-		    </div>
-		    <p class="weui-tabbar__label">订单</p>
-		  </a>
-		  <a href="/Drift_wechat/api/QA/Index" class="weui-tabbar__item">
-		    <div class="weui-tabbar__icon">
-		      <img src="/Drift_wechat/images/navi/community.png" alt="">
-		    </div>
-		    <p class="weui-tabbar__label">社区</p>
-		  </a>
-		  <a href="/Drift_wechat/jsp/MyIndex.jsp" class="weui-tabbar__item">
-		    <div class="weui-tabbar__icon">
-		      <img src="/Drift_wechat/images/navi/my.png" alt="">
-		    </div>
-		    <p class="weui-tabbar__label">我的</p>
-		  </a>
-	</div>
+		  <div style="height:70px"></div>
+		  <!--导航区域  -->
+		  <div class="weui-tabbar">
+			  <a href="/Drift_wechat/api/wechat/index" class="weui-tabbar__item weui-bar__item--on">
+			    <div class="weui-tabbar__icon">
+			      <img src="/Drift_wechat/images/navi/index.png" alt="">
+			    </div>
+			    <p class="weui-tabbar__label">首页</p>
+			  </a>
+			  <a href="/Drift_wechat/api/user/getState" class="weui-tabbar__item">
+			    <div class="weui-tabbar__icon">
+			      <img src="/Drift_wechat/images/navi/order.png" alt="">
+			    </div>
+			    <p class="weui-tabbar__label">订单</p>
+			  </a>
+			  <a href="/Drift_wechat/api/QA/Index" class="weui-tabbar__item">
+			    <div class="weui-tabbar__icon">
+			      <img src="/Drift_wechat/images/navi/community.png" alt="">
+			    </div>
+			    <p class="weui-tabbar__label">社区</p>
+			  </a>
+			  <a href="/Drift_wechat/jsp/MyIndex.jsp" class="weui-tabbar__item">
+			    <div class="weui-tabbar__icon">
+			      <img src="/Drift_wechat/images/navi/my.png" alt="">
+			    </div>
+			    <p class="weui-tabbar__label">我的</p>
+			  </a>
+		</div>
 	</div>
 	<!-- 模态框（Modal） -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:10%;bottom:10%;position:relative;">

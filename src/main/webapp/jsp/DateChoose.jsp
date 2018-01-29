@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		$.getJSON('/Drift_wechat/api/order/getDate',function(json){
            	var disabledDays = json.dates;
-           	//disabledDays = ["2018-1-10"];
+           	//disabledDays = ["2018-1-30"];
             $('#selectDate').datepicker({
 		      	showButtonPanel:true,//是否显示按钮面板
 		      	beforeShowDay: disableSpecificDays,

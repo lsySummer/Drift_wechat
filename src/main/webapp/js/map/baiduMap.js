@@ -133,7 +133,7 @@
 	function getAir(){
 		$.get("http://measure.qingair.net/management/deviceAddress/all",function(res){
 				if(res.responseCode=="RESPONSE_OK"){
-					for(var i=0;i<10;i++){
+					for(var i=0;i<res.data.length;i++){
 						temp = {};
 						temp["device_id"] = res.data[i].device_id;
 						temp["address"] = res.data[i].province+res.data[i].city+res.data[i].address;

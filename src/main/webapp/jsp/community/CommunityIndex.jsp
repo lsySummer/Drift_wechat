@@ -1,45 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
-<link rel="stylesheet" href="/Drift_wechat/css/demos.css">
-<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
-<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
-<script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
-<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
-<script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
-<script src="/Drift_wechat/js/bootstrap.min.js"></script>
-<head>
-  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">  
+  <head>
     <title>果麦公益检测</title>
-</head>
-<style type="text/css">
-	.question{
-		color:black;
-		font-size: 18px;
-		font-weight:bold;
-	}
-	
-	hr.style-one {
-		border: 0;	
-		height: 1px;	
-		background: #333;	
-		background-image: linear-gradient(to right, #ccc, #333, #ccc);	
-	}
-	hr.style-four {
-		height: 12px;
-		border: 0;
-		box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
-	}
-</style>  
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
+	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.css">
+	<link rel="stylesheet" href="/Drift_wechat/css/demos.css">
+	<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
+	<script src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
+	<script src="/Drift_wechat/js/fastclick.js"></script>
+	<script src="/Drift_wechat/js/jquery-weui.js"></script>
+	<script src="/Drift_wechat/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		.question{
+			color:black;
+			font-size: 18px;
+			font-weight:bold;
+		}
+		hr.style-four {
+			height: 12px;
+			border: 0;
+			box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+		}
+	</style> 
+  </head>
 
-<body>	
+  <body ontouchstart>
+	<!--下拉刷新  -->
+    <div class="weui-pull-to-refresh__layer">
+      <div class='weui-pull-to-refresh__arrow'></div>
+      <div class='weui-pull-to-refresh__preloader'></div>
+      <div class="down">下拉刷新</div>
+      <div class="up">释放刷新</div>
+      <div class="refresh">正在刷新</div>
+    </div>
+    
 	<!--导航栏  -->
 	<div class="weui-tabbar weui-footer_fixed-bottom" style="bottom:0">
 	  <a href="/Drift_wechat/api/wechat/index" class="weui-tabbar__item">
@@ -67,9 +69,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <p class="weui-tabbar__label">我的</p>
 	  </a>
 	</div>
-	
+		      <div class="weui-media-box__bd" style="height:20px">
+	      </div>
 	<!--页面抬头-->
-	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:10px ">
+	<div class="weui-cell" align="center" style="background:#F5F5F5;margin:10px;">
   		<div class="weui-cell__ft">
 			<div class="dropdown" style="margin:0px;padding:0px">
 			    <button type="button" tyle="background:#F5F5F5" class="btn dropdown-toggle btn-sm" id="dropdownMenu1" data-toggle="dropdown">排序
@@ -90,6 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
 	    <div class="weui-cell__ft"><a href=><a href="/Drift_wechat/jsp/community/PublishQ.html"><img alt="" style="" src="/Drift_wechat/images/community/ask.png">&nbsp;&nbsp;&nbsp;提问</a></div>
 	</div>
+	
 	<hr class="style-four" />	
 	  
 	  <!--问题列表  -->		  
@@ -112,30 +116,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      <div class="weui-media-box__bd" style="height:20%">
 		      <p class="weui-media-box__title question"></p>
 	      </div>
-		</a>
-		
-	  </div>
-	  	  
+		</a>	
 	</div>
-</body>
-<script type="text/javascript">
-/* $(document).ready(function(){  
-    var p=0,t=0;  
-    $(window).scroll(function(e){  
-            p = $(this).scrollTop();  
-              
-            if(t<=p){//下滚  
-                $("#navi").hide();
-                console.log($(window).scrollTop());
-                console.log($(window).height());  
-            }  
-              
-            else{//上滚  
-            	
-                $("#navi").show(); 
-            }  
-            setTimeout(function(){t = p;},0);         
-    });   
-});   */
-</script>
+	
+	<script>
+	  $(function() {
+	    FastClick.attach(document.body);
+	  });
+	  
+      $(document.body).pullToRefresh(function() {
+        setTimeout(function() {
+          window.location.href="/Drift_wechat/api/QA/Index";
+          $(document.body).pullToRefreshDone();
+        }, 1000);
+      });
+    </script>
+  </body>
 </html>
