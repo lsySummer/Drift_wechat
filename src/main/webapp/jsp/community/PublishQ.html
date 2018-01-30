@@ -6,11 +6,12 @@
   <title>提问</title>
   <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
   <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
-  <link href="/Drift_wechat/css/summernote.css" rel="stylesheet">
+  <link href="/Drift_wechat/css/summernote-lite.css" rel="stylesheet">
   <script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
   <script src="/Drift_wechat/js/bootstrap.min.js"></script> 
   <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
+  <script src="/Drift_wechat/js/summernote-lite.js"></script>  
   <style type="text/css">
 	.note-group-image-url {
 	    display:none;
@@ -24,7 +25,6 @@
   </style>
 </head>
 <body id="body">
-  <!-- <form class="weui-cells weui-cells_form" action="" id="basic" style="margin-top:4%;"> -->
     <div class="weui-cells__title" style="margin-top:5%;">标题</div>
 	<div class="weui-cells">
 	  <div class="weui-cell">
@@ -45,7 +45,6 @@
 	   <button id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:confirm();">发布</button>
 	  </div>
 	</div>
-  <!-- </form> -->
 <script type="text/javascript">
   var image_name = 0;
   $(document).ready(function() { 
@@ -54,8 +53,7 @@
       height: 450, /*指定高度*/  
       lang: 'zh-CN',  
       focus: true,
-      toolbar: [     
-        ['fontsize', ['fontsize']], 
+      toolbar: [
         ['insert', ['picture', 'hr']]  
       ],  
       callbacks: {
@@ -133,7 +131,6 @@
 	    return new Blob([u8arr], {type:mime});
    }
 </script>
-<script src="/Drift_wechat/js/summernote.js"></script>  
 </body>  
 </html>  
 </body>
