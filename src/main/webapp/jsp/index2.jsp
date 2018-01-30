@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <div style="height:70px"></div>
 		  
 		  <div class="weui-tabbar" style="bottom:0">
-			  <a href="/Drift_wechat/api/wechat/index" class="weui-tabbar__item weui-bar__item--on">
+			  <a href="/Drift_wechat/api/wechat/center" class="weui-tabbar__item weui-bar__item--on">
 			    <div class="weui-tabbar__icon">
 			      <img src="/Drift_wechat/images/navi/index.png" alt="">
 			    </div>
@@ -171,12 +171,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	function toMap(){
 		$("#loadmore").show();
-		if(<%=session.getAttribute("locationX")%>!=null){
+<%-- 		if(<%=session.getAttribute("locationX")%>!=null){
 			window.location.href="/Drift_wechat/api/map/map?x=1&y=1";
 		}
 		else{
 			weChatMap();
-		}
+		} --%>
+		weChatMap();
 	}
 		//页面加载完成启动
  	/* $("document").ready(function(){

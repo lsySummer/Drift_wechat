@@ -68,7 +68,7 @@
     }
     //返回首页
     function backIndex(){
-    	window.location.href="/Drift_wechat/api/wechat/index";
+    	window.location.href="/Drift_wechat/api/wechat/center";
     }
     
     //评论区初始化展示

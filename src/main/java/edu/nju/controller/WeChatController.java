@@ -74,7 +74,7 @@ public class WeChatController {
 		return redir;
 	}
 	
-	@RequestMapping(value = "/index")
+/*	@RequestMapping(value = "/index")
 	public String toCenter(Model model)
 			throws IOException {
 		List<Question> qList = mservice.getRecommend();
@@ -89,7 +89,7 @@ public class WeChatController {
 		model.addAttribute("qList", qList);
 		model.addAttribute("qnumList", qnumList);
 		return "jsp/index2";
-	}
+	}*/
 	
 //	@RequestMapping(value = "/getOrder")//管理员修改订单
 //	public String getOrder(HttpServletRequest request, String code,String state, HttpSession session)
