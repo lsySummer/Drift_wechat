@@ -171,13 +171,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	function toMap(){
 		$("#loadmore").show();
-<%-- 		if(<%=session.getAttribute("locationX")%>!=null){
+		if(<%=session.getAttribute("locationX")%>!=null){
 			window.location.href="/Drift_wechat/api/map/map?x=1&y=1";
 		}
 		else{
 			weChatMap();
-		} --%>
-		weChatMap();
+		}
 	}
 		//页面加载完成启动
  	/* $("document").ready(function(){
@@ -195,6 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        convertor.translate(pointArr, 1, 5, translateCallback);
 			        },
 			        fail: function(error) {
+			        	alert(error);
 			        	alert("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
 			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
 			        }
