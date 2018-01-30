@@ -53,7 +53,10 @@ public class WeChatController {
 //		if(state==null||state.equals("")){
 //			state = (String) session.getAttribute("state");
 //		}
-		String redir = getWechatInfo( code, state,session);
+		String redir = "jsp/index2";
+		if(session.getAttribute("openid")==null) {
+			redir = getWechatInfo( code, state,session);
+		}
 //		session.setAttribute("code", code);
 //		session.setAttribute("state", state);
 		log.info("code "+code+" state"+state);
@@ -141,7 +144,7 @@ public class WeChatController {
 		} catch (JSONException e) {
 			log.info(e);
 			e.printStackTrace();
-			return "jsp/BaiduMap";
+			return "jsp/index2";
 		}
 	}
 
