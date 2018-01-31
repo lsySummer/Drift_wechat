@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
 		<div class="modal-content">
           <div class="weui-grids" id="ptContent">          
-            <a class="weui-grid js_grid pb" >
+            <a class="weui-grid js_grid pb">
                 <img  id="img1" width=100px height=100px src="/Drift_wechat/images/default.jpg">
             </a>
             
@@ -95,13 +95,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 </body>
 <script type="text/javascript">
-	//页面加载完成启动
+	//初始化
+	var myLocation = {};
+	var pbset;
+	var level;
+	var index = 0;
+	var allAddressVO = [];
+	//var myLocation = {"x":118.786078,"y":32.061531};
+    var icon1 = new BMap.Icon("/Drift_wechat/images/map/blue.png", new BMap.Size(32,32));
+    var icon2 = new BMap.Icon("/Drift_wechat/images/map/red.png", new BMap.Size(32,32));  
+         
+    var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
+         new BMap.Size(23, 25), {  
+             offset: new BMap.Size(10, 25),  
+             imageOffset: new BMap.Size(0, -250)      
+         });
+    //页面加载完成启动
 	$("document").ready(function(){
 	    var x = <%=session.getAttribute("locationX")%>;
 	    var y = <%=session.getAttribute("locationY")%>;
 	    myLocation = {"x":parseFloat(x),"y":parseFloat(y)};
 		//weChatMap();
-		map_init(myLocation);
+		level = 18;
+		map_init();
 	});
+    $("#countryMap").click(function(){
+    	level = 4;
+    	map_init();
+    })
+    $("#originalMap").click(function(){
+    	level = 18;
+    	map_init();
+    })
+	$(".pb").click(function() {
+      	$.closePopup();
+        pbset.open();
+    });
 </script> 
 </html>

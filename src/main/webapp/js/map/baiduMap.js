@@ -1,44 +1,9 @@
 /**
  * 
- */
-  //初始化信息
-	var index = 0;
-	var allAddressVO = [];
-	//var myLocation = {"x":118.786078,"y":32.061531};
-	var myLocation = {};
-	var level = 18;
-	
-    var icon1 = new BMap.Icon("/Drift_wechat/images/map/blue.png", new BMap.Size(32,32));
-    var icon2 = new BMap.Icon("/Drift_wechat/images/map/red.png", new BMap.Size(32,32));  
-         
-    var myIcon = new BMap.Icon("/Drift_wechat/images/baiduMarkers.png",  
-         new BMap.Size(23, 25), {  
-             offset: new BMap.Size(10, 25),  
-             imageOffset: new BMap.Size(0, -250)      
-         });
-    
-    //动态效果      
-    var pbset;
-	$(".pb").click(function() {
-      	$.closePopup();
-        pbset.open();
-    });
-    $("#countryMap").click(function(){
-    	level = 4;
-    	map_init(myLocation);
-    })
-    $("#originalMap").click(function(){
-    	level = 18;
-    	map_init(myLocation);
-    })
-    
-    $("#yiqi").click(function() {
-        $('#myModal').modal();
-    });
-    
+ */ 
 	//初始化地图
-    function map_init(location) {
-    	    myLocation = location;
+    function map_init() {
+    	    //myLocation = location;
             map = new BMap.Map("map");  
             //第1步：设置地图中心点，当前城市  
             var point = new BMap.Point(myLocation.x,myLocation.y);
@@ -76,7 +41,8 @@
 		var ptUrls = [];
 		var comment;
 		var itemsArray = [];
-		var tempUrl = "/Drift_wechat/images/default.jpg";
+		var url = "/Drift_wechat/images/default.jpg";
+		var tempUrl = {"image":"/Drift_wechat/images/default.jpg"};
 		//var baseUrl = "/home/airstaff/Server/apache-tomcat-8.0.33/upload/comment/"+openid+"/";
 		var baseUrl = "/upload/comment/"+openid+"/";
 		//var baseUrl = "/Drift_wechat/upload/comment/"+openid+"/";	
@@ -93,7 +59,8 @@
 					ptUrls.push(temp);
 				}
 				while(ptUrls.length<3){
-					ptUrls.push(tempUrl);
+					ptUrls.push(url);
+					itemsArray.push(tempUrl);
 				}
 				$("#img1").attr('src',ptUrls[0]); 
 				$("#img2").attr('src',ptUrls[1]); 
@@ -101,9 +68,8 @@
 				$("#commentDiv").empty();
 				$("<p/>").appendTo("#commentDiv").html(comment);
 				
-				pbset = $.photoBrowser({
-			        items: itemsArray,
-			        initIndex: 0
+				pbset = $.photoBrowser({///upload/comment/oRTgpwQkDZKxGFvNnfKpJLWvxsyw/C8C08160-BB55-49F1-8588-1D27E184CDE5.jpeg;
+					  items: itemsArray
 			    });	    
 			    $("#comment").popup();
 			}				
