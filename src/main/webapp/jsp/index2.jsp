@@ -143,27 +143,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 </body>
 <script type="text/javascript">
-	wx.config({
-	       appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
-	       timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
-	       nonceStr: "<%=session.getAttribute("noncestr")%>", // 必填，生成签名的随机串
-	       signature: "<%=session.getAttribute("signature")%>",// 必填，签名，见附录1
-	       jsApiList: ['getLocation','hideAllNonBaseMenuItem'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-	});
-	wx.ready(function(){
-		wx.hideAllNonBaseMenuItem({
-		   success: function () {
-		   }
-		});
-	})
-	
-	wx.error(function(res){
-		
-		wx.hideAllNonBaseMenuItem({
-		   success: function () {
-		   }
-		});
-	});
  	var x=-1,y=-1;
 	function ShowModel(){
 		$('#myModal').modal();
@@ -184,6 +163,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}); */ 
 	
 	function weChatMap(){
+		wx.config({
+		       appId: 'wx80e3eed8e26e852f', // 必填，企业号的唯一标识，此处填写企业号corpid
+		       timestamp: parseInt("<%=session.getAttribute("timestamp")%>",10), // 必填，生成签名的时间戳
+		       nonceStr: "<%=session.getAttribute("noncestr")%>", // 必填，生成签名的随机串
+		       signature: "<%=session.getAttribute("signature")%>",// 必填，签名，见附录1
+		       jsApiList: ['getLocation','hideAllNonBaseMenuItem'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+		});
+/* 		wx.ready(function(){
+			wx.hideAllNonBaseMenuItem({
+			   success: function () {
+			   }
+			});
+		}) */
+		
+/* 		wx.error(function(res){
+			wx.hideAllNonBaseMenuItem({
+			   success: function () {
+			   }
+			});
+		}); */
 	    wx.ready(function(){
 	    	 wx.getLocation({
 			        success: function (res) {
@@ -194,7 +193,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        convertor.translate(pointArr, 1, 5, translateCallback);
 			        },
 			        fail: function(error) {
-			        	alert(error);
+			        	//alert(error);
 			        	alert("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
 			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
 			        }
@@ -202,6 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    });
 	 
 	    wx.error(function(res){
+	    	alert(res);
 	    });
 	    
 		//变换坐标函数
