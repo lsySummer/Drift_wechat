@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/Drift_wechat/css/demos.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/jquery-ui.min.css">
-	<script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
+	<!-- <script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script> -->
 	<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 	<script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
@@ -61,9 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var date2 = new Date(d);
 		date2.setDate(d.getDate() + 30);			
 		var endDateStr = date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate();
-		alert("准备去获取时间");
 		$.getJSON('/Drift_wechat/api/order/getDate',function(json){
-			alert("已经拿到时间返回数据");
            	var disabledDays = json.dates;
            	//disabledDays = ["2018-1-30"];
             $('#selectDate').datepicker({

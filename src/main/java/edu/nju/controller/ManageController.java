@@ -28,6 +28,7 @@ import edu.nju.entities.Device;
 import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
 import edu.nju.service.ManageService;
+import edu.nju.service.ReserveGetService;
 import edu.nju.service.ReserveService;
 import edu.nju.utils.PageUtil;
 
@@ -40,6 +41,8 @@ public class ManageController {
 	@Autowired
 	ReserveService reserveService;
 	
+	@Autowired
+	ReserveGetService reserveGetService;
 	@RequestMapping(value = "/addDevice")
 	public String toAddDevice(HttpSession session,Model model) {
 		String check = checkStatus(session);
@@ -50,6 +53,16 @@ public class ManageController {
 		return "jsp/Manage/AddDevice";
 	}
 	
+	@RequestMapping(value = "/toChangeArea")
+	public String toChangeArea(String did,HttpSession session,Model model) {
+		String check = checkStatus(session);
+		if(check != "true"){return check;}
+		List<String> provinces = new ArrayList<String>();
+		provinces = readFile();
+		model.addAttribute("provinces", provinces);
+		model.addAttribute("device",reserveGetService.getDeviceById(did));
+		return "jsp/Manage/ModifyDevice";
+	}
 	@RequestMapping(value = "/deviceList")
 	public String getIndex(String page,HttpSession session,Model model) {
 		String check = checkStatus(session);
@@ -64,6 +77,7 @@ public class ManageController {
 	@RequestMapping(value = "/changeType")
 	@ResponseBody
 	public String changeType(String did, String type,HttpSession session,Model model) {
+		System.out.println(Integer.valueOf(type));
 		if(manageService.changeDeviceType(did, Integer.valueOf(type))){
 			return "1";
 		}
@@ -193,6 +207,21 @@ public class ManageController {
 		device.setNumber(number);
 		device.setQueueNum(0);
 		device.setType(Integer.parseInt(type));
+		manageService.addDeviceList(device, areaList);
+		List<String> provinces = new ArrayList<String>();
+		provinces = readFile();
+		model.addAttribute("provinces", provinces);
+		return "success";
+	}
+	
+	@RequestMapping(value = "/modifyDeviceAction")
+	@ResponseBody
+	public String addDevice( @RequestParam("areas") String[] areas,String did,String type,Model model) {
+		List<String> areaList = new ArrayList<String>();		
+		for(int i=0;i<areas.length;i++){
+			areaList.add(areas[i]);
+		}
+		Device device = reserveGetService.getDeviceById(did);
 		manageService.addDeviceList(device, areaList);
 		List<String> provinces = new ArrayList<String>();
 		provinces = readFile();

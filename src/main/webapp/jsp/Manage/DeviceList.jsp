@@ -48,7 +48,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <th>排队人数</th>
 			      <th>流转区域</th>
 			      <th>类型</th>
-			      <th>更改类型</th>
+			      <th>修改类型</th>
+			      <th>修改流转区域</th>
 			      <th>删除</th>
 			    </tr>
 			  </thead>
@@ -69,7 +70,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</c:if>
 						</td>
 						<td>
-							<button type="button" class="btn btn-primary  btn-sm" onclick="changeType('${device.id}','${device.type}');">更改</button>
+							<button type="button" class="btn btn-primary  btn-sm" onclick="changeType('${device.id}','${device.type}');">修改</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-primary  btn-sm" onclick="toChangeArea('${device.id}');">修改</button>
 						</td>
 						<td>
 							<button type="button" class="btn btn-danger  btn-sm" onclick="confrimDelete('${device.id}','${device.loc}');">删除</button>
@@ -113,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      </div>  
 	    </div><!-- /.modal-content -->  
 	  </div><!-- /.modal-dialog -->  
-	</div><!-- /.modal -->  
+	</div><!-- /.modal --> 
 	<script>
 		$(function(){
 			$('#naviUL li').click(function(){
@@ -121,13 +125,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$(this).attr("class","active")
 			});
 		});
+		function toChangeArea(did){
+			window.location.href='/Drift_wechat/api/manage/toChangeArea?did='+did;
+		}
    		/*更改设备类型*/
    		function changeType(did,type){
    			var toType;
-   			if(type="2"){
+   			if(type =="2"){
    				toType = "0";
    			}
-   			else if(type="0"){
+   			if(type =="0"){
    				toType = "2";
    			}
    			if(did!='undefined'&&type!='undefined'){
@@ -153,7 +160,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$("#warnAlert").show();
    			}
    		}
-   		
    		/*刷新本页面  */
    		function refeshCurrentPage(){
  				setTimeout(function() {
