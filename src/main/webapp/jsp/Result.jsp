@@ -42,7 +42,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		  </div>
 		</div>
-    	<a href="/Drift_wechat/api/user/getState" class="weui-btn weui-btn_default" style="bottom:6%;position:fixed;width:100%;">返回</a>
+		<br/>
+    	<a href="/Drift_wechat/api/user/getState" class="weui-btn weui-btn_default" style="width:90%;">返回</a>
     </div>
     </div>
     <div id="image" class="weui-popup__container popup-bottom">
@@ -52,14 +53,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  			</div>
 		</div>
 	</div>
-        <div class="weui-footer weui-footer_fixed-bottom">
-                <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
-        </div>
+
 	<script>
 		$.getJSON('/Drift_wechat/api/order/get',function(json){
 			var data = json.data;
 			document.getElementById('orderId').innerHTML=data[data.length-1].id.slice(-12);
-			document.getElementById('startDate').innerHTML=data[data.length-1].startDate;
+			document.getElementById('startDate').innerHTML=data[data.length-1].startDate.slice(10);
 		});
 	</script>
   </body>

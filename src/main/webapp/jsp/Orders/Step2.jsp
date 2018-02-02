@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
   <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
   <link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
-  <script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
+  
   <script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
   <script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      <span class="weui-form-preview__value" id="deviceId1">可能有变动哦</span>
 		    </div>
 		  </div>
-		  <div class="weui-form-preview__ft" style="bottom:10%;position:fixed;width:100%;">
+		  <div class="weui-form-preview__ft" style="margin-bottom:70px;margin-top:10px;width:100%;">
 		  	<a id="d1" class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:query(1);">快递查询</a>
     		<button id="confirm" class="weui-form-preview__btn weui-form-preview__btn_primary" value="true" onclick="javascript:confirm();">确认收货</button>
   		  </div>
