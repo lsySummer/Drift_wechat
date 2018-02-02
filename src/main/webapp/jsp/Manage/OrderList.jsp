@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>   
   </head>
     <body>
-    <c:import url="manageNavi.jsp"/>
+    <c:import url="ManageNavi.jsp"/>
      <!--主要区域开始-->
      <div class="row">
      	<div class="col-sm-1"></div> 

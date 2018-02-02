@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<c:import url="manageNavi.jsp"/>
+  	<c:import url="ManageNavi.jsp"/>
     <div class="weui-cells__title">标题</div>
 	<div class="weui-cells">
 	  <div class="weui-cell">

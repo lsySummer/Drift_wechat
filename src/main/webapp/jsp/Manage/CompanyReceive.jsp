@@ -26,11 +26,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>   
   </head>
     <body>
-    <c:import url="manageNavi.jsp"/>
+    <c:import url="ManageNavi.jsp"/>
      <!--主要区域开始-->
      <div id="myAlert" class="alert alert-success" style="display:none;text-align:center">
 				<a href="#" class="close" data-dismiss="alert">&times;</a>
-				<strong>发货成功！</strong>
+				<strong>收货成功！</strong>
 	</div>
      <div class="row">
      	<div class="col-sm-2"></div> 
@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <th>电话</th>
 			      <th>地址</th>
 			      <th>订单状态</th>
-			      <th>填写快递</th>
+			      <th>确认收货</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -60,52 +60,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td >${order.phone} </td>
 						<td >${order.address} </td>
 						<td >${order.state}</td>
-						<td ><button type="button" id="${order.id}" onclick="javascript:modify(this);">发货</button></td>
+						<td ><button type="button" id="${order.id}" onclick="javascript:confirm(this);">确认收货</button></td>
 					</tr>
 				</c:forEach> 
 			  </tbody>
 			</table>
 		</div> 
 	</div>
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">公司发货</h4>
-            </div>
-            <div class="modal-body" id="modal-body">
-             <div class="form-group">
-			    <label  class="col-sm-2 control-label">快递号:</label>
-			    <div class="col-sm-8">
-			      <input  class="form-control" id="number" name="number" placeholder="请输入快递号">
-			    </div>
-			  </div>
-			</br>
-			</br>
-			<div align="center"><button class="btn btn-success" type="button" id="modify" onclick="javascript:confirm();">确认提交</button></div>
-            </br>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
 		<script>
-		var orderId;
 		$(function(){
 			$('#naviUL li').click(function(){
 				$(".active").attr("class",null);
 				$(this).attr("class","active")
 			});
 		});
-		function modify(obj){
+		function confirm(obj){
 			orderId = obj.id;
-			$('#myModal').modal('show');
-		}
-		function confirm(){
-			var deliveryNum = document.getElementById("number").value;
-			$.getJSON('/Drift_wechat/api/manage/deliveryNum?orderId='+orderId+"&deliveryNum="+deliveryNum,function(json){
-				$('#myModal').modal('hide');
+			$.getJSON('/Drift_wechat/api/manage/receiveConfirm?orderId='+orderId, function(json){
 				$("#myAlert").show();
-				window.location.href='/Drift_wechat/api/manage/companySend';
+				window.location.href='/Drift_wechat/api/manage/companyReceive';
 			});
 		}
 		</script>  

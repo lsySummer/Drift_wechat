@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="/Drift_wechat/js/bootstrap.min.js"></script>  
   </head>
  <body>
-    <c:import url="manageNavi.jsp"/>
+    <c:import url="ManageNavi.jsp"/>
     
     <!--操作提示框-->
    	<div id="successAlert" class="alert alert-success" style="display:none;text-align:center">

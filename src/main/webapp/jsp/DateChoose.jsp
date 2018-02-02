@@ -61,8 +61,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var date2 = new Date(d);
 		date2.setDate(d.getDate() + 30);			
 		var endDateStr = date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate();
-		
+		alert("准备去获取时间");
 		$.getJSON('/Drift_wechat/api/order/getDate',function(json){
+			alert("已经拿到时间返回数据");
            	var disabledDays = json.dates;
            	//disabledDays = ["2018-1-30"];
             $('#selectDate').datepicker({
