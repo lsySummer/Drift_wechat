@@ -284,4 +284,11 @@ public class ManageDaoImpl implements ManageDao{
 		return true;
 	}
 
+	@Override
+	public Long getOrdernum() {
+		String hql = "select count(*) from Order";
+		Long num = (Long) baseDao.getNewSession().createQuery(hql).getSingleResult();
+		return num;
+	}
+
 }

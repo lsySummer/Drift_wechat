@@ -49,4 +49,6 @@ public interface ManageDao {
 	boolean changeDeviceType(String deviceId, int type);
 
 	boolean deleteDevice(String deviceId);
+
+	Long getOrdernum();
 }

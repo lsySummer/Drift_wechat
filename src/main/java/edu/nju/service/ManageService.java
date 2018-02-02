@@ -184,6 +184,11 @@ public class ManageService {
 		return num;
 	}
 	
+	public Long getOrdernum() {
+		Long num = manageDao.getOrdernum();
+		return num;
+	}
+	
 	/**
 	 * @return
 	 * 获得所有设备流转路线
