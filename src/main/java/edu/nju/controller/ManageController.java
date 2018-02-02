@@ -51,10 +51,10 @@ public class ManageController {
 	}
 	
 	@RequestMapping(value = "/deviceList")
-	public String getIndex(Integer page,HttpSession session,Model model) {
+	public String getIndex(String page,HttpSession session,Model model) {
 		String check = checkStatus(session);
 		if(check != "true"){return check;}
-		PageUtil pageUtil = new PageUtil(page,manageService.getDevicenum());
+		PageUtil pageUtil = new PageUtil(Integer.valueOf(page),manageService.getDevicenum());
 		List<DeviceVO> deviceList = manageService.getDevices(pageUtil.getStart(),pageUtil.getPageSize());
 		model.addAttribute("deviceList", deviceList);
 		model.addAttribute("page", pageUtil);
@@ -83,21 +83,14 @@ public class ManageController {
 		}
 	}
 	
-/*	@RequestMapping(value = "/deviceList")
-	public String getDeviceList(HttpSession session,Model model) {
-		String check = checkStatus(session);
-		if(check != "true"){return check;}
-		List<DeviceVO> deviceList = manageService.getDevices(0,10);
-		model.addAttribute("deviceList", deviceList);
-		return "jsp/Manage/DeviceList";
-	}*/
-	
 	@RequestMapping(value = "/orderList")
-	public String getOrderList(HttpSession session,Model model) {
+	public String getOrderList(String page,HttpSession session,Model model) {
 		String check = checkStatus(session);
 		if(check != "true"){return check;}
-		List<OrderVO> orderList = manageService.getOrders(0,10);
+		PageUtil pageUtil = new PageUtil(Integer.valueOf(page),manageService.getOrdernum());
+		List<OrderVO> orderList = manageService.getOrders(pageUtil.getStart(),pageUtil.getPageSize());
 		model.addAttribute("orderList", orderList);
+		model.addAttribute("page", pageUtil);
 		return "jsp/Manage/OrderList";
 	}
 	

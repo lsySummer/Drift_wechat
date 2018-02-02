@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	订单管理<b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="/Drift_wechat/api/manage/orderList">查看订单</a></li>
+                    <li><a href="/Drift_wechat/api/manage/orderList?page=1">查看订单</a></li>
                     <li class="divider"></li>
                     <li><a href="/Drift_wechat/api/manage/companySend">公司发货</a></li>
                     <li class="divider"></li>

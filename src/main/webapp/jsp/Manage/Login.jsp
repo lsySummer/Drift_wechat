@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				document.getElementById('result').style.visibility = 'visible';
 				if(json.status == '200'){
 					document.getElementById('result').innerHTML = '<div class="alert alert-success" role="alert">登录成功</div>';
-					setTimeout("window.location.href='/Drift_wechat/api/manage/orderList'", 1000);
+					setTimeout("window.location.href='/Drift_wechat/api/manage/orderList?page=1'", 1000);
 				}else{
 					document.getElementById('result').innerHTML = '<div class="alert alert-danger" role="alert" id="alert">用户名或密码错误</div>';
 					setTimeout("document.getElementById('result').style.visibility = 'hidden'", 1000);

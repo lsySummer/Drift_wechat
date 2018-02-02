@@ -44,7 +44,7 @@
 			    <div class="col-sm-8">
 				    <select class="form-control" id="type" name="type">
 				      <option value=0>流动设备</option>
-				      <option value=1>备用设备</option>
+				      <option value=2>备用设备</option>
 				    </select>
 			    </div>
 			  </div>
