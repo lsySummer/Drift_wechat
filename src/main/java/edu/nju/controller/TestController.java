@@ -33,7 +33,10 @@ public class TestController {
 	
 	@RequestMapping(value = "/insert")
 	public String register() {
-		mservice.deleteDevice("4028e3e86154866b0161548682b30000");
+		List<String> list = gservice.getUnavailableDates("oRTgpweSZbOxfrg9H57JwuPwMJLo",0);
+		for(String str:list) {
+			System.out.println(str);
+		}
 		return "jsp/NewFile";
 	}
 }

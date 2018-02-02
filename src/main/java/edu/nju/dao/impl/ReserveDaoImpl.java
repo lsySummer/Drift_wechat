@@ -68,20 +68,26 @@ public class ReserveDaoImpl implements ReserveDao{
 	@SuppressWarnings("unchecked")
 	public List<Device> reserveDevice(String openid,int type) {
 		UserInfo userInfo = userDao.getUser(openid);
-		String[] arr =userInfo.getAddress().split(" ");
-		String hql = "from DeviceArea where area=:area and type=:type";
-		List<DeviceArea> list = baseDao.getNewSession().createQuery(hql)
-				.setParameter("area", arr[0]).setParameter("type", type).getResultList();
-		List<Device> dlist = new ArrayList<Device>();
-		for(int i=0;i<list.size();i++){
-			DeviceArea da = list.get(i);
-			String did = da.getDeviceId();
-			List<Device> tempList = rgetDao.getDeviceById(did);
-			if(tempList.size()>0){
-				dlist.add(tempList.get(0));
+		if(userInfo!=null) {
+			String[] arr =userInfo.getAddress().split(" ");
+			String hql = "from DeviceArea where area=:area";
+			List<DeviceArea> list = baseDao.getNewSession().createQuery(hql)
+					.setParameter("area", arr[0]).getResultList();
+			List<Device> dlist = new ArrayList<Device>();
+			for(int i=0;i<list.size();i++){
+				DeviceArea da = list.get(i);
+				String did = da.getDeviceId();
+				List<Device> tempList = rgetDao.getDeviceById(did);
+				if(tempList.size()>0){
+					Device d = tempList.get(0);
+					if(d.getType()==type) {
+						dlist.add(tempList.get(0));
+					}
+				}
 			}
+			return dlist;
 		}
-		return dlist;
+		return null;
 	}
 
 	@Override

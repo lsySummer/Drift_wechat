@@ -154,6 +154,7 @@ public class ReserveService {
 		Order o = gdao.getOrderByorderId(orderid);
 		Device d = gdao.getDeviceById(o.getDeviceId()).get(0);
 		d.setQueueNum(d.getQueueNum()-1);
+		d.setLoc("company");
 		baseDao.update(d);
 		o.setState("下家已收货");
 		try{
