@@ -22,9 +22,9 @@ public interface ManageDao {
 
 	boolean confirm(String deviceId);
 
-	boolean setArea(String deviceId, String area,int type);
+	boolean setArea(String deviceId, String area);
 
-	void updateArea(String id, List<String> area, int type);
+	void updateArea(String id, List<String> area);
 
 	List<RouteVO> getRoute(String deviceid);
 	
@@ -45,4 +45,8 @@ public interface ManageDao {
 	boolean deleteQuestion(String qid);
 
 	boolean deleteAnswer(String aid);
+
+	boolean changeDeviceType(String deviceId, int type);
+
+	boolean deleteDevice(String deviceId);
 }

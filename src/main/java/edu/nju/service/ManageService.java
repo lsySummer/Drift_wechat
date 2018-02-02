@@ -131,18 +131,26 @@ public class ManageService {
 		return o;
 	}
 	
-	public Device addDeviceList(Device d,List<String> list,int type){
+	public Device addDeviceList(Device d,List<String> list){
 		Device device = gservice.getDeviceById(d.getId());
 		if(device==null){
 			device = manageDao.addDevice(d);
 			for(int i=0;i<list.size();i++){
-				manageDao.setArea(device.getId(), list.get(i), type);
+				manageDao.setArea(device.getId(), list.get(i));
 			}
 			return device;
 		}else{
-			manageDao.updateArea(d.getId(),list,type);
+			manageDao.updateArea(d.getId(),list);
 			return d;
 		}
+	}
+	
+	public boolean changeDeviceType(String deviceId,int type) {
+		return manageDao.changeDeviceType(deviceId,type);
+	}
+	
+	public boolean deleteDevice(String deviceId) {
+		return manageDao.deleteDevice(deviceId);
 	}
 	
 	public List<OrderVO> getOrders(int start,int num){
@@ -155,8 +163,8 @@ public class ManageService {
 		return manageDao.confirm(deviceId);
 	}
 
-	public boolean setArea(String deviceId,String area,int type){
-		return manageDao.setArea(deviceId,area,type);
+	public boolean setArea(String deviceId,String area){
+		return manageDao.setArea(deviceId,area);
 	}
 	
 	/**

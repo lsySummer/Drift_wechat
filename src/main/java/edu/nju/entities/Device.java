@@ -16,6 +16,7 @@ public class Device {
 	private String loc;//目前所在位置
 //	private String deliveryId;//目前快递单号
 	private int queueNum;//当前排队人数
+	private int type;// 0代表普通，1代表购买过商品的优先用户，2预留
 	
 	@Id
 	@Column(length = 32)
@@ -45,12 +46,10 @@ public class Device {
 	public void setLoc(String loc) {
 		this.loc = loc;
 	}
-//	public String getDeliveryId() {
-//		return deliveryId;
-//	}
-//	public void setDeliveryId(String deliveryId) {
-//		this.deliveryId = deliveryId;
-//	}
-	
-	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}	
 }

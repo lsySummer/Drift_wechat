@@ -54,7 +54,7 @@ public class ManageDaoImpl implements ManageDao{
 				areaList.add(dlist.get(j).getArea());
 			}
 			DeviceVO vo = new DeviceVO(d.getId(),d.getNumber(),d.getLoc(),d.getQueueNum(),
-				areaList,dlist.get(0).getType());
+				areaList,d.getType());
 			volist.add(vo);
 		}
 		return volist;
@@ -114,11 +114,10 @@ public class ManageDaoImpl implements ManageDao{
 	}
 
 	@Override
-	public boolean setArea(String deviceId, String area,int type) {
+	public boolean setArea(String deviceId, String area) {
 		DeviceArea da = new DeviceArea();
 		da.setArea(area);
 		da.setDeviceId(deviceId);
-		da.setType(type);
 		try{
 			baseDao.save(da);
 			return true;
@@ -130,7 +129,7 @@ public class ManageDaoImpl implements ManageDao{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void updateArea(String id, List<String> area, int type) {
+	public void updateArea(String id, List<String> area) {
 		String hql = "from DeviceArea where deviceId=:did";
 		List<DeviceArea> list = baseDao.getNewSession().createQuery(hql).setParameter("did", id).getResultList();
 		if(list.size()>0){
@@ -140,7 +139,6 @@ public class ManageDaoImpl implements ManageDao{
 				DeviceArea da = new DeviceArea();
 				da.setArea(area.get(i));
 				da.setDeviceId(id);
-				da.setType(type);
 				baseDao.save(da);
 			}
 			
@@ -261,6 +259,29 @@ public class ManageDaoImpl implements ManageDao{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean changeDeviceType(String deviceId, int type) {
+		String hql = "from Device where id=:deviceId";
+		Device d = (Device) baseDao.getNewSession().createQuery(hql).setParameter("deviceId", deviceId).getSingleResult();
+		d.setType(type);
+		baseDao.update(d);
+		return true;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean deleteDevice(String deviceId) {
+		String hql = "from Device where id=:deviceId";
+		Device d = (Device) baseDao.getNewSession().createQuery(hql).setParameter("deviceId", deviceId).getSingleResult();
+		baseDao.delete(d);
+		String hql2 = "from DeviceArea where deviceId = :deviceId";
+		List<DeviceArea> list = baseDao.getNewSession().createQuery(hql2).setParameter("deviceId", deviceId).getResultList();
+		for(DeviceArea da:list) {
+			baseDao.delete(da);
+		}
+		return true;
 	}
 
 }

@@ -14,7 +14,7 @@ public class DeviceArea {
 	private String id;
 	private String deviceId;
 	private String area;
-	private int type;// 0代表普通，1代表购买过商品的优先用户，2预留
+	
 	@Id
 	@Column(length = 32)
 	@GeneratedValue(generator = "system-uuid")
@@ -36,12 +36,6 @@ public class DeviceArea {
 	}
 	public void setArea(String area) {
 		this.area = area;
-	}
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
 	}
 	
 }
