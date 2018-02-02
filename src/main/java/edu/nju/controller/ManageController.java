@@ -77,7 +77,6 @@ public class ManageController {
 	@RequestMapping(value = "/changeType")
 	@ResponseBody
 	public String changeType(String did, String type,HttpSession session,Model model) {
-		System.out.println(Integer.valueOf(type));
 		if(manageService.changeDeviceType(did, Integer.valueOf(type))){
 			return "1";
 		}
