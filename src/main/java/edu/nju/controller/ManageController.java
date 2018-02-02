@@ -174,7 +174,8 @@ public class ManageController {
 		device.setLoc("company");
 		device.setNumber(number);
 		device.setQueueNum(0);
-		manageService.addDeviceList(device, areaList, Integer.parseInt(type));
+		device.setType(Integer.parseInt(type));
+		manageService.addDeviceList(device, areaList);
 		List<String> provinces = new ArrayList<String>();
 		provinces = readFile();
 		model.addAttribute("provinces", provinces);
