@@ -29,6 +29,7 @@ import edu.nju.model.DeviceVO;
 import edu.nju.model.OrderVO;
 import edu.nju.service.ManageService;
 import edu.nju.service.ReserveService;
+import edu.nju.utils.PageUtil;
 
 @Controller
 @RequestMapping(value="/manage")
@@ -46,33 +47,50 @@ public class ManageController {
 		List<String> provinces = new ArrayList<String>();
 		provinces = readFile();
 		model.addAttribute("provinces", provinces);
-		return "jsp/Manage/addDevice";
-	}
-	
-	@RequestMapping(value = "/index")
-	public String getIndex(HttpSession session,Model model) {
-		String check = checkStatus(session);
-		if(check != "true"){return check;}
-		List<DeviceVO> deviceList = manageService.getDevices(0,10);
-		model.addAttribute("deviceList", deviceList);
-		return "jsp/Manage/DeviceList";
+		return "jsp/Manage/AddDevice";
 	}
 	
 	@RequestMapping(value = "/deviceList")
-	public String getDeviceList(HttpSession session,Model model) {
+	public String getIndex(String page,HttpSession session,Model model) {
 		String check = checkStatus(session);
 		if(check != "true"){return check;}
-		List<DeviceVO> deviceList = manageService.getDevices(0,10);
+		PageUtil pageUtil = new PageUtil(Integer.valueOf(page),manageService.getDevicenum());
+		List<DeviceVO> deviceList = manageService.getDevices(pageUtil.getStart(),pageUtil.getPageSize());
 		model.addAttribute("deviceList", deviceList);
+		model.addAttribute("page", pageUtil);
 		return "jsp/Manage/DeviceList";
 	}
 	
+	@RequestMapping(value = "/changeType")
+	@ResponseBody
+	public String changeType(String did, String type,HttpSession session,Model model) {
+		if(manageService.changeDeviceType(did, Integer.valueOf(type))){
+			return "1";
+		}
+		else{
+			return "0";
+		}
+	}
+	
+	@RequestMapping(value = "/deleteDevice")
+	@ResponseBody
+	public String deleteDevice(String did,HttpSession session,Model model) {
+		if(manageService.deleteDevice(did)){
+			return "1";
+		}
+		else{
+			return "0";
+		}
+	}
+	
 	@RequestMapping(value = "/orderList")
-	public String getOrderList(HttpSession session,Model model) {
+	public String getOrderList(String page,HttpSession session,Model model) {
 		String check = checkStatus(session);
 		if(check != "true"){return check;}
-		List<OrderVO> orderList = manageService.getOrders(0,10);
+		PageUtil pageUtil = new PageUtil(Integer.valueOf(page),manageService.getOrdernum());
+		List<OrderVO> orderList = manageService.getOrders(pageUtil.getStart(),pageUtil.getPageSize());
 		model.addAttribute("orderList", orderList);
+		model.addAttribute("page", pageUtil);
 		return "jsp/Manage/OrderList";
 	}
 	
@@ -82,7 +100,7 @@ public class ManageController {
 		if(check != "true"){return check;}
 		List<OrderVO> orderList = reserveService.getCompanySend();
 		model.addAttribute("orderList", orderList);
-		return "jsp/Manage/companySend";
+		return "jsp/Manage/CompanySend";
 	}
 	
 	@RequestMapping(value = "/deliveryNum")
@@ -105,7 +123,7 @@ public class ManageController {
 		if(check != "true"){return check;}
 		List<OrderVO> orderList = reserveService.getCompanyReceive();
 		model.addAttribute("orderList", orderList);
-		return "jsp/Manage/companyReceive";
+		return "jsp/Manage/CompanyReceive";
 	}
 	
 	@RequestMapping(value = "/receiveConfirm")

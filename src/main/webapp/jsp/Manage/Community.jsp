@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<c:import url="manageNavi.jsp"/>
+  	<c:import url="ManageNavi.jsp"/>
     This is my JSP page. <br>
   </body>
 </html>

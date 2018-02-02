@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>   
   </head>
     <body>
-    <c:import url="manageNavi.jsp"/>
+    <c:import url="ManageNavi.jsp"/>
      <!--主要区域开始-->
      <div class="row">
      	<div class="col-sm-1"></div> 
@@ -79,6 +79,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</table>
 		</div> 
 	</div>
+	<!--分页-->
+	<div class="row">
+     	<div class="col-sm-2"></div>
+        <div id="pages"  class="col-sm-8" align="center">
+        	<c:if test="${page.counts!=null && page.totalPage>1}">
+				<a href="/Drift_wechat/api/manage/orderList?page=1">首页</a>
+				<a href="/Drift_wechat/api/manage/orderList?page=${page.previous}">上一页</a>
+				<span class="current_page">${page.currentPage}</span>/<span id="totalPage" class="current_page">${page.totalPage}</span>
+				<a href="/Drift_wechat/api/manage/orderList?page=${page.next}">下一页</a>
+				<a href="/Drift_wechat/api/manage/orderList?page=${page.totalPage}">末页</a>
+				<input type="text" id="skip" name="page" class="width50">
+				<input type="button" id="goBtn" class="btn btn-primary  btn-sm" value="GO">
+			</c:if>
+        </div>
+    </div>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

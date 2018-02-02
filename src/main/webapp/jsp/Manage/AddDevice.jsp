@@ -15,7 +15,7 @@
 	<title>AddDevice</title>
 </head>
 <body>
-	<c:import url="manageNavi.jsp"/>
+	<c:import url="ManageNavi.jsp"/>
 	<!--主要区域开始-->
 	<div style="height:30px"></div>
 	<div id="main">
@@ -43,8 +43,8 @@
 			    <label for="name" class="col-sm-2 control-label">设备类型:</label>
 			    <div class="col-sm-8">
 				    <select class="form-control" id="type" name="type">
-				      <option value=1>流动设备</option>
-				      <option value=0>备用设备</option>
+				      <option value=0>流动设备</option>
+				      <option value=2>备用设备</option>
 				    </select>
 			    </div>
 			  </div>
@@ -99,6 +99,9 @@
 						data:"number="+number+"&areas="+areas+"&type="+type,
 						success:function(data){
 							$("#myAlert").show();
+			   				setTimeout(function() {
+			   					window.location.href="/Drift_wechat/api/manage/deviceList?page=1";
+			   				},1000)	;
 						}
 					});
 	  			}
