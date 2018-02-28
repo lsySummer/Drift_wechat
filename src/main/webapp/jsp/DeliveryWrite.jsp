@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/demos.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.min.css">
-	<script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
+	
 	<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
 	<script type="text/javascript" src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="/Drift_wechat/js/jquery-weui.min.js"></script>
@@ -53,9 +53,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            </div> -->
 		        </div>
 		    </div>
-		    <div class="weui-btn-area">
-	            <button class="weui-btn weui-btn_primary" type="submit" id="submit">确认发货</button>
-	        </div>
+	        <div id="botton" class="weui-flex" style="padding-top:10%;width:100%;">
+			  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
+			   <button class="weui-btn weui-btn_warn" id="cancel">无需快递</button>
+			  </div>
+			  <div class="weui-flex__item placeholder" style="padding-left:10px;padding-right:20px">
+			   <button class="weui-btn weui-btn_primary" type="submit" id="submit">确认发货</button>
+			  </div>
+			</div>
     	</form>
 	</div>
     <div class="weui-msg__extra-area">
@@ -73,5 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				return false;
 			}
 		})
+		$("#cancel").click(function(){
+			window.location.href='/Drift_wechat/api/delivery/set?deliveryNum=100';
+		});
   </script>
 </html>
