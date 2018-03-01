@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
         <div class="weui-msg__text-area">
             <h2 class="weui-msg__title">操作成功</h2>
-            <p class="weui-msg__desc">请加客服微信，方便客服与您联系</p>
+            <p class="weui-msg__desc" style="font-weight:bold;">请务必加客服微信，方便客服与您联系</p>
         </div>
     		<img src="/Drift_wechat/images/QR_code.jpg" height="200px" width="200px"/>
     		</br>

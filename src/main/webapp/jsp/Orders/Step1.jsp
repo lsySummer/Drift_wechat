@@ -23,11 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--TOP -->
 	<%@include file="TopBar.html"%>
   	<!--文案 -->
-	<div style="height:100%;width:100%;margin-top:4%;">
-		<img width=100% src="/Drift_wechat/images/sky.jpg" title="甲醛漂流仪"/>
+	<div style="height:100%;width:100%;">
+		<img width=100% src="/Drift_wechat/images/detail.jpg" title="甲醛漂流仪"/>
 	</div>
 	<!--按钮组 -->
-	<div id="botton" class="weui-flex" style="bottom:10%;position:fixed;width:100%;">
+	<div id="botton" class="weui-flex" style="padding-bottom:20%;width:100%;">
 	  <div class="weui-flex__item placeholder" style="padding-left:20px;padding-right:10px">
 	   <button type="submit" id="auth" name="auth" class="weui-btn weui-btn_primary" onclick="javascrtpt:window.location.href='/Drift_wechat/api/order/set';">我要预约</button>
 	  </div>

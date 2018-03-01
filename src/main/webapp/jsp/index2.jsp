@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/demos.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
-	<!-- <script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script> -->
+	
 	<script src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 	<script src="/Drift_wechat/js/jquery-weui.js"></script>
 	<script src="/Drift_wechat/js/bootstrap.min.js"></script>
@@ -96,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</h4>
 				</div>
 				<div class="modal-body" align="center">
-					 <img  width=80% height=70%  src="/Drift_wechat/images/info.jpg">
+					 <img  width=100% height=100%  src="/Drift_wechat/images/detail.jpg">
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
