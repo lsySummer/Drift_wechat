@@ -150,12 +150,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	function toMap(){
 		$("#loadmore").show();
-<%-- 		if(<%=session.getAttribute("locationX")%>!=null){
+		if(<%=session.getAttribute("locationX")%>!=null){
 			window.location.href="/Drift_wechat/api/map/map?x=1&y=1";
 		}
-		else{ --%>
+		else{
 			weChatMap();
-		//}
+		}
 	}
 		//页面加载完成启动
  	/* $("document").ready(function(){
