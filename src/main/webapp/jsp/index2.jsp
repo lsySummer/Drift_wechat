@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/demos.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
-	
+	<script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
 	<script src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 	<script src="/Drift_wechat/js/jquery-weui.js"></script>
 	<script src="/Drift_wechat/js/bootstrap.min.js"></script>
@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<br/>
 			<br/>
 			<br/>
-			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计漂流${allnum}次</br>今日漂流${todaynum}次</span></marquee>
+			<marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">甲醛仪累计流转${allnum}次</br>今日流转${todaynum}次</span></marquee>
 			<br/>
 			<%-- <marquee><span style="font-weight: bolder;font-size: 40px;color:#FFFFFF;">今日漂流${todaynum}次</span></marquee> --%>
 		</div>
@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						&times;
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						甲醛检测仪
+						免费使用甲醛检测仪
 					</h4>
 				</div>
 				<div class="modal-body" align="center">
@@ -201,7 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    });
 	 
 	    wx.error(function(res){
-	    	alert(res);
+	    	//alert(res);
 	    });
 	    
 		//变换坐标函数
