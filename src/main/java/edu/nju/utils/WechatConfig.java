@@ -24,10 +24,10 @@ public class WechatConfig {
 	
 	//自定义的token
 	
-	public static String appId = "wx80e3eed8e26e852f";
+	public static String appId = "wxfdc776bec7d08f72";
 	//public static String mchId = "1380202002";    //商户号，微信商户平台里面获取
 	//public static String secret = "da188683eaeacf8cde241aee8df3cb30";
-	public static String secret = "d4fcc6adb4ce3be7c9b299091b8a6870";
+	public static String secret = "dd12ca6dc62c94419a405af0ab0021c9";
 	
 	
 	//微信推送的ma

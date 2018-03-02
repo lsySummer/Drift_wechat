@@ -33,10 +33,11 @@ public class TestController {
 	
 	@RequestMapping(value = "/insert")
 	public String register() {
-		List<String> list = gservice.getUnavailableDates("oRTgpweSZbOxfrg9H57JwuPwMJLo",0);
-		for(String str:list) {
-			System.out.println(str);
-		}
+		Device d = gservice.getDeviceById("4028e3f06155798e0161557ab40d0000");
+		List<String> list = new ArrayList<String>();
+		list.add("北京");
+		list.add("天津");
+		mservice.addDeviceList(d, list);
 		return "jsp/NewFile";
 	}
 }
