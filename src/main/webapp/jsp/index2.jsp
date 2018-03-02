@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						&times;
 					</button>
 					<h4 class="modal-title" id="myModalLabel">
-						甲醛检测仪
+						免费使用甲醛检测仪
 					</h4>
 				</div>
 				<div class="modal-body" align="center">

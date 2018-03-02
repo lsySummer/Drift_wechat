@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">  
     <link rel="stylesheet" href="/Drift_wechat/css/weui.min.css">
 	<script type="text/javascript" src="/Drift_wechat/js/weui.min.js"></script>
-    <title>申请结果</title>
+    <title>联系客服</title>
   </head>
   
   <body>
@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="weui-msg">
         <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
         <div class="weui-msg__text-area">
-            <h2 class="weui-msg__title">客服微信</h2>
+            <h2 class="weui-msg__title">甲醛仪流转客服</h2>
             <img src="/Drift_wechat/images/QR_code.jpg" height="200px" width="200px"/>
             <p class="weui-msg__desc">长按识别图中二维码，联系客服。</p>
         </div>
