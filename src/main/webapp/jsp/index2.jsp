@@ -194,6 +194,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        },
 			        fail: function(error) {
 			        	//alert(error);
+			        //	alert(location.href.split('#')[0]);
+			        	//alert(error.errMsg);
 			        	alert("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
 			            AlertUtil.error("获取地理位置失败，请确保开启GPS且允许微信获取您的地理位置！");
 			        }

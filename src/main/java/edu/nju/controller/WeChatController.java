@@ -135,7 +135,7 @@ public class WeChatController {
 				session.setAttribute("openid", openid);
 				session.setAttribute("nickname", nickname);
 				session.setAttribute("headimgurl", headimgurl);
-				String url="http://drift.gmair.net/Drift_wechat/api/wechat/center?code="+code+"&state="+state;
+				String url="http://drift.gmair.net/Drift_wechat/api/wechat/center/?code="+code+"&state="+state;
 				getAddress(session,url,accessToken);
 				return "jsp/index2";
 			} else {
