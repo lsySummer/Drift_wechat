@@ -132,16 +132,15 @@ public class ManageDaoImpl implements ManageDao{
 	public void updateArea(String id, List<String> area) {
 		String hql = "from DeviceArea where deviceId=:did";
 		List<DeviceArea> list = baseDao.getNewSession().createQuery(hql).setParameter("did", id).getResultList();
-		if(list.size()>0){
-			for(int i =0;i<list.size();i++){
-				DeviceArea d = list.get(i);
-				baseDao.delete(d);
-				DeviceArea da = new DeviceArea();
-				da.setArea(area.get(i));
-				da.setDeviceId(id);
-				baseDao.save(da);
-			}
-			
+		for(int i=0;i<list.size();i++){
+			DeviceArea d = list.get(i);
+			baseDao.delete(d);
+		}
+		for(int i =0;i<area.size();i++){
+			DeviceArea da = new DeviceArea();
+			da.setArea(area.get(i));
+			da.setDeviceId(id);
+			baseDao.save(da);
 		}
 	}
 
