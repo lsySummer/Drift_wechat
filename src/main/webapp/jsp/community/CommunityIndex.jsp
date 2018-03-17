@@ -14,7 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="/Drift_wechat/css/jquery-weui.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/demos.css">
 	<link rel="stylesheet" href="/Drift_wechat/css/bootstrap.css">
-	<script type="text/javascript" src="/Drift_wechat/js/myJS/Forbid.js"></script>
 	<script src="/Drift_wechat/js/jquery-3.2.0.min.js"></script>
 	<script src="/Drift_wechat/js/fastclick.js"></script>
 	<script src="/Drift_wechat/js/jquery-weui.js"></script>

@@ -30,4 +30,6 @@ public interface UserDao {
 
 	int getUserState(String openid);
 
+	boolean bindPhone(String phone, String openid, String nickname, String headimgUrl);
+
 }

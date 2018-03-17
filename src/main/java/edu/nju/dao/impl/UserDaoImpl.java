@@ -178,4 +178,10 @@ public class UserDaoImpl implements UserDao{
 		UserInfo user = getUser(openid);
 		return user.getState();
 	}
+
+	@Override
+	public boolean bindPhone(String phone, String openid, String nickname, String headimgUrl) {
+		
+		return false;
+	}
 }

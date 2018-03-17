@@ -74,52 +74,6 @@ public class WeChatController {
 		return redir;
 	}
 	
-/*	@RequestMapping(value = "/index")
-	public String toCenter(Model model)
-			throws IOException {
-		List<Question> qList = mservice.getRecommend();
-		List<Long> qnumList = new ArrayList();
-		if(qList!=null){
-			for(Question q:qList){
-				qnumList.add(qaservice.getAnswerNum(q.getId()));
-			}
-		}
-		model.addAttribute("allnum", cservice.getOrderNum());
-		model.addAttribute("todaynum", cservice.getTodayNum());
-		model.addAttribute("qList", qList);
-		model.addAttribute("qnumList", qnumList);
-		return "jsp/index2";
-	}*/
-	
-//	@RequestMapping(value = "/getOrder")//管理员修改订单
-//	public String getOrder(HttpServletRequest request, String code,String state, HttpSession session)
-//			throws IOException {
-//		session.setAttribute("code", code);
-//		session.setAttribute("state", state);
-//		String wechatInfo = WechatLoginUse.wechatInfo(code);
-//		JSONObject resultJson;
-//		try {
-//			log.info("用户信息:" + wechatInfo);
-//			resultJson = new JSONObject(wechatInfo);
-//			if (resultJson.get("message").equals("success")) {
-//				String openid = resultJson.getString("openid");
-//				String nickname = resultJson.getString("nickname");
-//				String headimgurl = resultJson.getString("headimgurl");
-//				session.setAttribute("openid", openid);
-//				session.setAttribute("nickname", nickname);
-//				session.setAttribute("headimgurl", headimgurl);
-//				return "jsp/Orders";
-//			} else {
-//				return "jsp/Orders";
-//			}
-//		} catch (JSONException e) {
-//			log.info(e);
-//			e.printStackTrace();
-//			return "jsp/Orders";
-//		}
-//	}
-
-	
 
 	public String getWechatInfo(String code, String state,HttpSession session) throws UnsupportedEncodingException {
 		String wechatInfo = WechatLoginUse.wechatInfo(code);

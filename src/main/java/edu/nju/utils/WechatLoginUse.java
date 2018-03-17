@@ -1,6 +1,7 @@
 package edu.nju.utils;
 
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.nju.controller.UserController;
@@ -15,6 +16,8 @@ public class WechatLoginUse {
 		//access token
 		JSONObject resultJson = WechatConfig.getAccessToken(code);
 		log.info("resultJson"+resultJson.toString());
+		JSONObject wechatInfo = new JSONObject();
+		try{
 		String openid = resultJson.getString("openid");
 		String accessToken = resultJson.getString("access_token");
 		
@@ -25,12 +28,15 @@ public class WechatLoginUse {
 		String head = userInfoJson.getString("headimgurl");
 		
 		//返回前台
-		JSONObject wechatInfo = new JSONObject();
 		wechatInfo.put("message", "success");
 		wechatInfo.put("openid", openid);
 		wechatInfo.put("nickname", name);
 		wechatInfo.put("headimgurl", head);
 		wechatInfo.put("access_token", accessToken);
+		}catch(JSONException e){
+			//不是从微信进去的
+			wechatInfo.put("message", "fail");
+		}
 		return wechatInfo.toString();
 	
 	}

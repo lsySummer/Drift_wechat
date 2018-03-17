@@ -135,4 +135,11 @@ public class UserService {
 		return dao.getUserState(openid);
 	}
 	
+	/**
+	 * 绑定手机号
+	 * @return
+	 */
+	public boolean bindPhone(String phone,String openid,String nickname,String headimgUrl){
+		return dao.bindPhone(phone,openid,nickname,headimgUrl);
+	}
 }
