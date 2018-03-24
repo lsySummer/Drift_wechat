@@ -71,6 +71,9 @@ public class ReserveGetDaoImpl implements ReserveGetDao{
 						if(Utility.getDaysBetween(beforeOrder.getStartDate(),beforeOrder.getEndDate())==Constants.USER_DATE){
 							return userDao.getUser("thisiscomponyinfomation");
 						}
+						if(Utility.getDaysBetween(beforeOrder.getEndDate(), o.getStartDate())>2){
+							return userDao.getUser("thisiscomponyinfomation");
+						}
 						UserInfo beforeUser = userDao.getUser(beforeOrder.getOpenId());
 						return beforeUser;
 					}
