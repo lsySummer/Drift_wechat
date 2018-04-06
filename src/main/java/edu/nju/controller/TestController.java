@@ -33,11 +33,17 @@ public class TestController {
 	
 	@RequestMapping(value = "/insert")
 	public String register() {
-		Device d = gservice.getDeviceById("4028e3f06155798e0161557ab40d0000");
-		List<String> list = new ArrayList<String>();
-		list.add("北京");
-		list.add("天津");
-		mservice.addDeviceList(d, list);
+//		Device d = gservice.getDeviceById("0000000061e60eca0161e62de4810006");
+//		List<String> list = new ArrayList<String>();
+//		list.add("江苏省");
+//		list.add("上海");
+//		mservice.addDeviceList(d, list);
+		System.out.println(gservice.getBefore("o-Zay1L_qlGS_7IASDo2wDyZ7ts4").getNickName());
+		System.out.println(gservice.getBefore("o-Zay1NkOxBTnoRsLofP6I-5BMYM").getNickName());
+		System.out.println(gservice.getBefore("o-Zay1F84qAt1aFlXa011eHFPnsE").getNickName());
+		System.out.println(gservice.getBefore("o-Zay1I0ZAGOdTmGpY_xCRBfulQ0").getNickName());
+		System.out.println(gservice.getBefore("o-Zay1JrTymubxMT5odoOkO1eghM").getNickName());
+		System.out.println(gservice.getBefore("o-Zay1HVtb_xP7NoRDLtS_aWDVag").getNickName());
 		return "jsp/NewFile";
 	}
 }
