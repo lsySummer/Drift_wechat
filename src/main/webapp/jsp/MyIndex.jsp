@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <div class="weui-tab__bd" id="container" style="height:100%;width:100%;margin-top:15%;>
+    <div class="weui-tab__bd" id="container" style="height:100%;width:100%;margin-top:15%;">
     <div class="weui-tab__bd-item weui-tab__bd-item--active" id="table">
     	<div style="text-align: center">
 			<img alt="" id="image" class="img-circle" src="/Drift_wechat/images/icon.jpg" style="margin: 0 auto;width: 100px; heigth: 100px;" />
@@ -109,6 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="weui-footer weui-footer_fixed-bottom">
             <p class="weui-footer__text">Copyright © 2017-2020 GuoMai</p>
         </div>
+     </div>
   </body>
   	<script type="text/javascript" src="/Drift_wechat/js/myJS/MyIndex.js"></script>
 </html>
